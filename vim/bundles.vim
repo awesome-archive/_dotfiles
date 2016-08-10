@@ -100,23 +100,22 @@ Bundle 'edkolev/promptline.vim'
 Bundle 'tpope/vim-repeat'
 Bundle 'ctjhoa/spacevim'
 Bundle 'godlygeek/csapprox'
-"Bundle 'itchyny/lightline.vim'
 
 Bundle 'vcscommand.vim'
 Bundle 'dkprice/vim-easygrep'
 Bundle 'matze/vim-move'
 Bundle 'justinmk/vim-sneak'
-"Bundle 'ahri/vim-sesspit'
 Bundle 'terryma/vim-expand-region'
 Bundle 'm1foley/vim-expresso'
 Bundle 'fergdev/vim-cursor-hist'
 
-
-
-
-
-
-
+Bundle 'danro/rename.vim'
+Bundle 'pbrisbin/vim-mkdir'
+Bundle 'vimcn/vimcdoc'
+Bundle 'bsdelf/bufferhint'
+Bundle 'mileszs/ack.vim'
+Bundle 'sjas/csexplorer'
+Bundle 'majutsushi/tagbar'
 
 
 

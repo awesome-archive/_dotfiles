@@ -7,6 +7,10 @@ set termencoding=utf-8
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936
 set fileencoding=utf-8
+set foldlevel=100
+set showcmd
+set noerrorbells
+set novisualbell " 不要闪烁
 
 "基础
 let mapleader = " "
@@ -18,6 +22,7 @@ set go=
 autocmd InsertLeave * se nocul
 autocmd InsertEnter * se cul
 set nocompatible
+set formatoptions=tcrqn
 
 " 设置配色方案
 "set background=dark
@@ -28,6 +33,7 @@ if has("gui_running")
 	"colorscheme distinguished
 	"colorscheme vividchalk
 	colorscheme dracula
+	
 	"colorscheme gruvbox
 else
 	"colorscheme tomorrow
@@ -199,6 +205,7 @@ let g:EasyMotion_leader_key = '<Leader>'
 
 " Nerd Tree
 let NERDChristmasTree=0
+let g:netrw_winsize = 35
 let NERDTreeWinSize=30
 let NERDTreeChDirMode=2
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
@@ -231,8 +238,8 @@ nmap <F2> :TagbarToggle<CR>
 nmap <F1> :GundoToggle<CR>
 
 " Move to line
-map <Leader><Leader> <Plug>(easymotion-bd-jk)
-nmap <Leader><Leader> <Plug>(easymotion-overwin-line)
+map <Leader>y <Plug>(easymotion-bd-jk)
+nmap <Leader>y <Plug>(easymotion-overwin-line)
 
 " Move to word
 map  <Leader>w <Plug>(easymotion-bd-w)
@@ -353,3 +360,17 @@ omap F <Plug>Sneak_S
 
 nnoremap <leader>j :call g:CursorHistForward()<CR>
 nnoremap <leader>k :call g:CursorHistBack()<CR>
+
+let g:SuperTabDefaultCompletionType="context"   
+
+
+nnoremap <leader><leader> :call bufferhint#Popup()<CR>
+nnoremap \ :call bufferhint#LoadPrevious()<CR>
+
+
+
+nnoremap <Leader>a :Ack!<Space>
+
+nmap <F8> :TagbarToggle<CR>
+
+
