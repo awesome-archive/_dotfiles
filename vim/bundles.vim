@@ -117,8 +117,8 @@ Bundle 'mileszs/ack.vim'
 Bundle 'sjas/csexplorer'
 Bundle 'majutsushi/tagbar'
 
-
-
+Bundle 'godlygeek/tabular'
+Bundle 'dhruvasagar/vim-table-mode'
 
 
 filetype plugin indent on     " required!
