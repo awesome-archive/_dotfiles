@@ -144,7 +144,7 @@ map <silent> <leader><cr> :noh<cr>
 "共享剪贴板
 set clipboard+=unnamed
 "设置行高
-"set linespace=6
+set linespace=6
 
 set laststatus=2
 
