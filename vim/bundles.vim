@@ -16,8 +16,9 @@ Bundle 'mattn/emmet-vim'
 Bundle 'Raimondi/delimitMate'
 Bundle 'ervandew/supertab'
 " snippets
-Bundle 'garbas/vim-snipmate'
-"Bundle 'honza/vim-snippets'
+"Bundle 'garbas/vim-snipmate'
+Bundle 'sirver/ultisnips'
+Bundle 'honza/vim-snippets'
 "------ snipmate dependencies -------
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
@@ -107,7 +108,6 @@ Bundle 'matze/vim-move'
 Bundle 'justinmk/vim-sneak'
 Bundle 'terryma/vim-expand-region'
 Bundle 'm1foley/vim-expresso'
-Bundle 'fergdev/vim-cursor-hist'
 
 Bundle 'danro/rename.vim'
 Bundle 'pbrisbin/vim-mkdir'
@@ -119,6 +119,9 @@ Bundle 'majutsushi/tagbar'
 
 Bundle 'godlygeek/tabular'
 Bundle 'dhruvasagar/vim-table-mode'
-
+Bundle 'vim-scripts/TaskList.vim'
+Bundle 'YankRing.vim'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'marijnh/tern_for_vim'
 
 filetype plugin indent on     " required!

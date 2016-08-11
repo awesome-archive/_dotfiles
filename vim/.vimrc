@@ -29,11 +29,11 @@ set formatoptions=tcrqn
 if has("gui_running")
 	"colorscheme desert
 	"colorscheme solarized
-	"colorscheme tomorrow
+	colorscheme tomorrow
 	"colorscheme distinguished
 	"colorscheme vividchalk
-	colorscheme dracula
-	
+	"colorscheme Tomorrow-Night-Eighties
+
 	"colorscheme gruvbox
 else
 	"colorscheme tomorrow
@@ -42,11 +42,11 @@ endif
 "字体
 if has("mac") || has("macunix")
 	"set guifont=Source_Code_Pro_Light:h18
-	set guifont=Hack:h18
+	"set guifont=Hack:h18
 	"set guifont=Inconsolata_for_Powerline:h20
 	"set guifont=Anonymice_Powerline:h20
 	"set guifont=DejaVu_Sans_Mono_for_Powerline:h20
-	"set guifont=Literation_Mono_Powerline:h20
+	set guifont=Literation_Mono_Powerline:h18
 	"set guifont=Fura_Powerline:h20
 	"set guifont=Ubuntu_Mono_derivative_Powerline:h20
 
@@ -166,6 +166,8 @@ noremap L $
 nmap j gj
 nmap k gk
 
+inoremap jj <esc>
+
 map ,cd :cd %:p:h<CR>
 
 nmap <silent> <Leader>ev :e $MYVIMRC<CR>
@@ -195,6 +197,15 @@ inoremap <C-a> <Left>
 inoremap <C-s> <Down>
 inoremap <C-w> <Up>
 inoremap <C-d> <Right>
+
+nnoremap <leader>m  :<c-u><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
+
+nnoremap <expr> n  'Nn'[v:searchforward]
+nnoremap <expr> N  'nN'[v:searchforward]
+
+
+command! Bigger  :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)+1', '')
+command! Smaller :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)-1', '')
 
 "插件配置
 
@@ -246,13 +257,11 @@ map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
 
 
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
 
 
 
 " airline
-let g:airline_theme="dracula"
+"let g:airline_theme="dracula"
 let g:airline_section_b = '%{strftime("%c")}'
 let g:airline_section_y = 'BN: %{bufnr("%")}'
 let g:airline#extensions#tabline#enabled = 1
@@ -277,11 +286,11 @@ map <leader>r :MRU<CR>
 
 " => bufExplorer plugin
 """"""""""""""""""""""""""""""
-let g:bufExplorerDefaultHelp=0
-let g:bufExplorerShowRelativePath=1
-let g:bufExplorerFindActive=1
-let g:bufExplorerSortBy='name'
-map <leader>b :BufExplorer<cr>
+"let g:bufExplorerDefaultHelp=0
+"let g:bufExplorerShowRelativePath=1
+"let g:bufExplorerFindActive=1
+"let g:bufExplorerSortBy='name'
+"map <leader>b :BufExplorer<cr>
 
 
 
@@ -310,58 +319,42 @@ nmap <leader>ss :SessionSave<CR>
 nmap <leader>sc :SessionClose<CR>
 
 
-
-
-" NeoComplCache
-let g:neocomplcache_enable_at_startup=1
-let g:neoComplcache_disableautocomplete=1
-"let g:neocomplcache_enable_underbar_completion = 1
-"let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_smart_case=1
-let g:neocomplcache_min_syntax_length = 1
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-set completeopt-=preview
-
-imap <C-k> <Plug>(neocomplcache_snippets_force_expand)
-smap <C-k> <Plug>(neocomplcache_snippets_force_expand)
-imap <C-l> <Plug>(neocomplcache_snippets_force_jump)
-smap <C-l> <Plug>(neocomplcache_snippets_force_jump)
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType c setlocal omnifunc=ccomplete#Complete
-if !exists('g:neocomplcache_omni_patterns')
-	let g:neocomplcache_omni_patterns = {}
-endif
-let g:neocomplcache_omni_patterns.erlang = '[a-zA-Z]\|:'
+" SuperTab
+let g:SuperTabDefultCompletionType='context'
+let g:SuperTabDefaultCompletionType = '<C-X><C-U>'
+let g:SuperTabRetainCompletionType=2
 
 
 
-let g:move_key_modifier = 'C'
 
-let g:sneak#streak = 1
-nmap f <Plug>Sneak_s
-nmap F <Plug>Sneak_S
-xmap f <Plug>Sneak_s
-xmap F <Plug>Sneak_S
-omap f <Plug>Sneak_s
-omap F <Plug>Sneak_S
 
+
+"let g:move_key_modifier = 'C'
+
+"let g:sneak#streak = 1
+"nmap f <Plug>Sneak_s
+"nmap F <Plug>Sneak_S
+"xmap f <Plug>Sneak_s
+"xmap F <Plug>Sneak_S
+"omap f <Plug>Sneak_s
+"omap F <Plug>Sneak_S
+
+
+map  f <Plug>(easymotion-sn)
+omap f <Plug>(easymotion-tn)
 
 "noremap <leader>s  :SessPit<CR>
 
-"map K <Plug>(expand_region_expand)
-"map J <Plug>(expand_region_shrink)
+
+map K <Plug>(expand_region_expand)
+map J <Plug>(expand_region_shrink)
 
 
 
-nnoremap <leader>j :call g:CursorHistForward()<CR>
-nnoremap <leader>k :call g:CursorHistBack()<CR>
+"nnoremap <leader>j :call g:CursorHistForward()<CR>
+"nnoremap <leader>k :call g:CursorHistBack()<CR>
 
-let g:SuperTabDefaultCompletionType="context"   
+let g:SuperTabDefaultCompletionType="context"
 
 
 nnoremap <leader><leader> :call bufferhint#Popup()<CR>
@@ -377,3 +370,59 @@ nmap <F8> :TagbarToggle<CR>
 let g:table_mode_corner="|"
 let g:table_mode_corner_corner="+"
 let g:table_mode_header_fillchar="="
+
+
+
+
+
+
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+
+
+
+map <leader>d <Plug>TaskList
+
+
+
+
+au WinLeave * set nocursorline nocursorcolumn
+au WinEnter * set cursorline cursorcolumn
+set cursorline cursorcolumn
+
+
+
+
+
+
+let g:ycm_min_num_of_chars_for_completion = 1
+let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_complete_in_comments = 1
+let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+function! MyTabFunction ()
+    let line = getline('.')
+    let substr = strpart(line, -1, col('.')+1)
+    let substr = matchstr(substr, "[^ \t]*$")
+    if strlen(substr) == 0
+        return "\<tab>"
+    endif
+    return pumvisible() ? "\<c-n>" : "\<c-x>\<c-o>"
+endfunction
+inoremap <tab> <c-r>=MyTabFunction()<cr>
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+
+
+" 自动切换目录为当前编辑文件所在目录
+au BufRead,BufNewFile,BufEnter * cd %:p:h
