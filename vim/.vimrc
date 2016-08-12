@@ -1,7 +1,13 @@
-"引入插件文件
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                     Vim-Config
+"                                     2016.8.12
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                     插件引入
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 source ~/dotfiles/vim/bundles.vim
-
-"避免乱码
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                     避免乱码
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8
 set encoding=utf-8
@@ -10,9 +16,10 @@ set fileencoding=utf-8
 set foldlevel=100
 set showcmd
 set noerrorbells
-set novisualbell " 不要闪烁
-
-"基础
+set novisualbell
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                     基础设置
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = " "
 let g:mapleader = " "
 syntax enable
@@ -23,23 +30,79 @@ autocmd InsertLeave * se nocul
 autocmd InsertEnter * se cul
 set nocompatible
 set formatoptions=tcrqn
+set autoread
+set nobackup
+set magic
+set guioptions-=T
+set guioptions-=m
+set foldcolumn=0
+set foldmethod=indent
+set foldlevel=3
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+set confirm
+set autoindent
+set cindent
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set noexpandtab
+set smarttab
+set history=1000
+set nobackup
+set noswapfile
+set ignorecase
+set hlsearch
+set incsearch
+set gdefault
+set laststatus=2
+filetype on
+filetype indent on
+set viminfo+=!
+set iskeyword+=_,$,@,%,#,-
+set wildmenu
+set backspace=2
+set mouse=a
+set selection=exclusive
+set selectmode=mouse,key
+set report=0
+set showmatch
+set matchtime=1
+set scrolloff=10
+filetype plugin indent on
+set completeopt=longest,menu
+set clipboard+=unnamed
+set linespace=6
+set laststatus=2
+set foldlevelstart=99
+if has("autocmd")
+	au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
 
-" 设置配色方案
-"set background=dark
+au BufRead,BufNewFile,BufEnter * cd %:p:h
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                     配色
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("gui_running")
+	set background=dark
 	"colorscheme desert
 	"colorscheme solarized
 	colorscheme tomorrow
 	"colorscheme distinguished
 	"colorscheme vividchalk
 	"colorscheme Tomorrow-Night-Eighties
-
 	"colorscheme gruvbox
 else
 	"colorscheme tomorrow
 	colorscheme dracula
 endif
-"字体
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                     字体                                     "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("mac") || has("macunix")
 	"set guifont=Source_Code_Pro_Light:h18
 	"set guifont=Hack:h18
@@ -49,107 +112,15 @@ if has("mac") || has("macunix")
 	set guifont=Literation_Mono_Powerline:h18
 	"set guifont=Fura_Powerline:h20
 	"set guifont=Ubuntu_Mono_derivative_Powerline:h20
-
-
 else
 	set guifont=Source_Code_Pro_Light:h18
 endif
 
-
-
-" 设置当文件被改动时自动载入
-set autoread
-"从不备份
-set nobackup
-
-set magic                   " 设置魔术
-set guioptions-=T           " 隐藏工具栏
-set guioptions-=m           " 隐藏菜单栏
-set foldcolumn=0
-set foldmethod=indent
-set foldlevel=3
-
-
-" 去掉输入错误的提示声音
-set noerrorbells
-set novisualbell
-set t_vb=
-set tm=500
-" 在处理未保存或只读文件的时候，弹出确认
-set confirm
-" 自动缩进
-set autoindent
-set cindent
-" Tab键的宽度
-set tabstop=4
-" 统一缩进为4
-set softtabstop=4
-set shiftwidth=4
-" 不要用空格代替制表符
-set noexpandtab
-" 在行和段开始处使用制表符
-set smarttab
-" 历史记录数
-set history=1000
-"禁止生成临时文件
-set nobackup
-set noswapfile
-"搜索忽略大小写
-set ignorecase
-"搜索逐字符高亮
-set hlsearch
-set incsearch
-"行内替换
-set gdefault
-"恢复光标关闭前位置
-if has("autocmd")
-	au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-endif
-"set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
-" 总是显示状态行
-set laststatus=2
-" 侦测文件类型
-filetype on
-
-" 为特定文件类型载入相关缩进文件
-filetype indent on
-" 保存全局变量
-set viminfo+=!
-" 带有如下符号的单词不要被换行分割
-set iskeyword+=_,$,@,%,#,-
-" 字符间插入的像素行数目
-" 增强模式中的命令行自动完成操作
-set wildmenu
-" 使回格键（backspace）正常处理indent, eol, start等
-set backspace=2
-" 可以在buffer的任何地方使用鼠标（类似office中在工作区双击鼠标定位）
-set mouse=a
-set selection=exclusive
-set selectmode=mouse,key
-" 通过使用: commands命令，告诉我们文件的哪一行被改变过
-set report=0
-" 在被分割的窗口间显示空白，便于阅读
-"set fillchars=vert:\ ,stl:\ ,stlnc:\
-" 高亮显示匹配的括号
-set showmatch
-" 匹配括号高亮的时间（单位是十分之一秒）
-set matchtime=1
-" 光标移动到buffer的顶部和底部时保持3行距离
-set scrolloff=10
-
-filetype plugin indent on
-"打开文件类型检测, 加了这句才可以用智能补全
-set completeopt=longest,menu
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  修改默认快捷键
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <silent> <leader><cr> :noh<cr>
-"共享剪贴板
-set clipboard+=unnamed
-"设置行高
-set linespace=6
 
-set laststatus=2
-
-
-"基础快捷键
 noremap <silent> <C-left> :bprev<CR>
 noremap <silent> <C-h> :bprev<CR>
 noremap <silent> <C-right> :bnext<CR>
@@ -176,10 +147,9 @@ nmap <silent> <Leader>es :so $MYVIMRC<CR>
 nnoremap <leader>\ :vs<CR>
 nnoremap <leader>- :sp<CR>
 
-" 映射全选+复制 ctrl+a
 map <C-A> ggVGY
 map! <C-A> <Esc>ggVGY
-" 选中状态下 Ctrl+c 复制
+
 vmap <C-c> "+y
 
 nmap <D-]> >>
@@ -189,9 +159,7 @@ map <Leader>T :%s/\s\+$//<CR>
 
 nmap <leader>F :%s//g<LEFT><LEFT>
 
-" eggcache vim
 nnoremap ; :
-
 
 inoremap <C-a> <Left>
 inoremap <C-s> <Down>
@@ -203,18 +171,32 @@ nnoremap <leader>m  :<c-u><c-r>='let @'. v:register .' = '. string(getreg(v:regi
 nnoremap <expr> n  'Nn'[v:searchforward]
 nnoremap <expr> N  'nN'[v:searchforward]
 
-
 command! Bigger  :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)+1', '')
 command! Smaller :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)-1', '')
 
-"插件配置
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                    插件配置
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-" easy-motion
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                 easy-motion
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:EasyMotion_leader_key = '<Leader>'
 
+map <Leader>y <Plug>(easymotion-bd-jk)
+nmap <Leader>y <Plug>(easymotion-overwin-line)
 
-" Nerd Tree
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
+
+map  f <Plug>(easymotion-sn)
+omap f <Plug>(easymotion-tn)
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                 Nerd Tree
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let NERDChristmasTree=0
 let g:netrw_winsize = 35
 let NERDTreeWinSize=30
@@ -224,43 +206,46 @@ let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
 let NERDTreeShowBookmarks=1
 let NERDTreeWinPos = "left"
 
-" nerdcommenter
-let NERDSpaceDelims=1
-let NERDCompactSexyComs=1
-
-" ZenCoding
-let g:user_emmet_expandabbr_key='<d-j>'
-
-" SuperTab
-" let g:SuperTabDefultCompletionType='context'
-let g:SuperTabDefaultCompletionType = '<C-X><C-U>'
-let g:SuperTabRetainCompletionType=2
-
-" ctrlp
-set wildignore+=*/tmp/*,*.so,*.o,*.a,*.obj,*.swp,*.zip,*.pyc,*.pyo,*.class,.DS_Store  " MacOSX/Linux
-let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
-
-
 map <Leader>n :NERDTreeMirror<CR>
 map <Leader>n :NERDTreeToggle<CR>
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  nerdcommenter
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let NERDSpaceDelims=1
+let NERDCompactSexyComs=1
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  emmet
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:user_emmet_expandabbr_key='<d-j>'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  SuperTab
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:SuperTabDefultCompletionType='context'
+let g:SuperTabDefaultCompletionType = '<C-X><C-U>'
+let g:SuperTabRetainCompletionType=2
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                   ctrlp
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set wildignore+=*/tmp/*,*.so,*.o,*.a,*.obj,*.swp,*.zip,*.pyc,*.pyo,*.class,.DS_Store  " MacOSX/Linux
+let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                   tagbar
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <F2> :TagbarToggle<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                   gundo
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <F1> :GundoToggle<CR>
 
-" Move to line
-map <Leader>y <Plug>(easymotion-bd-jk)
-nmap <Leader>y <Plug>(easymotion-overwin-line)
-
-" Move to word
-map  <Leader>w <Plug>(easymotion-bd-w)
-nmap <Leader>w <Plug>(easymotion-overwin-w)
-
-
-
-
-
-" airline
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                   airline
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "let g:airline_theme="dracula"
 let g:airline_section_b = '%{strftime("%c")}'
 let g:airline_section_y = 'BN: %{bufnr("%")}'
@@ -277,152 +262,149 @@ let g:airline_right_alt_sep = ''
 nnoremap <C-N> :bn<CR>
 nnoremap <C-P> :bp<CR>
 
-
-" MRU plugin
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                    MRU
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let MRU_Max_Entries = 600
 map <leader>r :MRU<CR>
 
-
-
-" => bufExplorer plugin
-""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                    bufExplorer
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "let g:bufExplorerDefaultHelp=0
 "let g:bufExplorerShowRelativePath=1
 "let g:bufExplorerFindActive=1
 "let g:bufExplorerSortBy='name'
 "map <leader>b :BufExplorer<cr>
 
-
-
-" Vimroom
-let g:goyo_width=100
-let g:goyo_margin_top = 2
-let g:goyo_margin_bottom = 2
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  Vimroom
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:goyo_width=0
+let g:goyo_margin_top = 0
+let g:goyo_margin_bottom = 0
 nnoremap <silent> <leader>z :Goyo<cr>
 
-
-
-" bufExplorer plugin
-""""""""""""""""""""""""""""""
-let g:bufExplorerDefaultHelp=0
-let g:bufExplorerShowRelativePath=1
-let g:bufExplorerFindActive=1
-let g:bufExplorerSortBy='name'
-map <leader>b :BufExplorer<cr>
-
-
-
-"Session
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  Session
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set sessionoptions=blank,buffers,curdir,folds,tabpages,winsize
 nmap <leader>sl :SessionList<CR>
 nmap <leader>ss :SessionSave<CR>
 nmap <leader>sc :SessionClose<CR>
 
-
-" SuperTab
-let g:SuperTabDefultCompletionType='context'
-let g:SuperTabDefaultCompletionType = '<C-X><C-U>'
-let g:SuperTabRetainCompletionType=2
-
-
-
-
-
-
-"let g:move_key_modifier = 'C'
-
-"let g:sneak#streak = 1
-"nmap f <Plug>Sneak_s
-"nmap F <Plug>Sneak_S
-"xmap f <Plug>Sneak_s
-"xmap F <Plug>Sneak_S
-"omap f <Plug>Sneak_s
-"omap F <Plug>Sneak_S
-
-
-map  f <Plug>(easymotion-sn)
-omap f <Plug>(easymotion-tn)
-
-"noremap <leader>s  :SessPit<CR>
-
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                 vim-expand-region
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map K <Plug>(expand_region_expand)
 map J <Plug>(expand_region_shrink)
 
-
-
-"nnoremap <leader>j :call g:CursorHistForward()<CR>
-"nnoremap <leader>k :call g:CursorHistBack()<CR>
-
-let g:SuperTabDefaultCompletionType="context"
-
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                 bufferhint
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <leader><leader> :call bufferhint#Popup()<CR>
 nnoremap \ :call bufferhint#LoadPrevious()<CR>
 
-
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                    Ack
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <Leader>a :Ack!<Space>
 
-nmap <F8> :TagbarToggle<CR>
-
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                 table-mode
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:table_mode_corner="|"
 let g:table_mode_corner_corner="+"
 let g:table_mode_header_fillchar="="
 
-
-
-
-
-
-
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" If you want :UltiSnipsEdit to split your window.
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                 UltiSnips
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 let g:UltiSnipsEditSplit="vertical"
 
-
-
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  TaskList
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>d <Plug>TaskList
 
-
-
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                 cursorline
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au WinLeave * set nocursorline nocursorcolumn
 au WinEnter * set cursorline cursorcolumn
 set cursorline cursorcolumn
 
-
-
-
-
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                 YouCompleteMe
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_complete_in_comments = 1
 let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 function! MyTabFunction ()
-    let line = getline('.')
-    let substr = strpart(line, -1, col('.')+1)
-    let substr = matchstr(substr, "[^ \t]*$")
-    if strlen(substr) == 0
-        return "\<tab>"
-    endif
-    return pumvisible() ? "\<c-n>" : "\<c-x>\<c-o>"
+	let line = getline('.')
+	let substr = strpart(line, -1, col('.')+1)
+	let substr = matchstr(substr, "[^ \t]*$")
+	if strlen(substr) == 0
+		return "\<tab>"
+	endif
+	return pumvisible() ? "\<c-n>" : "\<c-x>\<c-o>"
 endfunction
 inoremap <tab> <c-r>=MyTabFunction()<cr>
 
-" better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                 tabular
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:table_mode_corner="|"
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                 syntastic
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 在打开文件的时候检查
+let g:syntastic_check_on_open = 1
+let g:syntastic_cpp_include_dirs = ['/usr/include/']
+let g:syntastic_cpp_remove_include_errors = 1
+let g:syntastic_cpp_check_header = 1
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libstdc++'
+"set error or warning signs
+"let g:syntastic_error_symbol = '✗'
+let g:syntastic_error_symbol = 'ㄨ'
+"let g:syntastic_warning_symbol = '•'
+let g:syntastic_warning_symbol = '⚠️'
+"whether to show balloons
+let g:syntastic_enable_balloons = 1
+let g:syntastic_always_populate_loc_list = 1
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                 matchtag
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:hamlet_prevent_invalid_nesting = 0
+let g:hamlet_highlight_trailing_space = 0
 
-" 自动切换目录为当前编辑文件所在目录
-au BufRead,BufNewFile,BufEnter * cd %:p:h
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  sourcebeautify.vim
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au BufRead,BufNewFile *.json setf jsonk
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  dict.vim
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:api_key = "1932136763"
+let g:keyfrom = "aioiyuuko"
+nmap <silent> <Leader>d <Plug>DictSearch
+" --普通模式下，<Leader>d 即可翻译光标下的文本，并在命令行回显
+vmap <silent> <Leader>d <Plug>DictVSearch
+" --可视化模式下，<Leader>d 即可翻译选中的文本，并在命令行回显
+nmap <silent> <Plug>DictWSearch
+" --普通模式下，<Leader>w 即可翻译光标下的文本，并且在Dict新窗口显示
+vmap <silent> <Plug>DictWVSearch
+" --可视化模式下，<Leader>w 即可翻译选中的文本，并且在Dict新窗口显示
+nmap <silent> <Leader><Leader>r <Plug>DictRSearch
+" --普通模式下，<Leader><Leader>r 即可翻译光标下的单词，并替换为翻译的结果
+vmap <silent> <Leader><Leader>r <Plug>DictRVSearch
+" --可视化模式下，<Leader><Leader>r 即可翻译光标下的单词，并替换为翻译的结果
