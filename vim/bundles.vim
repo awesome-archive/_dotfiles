@@ -117,8 +117,8 @@ Bundle 'michalliu/sourcebeautify.vim'
 Bundle 'michalliu/jsoncodecs.vim'
 Bundle 'michalliu/jsruntime.vim'
 Bundle 'iamcco/dict.vim'
-
-
+Bundle 'vimcn/vimwiki.vim.cnx'
+Bundle 'yysfire/vimwiki2markdown'
 
 
 

@@ -408,3 +408,63 @@ nmap <silent> <Leader><Leader>r <Plug>DictRSearch
 " --普通模式下，<Leader><Leader>r 即可翻译光标下的单词，并替换为翻译的结果
 vmap <silent> <Leader><Leader>r <Plug>DictRVSearch
 " --可视化模式下，<Leader><Leader>r 即可翻译光标下的单词，并替换为翻译的结果
+
+
+
+
+
+" -----------------------------------------------------------------------------
+" let g:vimwiki_list_ignore_newline=0
+" let g:vimwiki_menu = ''
+" let g:vimwiki_use_mouse = 1
+
+
+" let WKROOT = '~/dotfiles/wikisnips/vimwiki'
+
+" let g:vimwiki_list = [{'path': WKROOT.'vimwiki1/', 'path_html': WKROOT.'vimwiki1/html/', 'html_header': WKROOT.'vimwiki1/template/header.tpl',},
+                    " \ {'path': WKROOT.'vimwiki2/', 'path_html': WKROOT.'vimwiki2/html/', 'html_header': WKROOT.'vimwiki2/template/header.tpl',},
+                    " \ {'path': WKROOT.'vimwiki3/', 'path_html': WKROOT.'vimwiki3/html/', 'html_header': WKROOT.'vimwiki3/template/header.tpl',}]
+" let g:vimwiki_file_exts = 'c, cpp, wav, txt, h, hpp, zip, sh, awk, ps, pdf'
+" let g:vimwiki_valid_html_tags='b,i,s,u,sub,sup,kbd,br,hr,div,center,strong,em,a'
+
+
+
+
+
+" let g:vimwiki_list = [{'path':'~/dotfiles/wikisnips/vimwiki',
+            " \'template_path' : '~/dotfiles/wikisnips/vimwiki/template',
+            " \'template_default' : '~/dotfiles/wikisnips/vimwiki/default_template',
+            " \'template_ext' : '.html',
+            " \'path_html': '~/dotfiles/wikisnips/vimwiki/html'}
+" ]
+
+
+" let g:vimwiki_CJK_length = 1
+" "let g:vimwiki_folding = 1
+" let g:vimwiki_menu = ''
+" let g:vimwiki_hl_cb_checked = 1
+" let g:vimwiki_camel_case = 0
+
+let g:vimwiki_use_mouse = 1
+let g:vimwiki_camel_case = 0
+let g:vimwiki_CJK_length = 1
+let g:vimwiki_use_calendar = 0
+let g:vimwiki_timestamp_format='%Y年%m月%d日 %H:%M:%S'
+let g:vimwiki_user_htmls = "search.html,404.html"
+
+let g:vimwiki_use_mouse = 1
+let g:vimwiki_list = [{'path': '~/dotfiles/wikisnips/vimwiki',
+    \    'path_html': '~/dotfiles/wikisnips/vimwiki_html',
+    \    'template_path': '~/dotfiles/wikisnips/vimwiki/template',
+    \    'template_default': "default.tpl"}]
+
+
+
+let g:tomato#interval = 60 * 60
+let g:tomato#rest_time = 20 * 60
+let g:tomato#lang = 'chinese'
+let g:tomato#remind = "☻" (" \uf003 " if you are using awesome-terminal-fonts)
+let g:tomato#restinfo = "☺" (" \ue1f1 " if you are using awesome-terminal-fonts)
+let g:tomato#show_clock = 1
+let g:tomato#show_clock = 1
+let g:tomato#show_count_down = 1

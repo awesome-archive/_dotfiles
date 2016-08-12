@@ -29,6 +29,8 @@ brew install ctags
 brew install tig
 brew install node
 
+gem install markdown2html
+
 echo "移删vimrc文件..."
 rm ~/.zshrc
 echo "链接vimrc文件..."
