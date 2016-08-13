@@ -1,5 +1,5 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                     Vim-Config
+si"                                     Vim-Config
 "                                     2016.8.12
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                     Plug-in to introduce
@@ -479,13 +479,28 @@ set cpo&vim
 
 set encoding=utf-8
 scriptencoding=utf-8
+"#############################################################################
+"###                            UNITETUNES                                 ###
+"#############################################################################
+if exists('g:loaded_unitetunes')
+  finish
+elseif v:version < 703
+  echoerr 'unitetunes.vim does not work on Vim "' . v:version . '".'
+  finish
+endif
+
+let s:save_cpo = &cpo
+set cpo&vim
+
+set encoding=utf-8
+scriptencoding=utf-8
 
 "=============================================================================
 " UniteSettings
 "=============================================================================
 
 " Unite keymap
-nmap <silent> su :UniteMenuToggle shortcut<CR>i
+nmap <silent> su :UniteMenuToggle shortcut<CR>
 nmap <silent> sU :Unite menu:shortcut<CR>
 
 " Unite settings
@@ -583,17 +598,31 @@ endfunction
 " Map Unite menu:*
 function! UniteMap(key, value)
 	let [word, value] = a:value
-	if isdirectory(value)
+	if word == "---"
+		" separator
+		return {
+		\    "word" : "-+----------------------------------------------------------------------------",
+		\    "kind" : "command",
+		\    "action__command" : ""
+		\}
+	elseif value == ""
+		" title
+		return {
+		\    "word" : " | ". word,
+		\    "kind" : "command",
+		\    "action__command" : ""
+		\}
+	elseif isdirectory(value)
 		" directory
 		return {
-		\    "word" : "[/] ". word,
+		\    "word" : "/| ". word,
 		\    "kind" : "directory",
 		\    "action__directory" : value
 		\}
 	elseif !empty(glob(value))
 		" file
 		return {
-		\    "word" : "[e] ". word,
+		\    "word" : "e| ". word,
 		\    "kind" : "file",
 		\    "default_action" : "tabdrop",
 		\    "action__path" : value,
@@ -601,7 +630,7 @@ function! UniteMap(key, value)
 	else
 		" command
 		return {
-		\    "word" : "[:] ". word,
+		\    "word" : ":| ". word,
 		\    "kind" : "command",
 		\    "action__command" : value
 		\}
@@ -622,58 +651,85 @@ let g:unite_source_menu_menus.shortcut = {
 \   "description" : "shortcut",
 \   "map"         : function("UniteMap"),
 \   "candidates"  : [
-\       ["[1sh] Enter    Shell",                                                      "normal 1sh"],
+\       ["[1sh]    Shell BufferDir",                                                  "OpenShell"],
 \       ["[2sh] VimFiler BufferDir",                                                  "call VimFiler(0)"],
 \       ["[3sh]          Project",                                                    "call VimFiler(1)"],
-\       [" [1/] VimGrep  BufferDir",                                                  "normal 1/"],
-\       [" [2/]          Project",                                                    "normal 2/"],
-\       ["               Qfreplace",                                                  "Qfreplace"],
+\       [" [1/]  VimGrep BufferDir",                                                  ""],
+\       [" [2/]          Project",                                                    ""],
+\       ["---",                                                                       ""],
+\       [" [;]  easy motion",                                                         ""],
+\       ["[s;] fuzzy motion",                                                         ""],
+\       ["[s/] fuzzy search",                                                         ""],
+\       ["---",                                                                       ""],
 \       ["[<C-s>.] tabmove left",                                                     "call vimtunes.tabmove(-1)"],
 \       ["[<C-s>,] tabmove right",                                                    "call vimtunes.tabmove(+1)"],
 \       ["[<C-s>0] tabmove 0",                                                        "tabmove 0"],
 \       ["[<C-s>$] tabmove 1000",                                                     "tabmove 1000"],
 \       ["[<C-s>o] tabonly",                                                          "call vimtunes.only(1)"],
-\       [" [sr]  QuickRun",                                                           "QuickRun"],
-\       [" [so]  only (make current window only)",                                    "only"],
-\       [" [^p]  CtrlP",                                                              "CtrlP"],
-\       ["[1^p]  CtrlP MRUFiles",                                                     "CtrlPMRUFiles"],
-\       ["[2^p]  CtrlP Buffer",                                                       "CtrlPBuffer"],
-\       ["[3^p]  CtrlP Line",                                                         "CtrlPLine"],
-\       ["[8^p]  CtrlP VimDirectory",                                                 "call CtrlPCall(8)"],
-\       ["[9^p]  CtrlP ClearCache",                                                   "CtrlPClearCache"],
-\       [" [gd]  YcmCompleter GotoDefinition",                                        "normal gd"],
-\       [" [gI]  YcmCompleter GotoImplementation",                                    "normal gI"],
-\       [" [gr]  OmniSharpFindUsages",                                                "normal gr"],
-\       ["  [K]  OmniSharpDocumentation",                                             "normal K"],
-\       ["[s^p]  OmniSharpFindType",                                                  "OmniSharpFindType"],
-\       ["[S^p]  OmniSharpFindSymbol",                                                "OmniSharpFindSymbol"],
-\       ["[9gr]  OmniSharpFindUsages With ReloadSolution",                            "normal 9gr"],
-\       ["[9K]   OmniSharpDocumentation With ReloadSolution",                         "normal 9K"],
+\       ["---",                                                                       ""],
+\       [" [^p] CtrlP",                                                               "CtrlP"],
+\       ["[1^p] CtrlP MRUFiles",                                                      "CtrlPMRUFiles"],
+\       ["[2^p] CtrlP Buffer",                                                        "CtrlPBuffer"],
+\       ["[3^p] CtrlP Line",                                                          "CtrlPLine"],
+\       ["[8^p] CtrlP VimDirectory",                                                  "call CtrlPCall(8)"],
+\       ["[9^p] CtrlP ClearCache",                                                    "CtrlPClearCache"],
+\       ["---",                                                                       ""],
+\       ["  [gd] YcmCompleter GotoDefinition",                                        "normal gd"],
+\       ["  [gI] YcmCompleter GotoImplementation",                                    "normal gI"],
+\       ["  [gr] OmniSharpFindUsages",                                                "normal gr"],
+\       ["   [K] OmniSharpDocumentation",                                             "normal K"],
+\       [" [s^p] OmniSharpFindType",                                                  "OmniSharpFindType"],
+\       [" [S^p] OmniSharpFindSymbol",                                                "OmniSharpFindSymbol"],
+\       [" [9gr] OmniSharpFindUsages With ReloadSolution",                            "normal 9gr"],
+\       ["  [9K] OmniSharpDocumentation With ReloadSolution",                         "normal 9K"],
 \       ["[9s^p] OmniSharpFindType With ReloadSolution",                              "normal 9s<C-p>"],
 \       ["[9S^p] OmniSharpFindSymbol With ReloadSolution",                            "normal 9S<C-p>"],
-\       ["       Format json (need pyhton)",                                          "%!python -m json.tool"],
-\       ["       Vinarise (Edit current file as binary file)",                        "Vinarise"],
-\       ["[`<][`>] Goto last visual mode start/end position",                         "normal `<"],
-\       ["[`[][`]] Goto last yanked start/end position",                              "normal `["],
-\       ["[g;][g,] next/preg changelist",                                             "normal g;"],
-\       ["[<C-r>.] Insert last inserted text",                                        "normal <C-r>."],
-\       ["[<C-r>.] Insert last inserted text",                                        "normal <C-r>."],
-\       ["[<C-r>/] Insert last searched text",                                        "normal <C-r>/"],
-\       ["[<C-r>%] Insert current filename text",                                     "normal <C-r>%"],
-\       ["[_] Switch Word",                                                           "Switch"],
-\       ["[~] Toggle Case",                                                           "normal ~"],
-\       ["[o]                   goto   Opponent selection position (in visual mode)", "normal vo"],
-\       ["[^h],[^j],[^k],[^l]   expand opponent selection / cursor (in visual mode)", "normal v<C-h>"],
-\       ["[^w],[^b]             expand opponent selection / word   (in visual mode)", "normal v<C-w>"],
-\       ["[+],[-]               expand opponent selection / block  (in visual mode)", "normal v+"],
-\       ["[<CR><delim>]         EasyAlign <delim>                  (in visual mode)", "normal v<CR>="],
-\       ["[<CR>*<delim>]        EasyAlign All <delim>              (in visual mode)", "normal v<CR>*="],
-\       ["[<CR><right>*<delim>] EasyAlign to Right All <delim>     (in visual mode)", "normal v<CR><Right>*="],
-\       ["[s<CR>]               Autoformat",                                          "Autoformat"],
-\       ["[^o] prev jumplist",                                                        "normal ^o"],
-\       ["[^g] next jumplist and output filename",                                    "normal ^g"],
+\       ["---",                                                                       ""],
+\       ["[`<][`>] Goto last visual mode start/end position",                         ""],
+\       ["[`[][`]] Goto last yanked start/end position",                              ""],
+\       ["[g;][g,] next/prev changelist",                                             ""],
+\       ["---",                                                                       ""],
+\       ["[<C-r>.] Insert last inserted text",                                        ""],
+\       ["[<C-r>.] Insert last inserted text",                                        ""],
+\       ["[<C-r>/] Insert last searched text",                                        ""],
+\       ["[<C-r>%] Insert current filename text",                                     ""],
+\       ["---",                                                                       ""],
+\       ["[o]                   goto   Opponent selection position (in visual mode)", ""],
+\       ["[^h],[^j],[^k],[^l]   expand opponent selection / cursor (in visual mode)", ""],
+\       ["[^w],[^b]             expand opponent selection / word   (in visual mode)", ""],
+\       ["[+],[-]               expand opponent selection / block  (in visual mode)", ""],
+\       ["---",                                                                       ""],
+\       ["[<CR><delim>]         EasyAlign <delim>                  (in visual mode)", ""],
+\       ["[<CR>*<delim>]        EasyAlign All <delim>              (in visual mode)", ""],
+\       ["[<CR><right>*<delim>] EasyAlign to Right All <delim>     (in visual mode)", ""],
+\       ["---",                                                                       ""],
+\       ["[^o] prev jumplist",                                                        ""],
+\       ["[^g] next jumplist and output filename",                                    ""],
 \       ["[sc] toggle colorcolumn color",                                             "normal sc"],
 \       ["[sC] toggle colorcolumn width",                                             "normal sC"],
+\       ["---",                                                                       ""],
+\       ["[<op>av], [<op>iv] operate A/Inner Vertical word column",                   "normal vav"],
+\       ["[<op>ac], [<op>ic] operate A/Inner Comment",                                "normal vac"],
+\       ["[<op>a,], [<op>i,] operate A/Inner function argument (,)",                  "normal va,"],
+\       ["[<op>ap], [<op>ip] operate A/Inner Paragraph",                              "normal vap"],
+\       ["---",                                                                       ""],
+\       ["[^-^-] toggle comment",                                                     "TComment"],
+\       ["  [sr] toggle line",                                                        "normal sr"],
+\       ["  [st] toggle tabspace",                                                    "normal st"],
+\       ["  [sT] toggle tabchar",                                                     "normal sT"],
+\       ["  [qa] record  macro (@a), [q] to quit record",                             "normal qa"],
+\       ["  [@a] execute macro (@a)",                                                 "normal @a"],
+\       ["---",                                                                       ""],
+\       ["    [_] Switch Word",                                                       "Switch"],
+\       ["    [~] Toggle Case",                                                       "normal ~"],
+\       ["   [sr] QuickRun",                                                          "QuickRun"],
+\       ["   [so] only (make current window only)",                                   "only"],
+\       ["   [sg] OpenBrowserSmartSearch",                                            "call openbrowser#_keymapping_smart_search('n')"],
+\       ["[s<CR>] Autoformat",                                                        "Autoformat"],
+\       ["---",                                                                       ""],
+\       ["UltiSnips Edit   (edit snippets)",                                          "exec 'UltiSnipsEdit'"],
+\       ["          Update (NeoBundleUpdate vim-snippets-mine)",                      "NeoBundleUpdate vim-snippets-mine"],
+\       ["---",                                                                       ""],
 \       ["Ricty OpenFontDir",                                                         "RictyOpenFontDir"],
 \       ["      Use RictyDiminished",                                                 "RictyUse Ricty_Diminished:h18:cSHIFTJIS Ricty_Diminished:h24"],
 \       ["      Use Osaka",                                                           "RictyUse Osaka－等幅:h18:cSHIFTJIS Osaka-Mono:h24"],
@@ -681,33 +737,25 @@ let g:unite_source_menu_menus.shortcut = {
 \       ["      Use Inconsolata",                                                     "RictyUse Inconsolata:h18:cSHIFTJIS Inconsolata:h26"],
 \       ["      Use Ubuntu Mono",                                                     "RictyUse Ubuntu\\ Mono:h18:cSHIFTJIS Ubuntu\\ Mono:h26"],
 \       ["      Unuse",                                                               "RictyUnuse"],
-\       ["YouCompleteMe Bundle Valloric/YouCompleteMe (Win + ManualBuild and Mac)",   "exec 'OpenBrowser https://goo.gl/1eB6jq' | KeySet ycm_bundle Valloric/YouCompleteMe ycm_name YouCompleteMe"],
-\       ["                     nunun/ycmx64           (Win + Prebuild 64bit)",        "exec 'OpenBrowser https://github.com/nunun/ycmx64' | KeySet ycm_bundle nunun/ycmx64 ycm_name ycmx64"],
-\       ["                     Unuse",                                                "KeyDel ycm_bundle ycm_name"],
-\       ["UltiSnips Edit   (edit snippets)",                                          "exec 'UltiSnipsEdit'"],
-\       ["          Update (NeoBundleUpdate vim-snippets-mine)",                      "NeoBundleUpdate vim-snippets-mine"],
-\       ["git",                                                                       "UniteMenuNest menu:version_controls_git"],
-\       ["svn",                                                                       "UniteMenuNest menu:version_controls_svn"],
-\       ["[<op>av],  [<op>iv]  operate A/Inner Vertical word column",                 "normal vav"],
-\       ["[<op>ac],  [<op>ic]  operate A/Inner Comment",                              "normal vac"],
-\       ["[<op>a,],  [<op>i,]  operate A/Inner function argument (,)",                "normal va,"],
-\       ["[<op>ap],  [<op>ip]  operate A/Inner Paragraph",                            "normal vap"],
-\       ["[^-^-] toggle comment",                                                     "TComment"],
-\       ["[sg] OpenBrowserSmartSearch",                                               "call openbrowser#_keymapping_smart_search('n')"],
-\       ["[sr] toggle line",                                                          "normal sr"],
-\       ["[st] toggle tabspace",                                                      "normal st"],
-\       ["[sT] toggle tabchar",                                                       "normal sT"],
-\       ["[qa] record  macro (@a), [q] to quit record",                               "normal qa"],
-\       ["[@a] execute macro (@a)",                                                   "normal @a"],
+\       ["---",                                                                       ""],
 \       ["NeoComplCache Enable  (enable  neocomplcache)",                             "NeoComplCacheUnlock | NeoComplCacheEnable"],
 \       ["              Disable (disable neocomplcache)",                             "NeoComplCacheDisable | NeoComplCacheLock "],
+\       ["---",                                                                       ""],
+\       ["VimShell",                                                                  "OpenVimShell"],
+\       ["Qfreplace",                                                                 "Qfreplace"],
+\       ["quickfix",                                                                  "UniteMenuNest quickfix"],
+\       ["quickrun (QuickRun)",                                                       "QuickRun"],
+\       ["Vinarise (Edit current file as binary file)",                               "Vinarise"],
+\       ["Format json (need pyhton)",                                                 "%!python -m json.tool"],
+\       ["git",                                                                       "UniteMenuNest menu:version_controls_git"],
+\       ["svn",                                                                       "UniteMenuNest menu:version_controls_svn"],
+\       ["---",                                                                       ""],
 \       ["file_mru",                                                                  "UniteMenuNest file_mru"],
 \       ["history/yank",                                                              "UniteMenuNest history/yank"],
 \       ["vimgrep",                                                                   "UniteMenuNest vimgrep"],
-\       ["quickfix",                                                                  "UniteMenuNest quickfix"],
-\       ["quickrun (QuickRun)",                                                       "QuickRun"],
 \       ["line",                                                                      "UniteMenuNest -start-insert line"],
 \       ["source",                                                                    "UniteMenuNest source"],
+\       ["---",                                                                       ""],
 \       ["open .vimrc",                                                               $HOME. "/.vimrc"],
 \       ["NeoBundle List",                                                            "NeoBundleList"],
 \       ["          Install",                                                         "NeoBundleInstall"],
@@ -768,3 +816,6 @@ let g:unite_source_menu_menus.version_controls_svn = {
 let g:loaded_unitetunes = 1
 let &cpo = s:save_cpo
 unlet s:save_cpo
+
+
+ nnoremap <silent> df :Unite line -prompt-direction="top" -auto-resize -auto-highlight -start-insert<CR>

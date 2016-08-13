@@ -124,7 +124,7 @@ Bundle 'mattesgroeger/vim-bookmarks'
 Bundle 'shougo/unite.vim'
 Bundle 'ujihisa/unite-colorscheme'
 Bundle 'ryanoasis/vim-devicons'
-
+Bundle 'Shougo/neomru.vim'
 
 
 filetype plugin indent on
