@@ -2,11 +2,11 @@
 "                                     Vim-Config
 "                                     2016.8.12
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                     插件引入
+"                                     Plug-in to introduce
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 source ~/dotfiles/vim/bundles.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                     避免乱码
+"                                     To avoid the code
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8
@@ -18,7 +18,7 @@ set showcmd
 set noerrorbells
 set novisualbell
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                     基础设置
+"                                     infrastructure
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = " "
 let g:mapleader = " "
@@ -84,7 +84,7 @@ endif
 au BufRead,BufNewFile,BufEnter * cd %:p:h
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                     配色
+"                                    The theme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("gui_running")
 	set background=dark
@@ -102,7 +102,7 @@ else
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                     字体                                     "
+"                                     The font
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("mac") || has("macunix")
 	"set guifont=Source_Code_Pro_Light:h18
@@ -118,7 +118,7 @@ else
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                  修改默认快捷键
+"                                  Change the default shortcuts
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <silent> <leader><cr> :noh<cr>
 
@@ -167,8 +167,6 @@ inoremap <C-s> <Down>
 inoremap <C-w> <Up>
 inoremap <C-d> <Right>
 
-nnoremap <leader>m  :<c-u><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
-
 nnoremap <expr> n  'Nn'[v:searchforward]
 nnoremap <expr> N  'nN'[v:searchforward]
 
@@ -177,7 +175,7 @@ command! Smaller :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)-1'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                    插件配置
+"                                    The plug-in configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -231,8 +229,41 @@ let g:SuperTabRetainCompletionType=2
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   ctrlp
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set wildignore+=*/tmp/*,*.so,*.o,*.a,*.obj,*.swp,*.zip,*.pyc,*.pyo,*.class,.DS_Store  " MacOSX/Linux
-let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
+let g:ctrlp_map = 'p'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
+    \ }
+let g:ctrlp_working_path_mode=0
+let g:ctrlp_match_window_bottom=1
+let g:ctrlp_max_height=15
+let g:ctrlp_match_window_reversed=0
+let g:ctrlp_mruf_max=500
+let g:ctrlp_follow_symlinks=1
+
+nnoremap <Leader>fu :CtrlPFunky<Cr>
+" narrow the list down with a word under cursor
+nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+
+
+" narrow the list down with a word under cursor
+"nnoremap fU :execute 'CtrlPFunky ' . expand('')
+let g:ctrlp_funky_syntax_highlight = 1
+
+let g:ctrlp_extensions = ['funky']
+
+let g:ctrlp_cmdpalette_execute = 1
+
+
+nnoremap <c-]> :CtrlPtjump<cr>
+vnoremap <c-]> :CtrlPtjumpVisual<cr>
+
+let g:ctrlp_extensions = ['filetype']
+silent! nnoremap <unique> <silent> <Leader>i :CtrlPFiletype<CR>
+
+map <Leader>m :CtrlPModified<CR>
+map <Leader>M :CtrlPBranch<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   tagbar
@@ -398,71 +429,13 @@ au BufRead,BufNewFile *.json setf jsonk
 let g:api_key = "1932136763"
 let g:keyfrom = "aioiyuuko"
 nmap <silent> <Leader>d <Plug>DictSearch
-" --普通模式下，<Leader>d 即可翻译光标下的文本，并在命令行回显
 vmap <silent> <Leader>d <Plug>DictVSearch
-" --可视化模式下，<Leader>d 即可翻译选中的文本，并在命令行回显
 nmap <silent> <Plug>DictWSearch
-" --普通模式下，<Leader>w 即可翻译光标下的文本，并且在Dict新窗口显示
 vmap <silent> <Plug>DictWVSearch
-" --可视化模式下，<Leader>w 即可翻译选中的文本，并且在Dict新窗口显示
 nmap <silent> <Leader><Leader>r <Plug>DictRSearch
-" --普通模式下，<Leader><Leader>r 即可翻译光标下的单词，并替换为翻译的结果
 vmap <silent> <Leader><Leader>r <Plug>DictRVSearch
-" --可视化模式下，<Leader><Leader>r 即可翻译光标下的单词，并替换为翻译的结果
 
 
 
-
-
-" -----------------------------------------------------------------------------
-" let g:vimwiki_list_ignore_newline=0
-" let g:vimwiki_menu = ''
-" let g:vimwiki_use_mouse = 1
-
-
-" let WKROOT = '~/dotfiles/wikisnips/vimwiki'
-
-" let g:vimwiki_list = [{'path': WKROOT.'vimwiki1/', 'path_html': WKROOT.'vimwiki1/html/', 'html_header': WKROOT.'vimwiki1/template/header.tpl',},
-                    " \ {'path': WKROOT.'vimwiki2/', 'path_html': WKROOT.'vimwiki2/html/', 'html_header': WKROOT.'vimwiki2/template/header.tpl',},
-                    " \ {'path': WKROOT.'vimwiki3/', 'path_html': WKROOT.'vimwiki3/html/', 'html_header': WKROOT.'vimwiki3/template/header.tpl',}]
-" let g:vimwiki_file_exts = 'c, cpp, wav, txt, h, hpp, zip, sh, awk, ps, pdf'
-" let g:vimwiki_valid_html_tags='b,i,s,u,sub,sup,kbd,br,hr,div,center,strong,em,a'
-
-
-
-
-
-" let g:vimwiki_list = [{'path':'~/dotfiles/wikisnips/vimwiki',
-            " \'template_path' : '~/dotfiles/wikisnips/vimwiki/template',
-            " \'template_default' : '~/dotfiles/wikisnips/vimwiki/default_template',
-            " \'template_ext' : '.html',
-            " \'path_html': '~/dotfiles/wikisnips/vimwiki/html'}
-" ]
-
-
-" let g:vimwiki_CJK_length = 1
-" "let g:vimwiki_folding = 1
-" let g:vimwiki_menu = ''
-" let g:vimwiki_hl_cb_checked = 1
-" let g:vimwiki_camel_case = 0
-
-let g:vimwiki_use_mouse = 1
-let g:vimwiki_camel_case = 0
-let g:vimwiki_CJK_length = 1
-let g:vimwiki_use_calendar = 0
-let g:vimwiki_timestamp_format='%Y年%m月%d日 %H:%M:%S'
-let g:vimwiki_user_htmls = "search.html,404.html"
-
-let g:vimwiki_use_mouse = 1
-let g:vimwiki_list = [{'path': '~/dotfiles/wikisnips/vimwiki',
-    \    'path_html': '~/dotfiles/wikisnips/vimwiki_html',
-    \    'template_path': '~/dotfiles/wikisnips/vimwiki/template',
-    \    'template_default': "default.tpl"}]
-let g:vimwiki_valid_html_tags='b,i,s,u,sub,sup,kbd,del,br,hr,div,code,h1'
-
-
-
-
-
-
+let g:vikiUseParentSuffix = 1
 

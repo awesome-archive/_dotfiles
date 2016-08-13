@@ -108,7 +108,6 @@ Bundle 'vim-scripts/TaskList.vim'
 Bundle 'YankRing.vim'
 Bundle 'Valloric/YouCompleteMe'
 "Bundle 'marijnh/tern_for_vim'
-Bundle 'Valloric/YouCompleteMe'
 Bundle 'gregsexton/matchtag'
 Bundle 'pbrisbin/vim-syntax-shakespeare'
 Bundle 'csscomb/vim-csscomb'
@@ -116,13 +115,21 @@ Bundle 'csscomb/vim-csscomb'
 Bundle 'michalliu/sourcebeautify.vim'
 Bundle 'michalliu/jsoncodecs.vim'
 Bundle 'michalliu/jsruntime.vim'
-Bundle 'iamcco/dict.vim'
 Bundle 'vimcn/vimwiki.vim.cnx'
 Bundle 'yysfire/vimwiki2markdown'
 Bundle 'vim-scripts/txt2tags'
 Bundle 'vim-scripts/gitignore'
+Bundle 'c9s/colorselector.vim'
 
 
 
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'kovetskiy/ycm-sh'
+Bundle 'tacahiroy/ctrlp-funky'
 
-filetype plugin indent on     " required!
+Bundle 'iamcco/dict.vim'
+Bundle 'ivalkeen/vim-ctrlp-tjump'
+Bundle 'endel/ctrlp-filetype.vim'
+Bundle 'jasoncodes/ctrlp-modified.vim'
+
+filetype plugin indent on
