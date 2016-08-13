@@ -5,6 +5,7 @@
 "                                     Plug-in to introduce
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 source ~/dotfiles/vim/bundles.vim
+"source ~/dotfiles/vim/plug.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                     To avoid the code
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -17,6 +18,7 @@ set foldlevel=100
 set showcmd
 set noerrorbells
 set novisualbell
+set encoding=utf8
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                     infrastructure
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -81,14 +83,15 @@ if has("autocmd")
 	au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-au BufRead,BufNewFile,BufEnter * cd %:p:h
+"  pen the file automatically change directory
+"au BufRead,BufNewFile,BufEnter * cd %:p:h
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                    The theme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("gui_running")
 	set background=dark
-	"colorscheme desert
+	colorscheme desert
 	"colorscheme solarized
 	"colorscheme tomorrow
 	"colorscheme distinguished
@@ -110,12 +113,15 @@ if has("mac") || has("macunix")
 	"set guifont=Inconsolata_for_Powerline:h20
 	"set guifont=Anonymice_Powerline:h20
 	"set guifont=DejaVu_Sans_Mono_for_Powerline:h20
-	set guifont=Literation_Mono_Powerline:h18
+	set guifont=Literation_Mono_Powerline_Nerd_Font_Plus_Font_Awesome_Mono_Windows_Compatible:h18
+	"set guifont=Literation_Mono_Powerline:h18
 	"set guifont=Fura_Powerline:h20
 	"set guifont=Ubuntu_Mono_derivative_Powerline:h20
 else
 	set guifont=Source_Code_Pro_Light:h18
 endif
+
+let g:airline_powerline_fonts = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  Change the default shortcuts
@@ -229,8 +235,6 @@ let g:SuperTabRetainCompletionType=2
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   ctrlp
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ctrlp_map = 'p'
-let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
     \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
@@ -242,28 +246,22 @@ let g:ctrlp_match_window_reversed=0
 let g:ctrlp_mruf_max=500
 let g:ctrlp_follow_symlinks=1
 
-nnoremap <Leader>fu :CtrlPFunky<Cr>
+nnoremap <Leader>uu :CtrlPFunky<Cr>
 " narrow the list down with a word under cursor
-nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+nnoremap <Leader>oo :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 
 
 " narrow the list down with a word under cursor
 "nnoremap fU :execute 'CtrlPFunky ' . expand('')
 let g:ctrlp_funky_syntax_highlight = 1
 
-let g:ctrlp_extensions = ['funky']
-
 let g:ctrlp_cmdpalette_execute = 1
 
 
-nnoremap <c-]> :CtrlPtjump<cr>
-vnoremap <c-]> :CtrlPtjumpVisual<cr>
+let g:ctrlp_extensions = ['funky', 'filetype','F']
+silent! nnoremap <unique> <silent> <Leader>ii :CtrlPFiletype<CR>
 
-let g:ctrlp_extensions = ['filetype']
-silent! nnoremap <unique> <silent> <Leader>i :CtrlPFiletype<CR>
-
-map <Leader>m :CtrlPModified<CR>
-map <Leader>M :CtrlPBranch<CR>
+nnoremap <Leader>jj :CtrlPBuffer<Cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   tagbar
@@ -300,14 +298,6 @@ nnoremap <C-P> :bp<CR>
 let MRU_Max_Entries = 600
 map <leader>r :MRU<CR>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                    bufExplorer
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let g:bufExplorerDefaultHelp=0
-"let g:bufExplorerShowRelativePath=1
-"let g:bufExplorerFindActive=1
-"let g:bufExplorerSortBy='name'
-"map <leader>b :BufExplorer<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  Vimroom
@@ -438,4 +428,81 @@ vmap <silent> <Leader><Leader>r <Plug>DictRVSearch
 
 
 let g:vikiUseParentSuffix = 1
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  Move
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:move_key_modifier = 'C'
+<C-k>   Move current line/selections up
+<C-j>   Move current line/selections down
+
+
+
+nmap <leader>il :IndentLinesToggle<CR>
+
+" 设置Gvim的对齐线样式
+if g:isGUI
+    let g:indentLine_char = "┊"
+    let g:indentLine_first_char = "┊"
+endif
+
+" 设置终端对齐线颜色，如果不喜欢可以将其注释掉采用默认颜色
+let g:indentLine_color_term = 239
+
+" 设置 GUI 对齐线颜色，如果不喜欢可以将其注释掉采用默认颜色
+" let g:indentLine_color_gui = '#A4E57E'
+
+
+
+
+
+highlight BookmarkSign ctermbg=NONE ctermfg=160
+highlight BookmarkLine ctermbg=194 ctermfg=NONE
+"let g:bookmark_sign = '♥'
+let g:bookmark_highlight_lines = 1
+
+
+
+
+let g:unite_source_menu_menus = get(g:,'unite_source_menu_menus',{})
+let g:unite_source_menu_menus.git = {
+    \ 'description' : '            gestionar repositorios git
+        \                            ⌘ [espacio]g',
+    \}
+let g:unite_source_menu_menus.git.command_candidates = [
+    \['▷ tig                                                        ⌘ ,gt',
+        \'normal ,gt'],
+    \['▷ git status       (Fugitive)                                ⌘ ,gs',
+        \'Gstatus'],
+    \['▷ git diff         (Fugitive)                                ⌘ ,gd',
+        \'Gdiff'],
+    \['▷ git commit       (Fugitive)                                ⌘ ,gc',
+        \'Gcommit'],
+    \['▷ git log          (Fugitive)                                ⌘ ,gl',
+        \'exe "silent Glog | Unite quickfix"'],
+    \['▷ git blame        (Fugitive)                                ⌘ ,gb',
+        \'Gblame'],
+    \['▷ git stage        (Fugitive)                                ⌘ ,gw',
+        \'Gwrite'],
+    \['▷ git checkout     (Fugitive)                                ⌘ ,go',
+        \'Gread'],
+    \['▷ git rm           (Fugitive)                                ⌘ ,gr',
+        \'Gremove'],
+    \['▷ git mv           (Fugitive)                                ⌘ ,gm',
+        \'exe "Gmove " input("destino: ")'],
+    \['▷ git push         (Fugitive, salida por buffer)             ⌘ ,gp',
+        \'Git! push'],
+    \['▷ git pull         (Fugitive, salida por buffer)             ⌘ ,gP',
+        \'Git! pull'],
+    \['▷ git prompt       (Fugitive, salida por buffer)             ⌘ ,gi',
+        \'exe "Git! " input("comando git: ")'],
+    \['▷ git cd           (Fugitive)',
+        \'Gcd'],
+    \]
+nnoremap <silent>[menu]g :Unite -silent -start-insert menu:git<CR>
+
+
+nnoremap <Leader>l :Unite file file_rec buffer<CR>
+
 
