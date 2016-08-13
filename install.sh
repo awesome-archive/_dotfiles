@@ -53,7 +53,7 @@ ln -s ~/dotfiles/.tumx.conf ~/.tumx.conf
 echo "移除zshrc..."
 rm ~/.zshrc
 echo "链接zshrc..."
-ln -s ~/dotfiles/.vimrc ~/.zshrc
+ln -s ~/dotfiles/.zshrc ~/.zshrc
 
 isContinue='y'
 echo "请您打开vim 进入进入命令模式执行":BundleInstall"等待安装完成！按y继续进行!"
