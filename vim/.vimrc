@@ -90,11 +90,12 @@ if has("gui_running")
 	set background=dark
 	"colorscheme desert
 	"colorscheme solarized
-	colorscheme tomorrow
+	"colorscheme tomorrow
 	"colorscheme distinguished
 	"colorscheme vividchalk
 	"colorscheme Tomorrow-Night-Eighties
 	"colorscheme gruvbox
+	colorscheme dracula
 else
 	"colorscheme tomorrow
 	colorscheme dracula
@@ -457,14 +458,11 @@ let g:vimwiki_list = [{'path': '~/dotfiles/wikisnips/vimwiki',
     \    'path_html': '~/dotfiles/wikisnips/vimwiki_html',
     \    'template_path': '~/dotfiles/wikisnips/vimwiki/template',
     \    'template_default': "default.tpl"}]
+let g:vimwiki_valid_html_tags='b,i,s,u,sub,sup,kbd,del,br,hr,div,code,h1'
 
 
 
-let g:tomato#interval = 60 * 60
-let g:tomato#rest_time = 20 * 60
-let g:tomato#lang = 'chinese'
-let g:tomato#remind = "☻" (" \uf003 " if you are using awesome-terminal-fonts)
-let g:tomato#restinfo = "☺" (" \ue1f1 " if you are using awesome-terminal-fonts)
-let g:tomato#show_clock = 1
-let g:tomato#show_clock = 1
-let g:tomato#show_count_down = 1
+
+
+
+

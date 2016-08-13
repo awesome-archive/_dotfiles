@@ -119,6 +119,8 @@ Bundle 'michalliu/jsruntime.vim'
 Bundle 'iamcco/dict.vim'
 Bundle 'vimcn/vimwiki.vim.cnx'
 Bundle 'yysfire/vimwiki2markdown'
+Bundle 'vim-scripts/txt2tags'
+Bundle 'vim-scripts/gitignore'
 
 
 
