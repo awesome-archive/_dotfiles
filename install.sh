@@ -57,5 +57,8 @@ echo ${isContinue}
 cd ~/.vim/bundle/YouCompleteMe
 ./install.py --all
 
+cd ~/.vim/bundle/vimproc.vim
+make
+
 echo "The installation is complete"
 
