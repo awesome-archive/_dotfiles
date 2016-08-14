@@ -1,5 +1,5 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-si"                                     Vim-Config
+"                                     Vim-Config
 "                                     2016.8.12
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                     Plug-in to introduce
@@ -26,7 +26,7 @@ let mapleader = " "
 let g:mapleader = " "
 syntax enable
 set nu
-set relativenumber
+"set relativenumber
 set go=
 autocmd InsertLeave * se nocul
 autocmd InsertEnter * se cul
@@ -128,10 +128,10 @@ let g:airline_powerline_fonts = 1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <silent> <leader><cr> :noh<cr>
 
-noremap <silent> <C-left> :bprev<CR>
-noremap <silent> <C-h> :bprev<CR>
-noremap <silent> <C-right> :bnext<CR>
-noremap <silent> <C-l> :bnext<CR>
+"noremap <silent> <C-left> :bprev<CR>
+"noremap <silent> <C-h> :bprev<CR>
+"noremap <silent> <C-right> :bnext<CR>
+"noremap <silent> <C-l> :bnext<CR>
 
 nnoremap <Leader>h <C-w>h
 nnoremap <Leader>l <C-w>l
@@ -246,22 +246,10 @@ let g:ctrlp_match_window_reversed=0
 let g:ctrlp_mruf_max=500
 let g:ctrlp_follow_symlinks=1
 
-nnoremap <Leader>uu :CtrlPFunky<Cr>
-" narrow the list down with a word under cursor
-nnoremap <Leader>oo :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
-
-
-" narrow the list down with a word under cursor
-"nnoremap fU :execute 'CtrlPFunky ' . expand('')
-let g:ctrlp_funky_syntax_highlight = 1
-
-let g:ctrlp_cmdpalette_execute = 1
-
 
 let g:ctrlp_extensions = ['funky', 'filetype','F']
 silent! nnoremap <unique> <silent> <Leader>ii :CtrlPFiletype<CR>
 
-nnoremap <Leader>jj :CtrlPBuffer<Cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   tagbar
@@ -319,6 +307,7 @@ nmap <leader>sc :SessionClose<CR>
 "                                 vim-expand-region
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map K <Plug>(expand_region_expand)
+
 map J <Plug>(expand_region_shrink)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -331,7 +320,6 @@ nnoremap \ :call bufferhint#LoadPrevious()<CR>
 "                                    Ack
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <Leader>a :Ack!<Space>
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 table-mode
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -434,8 +422,8 @@ let g:vikiUseParentSuffix = 1
 "                                  Move
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:move_key_modifier = 'C'
-<C-k>   Move current line/selections up
-<C-j>   Move current line/selections down
+noremap <C-k>   Move current line/selections up
+noremap <C-j>   Move current line/selections down
 
 
 
@@ -451,7 +439,7 @@ endif
 let g:indentLine_color_term = 239
 
 " 设置 GUI 对齐线颜色，如果不喜欢可以将其注释掉采用默认颜色
-" let g:indentLine_color_gui = '#A4E57E'
+let g:indentLine_color_gui = '#A4E57E'
 
 
 
@@ -647,122 +635,164 @@ if !exists("g:unite_source_menu_menus")
 endif
 
 " Unite menu:shortcut
+" let g:unite_source_menu_menus.shortcut = {
+" \   "description" : "shortcut",
+" \   "map"         : function("UniteMap"),
+" \   "candidates"  : [
+" \       ["[1sh]    Shell BufferDir",                                                  "OpenShell"],
+" \       ["[2sh] VimFiler BufferDir",                                                  "VimFilerBufferDir"],
+" \       ["[3sh]          Project",                                                    "call VimFiler(1)"],
+" \       [" [1/]  VimGrep BufferDir",                                                  ""],
+" \       [" [2/]          Project",                                                    ""],
+" \       ["---",                                                                       ""],
+" \       [" [;]  easy motion",                                                         ""],
+" \       ["[s;] fuzzy motion",                                                         ""],
+" \       ["[s/] fuzzy search",                                                         ""],
+" \       ["---",                                                                       ""],
+" \       ["[<C-s>.] tabmove left",                                                     "call vimtunes.tabmove(-1)"],
+" \       ["[<C-s>,] tabmove right",                                                    "call vimtunes.tabmove(+1)"],
+" \       ["[<C-s>0] tabmove 0",                                                        "tabmove 0"],
+" \       ["[<C-s>$] tabmove 1000",                                                     "tabmove 1000"],
+" \       ["[<C-s>o] tabonly",                                                          "call vimtunes.only(1)"],
+" \       ["---",                                                                       ""],
+" \       [" [^p] CtrlP",                                                               "CtrlP"],
+" \       ["[1^p] CtrlP MRUFiles",                                                      "CtrlPMRUFiles"],
+" \       ["[2^p] CtrlP Buffer",                                                        "CtrlPBuffer"],
+" \       ["[3^p] CtrlP Line",                                                          "CtrlPLine"],
+" \       ["[8^p] CtrlP VimDirectory",                                                  "call CtrlPCall(8)"],
+" \       ["[9^p] CtrlP ClearCache",                                                    "CtrlPClearCache"],
+" \       ["---",                                                                       ""],
+" \       ["  [gd] YcmCompleter GotoDefinition",                                        "normal gd"],
+" \       ["  [gI] YcmCompleter GotoImplementation",                                    "normal gI"],
+" \       ["  [gr] OmniSharpFindUsages",                                                "normal gr"],
+" \       ["   [K] OmniSharpDocumentation",                                             "normal K"],
+" \       [" [s^p] OmniSharpFindType",                                                  "OmniSharpFindType"],
+" \       [" [S^p] OmniSharpFindSymbol",                                                "OmniSharpFindSymbol"],
+" \       [" [9gr] OmniSharpFindUsages With ReloadSolution",                            "normal 9gr"],
+" \       ["  [9K] OmniSharpDocumentation With ReloadSolution",                         "normal 9K"],
+" \       ["[9s^p] OmniSharpFindType With ReloadSolution",                              "normal 9s<C-p>"],
+" \       ["[9S^p] OmniSharpFindSymbol With ReloadSolution",                            "normal 9S<C-p>"],
+" \       ["---",                                                                       ""],
+" \       ["[`<][`>] Goto last visual mode start/end position",                         ""],
+" \       ["[`[][`]] Goto last yanked start/end position",                              ""],
+" \       ["[g;][g,] next/prev changelist",                                             ""],
+" \       ["---",                                                                       ""],
+" \       ["[<C-r>.] Insert last inserted text",                                        ""],
+" \       ["[<C-r>.] Insert last inserted text",                                        ""],
+" \       ["[<C-r>/] Insert last searched text",                                        ""],
+" \       ["[<C-r>%] Insert current filename text",                                     ""],
+" \       ["---",                                                                       ""],
+" \       ["[o]                   goto   Opponent selection position (in visual mode)", ""],
+" \       ["[^h],[^j],[^k],[^l]   expand opponent selection / cursor (in visual mode)", ""],
+" \       ["[^w],[^b]             expand opponent selection / word   (in visual mode)", ""],
+" \       ["[+],[-]               expand opponent selection / block  (in visual mode)", ""],
+" \       ["---",                                                                       ""],
+" \       ["[<CR><delim>]         EasyAlign <delim>                  (in visual mode)", ""],
+" \       ["[<CR>*<delim>]        EasyAlign All <delim>              (in visual mode)", ""],
+" \       ["[<CR><right>*<delim>] EasyAlign to Right All <delim>     (in visual mode)", ""],
+" \       ["---",                                                                       ""],
+" \       ["[^o] prev jumplist",                                                        ""],
+" \       ["[^g] next jumplist and output filename",                                    ""],
+" \       ["[sc] toggle colorcolumn color",                                             "normal sc"],
+" \       ["[sC] toggle colorcolumn width",                                             "normal sC"],
+" \       ["---",                                                                       ""],
+" \       ["[<op>av], [<op>iv] operate A/Inner Vertical word column",                   "normal vav"],
+" \       ["[<op>ac], [<op>ic] operate A/Inner Comment",                                "normal vac"],
+" \       ["[<op>a,], [<op>i,] operate A/Inner function argument (,)",                  "normal va,"],
+" \       ["[<op>ap], [<op>ip] operate A/Inner Paragraph",                              "normal vap"],
+" \       ["---",                                                                       ""],
+" \       ["[^-^-] toggle comment",                                                     "TComment"],
+" \       ["  [sr] toggle line",                                                        "normal sr"],
+" \       ["  [st] toggle tabspace",                                                    "normal st"],
+" \       ["  [sT] toggle tabchar",                                                     "normal sT"],
+" \       ["  [qa] record  macro (@a), [q] to quit record",                             "normal qa"],
+" \       ["  [@a] execute macro (@a)",                                                 "normal @a"],
+" \       ["---",                                                                       ""],
+" \       ["    [_] Switch Word",                                                       "Switch"],
+" \       ["    [~] Toggle Case",                                                       "normal ~"],
+" \       ["   [sr] QuickRun",                                                          "QuickRun"],
+" \       ["   [so] only (make current window only)",                                   "only"],
+" \       ["   [sg] OpenBrowserSmartSearch",                                            "call openbrowser#_keymapping_smart_search('n')"],
+" \       ["[s<CR>] Autoformat",                                                        "Autoformat"],
+" \       ["---",                                                                       ""],
+" \       ["UltiSnips Edit   (edit snippets)",                                          "exec 'UltiSnipsEdit'"],
+" \       ["          Update (NeoBundleUpdate vim-snippets-mine)",                      "NeoBundleUpdate vim-snippets-mine"],
+" \       ["---",                                                                       ""],
+" \       ["Ricty OpenFontDir",                                                         "RictyOpenFontDir"],
+" \       ["      Use RictyDiminished",                                                 "RictyUse Ricty_Diminished:h18:cSHIFTJIS Ricty_Diminished:h24"],
+" \       ["      Use Osaka",                                                           "RictyUse Osaka－等幅:h18:cSHIFTJIS Osaka-Mono:h24"],
+" \       ["      Use Migu 1M",                                                         "RictyUse Migu\\ 1M\\ Regular:h18:cSHIFTJIS Migu\\ 1M\\ Regular:h26"],
+" \       ["      Use Inconsolata",                                                     "RictyUse Inconsolata:h18:cSHIFTJIS Inconsolata:h26"],
+" \       ["      Use Ubuntu Mono",                                                     "RictyUse Ubuntu\\ Mono:h18:cSHIFTJIS Ubuntu\\ Mono:h26"],
+" \       ["      Unuse",                                                               "RictyUnuse"],
+" \       ["---",                                                                       ""],
+" \       ["NeoComplCache Enable  (enable  neocomplcache)",                             "NeoComplCacheUnlock | NeoComplCacheEnable"],
+" \       ["              Disable (disable neocomplcache)",                             "NeoComplCacheDisable | NeoComplCacheLock "],
+" \       ["---",                                                                       ""],
+" \       ["VimShell",                                                                  "OpenVimShell"],
+" \       ["Qfreplace",                                                                 "Qfreplace"],
+" \       ["quickfix",                                                                  "UniteMenuNest quickfix"],
+" \       ["quickrun (QuickRun)",                                                       "QuickRun"],
+" \       ["Vinarise (Edit current file as binary file)",                               "Vinarise"],
+" \       ["Format json (need pyhton)",                                                 "%!python -m json.tool"],
+" \       ["git",                                                                       "UniteMenuNest menu:version_controls_git"],
+" \       ["svn",                                                                       "UniteMenuNest menu:version_controls_svn"],
+" \       ["---",                                                                       ""],
+" \       ["file_mru",                                                                  "UniteMenuNest file_mru"],
+" \       ["history/yank",                                                              "UniteMenuNest history/yank"],
+" \       ["vimgrep",                                                                   "UniteMenuNest vimgrep"],
+" \       ["line",                                                                      "UniteMenuNest -start-insert line"],
+" \       ["source",                                                                    "UniteMenuNest source"],
+" \       ["---",                                                                       ""],
+" \       ["open .vimrc",                                                               $HOME. "/.vimrc"],
+" \       ["NeoBundle List",                                                            "NeoBundleList"],
+" \       ["          Install",                                                         "NeoBundleInstall"],
+" \       ["          Clean",                                                           "NeoBundleClean"],
+" \       ["          Update",                                                          "NeoBundleUpdate"],
+" \   ],
+" \}
+
+
+
 let g:unite_source_menu_menus.shortcut = {
 \   "description" : "shortcut",
 \   "map"         : function("UniteMap"),
 \   "candidates"  : [
-\       ["[1sh]    Shell BufferDir",                                                  "OpenShell"],
-\       ["[2sh] VimFiler BufferDir",                                                  "call VimFiler(0)"],
-\       ["[3sh]          Project",                                                    "call VimFiler(1)"],
-\       [" [1/]  VimGrep BufferDir",                                                  ""],
-\       [" [2/]          Project",                                                    ""],
+\       ["VimShell",                                                      "VimShell"],
+\       ["VimFiler BufferDir",                                                  "VimFilerBufferDir"],
 \       ["---",                                                                       ""],
-\       [" [;]  easy motion",                                                         ""],
-\       ["[s;] fuzzy motion",                                                         ""],
-\       ["[s/] fuzzy search",                                                         ""],
+\       ["CtrlP",                                                               "CtrlP"],
+\       ["CtrlP MRUFiles",                                                      "CtrlPMRUFiles"],
+\       ["CtrlP Buffer",                                                        "CtrlPBuffer"],
+\       ["CtrlP Line",                                                          "CtrlPLine"],
+\       ["CtrlP VimDirectory",                                                  "CtrlPVimDirectory"],
+\       ["CtrlP FileType",                                                      "CtrlPFiletype"],
+\       ["CtrlP ClearCache",                                                    "CtrlPClearCache"],
 \       ["---",                                                                       ""],
-\       ["[<C-s>.] tabmove left",                                                     "call vimtunes.tabmove(-1)"],
-\       ["[<C-s>,] tabmove right",                                                    "call vimtunes.tabmove(+1)"],
-\       ["[<C-s>0] tabmove 0",                                                        "tabmove 0"],
-\       ["[<C-s>$] tabmove 1000",                                                     "tabmove 1000"],
-\       ["[<C-s>o] tabonly",                                                          "call vimtunes.only(1)"],
-\       ["---",                                                                       ""],
-\       [" [^p] CtrlP",                                                               "CtrlP"],
-\       ["[1^p] CtrlP MRUFiles",                                                      "CtrlPMRUFiles"],
-\       ["[2^p] CtrlP Buffer",                                                        "CtrlPBuffer"],
-\       ["[3^p] CtrlP Line",                                                          "CtrlPLine"],
-\       ["[8^p] CtrlP VimDirectory",                                                  "call CtrlPCall(8)"],
-\       ["[9^p] CtrlP ClearCache",                                                    "CtrlPClearCache"],
-\       ["---",                                                                       ""],
-\       ["  [gd] YcmCompleter GotoDefinition",                                        "normal gd"],
-\       ["  [gI] YcmCompleter GotoImplementation",                                    "normal gI"],
-\       ["  [gr] OmniSharpFindUsages",                                                "normal gr"],
-\       ["   [K] OmniSharpDocumentation",                                             "normal K"],
-\       [" [s^p] OmniSharpFindType",                                                  "OmniSharpFindType"],
-\       [" [S^p] OmniSharpFindSymbol",                                                "OmniSharpFindSymbol"],
-\       [" [9gr] OmniSharpFindUsages With ReloadSolution",                            "normal 9gr"],
-\       ["  [9K] OmniSharpDocumentation With ReloadSolution",                         "normal 9K"],
-\       ["[9s^p] OmniSharpFindType With ReloadSolution",                              "normal 9s<C-p>"],
-\       ["[9S^p] OmniSharpFindSymbol With ReloadSolution",                            "normal 9S<C-p>"],
-\       ["---",                                                                       ""],
-\       ["[`<][`>] Goto last visual mode start/end position",                         ""],
-\       ["[`[][`]] Goto last yanked start/end position",                              ""],
-\       ["[g;][g,] next/prev changelist",                                             ""],
-\       ["---",                                                                       ""],
-\       ["[<C-r>.] Insert last inserted text",                                        ""],
-\       ["[<C-r>.] Insert last inserted text",                                        ""],
-\       ["[<C-r>/] Insert last searched text",                                        ""],
-\       ["[<C-r>%] Insert current filename text",                                     ""],
-\       ["---",                                                                       ""],
-\       ["[o]                   goto   Opponent selection position (in visual mode)", ""],
-\       ["[^h],[^j],[^k],[^l]   expand opponent selection / cursor (in visual mode)", ""],
-\       ["[^w],[^b]             expand opponent selection / word   (in visual mode)", ""],
-\       ["[+],[-]               expand opponent selection / block  (in visual mode)", ""],
-\       ["---",                                                                       ""],
-\       ["[<CR><delim>]         EasyAlign <delim>                  (in visual mode)", ""],
-\       ["[<CR>*<delim>]        EasyAlign All <delim>              (in visual mode)", ""],
-\       ["[<CR><right>*<delim>] EasyAlign to Right All <delim>     (in visual mode)", ""],
-\       ["---",                                                                       ""],
-\       ["[^o] prev jumplist",                                                        ""],
-\       ["[^g] next jumplist and output filename",                                    ""],
-\       ["[sc] toggle colorcolumn color",                                             "normal sc"],
-\       ["[sC] toggle colorcolumn width",                                             "normal sC"],
-\       ["---",                                                                       ""],
-\       ["[<op>av], [<op>iv] operate A/Inner Vertical word column",                   "normal vav"],
-\       ["[<op>ac], [<op>ic] operate A/Inner Comment",                                "normal vac"],
-\       ["[<op>a,], [<op>i,] operate A/Inner function argument (,)",                  "normal va,"],
-\       ["[<op>ap], [<op>ip] operate A/Inner Paragraph",                              "normal vap"],
-\       ["---",                                                                       ""],
-\       ["[^-^-] toggle comment",                                                     "TComment"],
-\       ["  [sr] toggle line",                                                        "normal sr"],
-\       ["  [st] toggle tabspace",                                                    "normal st"],
-\       ["  [sT] toggle tabchar",                                                     "normal sT"],
-\       ["  [qa] record  macro (@a), [q] to quit record",                             "normal qa"],
-\       ["  [@a] execute macro (@a)",                                                 "normal @a"],
-\       ["---",                                                                       ""],
-\       ["    [_] Switch Word",                                                       "Switch"],
-\       ["    [~] Toggle Case",                                                       "normal ~"],
-\       ["   [sr] QuickRun",                                                          "QuickRun"],
-\       ["   [so] only (make current window only)",                                   "only"],
-\       ["   [sg] OpenBrowserSmartSearch",                                            "call openbrowser#_keymapping_smart_search('n')"],
-\       ["[s<CR>] Autoformat",                                                        "Autoformat"],
+\       ["Autoformat",                                                        "Autoformat"],
 \       ["---",                                                                       ""],
 \       ["UltiSnips Edit   (edit snippets)",                                          "exec 'UltiSnipsEdit'"],
-\       ["          Update (NeoBundleUpdate vim-snippets-mine)",                      "NeoBundleUpdate vim-snippets-mine"],
 \       ["---",                                                                       ""],
-\       ["Ricty OpenFontDir",                                                         "RictyOpenFontDir"],
-\       ["      Use RictyDiminished",                                                 "RictyUse Ricty_Diminished:h18:cSHIFTJIS Ricty_Diminished:h24"],
-\       ["      Use Osaka",                                                           "RictyUse Osaka－等幅:h18:cSHIFTJIS Osaka-Mono:h24"],
-\       ["      Use Migu 1M",                                                         "RictyUse Migu\\ 1M\\ Regular:h18:cSHIFTJIS Migu\\ 1M\\ Regular:h26"],
-\       ["      Use Inconsolata",                                                     "RictyUse Inconsolata:h18:cSHIFTJIS Inconsolata:h26"],
-\       ["      Use Ubuntu Mono",                                                     "RictyUse Ubuntu\\ Mono:h18:cSHIFTJIS Ubuntu\\ Mono:h26"],
-\       ["      Unuse",                                                               "RictyUnuse"],
-\       ["---",                                                                       ""],
-\       ["NeoComplCache Enable  (enable  neocomplcache)",                             "NeoComplCacheUnlock | NeoComplCacheEnable"],
-\       ["              Disable (disable neocomplcache)",                             "NeoComplCacheDisable | NeoComplCacheLock "],
-\       ["---",                                                                       ""],
-\       ["VimShell",                                                                  "OpenVimShell"],
-\       ["Qfreplace",                                                                 "Qfreplace"],
-\       ["quickfix",                                                                  "UniteMenuNest quickfix"],
-\       ["quickrun (QuickRun)",                                                       "QuickRun"],
-\       ["Vinarise (Edit current file as binary file)",                               "Vinarise"],
-\       ["Format json (need pyhton)",                                                 "%!python -m json.tool"],
 \       ["git",                                                                       "UniteMenuNest menu:version_controls_git"],
 \       ["svn",                                                                       "UniteMenuNest menu:version_controls_svn"],
 \       ["---",                                                                       ""],
-\       ["file_mru",                                                                  "UniteMenuNest file_mru"],
-\       ["history/yank",                                                              "UniteMenuNest history/yank"],
-\       ["vimgrep",                                                                   "UniteMenuNest vimgrep"],
 \       ["line",                                                                      "UniteMenuNest -start-insert line"],
+\       ["file_mru",                                                                  "UniteMenuNest file_mru"],
+\       ["vimgrep",                                                                   "UniteMenuNest vimgrep"],
 \       ["source",                                                                    "UniteMenuNest source"],
 \       ["---",                                                                       ""],
 \       ["open .vimrc",                                                               $HOME. "/.vimrc"],
-\       ["NeoBundle List",                                                            "NeoBundleList"],
-\       ["          Install",                                                         "NeoBundleInstall"],
-\       ["          Clean",                                                           "NeoBundleClean"],
-\       ["          Update",                                                          "NeoBundleUpdate"],
+\       ["open Bundle",                                                               $HOME. "~/dotfiles.vim/bundles.vim"],
+\       ["VimwikiIndex",                                                              "VimwikiIndex"],
+\       ["Bundle List",																  "BundleList"],
+\       ["          Install",                                                         "BundleInstall"],
+\       ["          Clean",                                                           "BundleClean"],
+\       ["          Update",                                                          "BundleUpdate"],
 \   ],
 \}
+
+
+
 " PENDING
 "["[<op>i|] operate Inner word column(|)", "normal vi|"],
 
@@ -818,4 +848,34 @@ let &cpo = s:save_cpo
 unlet s:save_cpo
 
 
- nnoremap <silent> df :Unite line -prompt-direction="top" -auto-resize -auto-highlight -start-insert<CR>
+nnoremap <silent> df :Unite line -prompt-direction="top" -auto-resize -auto-highlight -start-insert<CR>
+nnoremap <silent> dc :CtrlPLine -prompt-direction="top" -auto-resize -auto-highlight -start-insert<CR>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let g:vimfiler_as_default_explorer = 1
+
+
+au BufWrite * :Autoformat
+let g:autoformat_autoindent = 0
+let g:autoformat_retab = 0
+let g:autoformat_remove_trailing_spaces = 0
+autocmd FileType vim,tex let b:autoformat_autoindent=0
