@@ -103,10 +103,10 @@ Bundle "ap/vim-css-color"
 Bundle 'csscomb/vim-csscomb'
 
 
-Bundle 'vimwiki'
-Bundle 'vimcn/vimwiki.vim.cnx'
-Bundle 'yysfire/vimwiki2markdown'
-Bundle 'c9s/colorselector.vim'
+"Bundle 'vimwiki'
+"Bundle 'vimcn/vimwiki.vim.cnx'
+"Bundle 'yysfire/vimwiki2markdown'
+"Bundle 'c9s/colorselector.vim'
 
 " 中文注释
 Bundle 'Valloric/YouCompleteMe'
@@ -119,17 +119,6 @@ Bundle 'endel/ctrlp-filetype.vim'
 Bundle 'mattesgroeger/vim-bookmarks'
 
 Bundle 'shougo/unite.vim'
-Bundle 'ujihisa/unite-colorscheme'
-Bundle 'ryanoasis/vim-devicons'
-Bundle 'Shougo/neomru.vim'
-
-
-
-
-
-
-
-
 
 Bundle 'osyo-manga/unite-quickfix'
 
@@ -137,5 +126,11 @@ Bundle 'Shougo/vimfiler.vim'
 Bundle 'shougo/vimshell.vim'
 Bundle 'shougo/vimproc.vim'
 Bundle 'chiel92/vim-autoformat'
+
+
+
+
+
+
 
 filetype plugin indent on
