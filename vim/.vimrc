@@ -5,10 +5,10 @@
 "                                     Plug-in to introduce
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 source ~/dotfiles/vim/bundles.vim
-"source ~/dotfiles/vim/plug.vim
+"source ~/dotfiles/vim/list.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                     To avoid the code
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""list"""""""""""""""
 set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8
 set encoding=utf-8
@@ -261,21 +261,21 @@ nmap <F1> :GundoToggle<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   airline
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:airline_theme="dracula"
-let g:airline_section_b = '%{strftime("%c")}'
-let g:airline_section_y = 'BN: %{bufnr("%")}'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-if !exists('g:airline_symbols')
-	let g:airline_symbols = {}
-endif
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-nnoremap <C-N> :bn<CR>
-nnoremap <C-P> :bp<CR>
+" let g:airline_theme="dracula"
+" let g:airline_section_b = '%{strftime("%c")}'
+" let g:airline_section_y = 'BN: %{bufnr("%")}'
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#left_sep = ' '
+" let g:airline#extensions#tabline#left_alt_sep = '|'
+" if !exists('g:airline_symbols')
+	" let g:airline_symbols = {}
+" endif
+" let g:airline_left_sep = ''
+" let g:airline_left_alt_sep = ''
+" let g:airline_right_sep = ''
+" let g:airline_right_alt_sep = ''
+" nnoremap <C-N> :bn<CR>
+" nnoremap <C-P> :bp<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                    MRU
@@ -393,6 +393,21 @@ nmap <silent> <Leader><Leader>r <Plug>DictRSearch
 vmap <silent> <Leader><Leader>r <Plug>DictRVSearch
 let g:vikiUseParentSuffix = 1
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  vimwiki                                   "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+noremap <Leader>ww :VimwikiIndex<CR>
+
+
+let g:vimwiki_list = [{'path': '~/vimwiki',
+    \    'path_html': '~/vimwiki_html',
+    \    'template_path': '~/vimwiki/template',
+    \    'template_default': "default.tpl"}]
+
+let g:vimwiki_hl_cb_checked = 1
+let g:vimwiki_CJK_length = 1
+let g:vimwiki_menu = ''
+let g:vimwiki_camel_case = 0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  Move
@@ -625,19 +640,7 @@ let g:loaded_unitetunes = 1
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
-
 nnoremap <silent> df :Unite line -prompt-direction="top" -auto-resize -auto-highlight -start-insert<CR>
-
-
-
-
-
-
-
-
-
-
-
 
 let g:vimfiler_as_default_explorer = 1
 
@@ -647,3 +650,16 @@ let g:autoformat_autoindent = 0
 let g:autoformat_retab = 0
 let g:autoformat_remove_trailing_spaces = 0
 autocmd FileType vim,tex let b:autoformat_autoindent=0
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -39,7 +39,7 @@ Bundle 'vim-scripts/mru.vim'
 "--------------
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-fugitive'
-Bundle 'bling/vim-airline'
+"Bundle 'bling/vim-airline'
 Bundle 'bronson/vim-trailing-whitespace'
 Bundle 'yggdroot/indentline'
 "----------------------------------------
@@ -103,10 +103,9 @@ Bundle "ap/vim-css-color"
 Bundle 'csscomb/vim-csscomb'
 
 
-"Bundle 'vimwiki'
+Bundle 'vimwiki/vimwiki'
 "Bundle 'vimcn/vimwiki.vim.cnx'
 "Bundle 'yysfire/vimwiki2markdown'
-"Bundle 'c9s/colorselector.vim'
 
 " 中文注释
 Bundle 'Valloric/YouCompleteMe'
@@ -128,8 +127,7 @@ Bundle 'shougo/vimproc.vim'
 Bundle 'chiel92/vim-autoformat'
 
 
-
-
+Bundle 'itchyny/lightline.vim'
 
 
 
