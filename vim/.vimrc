@@ -634,9 +634,8 @@ nnoremap <silent> df :Unite line -prompt-direction="top" -auto-resize -auto-high
 
 let g:vimfiler_as_default_explorer = 1
 
-
-au BufWrite * :Autoformat
+" Disable automatic default formatting
+"au BufWrite * :Autoformat
 let g:autoformat_autoindent = 0
 let g:autoformat_retab = 0
 let g:autoformat_remove_trailing_spaces = 0
-autocmd FileType vim,tex let b:autoformat_autoindent=0
