@@ -104,8 +104,6 @@ Bundle 'csscomb/vim-csscomb'
 
 
 Bundle 'vimwiki/vimwiki'
-"Bundle 'vimcn/vimwiki.vim.cnx'
-"Bundle 'yysfire/vimwiki2markdown'
 
 " 中文注释
 Bundle 'Valloric/YouCompleteMe'

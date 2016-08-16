@@ -5,7 +5,6 @@
 "                                     Plug-in to introduce
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 source ~/dotfiles/vim/bundles.vim
-"source ~/dotfiles/vim/list.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                     To avoid the code
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""list"""""""""""""""
@@ -109,10 +108,10 @@ endif
 if has("mac") || has("macunix")
 	"set guifont=Source_Code_Pro_Light:h18
 	"set guifont=Hack:h18
-	"set guifont=Inconsolata_for_Powerline:h20
+	set guifont=Inconsolata_for_Powerline:h20
 	"set guifont=Anonymice_Powerline:h20
 	"set guifont=DejaVu_Sans_Mono_for_Powerline:h20
-	set guifont=Literation_Mono_Powerline:h20
+	"set guifont=Literation_Mono_Powerline:h20
 	"set guifont=Fura_Powerline:h20
 	"set guifont=Ubuntu_Mono_derivative_Powerline:h20
 else
@@ -300,12 +299,6 @@ map K <Plug>(expand_region_expand)
 map J <Plug>(expand_region_shrink)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                 bufferhint
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"nnoremap <leader><leader> :call bufferhint#Popup()<CR>
-"nnoremap \ :call bufferhint#LoadPrevious()<CR>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                    Ack
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <Leader>a :Ack!<Space>
@@ -365,10 +358,7 @@ let g:syntastic_cpp_remove_include_errors = 1
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libstdc++'
-"set error or warning signs
-"let g:syntastic_error_symbol = '✗'
 let g:syntastic_error_symbol = 'ㄨ'
-"let g:syntastic_warning_symbol = '•'
 let g:syntastic_warning_symbol = '⚠️'
 "whether to show balloons
 let g:syntastic_enable_balloons = 1
@@ -650,16 +640,3 @@ let g:autoformat_autoindent = 0
 let g:autoformat_retab = 0
 let g:autoformat_remove_trailing_spaces = 0
 autocmd FileType vim,tex let b:autoformat_autoindent=0
-
-
-
-
-
-
-
-
-
-
-
-
-
