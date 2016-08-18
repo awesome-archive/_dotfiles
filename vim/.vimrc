@@ -75,7 +75,7 @@ set scrolloff=10
 filetype plugin indent on
 set completeopt=longest,menu
 set clipboard+=unnamed
-set linespace=6
+set linespace=1
 set laststatus=2
 set foldlevelstart=99
 if has("autocmd")
@@ -91,13 +91,11 @@ endif
 set background=dark
 if has("gui_running")
 	"colorscheme desert
-	"colorscheme tomor
-	
-	"rotew
 	"colorscheme Tomorrow-Night-Eighties
-	colorscheme gruvbox
+	"colorscheme gruvbox
 	"colorscheme dracula
-	"colorscheme solarized
+	"colorscheme onedark
+	colorscheme solarized
 else
 	"colorscheme gruvbox
 endif
@@ -198,17 +196,8 @@ omap f <Plug>(easymotion-tn)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 Nerd Tree
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"lesu NERDChristmasTree=0
-let g:netrw_winsize = 35
-let NERDTreeWinSize=30
-let NERDTreeChDirMode=2
-let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
-" let NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$',  '\~$']
-let NERDTreeShowBookmarks=1
-let NERDTreeWinPos = "left"
-
-map <Leader>n :NERDTreeMirror<CR>
-map <Leader>n :NERDTreeToggle<CR>
+let g:vimfiler_as_default_explorer = 1
+map <Leader>n :VimFilerExplorer<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  nerdcommenter
@@ -392,7 +381,9 @@ noremap <Leader>ww :VimwikiIndex<CR>
 let g:vimwiki_list = [{'path': '~/vimwiki',
     \    'path_html': '~/vimwiki_html',
     \    'template_path': '~/vimwiki/template',
-    \    'template_default': "default.tpl"}]
+    \    'template_default': "default.tpl",
+	\   "syntax": "markdown",
+    \   "auto_export": 1}]
 
 let g:vimwiki_hl_cb_checked = 1
 let g:vimwiki_CJK_length = 1
@@ -630,12 +621,19 @@ let g:loaded_unitetunes = 1
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
-nnoremap <silent> df :Unite line -prompt-direction="top" -auto-resize -auto-highlight -start-insert<CR>
+"nnoremap <silent> df :Unite line -prompt-direction="top" -auto-resize -auto-highlight -start-insert<CR>
 
 let g:vimfiler_as_default_explorer = 1
 
 " Disable automatic default formatting
-"au BufWrite * :Autoformat
+au BufWrite * :Autoformat
 let g:autoformat_autoindent = 0
 let g:autoformat_retab = 0
 let g:autoformat_remove_trailing_spaces = 0
+
+
+
+nmap <Leader>l :call Swoop()<CR>
+vmap <Leader>l :call SwoopSelection()<CR>
+nmap <Leader>ml :call SwoopMulti()<CR>
+vmap <Leader>ml :call SwoopMultiSelection()<CR>
