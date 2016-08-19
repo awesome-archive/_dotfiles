@@ -12,7 +12,7 @@ set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936
-set fileencoding=utf-8
+awesome-macset fileencoding=utf-8
 set foldlevel=100
 set showcmd
 set noerrorbells
@@ -183,15 +183,12 @@ command! Smaller :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)-1'
 "                                 easy-motion
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:EasyMotion_leader_key = '<Leader>'
-
 map <Leader>y <Plug>(easymotion-bd-jk)
 nmap <Leader>y <Plug>(easymotion-overwin-line)
 
 map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
 
-map  f <Plug>(easymotion-sn)
-omap f <Plug>(easymotion-tn)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 Nerd Tree
@@ -231,8 +228,7 @@ let g:ctrlp_match_window_reversed=0
 let g:ctrlp_mruf_max=500
 let g:ctrlp_follow_symlinks=1
 
-
-let g:ctrlp_extensions = ['funky', 'filetype','F']
+let g:ctrlp_extensions = ['filetype']
 silent! nnoremap <unique> <silent> <Leader>ii :CtrlPFiletype<CR>
 
 
@@ -404,224 +400,6 @@ let g:bookmark_highlight_lines = 1
 
 
 
-"#############################################################################
-"###                            UNITETUNES                                 ###
-"#############################################################################
-if exists('g:loaded_unitetunes')
-  finish
-elseif v:version < 703
-  echoerr 'unitetunes.vim does not work on Vim "' . v:version . '".'
-  finish
-endif
-
-let s:save_cpo = &cpo
-set cpo&vim
-
-set encoding=utf-8
-scriptencoding=utf-8
-"#############################################################################
-"###                            UNITETUNES                                 ###
-"#############################################################################
-if exists('g:loaded_unitetunes')
-  finish
-elseif v:version < 703
-  echoerr 'unitetunes.vim does not work on Vim "' . v:version . '".'
-  finish
-endif
-
-let s:save_cpo = &cpo
-set cpo&vim
-
-
-"=============================================================================
-" UniteSettings
-"=============================================================================
-
-" Unite keymap
-nmap <silent> su :UniteMenuToggle shortcut<CR>
-nmap <silent> sU :Unite menu:shortcut<CR>
-
-" Unite settings
-let g:unite_force_overwrite_statusline=0
-let g:unite_source_history_yank_enable=1
-
-" Unite buffer keymap
-autocmd FileType unite call s:unite_my_settings()
-function! s:unite_my_settings()
-	nmap <buffer> q :UniteMenuBack shortcut<CR>
-	nmap <buffer> Q :UniteClose default<CR>
-	nmap <buffer> <C-c> :UniteClose default<CR>
-	"nmap <buffer> su <Nop>
-	"nmap <buffer> sU <Nop>
-	autocmd CursorMoved  <buffer> :call UniteCursorMoved()
-	autocmd CursorMovedI <buffer> :call UniteCursorMoved()
-	UniteMenuNestEcho
-endfunction
-
-" Unite cursor move. record line number for resume.
-let s:unite_line = 0
-function! UniteCursorMoved()
-	let s:unite_line = line('.')
-endfunction
-
-" Unite menu:* nest show
-let s:unite_stack = []
-command! -nargs=0 UniteMenuNestEcho :call UniteMenuNestEcho()
-function! UniteMenuNestEcho()
-	let mesg = ''
-	for i in s:unite_stack
-		let mesg .= '/'. i[0]
-	endfor
-	let unite = unite#get_current_unite()
-	if unite.args[0][0] == "menu"
-		let mesg .= '/['. unite.args[0][1][0]. ']'
-	else
-		let mesg .= '/['. unite.profile_name. ']'
-	endif
-	redraw | echo mesg
-endfunction
-
-" Unite menu:* nest open
-command! -nargs=+ UniteMenuNest :call UniteMenuNest(<f-args>)
-function! UniteMenuNest(...)
-	let unite = unite#get_current_unite()
-	if unite != {} && unite.args[0][0] == "menu"
-		let name = unite.args[0][1][0]
-		let line = (s:unite_line >= 2)? s:unite_line - 2 : 0
-		let item = [name, line]
-		call add(s:unite_stack, item)
-		exec "Unite ". join(a:000, " ")
-	else
-		echoerr "No Unite menu."
-	endif
-endfunction
-
-" Unite menu:* back
-command! -nargs=1 UniteMenuBack :call UniteMenuBack(<f-args>)
-function! UniteMenuBack(root_menu_name)
-	let unite = unite#get_current_unite()
-	if unite != {} && unite.is_finalized == 0
-		if unite.args[0][0] == "menu"
-		 \ && unite.args[0][1][0] == a:root_menu_name
-			UniteClose default
-		elseif len(s:unite_stack) > 0
-			let item = remove(s:unite_stack, -1)
-			let name = item[0]
-			let line = item[1]
-			exec "Unite -silent -select=". line. " menu:". name
-			" redraw cursor after 'Unite -select'
-			let  unite = unite#get_current_unite()
-			let  unite.cursor_line_time = [0, 0]
-			call unite#set_current_unite(unite)
-			call unite#force_redraw()
-		else
-			exec "Unite -silent menu:". a:root_menu_name
-		endif
-	endif
-endfunction
-
-" Unite menu:* toggle
-command! -nargs=1 UniteMenuToggle :call UniteMenuToggle(<f-args>)
-function! UniteMenuToggle(root_menu_name)
-	let unite = unite#get_current_unite()
-	if unite == {} || !exists("t:unite")
-		exec "Unite -wrap -multi-line -silent menu:". a:root_menu_name
-	elseif unite#get_unite_winnr(unite.buffer_name) < 0 "|| unite.is_finalized == 1
-		UniteResume -silent
-	else
-		UniteClose default
-	endif
-endfunction
-
-" Map Unite menu:*
-function! UniteMap(key, value)
-	let [word, value] = a:value
-	if word == "---"
-		" separator
-		return {
-		\    "word" : "-+----------------------------------------------------------------------------",
-		\    "kind" : "command",
-		\    "action__command" : ""
-		\}
-	elseif value == ""
-		" title
-		return {
-		\    "word" : " | ". word,
-		\    "kind" : "command",
-		\    "action__command" : ""
-		\}
-	elseif isdirectory(value)
-		" directory
-		return {
-		\    "word" : "/| ". word,
-		\    "kind" : "directory",
-		\    "action__directory" : value
-		\}
-	elseif !empty(glob(value))
-		" file
-		return {
-		\    "word" : "e| ". word,
-		\    "kind" : "file",
-		\    "default_action" : "tabdrop",
-		\    "action__path" : value,
-		\}
-	else
-		" command
-		return {
-		\    "word" : ":| ". word,
-		\    "kind" : "command",
-		\    "action__command" : value
-		\}
-	endif
-endfunction
-
-"=============================================================================
-" UniteMenu
-"=============================================================================
-
-" Initialize Unite menu:*
-if !exists("g:unite_source_menu_menus")
-	let g:unite_source_menu_menus = {}
-endif
-
-" Unite menu:shortcut
-
-
-let g:unite_source_menu_menus.shortcut = {
-\   "description" : "shortcut",
-\   "map"         : function("UniteMap"),
-\   "candidates"  : [
-\       ["VimShell",                                                      "VimShell"],
-\       ["VimFiler BufferDir",                                                  "VimFilerBufferDir"],
-\       ["CtrlP MRUFiles",                                                      "CtrlPMRUFiles"],
-\       ["CtrlP Buffer",                                                        "CtrlPBuffer"],
-\       ["CtrlP Line",                                                          "CtrlPLine"],
-\       ["CtrlP VimDirectory",                                                  "CtrlPVimDirectory"],
-\       ["CtrlP FileType",                                                      "CtrlPFiletype"],
-\       ["CtrlP ClearCache",                                                    "CtrlPClearCache"],
-\       ["Autoformat",                                                        "Autoformat"],
-\       ["UltiSnips Edit   (edit snippets)",                                          "exec 'UltiSnipsEdit'"],
-\       ["git",                                                                       "UniteMenuNest menu:version_controls_git"],
-\       ["svn",                                                                       "UniteMenuNest menu:version_controls_svn"],
-\       ["line",                                                                      "UniteMenuNest -start-insert line"],
-\       ["file_mru",                                                                  "UniteMenuNest file_mru"],
-\       ["vimgrep",                                                                   "UniteMenuNest vimgrep"],
-\       ["source",                                                                    "UniteMenuNest source"],
-\       ["---",                                                                       ""],
-\       ["open .vimrc",                                                               $HOME. "/.vimrc"],
-\       ["open Bundle",                                                               $HOME. "~/dotfiles.vim/bundles.vim"],
-\       ["Bundle List",																  "BundleList"],
-\       ["          Install",                                                         "BundleInstall"],
-\       ["          Clean",                                                           "BundleClean"],
-\       ["          Update",                                                          "BundleUpdate"],
-\   ],
-\}
-
-let g:loaded_unitetunes = 1
-let &cpo = s:save_cpo
-unlet s:save_cpo
-
-"nnoremap <silent> df :Unite line -prompt-direction="top" -auto-resize -auto-highlight -start-insert<CR>
 
 let g:vimfiler_as_default_explorer = 1
 
@@ -637,3 +415,15 @@ nmap <Leader>l :call Swoop()<CR>
 vmap <Leader>l :call SwoopSelection()<CR>
 nmap <Leader>ml :call SwoopMulti()<CR>
 vmap <Leader>ml :call SwoopMultiSelection()<CR>
+
+
+
+
+
+let g:sneak#streak = 1
+nmap f <Plug>Sneak_s
+nmap F <Plug>Sneak_S
+xmap f <Plug>Sneak_s
+xmap F <Plug>Sneak_S
+omap f <Plug>Sneak_s
+omap F <Plug>Sneak_S
