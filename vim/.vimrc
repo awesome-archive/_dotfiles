@@ -12,7 +12,6 @@ set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936
-awesome-macset fileencoding=utf-8
 set foldlevel=100
 set showcmd
 set noerrorbells
@@ -88,14 +87,21 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                    The theme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set background=dark
+"set background=dark
+set background=light
 if has("gui_running")
 	"colorscheme desert
-	"colorscheme Tomorrow-Night-Eighties
+	"colorscheme Tomorro
 	"colorscheme gruvbox
 	"colorscheme dracula
 	"colorscheme onedark
-	colorscheme solarized
+	"colorscheme solarized
+	"colorscheme github
+	" colorscheme tomorrow
+	"colorscheme distinguished
+	"colorscheme vividchalk
+	colorscheme hemisu
+
 else
 	"colorscheme gruvbox
 endif
@@ -167,8 +173,8 @@ inoremap <C-s> <Down>
 inoremap <C-w> <Up>
 inoremap <C-d> <Right>
 
-nnoremap <expr> n  'Nn'[v:searchforward]
-nnoremap <expr> N  'nN'[v:searchforward]
+" nnoremap <expr> n  'Nn'[v:searchforward]
+" nnoremap <expr> N  'nN'[v:searchforward]
 
 command! Bigger  :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)+1', '')
 command! Smaller :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)-1', '')
@@ -245,21 +251,26 @@ nmap <F1> :GundoToggle<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   airline
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" let g:airline_theme="dracula"
-" let g:airline_section_b = '%{strftime("%c")}'
-" let g:airline_section_y = 'BN: %{bufnr("%")}'
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#left_sep = ' '
-" let g:airline#extensions#tabline#left_alt_sep = '|'
-" if !exists('g:airline_symbols')
-	" let g:airline_symbols = {}
-" endif
-" let g:airline_left_sep = ''
-" let g:airline_left_alt_sep = ''
-" let g:airline_right_sep = ''
-" let g:airline_right_alt_sep = ''
-" nnoremap <C-N> :bn<CR>
-" nnoremap <C-P> :bp<CR>
+"let g:airline_theme="dracula"
+"let g:airline_theme = 'airlineish'
+let g:airline_theme = 'onedark'
+"let g:airline_theme = 'mod8'
+
+let g:airline_section_b = '%{strftime("%c")}'
+let g:airline_section_y = 'BN: %{bufnr("%")}'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+if !exists('g:airline_symbols')
+	let g:airline_symbols = {}
+endif
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+nnoremap <C-N> :bn<CR>
+nnoremap <C-P> :bp<CR>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                    MRU
@@ -418,8 +429,6 @@ vmap <Leader>ml :call SwoopMultiSelection()<CR>
 
 
 
-
-
 let g:sneak#streak = 1
 nmap f <Plug>Sneak_s
 nmap F <Plug>Sneak_S
@@ -427,3 +436,97 @@ xmap f <Plug>Sneak_s
 xmap F <Plug>Sneak_S
 omap f <Plug>Sneak_s
 omap F <Plug>Sneak_S
+
+
+
+
+
+
+
+
+
+
+
+let g:mta_use_matchparen_group = 1
+
+
+
+
+
+
+
+
+
+
+augroup PrevimSettings
+  autocmd!
+  autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+augroup END
+
+" 彩色括号
+let g:rainbow_active = 1 
+
+
+
+
+" 查找增强
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+
+set hlsearch
+let g:incsearch#auto_nohlsearch = 1
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
+
+function! s:noregexp(pattern) abort
+  return '\V' . escape(a:pattern, '\')
+endfunction
+
+function! s:config() abort
+  return {'converters': [function('s:noregexp')]}
+endfunction
+
+noremap <silent><expr> z/ incsearch#go(<SID>config())
+
+
+
+
+
+
+
+
+
+autocmd Syntax clojure EnableSyntaxExtension
+
+
+
+
+" mapping
+nmap n <Plug>(anzu-n-with-echo)
+nmap N <Plug>(anzu-N-with-echo)
+nmap * <Plug>(anzu-star-with-echo)
+nmap # <Plug>(anzu-sharp-with-echo)
+
+" clear status
+nmap <Esc><Esc> <Plug>(anzu-clear-search-status)
+
+
+" statusline
+set statusline=%{anzu#search_status()}
+
+
+" if start anzu-mode key mapping
+" anzu-mode is anzu(12/51) in screen
+" nmap n <Plug>(anzu-mode-n)
+" nmap N <Plug>(anzu-mode-N)
+"
+let g:tabman_toggle = '<leader>mt'
+let g:tabman_focus  = '<leader>mf'
+let g:tabman_width = 25
+let g:tabman_specials = 0
+let g:tabman_number = 1

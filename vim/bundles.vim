@@ -35,7 +35,6 @@ Bundle 'tpope/vim-fugitive'
 " Syntax/Indent for language enhancement
 "----------------------------------------
 "------- web backend ---------
-"Bundle 'lepture/vim-jinja'
 "Bundle 'digitaltoad/vim-jade'
 
 "------- web frontend ----------
@@ -50,15 +49,14 @@ Bundle 'tpope/vim-markdown'
 " Color Schemes
 "--------------
 Bundle 'altercation/vim-colors-solarized'
-"Bundle 'chriskempson/vim-tomorrow-theme'
 Bundle 'morhetz/gruvbox'
 "Bundle 'dracula/vim'
 Bundle 'joshdick/onedark.vim'
-
+Bundle 'chriskempson/vim-tomorrow-theme'
+Bundle 'sbecker/github_editor_theme'
 
 Bundle 'airblade/vim-gitgutter'
 Bundle 'roman/golden-ratio'
-"Bundle 'tpope/vim-repeat'
 Bundle 'ctjhoa/spacevim'
 
 
@@ -76,7 +74,6 @@ Bundle 'majutsushi/tagbar'
 Bundle 'dhruvasagar/vim-table-mode'
 Bundle 'YankRing.vim'
 
-Bundle 'gregsexton/matchtag'
 
 Bundle 'pbrisbin/vim-syntax-shakespeare'
 Bundle 'scrooloose/syntastic'
@@ -102,12 +99,84 @@ Bundle 'shougo/vimshell.vim'
 Bundle 'shougo/vimproc.vim'
 
 Bundle 'chiel92/vim-autoformat'
-Bundle 'itchyny/lightline.vim'
+bundle 'bling/vim-airline'
+
+Bundle 'paranoida/vim-airlineish'
+Bundle 'joshdick/airline-onedark.vim'
+Bundle 'phazyy/vim-mod8-airline'
 
 Bundle 'pelodelfuego/vim-swoop'
 Bundle 'justinmk/vim-sneak'
 "Bundle 'goldfeld/vim-seek'
 "Bundle 't9md/vim-smalls'
 "Bundle 'rhysd/clever-f.vim'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+" Gist
+Bundle 'mattn/gist-vim'
+" 等号对齐
+Bundle 'junegunn/vim-easy-align'
+
+" 启动页面为最近打开文件
+Bundle 'mhinz/vim-startify'
+
+
+
+Bundle 'jpalardy/vim-slime'
+Bundle 'jonathanfilip/vim-lucius'
+
+Bundle 'valloric/matchtagalways'
+
+" md编辑预览
+Bundle 'kannokanno/previm'
+Bundle 'tyru/open-browser.vim'
+
+" 替换高亮
+Bundle 'osyo-manga/vim-over'
+
+" 彩色括号
+Bundle 'luochen1990/rainbow'
+
+
+" 查找增强
+Bundle 'haya14busa/incsearch.vim'
+Bundle 'osyo-manga/vim-anzu'
+
+" 编码统计 
+Bundle 'wakatime/vim-wakatime'
+" 225b2d32-d6c1-4e77-94e6-9526b0783baf
+
+
+Bundle 'jceb/vim-orgmode'
+
+" 高亮变量
+Bundle 'guns/vim-clojure-highlight'
+
+
+" 列表显示
+Bundle 'szw/vim-ctrlspace'
+
+
+Bundle 'noahfrederick/vim-hemisu'
+Bundle 'kien/tabman.vim'
+
+Bundle 'fcitx.vim'
 
 filetype plugin indent on
