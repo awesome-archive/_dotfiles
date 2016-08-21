@@ -40,6 +40,7 @@ Bundle 'mattesgroeger/vim-bookmarks'
 Bundle 'kannokanno/previm'
 Bundle 'tyru/open-browser.vim'
 Bundle 'mhinz/vim-startify'
+Bundle 'scrooloose/nerdtree'
 
 " 辅助增强
 Bundle 'iamcco/dict.vim'
