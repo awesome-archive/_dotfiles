@@ -199,8 +199,8 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 "                                 Nerd Tree
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:vimfiler_as_default_explorer = 1
-map <Leader>e :NERDTreeToggle<CR>
-map <Leader>ee :NERDTreeFind<CR>
+nnoremap <Leader>e :NERDTreeToggle<CR>
+nnoremap <Leader>ee :NERDTreeFind<CR>
 let NERDTreeChDirMode=2  "选中root即设置为当前目录
 let NERDTreeQuitOnOpen=1 "打开文件时关闭树
 let NERDTreeShowBookmarks=1 "显示书签
@@ -399,6 +399,10 @@ let g:vimwiki_hl_cb_checked = 1
 let g:vimwiki_CJK_length = 1
 let g:vimwiki_menu = ''
 let g:vimwiki_camel_case = 0
+
+
+
+nnoremap <Leader>p :!bash ~/iuunhao.github.io/blog.sh<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  Move
