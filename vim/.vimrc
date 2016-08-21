@@ -87,8 +87,8 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                    The theme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"set background=dark
-set background=light
+set background=dark
+"set background=light
 if has("gui_running")
 	"colorscheme desert
 	"colorscheme Tomorro
@@ -101,7 +101,6 @@ if has("gui_running")
 	"colorscheme distinguished
 	"colorscheme vividchalk
 	colorscheme hemisu
-
 else
 	"colorscheme gruvbox
 endif
@@ -383,8 +382,6 @@ let g:vikiUseParentSuffix = 1
 "                                  vimwiki                                   "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 noremap <Leader>ww :VimwikiIndex<CR>
-
-
 let g:vimwiki_list = [{'path': '~/vimwiki',
     \    'path_html': '~/vimwiki_html',
     \    'template_path': '~/vimwiki/template',
@@ -404,31 +401,32 @@ let g:move_key_modifier = 'C'
 noremap <C-k>   Move current line/selections up
 noremap <C-j>   Move current line/selections down
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  Bookmark                                  
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 highlight BookmarkSign ctermbg=NONE ctermfg=160
 highlight BookmarkLine ctermbg=194 ctermfg=NONE
-"let g:bookmark_sign = '♥'
 let g:bookmark_highlight_lines = 1
 
-
-
-
-let g:vimfiler_as_default_explorer = 1
-
-" Disable automatic default formatting
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  Autoformat                                   
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au BufWrite * :Autoformat
 let g:autoformat_autoindent = 0
 let g:autoformat_retab = 0
 let g:autoformat_remove_trailing_spaces = 0
 
-
-
-nmap <Leader>l :call Swoop()<CR>
-vmap <Leader>l :call SwoopSelection()<CR>
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  Swoop                                   
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <Leader>sl :call Swoop()<CR>
+vmap <Leader>sl :call SwoopSelection()<CR>
 nmap <Leader>ml :call SwoopMulti()<CR>
 vmap <Leader>ml :call SwoopMultiSelection()<CR>
 
-
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                 sneak
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:sneak#streak = 1
 nmap f <Plug>Sneak_s
 nmap F <Plug>Sneak_S
@@ -436,40 +434,24 @@ xmap f <Plug>Sneak_s
 xmap F <Plug>Sneak_S
 omap f <Plug>Sneak_s
 omap F <Plug>Sneak_S
-
-
-
-
-
-
-
-
-
-
-
 let g:mta_use_matchparen_group = 1
 
-
-
-
-
-
-
-
-
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                   previm                                   "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup PrevimSettings
   autocmd!
   autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
 augroup END
 
-" 彩色括号
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                 rainbow
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:rainbow_active = 1 
 
-
-
-
-" 查找增强
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                 incsearch                                           
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
@@ -482,7 +464,6 @@ map *  <Plug>(incsearch-nohl-*)
 map #  <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
-
 function! s:noregexp(pattern) abort
   return '\V' . escape(a:pattern, '\')
 endfunction
@@ -490,43 +471,35 @@ endfunction
 function! s:config() abort
   return {'converters': [function('s:noregexp')]}
 endfunction
-
 noremap <silent><expr> z/ incsearch#go(<SID>config())
-
-
-
-
-
-
-
-
-
 autocmd Syntax clojure EnableSyntaxExtension
 
-
-
-
-" mapping
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  mapping                                   
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap n <Plug>(anzu-n-with-echo)
 nmap N <Plug>(anzu-N-with-echo)
 nmap * <Plug>(anzu-star-with-echo)
 nmap # <Plug>(anzu-sharp-with-echo)
 
-" clear status
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  statusline                                   
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set statusline=%{anzu#search_status()}
 nmap <Esc><Esc> <Plug>(anzu-clear-search-status)
 
-
-" statusline
-set statusline=%{anzu#search_status()}
-
-
-" if start anzu-mode key mapping
-" anzu-mode is anzu(12/51) in screen
-" nmap n <Plug>(anzu-mode-n)
-" nmap N <Plug>(anzu-mode-N)
-"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  tabman                                   
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:tabman_toggle = '<leader>mt'
 let g:tabman_focus  = '<leader>mf'
 let g:tabman_width = 25
 let g:tabman_specials = 0
 let g:tabman_number = 1
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                   vcolor                                   
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:vcoolor_lowercase = 1
+let g:vcoolor_disable_mappings = 1
+"let g:vcoolor_map = '<leader>g'
