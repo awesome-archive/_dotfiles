@@ -88,7 +88,7 @@ endif
 "                                    The theme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set background=dark
-"set background=light
+set background=light
 if has("gui_running")
 	"colorscheme desert
 	"colorscheme Tomorro
@@ -111,11 +111,10 @@ endif
 if has("mac") || has("macunix")
 	"set guifont=Source_Code_Pro_Light:h18
 	"set guifont=Hack:h18
-	set guifont=Inconsolata_for_Powerline:h20
-	"set guifont=Anonymice_Powerline:h20
+	"set guifont=Inconsolata_for_Powerline:h20
+	set guifont=Anonymice_Powerline:h20
 	"set guifont=DejaVu_Sans_Mono_for_Powerline:h20
 	"set guifont=Literation_Mono_Powerline:h20
-	"set guifont=Fura_Powerline:h20
 	"set guifont=Ubuntu_Mono_derivative_Powerline:h20
 else
 	set guifont=Literation_Mono_Powerline:h20
@@ -199,8 +198,8 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 "                                 Nerd Tree
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:vimfiler_as_default_explorer = 1
-nnoremap <Leader>e :NERDTreeToggle<CR>
-nnoremap <Leader>ee :NERDTreeFind<CR>
+nnoremap <F3> :NERDTreeToggle<CR>
+nnoremap <F4> :NERDTreeFind<CR>
 let NERDTreeChDirMode=2  "选中root即设置为当前目录
 let NERDTreeQuitOnOpen=1 "打开文件时关闭树
 let NERDTreeShowBookmarks=1 "显示书签
@@ -391,14 +390,12 @@ noremap <Leader>ww :VimwikiIndex<CR>
 let g:vimwiki_list = [{'path': '~/vimwiki',
     \    'path_html': '~/vimwiki_html',
     \    'template_path': '~/vimwiki/template',
-    \    'template_default': "default.tpl",
-	\   "syntax": "markdown",
-    \   "auto_export": 1}]
+    \    'template_default': "~/vimwiki/template/default.tpl"}]
 
+let g:vimwiki_camel_case = 0
 let g:vimwiki_hl_cb_checked = 1
 let g:vimwiki_CJK_length = 1
-let g:vimwiki_menu = ''
-let g:vimwiki_camel_case = 0
+let g:vimwiki_valid_html_tags='b,i,s,u,sub,sup,kbd,del,br,hr,div,code,h1'
 
 
 

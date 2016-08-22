@@ -312,7 +312,7 @@ autoload compinstall
 
 
 
-#命令别名 {{{
+#命令别名
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
@@ -324,19 +324,13 @@ alias y='yaourt'
 alias h='htop'
 alias cls='clear'
 
-
 alias mkdir='mkdir -p'
-
-
 
 alias cls='tput reset'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
 alias vi='vim'
-
-
-
 
 alias gcl='git clone'
 alias gad='git add .'
@@ -348,15 +342,12 @@ alias gpl='git pull'
 alias gst='git status'
 alias glg='git log --pretty=format:"%h %s" --graph'
 
-
 alias cnew='cd /Users/iuunhao/Desktop/qianyilc/static.qianyilc.com/trunk/FED/newStatic'
 alias cgithub='cd /Users/iuunhao/Desktop/Github'
-
 
 alias tchongqi='sudo shutdown -r now'
 alias tguanji='sudo shutdown -h now'
 alias tyanshi='sudo shutdown -h 20:00'
-
 
 alias txianshi='defaults write com.apple.finder AppleShowAllFiles -bool true'
 alias tyincang='defaults write com.apple.finder AppleShowAllFiles -bool false'
