@@ -341,6 +341,8 @@ alias gpg='git push -u origin gh-pages'
 alias gpl='git pull'
 alias gst='git status'
 alias glg='git log --pretty=format:"%h %s" --graph'
+alias gre='git reset --hard HEAD~1'
+
 
 alias cnew='cd /Users/iuunhao/Desktop/qianyilc/static.qianyilc.com/trunk/FED/newStatic'
 alias cgithub='cd /Users/iuunhao/Desktop/Github'
