@@ -10,7 +10,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 echo "Copy the code fragment..."
-cp ~/dotfiles/vim/UltiSnips ~/.vim/UltiSnips
+cp ~/dotfiles/UltiSnips ~/.vim/UltiSnips
 
 echo "Remove ZSHRC..."
 rm ~/.zshrc
