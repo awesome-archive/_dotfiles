@@ -2,9 +2,9 @@
 
 ~/dotfiles
 git add .
-git commit -am "update"
-git push -u origin master
+git commit -am "DEV UPDATE"
+git push -u origin dev 
 
 echo ""
-echo "================ 😄 PUSH SUCCESS 👻 ==============="
+echo "================ 😄 PUSH [DEV] SUCCESS 👻 ==============="
 echo ""
