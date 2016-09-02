@@ -271,6 +271,9 @@ map <Leader>T :%s/\s\+$//<CR>
 nmap <leader>F :%s//g<LEFT><LEFT>
 
 
+map <Leader>push :!bash ~/dotfiles/push.sh<CR>
+
+
 " 插件
 call plug#begin('~/.vim/plugged')
 Plug 'sirver/ultisnips'
