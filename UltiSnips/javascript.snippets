@@ -16,3 +16,14 @@ snippet tern ".tern-project"
     }
 }
 endsnippet
+
+
+snippet dq "选择DOM" b
+let ${1:el} = document.querySelector("${2:.box}");
+${3}
+endsnippet
+
+snippet dqa "选择DOMS" b
+let ${1:els} = document.querySelectorAll("${2:.box}");
+${3}
+endsnippet

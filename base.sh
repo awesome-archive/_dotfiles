@@ -28,37 +28,17 @@ gem install markdown2html
 echo "Remove delete vimrc file..."
 rm ~/.zshrc
 echo "Link vimrc file..."
-ln -s ~/dotfiles/vim/.vimrc ~/.vimrc
+ln -s ~/dotfiles/vim/vimrc.vim ~/.vimrc
 
 echo "Download vundle..."
-git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 echo "Copy the code fragment..."
 cp ~/dotfiles/vim/UltiSnips ~/.vim/UltiSnips
 
-echo "Link to the following..."
-ln -s ~/dotfiles/.bash_profile ~/.bash_profile
-
-echo "Remove tumx. Conf..."
-rm ~/.tumx.conf
-echo "Link tumx. Conf..."
-ln -s ~/dotfiles/.tumx.conf ~/.tumx.conf
-
 echo "Remove ZSHRC..."
 rm ~/.zshrc
 echo "Link ZSHRC..."
-ln -s ~/dotfiles/.zshrc ~/.zshrc
-
-isContinue='y'
-echo "Would you please open the vim into the command execution ": BundleInstall" wait for the installation is complete! Press y to continue!"
-read -p 'continue?[y/n]' isContinue
-echo ${isContinue}
-
-cd ~/.vim/bundle/YouCompleteMe
-./install.py --all
-
-cd ~/.vim/bundle/vimproc.vim
-make
-
-echo "The installation is complete"
+ln -s ~/dotfiles/zshrc.zsh ~/.zshrc
 
