@@ -34,6 +34,9 @@ set mat=2             " How many tenths of a second to blink when matching brack
 set hlsearch          " highlight the searching words
 set ignorecase        " ingnore case when do searching
 
+set bsdir=buffer
+set autochdir
+
 set incsearch         " instant search
 set smartcase         " ignore case if search pattern is all lowercase, case-sensitive otherwise
 
