@@ -6,4 +6,4 @@ git add .
 git commit -am "update"
 git push -u origin master
 
-echo "success"
+echo "================ SUCCESS ==============="
