@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-~/dotfiles
+cd ~/dotfiles
+pwd
 git branch
 git add .
 git commit -am "DEV UPDATE"
