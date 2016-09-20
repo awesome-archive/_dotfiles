@@ -355,3 +355,5 @@ alias txianshi='defaults write com.apple.finder AppleShowAllFiles -bool true'
 alias tyincang='defaults write com.apple.finder AppleShowAllFiles -bool false'
 
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
