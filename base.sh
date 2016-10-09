@@ -13,6 +13,7 @@ brew install macvim
 brew install ctags
 brew install tig
 brew install node
+brew install neovim/neovim/neovim
 
 echo "安装npm模块"
 sudo npm i -g jshint csscomb js-beautify jsonlint http-server gulp webpack
