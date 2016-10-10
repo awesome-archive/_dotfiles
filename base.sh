@@ -36,7 +36,8 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 rm ~/.vimrc
-ln -s ~/dotfiles/vim/vimrc.vim ~/.vimrc
+ln -s ~/dotfiles/vim/ ~/.vim
+ln -s ~/dotfiles/vimrc.vim ~/.vimrc
 mkdir -p ~/.config/nvim
 ln -s  ~/.vim/autoload ~/.config/nvim/autoload
 ln -s ~/dotfiles/vim/vimrc.vim ~/.config/nvim/init.vim
@@ -44,6 +45,16 @@ ln -s  ~/dotfiles/UltiSnips ~/.vim/UltiSnips
 ln -s  ~/dotfiles/UltiSnips ~/.config/nvim/UltiSnips
 ln -s  ~/dotfiles/bashrc ~/.bashrc
 ln -s  ~/dotfiles/tmux/tmux.conf.symlink ~/.tmux.conf
+
+
+ln -s ~/dotfiles/zsh/prezto/runcoms/zshrc ~/.zhsrc
+ln -s ~/dotfiles/zsh/prezto/runcoms/zshenv ~/.zshenv
+ln -s ~/dotfiles/zsh/prezto/runcoms/zprofile ~/.zprofile
+ln -s ~/dotfiles/zsh/prezto/runcoms/zpreztorc ~/.zpreztorc
+ln -s ~/dotfiles/zsh/prezto/runcoms/zlogout ~/.zlogout
+ln -s ~/dotfiles/zsh/prezto/runcoms/zlogin ~/.zlogin
+
+ln -s ~/dotfiles/zsh/prezto ~/.prezto
 
 echo "安装插件"
 nvim +PlugInstall +PlugUpdate +PlugClean! +qall

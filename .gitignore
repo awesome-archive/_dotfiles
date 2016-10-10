@@ -23,3 +23,8 @@ Temporary Items
 .apdisk
 
 wikisnips/
+
+autoload/
+backups/
+plugged/
+session/
