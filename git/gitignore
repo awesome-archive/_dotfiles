@@ -6,6 +6,7 @@
 # Files that might appear on external disk
 .Spotlight-V100
 .Trashes
+Icon
 
 # Windows   taken from: https://github.com/github/gitignore/blob/master/Global/Windows.gitignore
 # ----------------------------------------------------------------------------------------------
@@ -45,3 +46,55 @@ Session.vim
 # SASS
 # ----------------------------------------------------------------------------------------------
 .sass-cache
+
+# Program 
+# # ----------------------------------------------------------------------------------------------
+*.dmg
+*.avi
+*.mp4
+*.mp3
+/node_modules
+
+
+# -*- mode: gitignore; -*-
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Org-mode
+.org-id-locations
+*_archive
+
+# flymake-mode
+*_flymake.*
+
+# eshell files
+/eshell/history
+/eshell/lastdir
+
+# elpa packages
+/elpa/
+
+# reftex files
+*.rel
+
+# AUCTeX auto folder
+/auto/
+
+# cask packages
+.cask/
+dist/
+
+# Flycheck
+flycheck_*.el
+
+# server auth directory
+/server/
+
+# projectiles files
+.projectile

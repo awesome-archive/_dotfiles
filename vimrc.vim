@@ -5,6 +5,10 @@ Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'  "恢复会话
 
 Plug 'jceb/vim-orgmode'
 
+Plug 'danro/rename.vim' "文件重命名
+
+Plug 'altercation/vim-colors-solarized'
+
 Plug 'pelodelfuego/vim-swoop' "搜索
 
 Plug 'joshdick/onedark.vim' "配色
@@ -58,13 +62,11 @@ Plug 'valloric/matchtagalways'  "html标签高亮
 
 "Plug 'scrooloose/syntastic' "语法检查
 
-"Plug 'pbrisbin/vim-mkdir' "快速创建子级目录
+Plug 'pbrisbin/vim-mkdir' "快速创建子级目录
 
 Plug 'Lokaltog/vim-easymotion'  "光标定位
 
 "Plug 'tmhedberg/matchit'  "扩展html标签
-
-""Plug 'vim-scripts/BufOnly.vim' "快速关闭其它bufers
 
 Plug 'tpope/vim-repeat' "点命令增强
 
@@ -263,9 +265,10 @@ set background=dark
 "set background=light
 colorscheme onedark
 "colorscheme beekai
+"colorscheme solarized
 
-"set guifont=Inconsolata_for_Powerline:h18
-set guifont=Inconsolata_for_Powerline:h22
+set guifont=Inconsolata_for_Powerline:h20
+"set guifont=Inconsolata_for_Powerline:h22
 set cursorline
 
 
