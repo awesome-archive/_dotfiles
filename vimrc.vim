@@ -1,9 +1,10 @@
 "插件
 call plug#begin('~/.vim/plugged')
 
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'  "恢复会话
-
 Plug 'jceb/vim-orgmode'
+
 
 Plug 'danro/rename.vim' "文件重命名
 
@@ -152,8 +153,8 @@ set breakindent
 set nobackup
 set noswapfile
 
-autocmd InsertEnter * :set norelativenumber
-autocmd InsertLeave * :set relativenumber
+"autocmd InsertEnter * :set norelativenumber
+"autocmd InsertLeave * :set relativenumber
 
 if has('statusline')
     set laststatus=2
@@ -267,9 +268,11 @@ colorscheme onedark
 "colorscheme beekai
 "colorscheme solarized
 
+color desert
+
 set guifont=Inconsolata_for_Powerline:h20
 "set guifont=Inconsolata_for_Powerline:h22
-set cursorline
+"set cursorline
 
 
 
@@ -689,3 +692,53 @@ nmap <Leader>bK :call SpacevimKillOtherBuffers()<cr>;
 "nmap <Leader>wo :call getip()<cr>;
 
 
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> {Left-mapping} :TmuxNavigateLeft<cr>
+nnoremap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
+nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
+nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
+nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+" -- tmux integration ----------------------------------------------------------
+
+" make arrow keys, home/end/pgup/pgdown, and function keys work when inside tmux
+if exists('$TMUX') && (system("tmux show-options -wg xterm-keys | cut -d' ' -f2") =~ '^on')
+  " tmux will send xterm-style keys when its xterm-keys option is on
+  " add 'setw -g xterm-keys on' to your ~/.tmux.conf
+  execute "set <xUp>=\e[1;*A"
+  execute "set <xDown>=\e[1;*B"
+  execute "set <xRight>=\e[1;*C"
+  execute "set <xLeft>=\e[1;*D"
+  execute "set <xHome>=\e[1;*H"
+  execute "set <xEnd>=\e[1;*F"
+  execute "set <Insert>=\e[2;*~"
+  execute "set <Delete>=\e[3;*~"
+  execute "set <PageUp>=\e[5;*~"
+  execute "set <PageDown>=\e[6;*~"
+  execute "set <xF1>=\e[1;*P"
+  execute "set <xF2>=\e[1;*Q"
+  execute "set <xF3>=\e[1;*R"
+  execute "set <xF4>=\e[1;*S"
+  execute "set <F5>=\e[15;*~"
+  execute "set <F6>=\e[17;*~"
+  execute "set <F7>=\e[18;*~"
+  execute "set <F8>=\e[19;*~"
+  execute "set <F9>=\e[20;*~"
+  execute "set <F10>=\e[21;*~"
+  execute "set <F11>=\e[23;*~"
+  execute "set <F12>=\e[24;*~"
+endif
