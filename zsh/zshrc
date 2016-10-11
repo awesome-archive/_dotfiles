@@ -6,6 +6,8 @@ ZSH_THEME="sunrise"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
+export PATH=$PATH:/Users/iuunhao/dotfiles/bin
+
 #标题栏、任务栏样式{{{
 case $TERM in (*xterm*|*rxvt*|(dt|k|E)term)
 precmd () { print -Pn "\e]0;%n@%M//%/\a" }
@@ -251,7 +253,10 @@ alias opostcss='open /Users/iuunhao/Desktop/Qianyi/static.qianyilc.com/trunk/FED
 
 #tmux
 alias t='tmux'
-
+alias tn='tmux new-session -s'
+alias ts='tmux-session save'
+alias tdev='tmux-session dev'
+alias te='crontab -e'
 
 
 

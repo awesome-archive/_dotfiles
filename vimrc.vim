@@ -10,15 +10,13 @@ Plug 'danro/rename.vim' "文件重命名
 
 Plug 'altercation/vim-colors-solarized'
 
-Plug 'pelodelfuego/vim-swoop' "搜索
+"Plug 'pelodelfuego/vim-swoop' "搜索
 
 Plug 'joshdick/onedark.vim' "配色
 Plug 'vim-airline/vim-airline' "状态栏
 
 Plug 'tpope/vim-tbone'
 Plug 'szw/vim-maximizer'  "tab最大化窗口
-
-Plug 'flazz/vim-colorschemes'
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }  "文件管理
 
@@ -48,7 +46,7 @@ Plug 'cakebaker/scss-syntax.vim'
 
 Plug 'terryma/vim-multiple-cursors' "多点编辑
 
-Plug 'airblade/vim-gitgutter' "git文件状态
+"Plug 'airblade/vim-gitgutter' "git文件状态
 
 Plug 'YankRing.vim' "复制增强
 
@@ -149,7 +147,12 @@ set guioptions-=R
 set guioptions-=m
 set guioptions-=T
 set wrap
-set breakindent
+
+if v:version >= 800
+  set breakindent
+endif
+
+
 set nobackup
 set noswapfile
 
@@ -264,11 +267,18 @@ inoremap <C-^> <C-o><C-^>
 "UI
 set background=dark
 "set background=light
-colorscheme onedark
 "colorscheme beekai
 "colorscheme solarized
 
+if has("gui_macvim")
+  colorscheme onedark
+endif
 color desert
+
+
+if (empty($TMUX) && has("termguicolors"))
+  set termguicolors
+endif
 
 set guifont=Inconsolata_for_Powerline:h20
 "set guifont=Inconsolata_for_Powerline:h22

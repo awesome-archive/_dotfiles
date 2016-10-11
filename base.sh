@@ -60,4 +60,17 @@ echo "安装插件"
 nvim +PlugInstall +PlugUpdate +PlugClean! +qall
 
 
+
+
+
+
+
+
+
+chmod -R +x /User/cssor/bin
+
+
+
+
+
 echo "完成"
