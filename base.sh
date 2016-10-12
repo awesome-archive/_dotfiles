@@ -23,54 +23,32 @@ brew install tig
 brew install node
 brew install neovim/neovim/neovim
 
-echo "安装fish并配置它"
-brew install fish
-curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisherman
-fisher sol
-
-echo "安装npm模块"
+#安装npm模块
 sudo npm i -g jshint csscomb js-beautify jsonlint http-server gulp webpack
 
-echo "下载vim-plug"
+
+#安装vim插件管理器
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+# zsh
+sudo rm -r -f ~/.oh-my-zsh
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+rm ~/.zshrc
+ln -s ~/dotfiles/zsh/zshrc ~/.zshrc
+#tmux 
+rm ~/.tmux.conf
+mkdir ~/.tmux
+cd ~/.tmux
+git clone https://github.com/tmux-plugins/tmux-resurrect.git
+cd ~
+ln -s  ~/dotfiles/tmux/.tmux.conf ~/.tmux.conf
+ln -s  ~/dotfiles/tmux/.tmux.conf.local ~/.tmux.conf.local
+#vim
 rm ~/.vimrc
 ln -s ~/dotfiles/vim/ ~/.vim
+ln -s ~/dotfiles/vim/ ~/.config/nvim
 ln -s ~/dotfiles/vimrc.vim ~/.vimrc
-mkdir -p ~/.config/nvim
-ln -s  ~/.vim/autoload ~/.config/nvim/autoload
-ln -s ~/dotfiles/vim/vimrc.vim ~/.config/nvim/init.vim
-ln -s  ~/dotfiles/UltiSnips ~/.vim/UltiSnips
-ln -s  ~/dotfiles/UltiSnips ~/.config/nvim/UltiSnips
 ln -s  ~/dotfiles/bashrc ~/.bashrc
-ln -s  ~/dotfiles/tmux/tmux.conf.symlink ~/.tmux.conf
-
-
-ln -s ~/dotfiles/zsh/prezto/runcoms/zshrc ~/.zhsrc
-ln -s ~/dotfiles/zsh/prezto/runcoms/zshenv ~/.zshenv
-ln -s ~/dotfiles/zsh/prezto/runcoms/zprofile ~/.zprofile
-ln -s ~/dotfiles/zsh/prezto/runcoms/zpreztorc ~/.zpreztorc
-ln -s ~/dotfiles/zsh/prezto/runcoms/zlogout ~/.zlogout
-ln -s ~/dotfiles/zsh/prezto/runcoms/zlogin ~/.zlogin
-
-ln -s ~/dotfiles/zsh/prezto ~/.prezto
-
-echo "安装插件"
-nvim +PlugInstall +PlugUpdate +PlugClean! +qall
-
-
-
-
-
-
-
-
-
-chmod -R +x /User/cssor/bin
-
-
-
-
-
-echo "完成"
+#插件安装
+vim +PlugInstall +PlugUpdate +PlugClean! +qall

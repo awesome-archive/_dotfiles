@@ -270,11 +270,10 @@ set background=dark
 "colorscheme beekai
 "colorscheme solarized
 
+color desert
 if has("gui_macvim")
   colorscheme onedark
 endif
-color desert
-
 
 if (empty($TMUX) && has("termguicolors"))
   set termguicolors
