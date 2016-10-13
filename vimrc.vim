@@ -5,6 +5,8 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'  "恢复会话
 Plug 'jceb/vim-orgmode'
 
+Plug 'junegunn/seoul256.vim'
+Plug 'junegunn/vim-emoji'
 
 Plug 'danro/rename.vim' "文件重命名
 
@@ -13,7 +15,7 @@ Plug 'altercation/vim-colors-solarized'
 "Plug 'pelodelfuego/vim-swoop' "搜索
 
 Plug 'joshdick/onedark.vim' "配色
-Plug 'vim-airline/vim-airline' "状态栏
+"Plug 'vim-airline/vim-airline' "状态栏
 
 Plug 'tpope/vim-tbone'
 Plug 'szw/vim-maximizer'  "tab最大化窗口
@@ -46,7 +48,7 @@ Plug 'cakebaker/scss-syntax.vim'
 
 Plug 'terryma/vim-multiple-cursors' "多点编辑
 
-"Plug 'airblade/vim-gitgutter' "git文件状态
+Plug 'airblade/vim-gitgutter' "git文件状态
 
 Plug 'YankRing.vim' "复制增强
 
@@ -90,6 +92,10 @@ Plug 'ervandew/supertab'  "tab增强
 
 "Plug 'vim-scripts/mru.vim'  "最近编辑的文件
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } "文件搜索
+
+Plug 'junegunn/fzf.vim'
+
+
 "
 "
 Plug 'airblade/vim-gitgutter'
@@ -178,7 +184,7 @@ au BufRead,BufNewFile *.scss set filetype=scss.css
 
 "透明度
 if has("gui_macvim")
-    "set transparency=15
+    set transparency=15
 endif
 
 
@@ -230,6 +236,7 @@ map <Leader>cd :cd %:p:h<CR>
 
 nmap <silent> <Leader>ev :e $MYVIMRC<CR>
 nmap <silent> <Leader>es :so $MYVIMRC<CR>
+nmap <silent> <Leader>ez :e ~/dotfiles/zhs/zshrc<CR>
 
 nnoremap <leader>\ :vs<CR>
 nnoremap <leader>- :sp<CR>
@@ -270,13 +277,10 @@ set background=dark
 "colorscheme beekai
 "colorscheme solarized
 
-color desert
+colorscheme seoul256
 if has("gui_macvim")
-  colorscheme onedark
-endif
-
-if (empty($TMUX) && has("termguicolors"))
-  set termguicolors
+  "colorscheme onedark
+  colorscheme seoul256
 endif
 
 set guifont=Inconsolata_for_Powerline:h20
