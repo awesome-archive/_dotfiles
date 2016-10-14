@@ -6,16 +6,15 @@ Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'  "恢复会话
 Plug 'jceb/vim-orgmode'
 
 Plug 'junegunn/seoul256.vim'
-Plug 'junegunn/vim-emoji'
 
 Plug 'danro/rename.vim' "文件重命名
 
 Plug 'altercation/vim-colors-solarized'
 
-"Plug 'pelodelfuego/vim-swoop' "搜索
+Plug 'pelodelfuego/vim-swoop' "搜索
 
 Plug 'joshdick/onedark.vim' "配色
-"Plug 'vim-airline/vim-airline' "状态栏
+Plug 'vim-airline/vim-airline' "状态栏
 
 Plug 'tpope/vim-tbone'
 Plug 'szw/vim-maximizer'  "tab最大化窗口
@@ -29,7 +28,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' } "补全
 
 Plug 'scrooloose/nerdcommenter' "快速注释
 
-"Plug 'mattesgroeger/vim-bookmarks'  "书签增强
+Plug 'mattesgroeger/vim-bookmarks'  "书签增强
 
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] }  "emmet
 
@@ -275,10 +274,12 @@ inoremap <C-^> <C-o><C-^>
 set background=dark
 "set background=light
 "colorscheme beekai
+
+color onedark
 "colorscheme solarized
 
-colorscheme seoul256
-if has("gui_macvim")
+"colorscheme seoul256
+if !has("gui_macvim")
   "colorscheme onedark
   colorscheme seoul256
 endif
@@ -294,7 +295,7 @@ set guifont=Inconsolata_for_Powerline:h20
 " ----------------------------------------------------------------------------
 " Autoformat
 " ----------------------------------------------------------------------------
-"au BufWrite * :Autoformat
+au BufWrite * :Autoformat
 let g:autoformat_autoindent = 0
 let g:autoformat_retab = 0
 let g:autoformat_remove_trailing_spaces = 0
@@ -350,7 +351,7 @@ endif
 " ----------------------------------------------------------------------------
 "nnoremap <leader>c :CtrlP<CR>
 nnoremap <leader>r :CtrlPMRU<CR>
-nnoremap <leader>b :CtrlPBuffer<CR>
+nnoremap <leader>bb :CtrlPBuffer<CR>
 nnoremap <leader>ff :CtrlPRoot<CR>
 silent! nnoremap <unique> <silent> <Leader>ft :CtrlPFiletype<CR>
 let g:ctrlp_custom_ignore = {
@@ -497,6 +498,29 @@ let tern_show_signature_in_pum = 1
 let tern_show_argument_hints = 'on_hold'
 autocmd FileType javascript nnoremap <leader>d :TernDef<CR>
 autocmd FileType javascript setlocal omnifunc=tern#Complete
+
+
+" ----------------------------------------------------------------------------
+" bookmarks
+" ----------------------------------------------------------------------------
+highlight BookmarkSign ctermbg=whatever ctermfg=whatever
+highlight BookmarkAnnotationSign ctermbg=whatever ctermfg=whatever
+highlight BookmarkLine ctermbg=whatever ctermfg=whatever
+highlight BookmarkAnnotationLine ctermbg=whatever ctermfg=whatever
+
+let g:bookmark_sign = '⚑'
+
+
+" ----------------------------------------------------------------------------
+"Swoop
+" ----------------------------------------------------------------------------
+let g:swoopUseDefaultKeyMap = 0
+nmap <Leader>nl :call Swoop()<CR>
+vmap <Leader>nl :call SwoopSelection()<CR>
+nmap <Leader>ml :call SwoopMulti()<CR>
+vmap <Leader>ml :call SwoopMultiSelection()<CR>
+
+
 
 "自定义功能
 " ----------------------------------------------------------------------------
