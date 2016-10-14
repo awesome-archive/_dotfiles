@@ -4,6 +4,13 @@ call plug#begin('~/.vim/plugged')
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'  "恢复会话
 Plug 'jceb/vim-orgmode'
+Plug 'keith/xcconfig.vim'
+
+Plug 'morhetz/gruvbox'
+
+
+"Plug 'hotoo/highlight-cursor-word.vim'
+"
 
 Plug 'junegunn/seoul256.vim'
 
@@ -183,7 +190,7 @@ au BufRead,BufNewFile *.scss set filetype=scss.css
 
 "透明度
 if has("gui_macvim")
-    set transparency=15
+    set transparency=10
 endif
 
 
@@ -219,10 +226,10 @@ vnoremap > >gv
 
 map <silent> <leader><cr> :noh<cr>
 
-noremap <silent> <C-left> :bprev<CR>
-noremap <silent> <C-h> :bprev<CR>
-noremap <silent> <C-right> :bnext<CR>
-noremap <silent> <C-l> :bnext<CR>
+noremap <silent> bN :bprev<CR>
+noremap <silent> bN :bprev<CR>
+noremap <silent> bn :bnext<CR>
+noremap <silent> bn :bnext<CR>
 
 inoremap <C-a> <Left>
 inoremap <C-s> <Down>
@@ -276,12 +283,13 @@ set background=dark
 "colorscheme beekai
 
 color onedark
+color gruvbox
 "colorscheme solarized
 
 "colorscheme seoul256
 if !has("gui_macvim")
   "colorscheme onedark
-  colorscheme seoul256
+  "colorscheme seoul256
 endif
 
 set guifont=Inconsolata_for_Powerline:h20
@@ -521,6 +529,10 @@ nmap <Leader>ml :call SwoopMulti()<CR>
 vmap <Leader>ml :call SwoopMultiSelection()<CR>
 
 
+" ----------------------------------------------------------------------------
+"highlight-cursor-word.vim
+" ----------------------------------------------------------------------------
+"autocmd CursorMoved,CursorHold * silent! call HighlightCursorWord()
 
 "自定义功能
 " ----------------------------------------------------------------------------
@@ -737,19 +749,6 @@ nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
 nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
 nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 " -- tmux integration ----------------------------------------------------------
 
 " make arrow keys, home/end/pgup/pgdown, and function keys work when inside tmux
@@ -779,3 +778,4 @@ if exists('$TMUX') && (system("tmux show-options -wg xterm-keys | cut -d' ' -f2"
   execute "set <F11>=\e[23;*~"
   execute "set <F12>=\e[24;*~"
 endif
+
