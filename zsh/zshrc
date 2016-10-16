@@ -263,12 +263,9 @@ alias te='crontab -e'
 
 
 
-
-
-
-
-
-
+#git
+alias ghuiyauncheng='git reset --hard'
+alias gshanchufenzhi='git push origin :'
 
 
 
