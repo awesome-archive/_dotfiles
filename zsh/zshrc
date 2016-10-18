@@ -258,16 +258,9 @@ alias ts='tmux-session save'
 alias tdev='tmux-session dev'
 alias te='crontab -e'
 
-
-
-
-
-
 #git
 alias ghuiyauncheng='git reset --hard'
 alias gshanchufenzhi='git push origin :'
-
-
 
 COLOR_BLACK="\e[0;30m"
 COLOR_BLUE="\e[0;34m"

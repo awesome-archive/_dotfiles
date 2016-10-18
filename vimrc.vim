@@ -1,29 +1,30 @@
 "插件
 call plug#begin('~/.vim/plugged')
 
-Plug 'christoomey/vim-tmux-navigator'
+"Plug 'christoomey/vim-tmux-navigator'
+
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'  "恢复会话
-Plug 'jceb/vim-orgmode'
+
+"Plug 'jceb/vim-orgmode'
+
 Plug 'keith/xcconfig.vim'
 
 Plug 'morhetz/gruvbox'
 
 
 "Plug 'hotoo/highlight-cursor-word.vim'
-"
-
 Plug 'junegunn/seoul256.vim'
 
-Plug 'danro/rename.vim' "文件重命名
+"Plug 'danro/rename.vim' "文件重命名
 
-Plug 'altercation/vim-colors-solarized'
+"Plug 'altercation/vim-colors-solarized'
 
 Plug 'pelodelfuego/vim-swoop' "搜索
 
-Plug 'joshdick/onedark.vim' "配色
-Plug 'vim-airline/vim-airline' "状态栏
+"Plug 'joshdick/onedark.vim' "配色
+"Plug 'vim-airline/vim-airline' "状态栏
 
-Plug 'tpope/vim-tbone'
+"Plug 'tpope/vim-tbone'
 Plug 'szw/vim-maximizer'  "tab最大化窗口
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }  "文件管理
@@ -35,7 +36,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' } "补全
 
 Plug 'scrooloose/nerdcommenter' "快速注释
 
-Plug 'mattesgroeger/vim-bookmarks'  "书签增强
+"Plug 'mattesgroeger/vim-bookmarks'  "书签增强
 
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] }  "emmet
 
@@ -43,39 +44,39 @@ Plug 'ap/vim-css-color', { 'for': ['css','stylus','scss'] } "css颜色显示
 
 Plug 'Chiel92/vim-autoformat' "自动格式化
 
-Plug 'pangloss/vim-javascript', { 'for': ['html', 'jsx', 'javascript'] }  "js代码补全
+"Plug 'pangloss/vim-javascript', { 'for': ['html', 'jsx', 'javascript'] }  "js代码补全
 
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } "补全
+"Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } "补全
 
-Plug 'myhere/vim-nodejs-complete'
-Plug 'mxw/vim-jsx'
+"Plug 'myhere/vim-nodejs-complete'
+"Plug 'mxw/vim-jsx'
 Plug 'hail2u/vim-css3-syntax'
-Plug 'cakebaker/scss-syntax.vim'
+"Plug 'cakebaker/scss-syntax.vim'
 
 Plug 'terryma/vim-multiple-cursors' "多点编辑
 
-Plug 'airblade/vim-gitgutter' "git文件状态
+"Plug 'airblade/vim-gitgutter' "git文件状态
 
 Plug 'YankRing.vim' "复制增强
 
 Plug 'iamcco/dict.vim'  "翻译
 
 Plug 'kien/ctrlp.vim' "文件搜索
-Plug 'endel/ctrlp-filetype.vim' "快速切换文件类型
+"Plug 'endel/ctrlp-filetype.vim' "快速切换文件类型
 
 Plug 'kris2k/vim-surround'  "成对符号修改
 
-Plug 'valloric/matchtagalways'  "html标签高亮
+"Plug 'valloric/matchtagalways'  "html标签高亮
 
 "Plug 'scrooloose/syntastic' "语法检查
 
-Plug 'pbrisbin/vim-mkdir' "快速创建子级目录
+"Plug 'pbrisbin/vim-mkdir' "快速创建子级目录
 
 Plug 'Lokaltog/vim-easymotion'  "光标定位
 
-"Plug 'tmhedberg/matchit'  "扩展html标签
+Plug 'macros/matchit.vim'  "扩展html标签
 
-Plug 'tpope/vim-repeat' "点命令增强
+"Plug 'tpope/vim-repeat' "点命令增强
 
 Plug 'Raimondi/delimitMate' "括号自动完成
 
@@ -89,7 +90,7 @@ Plug 'roman/golden-ratio'  "自动调整窗口大小
 
 "Plug 'tpope/vim-markdown'  "md语法
 
-"Plug 'unblevable/quick-scope' "高亮当前行跳转位置
+Plug 'unblevable/quick-scope' "高亮当前行跳转位置
 
 Plug 'ervandew/supertab'  "tab增强
 "Plug 'junegunn/vim-pseudocl'
@@ -97,15 +98,15 @@ Plug 'ervandew/supertab'  "tab增强
 "Plug 'junegunn/vim-fnr' "快速替换
 
 "Plug 'vim-scripts/mru.vim'  "最近编辑的文件
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } "文件搜索
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } "文件搜索
 
-Plug 'junegunn/fzf.vim'
+"Plug 'junegunn/fzf.vim'
 
 
 "
 "
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
+"Plug 'airblade/vim-gitgutter'
+"Plug 'tpope/vim-fugitive'
 
 call plug#end()
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
@@ -160,6 +161,10 @@ set guioptions-=m
 set guioptions-=T
 set wrap
 
+
+set foldmethod=indent
+
+
 if v:version >= 800
   set breakindent
 endif
@@ -170,16 +175,6 @@ set noswapfile
 
 "autocmd InsertEnter * :set norelativenumber
 "autocmd InsertLeave * :set relativenumber
-
-if has('statusline')
-    set laststatus=2
-    set statusline=%<%f\
-    set statusline+=%w%h%m%r
-    set statusline+=%{fugitive#statusline()}
-    set statusline+=\ [%{&ff}/%Y]
-    set statusline+=\ [%{getcwd()}]
-    set statusline+=%=%-14.(%l,%c%V%)\ %p%%
-endif
 
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -280,9 +275,7 @@ inoremap <C-^> <C-o><C-^>
 "UI
 set background=dark
 "set background=light
-"colorscheme beekai
 
-color onedark
 color gruvbox
 "colorscheme solarized
 
@@ -294,7 +287,7 @@ endif
 
 set guifont=Inconsolata_for_Powerline:h20
 "set guifont=Inconsolata_for_Powerline:h22
-"set cursorline
+set cursorline
 
 
 
@@ -357,7 +350,8 @@ endif
 " ----------------------------------------------------------------------------
 " ctrlp
 " ----------------------------------------------------------------------------
-"nnoremap <leader>c :CtrlP<CR>
+let g:ctrlp_map = '<c-E>llllllllllll'
+let g:ctrlp_cmd = 'CtrlP'
 nnoremap <leader>r :CtrlPMRU<CR>
 nnoremap <leader>bb :CtrlPBuffer<CR>
 nnoremap <leader>ff :CtrlPRoot<CR>
@@ -494,10 +488,10 @@ let g:swoopWindowsVerticalLayout = 1
 " ----------------------------------------------------------------------------
 " 同git diff,实时展示文件中修改的行
 " 只是不喜欢除了行号多一列, 默认关闭,gs时打开
-let g:gitgutter_map_keys = 0
-let g:gitgutter_enabled = 0
-let g:gitgutter_highlight_lines = 1
-nnoremap <leader>gs :GitGutterToggle<CR>
+"let g:gitgutter_map_keys = 0
+"let g:gitgutter_enabled = 0
+"let g:gitgutter_highlight_lines = 1
+"nnoremap <leader>gs :GitGutterToggle<CR>
 
 " ----------------------------------------------------------------------------
 " tern_for_vim
