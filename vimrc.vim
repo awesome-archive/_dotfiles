@@ -12,13 +12,10 @@ Plug 'Yggdroot/indentLine'
 
 Plug 'keith/xcconfig.vim'
 
-Plug 'morhetz/gruvbox'
 
-
-"Plug 'hotoo/highlight-cursor-word.vim'
-Plug 'junegunn/seoul256.vim'
 
 "Plug 'danro/rename.vim' "文件重命名
+
 
 "Plug 'altercation/vim-colors-solarized'
 
@@ -83,7 +80,7 @@ Plug 'macros/matchit.vim'  "扩展html标签
 
 Plug 'Raimondi/delimitMate' "括号自动完成
 
-"Plug 'terryma/vim-expand-region'  "快速扩展选择内容
+Plug 'terryma/vim-expand-region'  "快速扩展选择内容
 
 "Plug 'ctjhoa/spacevim'  "spacemacs风格快捷键
 
@@ -266,8 +263,8 @@ cnoremap <C-k> <t_ku>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 
-noremap J <C-d>
-noremap K <C-u>
+"noremap J <C-d>
+"noremap K <C-u>
 inoremap <C-h> <C-o>h
 inoremap <C-l> <C-o>a
 inoremap <C-j> <C-o>j
@@ -290,7 +287,7 @@ if !has("gui_macvim")
   "colorscheme seoul256
 endif
 
-set guifont=Inconsolata_for_Powerline:h20
+set guifont=Inconsolata_for_Powerline:h16
 "set guifont=Inconsolata_for_Powerline:h22
 set cursorline
 
@@ -336,8 +333,8 @@ let g:UltiSnipsEditSplit="vertical"
 " ----------------------------------------------------------------------------
 " vim-expand-region
 " ----------------------------------------------------------------------------
-"map K <Plug>(expand_region_expand)
-"map J <Plug>(expand_region_shrink)
+map K <Plug>(expand_region_expand)
+map J <Plug>(expand_region_shrink)
 
 " ----------------------------------------------------------------------------
 " vim-maximizer
