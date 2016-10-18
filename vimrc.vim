@@ -5,7 +5,10 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'  "恢复会话
 
+Plug 'ayu-theme/ayu-vim'
+
 "Plug 'jceb/vim-orgmode'
+Plug 'Yggdroot/indentLine'
 
 Plug 'keith/xcconfig.vim'
 
@@ -185,7 +188,7 @@ au BufRead,BufNewFile *.scss set filetype=scss.css
 
 "透明度
 if has("gui_macvim")
-    set transparency=10
+    "set transparency=10
 endif
 
 
@@ -273,11 +276,13 @@ inoremap <C-^> <C-o><C-^>
 
 
 "UI
-set background=dark
-"set background=light
+"set background=dark
+set background=light
 
-color gruvbox
+"color gruvbox
 "colorscheme solarized
+
+colorscheme ayu
 
 "colorscheme seoul256
 if !has("gui_macvim")
@@ -521,6 +526,14 @@ nmap <Leader>nl :call Swoop()<CR>
 vmap <Leader>nl :call SwoopSelection()<CR>
 nmap <Leader>ml :call SwoopMulti()<CR>
 vmap <Leader>ml :call SwoopMultiSelection()<CR>
+
+" ----------------------------------------------------------------------------
+"IndentLine
+" ----------------------------------------------------------------------------
+let g:indentLine_char = '┆'
+let g:indentLine_first_char = '┆'
+let g:indentLine_showFirstIndentLevel = 1
+let g:indentLine_setColors = 0
 
 
 " ----------------------------------------------------------------------------
