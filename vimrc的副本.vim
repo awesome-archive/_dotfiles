@@ -1,9 +1,3 @@
-set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
-set termencoding=utf-8
-set encoding=utf-8
-
-let anyfold_activate=1
-set foldlevel=0
 "插件
 call plug#begin('~/.vim/plugged')
 
@@ -12,26 +6,25 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'  "恢复会话
 
 Plug 'ayu-theme/ayu-vim'
-Plug 'rhysd/clever-f.vim'
-"Plug 'pseewald/anyfold'
 
 "Plug 'jceb/vim-orgmode'
+Plug 'Yggdroot/indentLine'
 
-"Plug 'Yggdroot/indentLine'
-
-
-Plug 'w0ng/vim-hybrid'
-Plug 'aperezdc/vim-lining'
-
-Plug 'danro/rename.vim' "文件重命名
+Plug 'keith/xcconfig.vim'
 
 
-"Plug 'pelodelfuego/vim-swoop' "搜索
+
+"Plug 'danro/rename.vim' "文件重命名
+
+
+"Plug 'altercation/vim-colors-solarized'
+
+Plug 'pelodelfuego/vim-swoop' "搜索
 
 "Plug 'joshdick/onedark.vim' "配色
-
 "Plug 'vim-airline/vim-airline' "状态栏
 
+"Plug 'tpope/vim-tbone'
 Plug 'szw/vim-maximizer'  "tab最大化窗口
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }  "文件管理
@@ -43,7 +36,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' } "补全
 
 Plug 'scrooloose/nerdcommenter' "快速注释
 
-Plug 'mattesgroeger/vim-bookmarks'  "书签增强
+"Plug 'mattesgroeger/vim-bookmarks'  "书签增强
 
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] }  "emmet
 
@@ -51,54 +44,66 @@ Plug 'ap/vim-css-color', { 'for': ['css','stylus','scss'] } "css颜色显示
 
 Plug 'Chiel92/vim-autoformat' "自动格式化
 
-Plug 'svermeulen/vim-easyclip'
-
 "Plug 'pangloss/vim-javascript', { 'for': ['html', 'jsx', 'javascript'] }  "js代码补全
 
 "Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } "补全
 
 "Plug 'myhere/vim-nodejs-complete'
+"Plug 'mxw/vim-jsx'
 Plug 'hail2u/vim-css3-syntax'
 "Plug 'cakebaker/scss-syntax.vim'
 
 Plug 'terryma/vim-multiple-cursors' "多点编辑
+
+"Plug 'airblade/vim-gitgutter' "git文件状态
 
 Plug 'YankRing.vim' "复制增强
 
 Plug 'iamcco/dict.vim'  "翻译
 
 Plug 'kien/ctrlp.vim' "文件搜索
-Plug 'endel/ctrlp-filetype.vim' "快速切换文件类型
+"Plug 'endel/ctrlp-filetype.vim' "快速切换文件类型
 
 Plug 'kris2k/vim-surround'  "成对符号修改
 
+"Plug 'valloric/matchtagalways'  "html标签高亮
 
-Plug 'scrooloose/syntastic' "语法检查
+"Plug 'scrooloose/syntastic' "语法检查
 
 "Plug 'pbrisbin/vim-mkdir' "快速创建子级目录
 
 Plug 'Lokaltog/vim-easymotion'  "光标定位
 
-Plug 'matchit.zip'
+"Plug 'macros/matchit.vim'  "扩展html标签
 
-Plug 'tpope/vim-repeat' "点命令增强
+"Plug 'tpope/vim-repeat' "点命令增强
 
 Plug 'Raimondi/delimitMate' "括号自动完成
 
 Plug 'terryma/vim-expand-region'  "快速扩展选择内容
 
+"Plug 'ctjhoa/spacevim'  "spacemacs风格快捷键
+
+"Plug 'mbbill/undotree',{ 'on': 'UndotreeToggle'}  "文件编辑历史
+
 Plug 'roman/golden-ratio'  "自动调整窗口大小
 
 "Plug 'tpope/vim-markdown'  "md语法
 
-"Plug 'unblevable/quick-scope' "高亮当前行跳转位置
+Plug 'unblevable/quick-scope' "高亮当前行跳转位置
 
 Plug 'ervandew/supertab'  "tab增强
+"Plug 'junegunn/vim-pseudocl'
+"Plug 'junegunn/vim-oblique' "查找增强
+"Plug 'junegunn/vim-fnr' "快速替换
 
 "Plug 'vim-scripts/mru.vim'  "最近编辑的文件
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } "文件搜索
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } "文件搜索
 
 "Plug 'junegunn/fzf.vim'
+
+
+"
 "
 "Plug 'airblade/vim-gitgutter'
 "Plug 'tpope/vim-fugitive'
@@ -237,9 +242,6 @@ nmap <silent> <Leader>ez :e ~/dotfiles/zhs/zshrc<CR>
 nnoremap <leader>\ :vs<CR>
 nnoremap <leader>- :sp<CR>
 
-nnoremap <leader>su :!svn up<CR>
-
-
 map <C-A> ggVGY
 map! <C-A> <Esc>ggVGY
 
@@ -271,13 +273,22 @@ inoremap <C-^> <C-o><C-^>
 
 
 "UI
-set background=dark
-"set background=light
+"set background=dark
+set background=light
+
+"color gruvbox
+"colorscheme solarized
 
 colorscheme ayu
-colorscheme hybrid
+
+"colorscheme seoul256
+if !has("gui_macvim")
+  "colorscheme onedark
+  "colorscheme seoul256
+endif
 
 set guifont=Inconsolata_for_Powerline:h18
+"set guifont=Inconsolata_for_Powerline:h22
 set cursorline
 
 
@@ -291,6 +302,13 @@ au BufWrite * :Autoformat
 let g:autoformat_autoindent = 0
 let g:autoformat_retab = 0
 let g:autoformat_remove_trailing_spaces = 0
+
+" ----------------------------------------------------------------------------
+" Bookmark
+" ----------------------------------------------------------------------------
+highlight BookmarkSign ctermbg=NONE ctermfg=160
+highlight BookmarkLine ctermbg=194 ctermfg=NONE
+let g:bookmark_highlight_lines = 1
 
 " ----------------------------------------------------------------------------
 " dict.vim
@@ -327,6 +345,9 @@ nnoremap <tab> :MaximizerToggle<CR>
 " emmet
 " ----------------------------------------------------------------------------
 let g:user_emmet_expandabbr_key='<d-j>'
+if has('win32')
+  let g:user_emmet_expandabbr_key='<M-j>'
+endif
 
 " ----------------------------------------------------------------------------
 " ctrlp
@@ -349,8 +370,20 @@ let g:ctrlp_max_height=15
 let g:ctrlp_match_window_reversed=0
 let g:ctrlp_mruf_max=500
 let g:ctrlp_follow_symlinks=1
+
 let g:ctrlp_extensions = ['filetype']
 
+" ----------------------------------------------------------------------------
+" airline
+" ----------------------------------------------------------------------------
+"let g:airline_theme = "hybrid"
+let g:airline_powerline_fonts=1
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tab_min_count = 2
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_splits = 0
 
 " ----------------------------------------------------------------------------
 " easy-motion
@@ -418,6 +451,11 @@ let g:SuperTabRetainCompletionType=2
 
 
 " ----------------------------------------------------------------------------
+" BufOnly.vim
+" ----------------------------------------------------------------------------
+nnoremap <silent> qo :BufOnly<CR>
+
+" ----------------------------------------------------------------------------
 " syntastic
 " ----------------------------------------------------------------------------
 let g:syntastic_error_symbol='✘'
@@ -428,14 +466,22 @@ let g:syntastic_check_on_open=0
 let g:syntastic_enable_highlighting = 0
 let g:syntastic_javascript_checkers = ['eslint']
 
+" ----------------------------------------------------------------------------
+" undotree
+" ----------------------------------------------------------------------------
+"let g:undotree_WindowLayout = 2
+"nnoremap U :UndotreeToggle<CR>
+
+"nmap <Leader>R <Plug>(FNR%)
+"xmap <Leader>R <Plug>(FNR%)
 
 
 " ----------------------------------------------------------------------------
 "vim-swoop
 " ----------------------------------------------------------------------------
-"let g:swoopUseDefaultKeyMap = 0
-"let g:swoopIgnoreCase = 1
-"let g:swoopWindowsVerticalLayout = 1
+let g:swoopUseDefaultKeyMap = 0
+let g:swoopIgnoreCase = 1
+let g:swoopWindowsVerticalLayout = 1
 
 
 
@@ -444,10 +490,10 @@ let g:syntastic_javascript_checkers = ['eslint']
 " ----------------------------------------------------------------------------
 " 同git diff,实时展示文件中修改的行
 " 只是不喜欢除了行号多一列, 默认关闭,gs时打开
-let g:gitgutter_map_keys = 0
-let g:gitgutter_enabled = 0
-let g:gitgutter_highlight_lines = 1
-nnoremap <leader>gs :GitGutterToggle<CR>
+"let g:gitgutter_map_keys = 0
+"let g:gitgutter_enabled = 0
+"let g:gitgutter_highlight_lines = 1
+"nnoremap <leader>gs :GitGutterToggle<CR>
 
 " ----------------------------------------------------------------------------
 " tern_for_vim
@@ -461,22 +507,22 @@ autocmd FileType javascript setlocal omnifunc=tern#Complete
 " ----------------------------------------------------------------------------
 " bookmarks
 " ----------------------------------------------------------------------------
-"highlight BookmarkSign ctermbg=whatever ctermfg=whatever
-"highlight BookmarkAnnotationSign ctermbg=whatever ctermfg=whatever
-"highlight BookmarkLine ctermbg=whatever ctermfg=whatever
-"highlight BookmarkAnnotationLine ctermbg=whatever ctermfg=whatever
+highlight BookmarkSign ctermbg=whatever ctermfg=whatever
+highlight BookmarkAnnotationSign ctermbg=whatever ctermfg=whatever
+highlight BookmarkLine ctermbg=whatever ctermfg=whatever
+highlight BookmarkAnnotationLine ctermbg=whatever ctermfg=whatever
 
-"let g:bookmark_sign = '⚑'
+let g:bookmark_sign = '⚑'
 
 
 " ----------------------------------------------------------------------------
 "Swoop
 " ----------------------------------------------------------------------------
-"let g:swoopUseDefaultKeyMap = 0
-"nmap <Leader>nl :call Swoop()<CR>
-"vmap <Leader>nl :call SwoopSelection()<CR>
-"nmap <Leader>ml :call SwoopMulti()<CR>
-"vmap <Leader>ml :call SwoopMultiSelection()<CR>
+let g:swoopUseDefaultKeyMap = 0
+nmap <Leader>nl :call Swoop()<CR>
+vmap <Leader>nl :call SwoopSelection()<CR>
+nmap <Leader>ml :call SwoopMulti()<CR>
+vmap <Leader>ml :call SwoopMultiSelection()<CR>
 
 " ----------------------------------------------------------------------------
 "IndentLine
@@ -486,7 +532,78 @@ let g:indentLine_first_char = '┆'
 let g:indentLine_showFirstIndentLevel = 1
 let g:indentLine_setColors = 0
 
+
+" ----------------------------------------------------------------------------
+"highlight-cursor-word.vim
+" ----------------------------------------------------------------------------
+"autocmd CursorMoved,CursorHold * silent! call HighlightCursorWord()
+
 "自定义功能
+" ----------------------------------------------------------------------------
+" 快速选择列块内容
+" ----------------------------------------------------------------------------
+function! s:inner_blockwise_column(vmode, cmd)
+  if a:vmode == "\<C-V>"
+    let [pvb, pve] = [getpos("'<"), getpos("'>")]
+    normal! `z
+  endif
+
+  execute "normal! \<C-V>".a:cmd."o\<C-C>"
+  let [line, col] = [line('.'), col('.')]
+  let [cb, ce]    = [col("'<"), col("'>")]
+  let [mn, mx]    = [line, line]
+
+  for dir in [1, -1]
+    let l = line + dir
+    while line('.') > 1 && line('.') < line('$')
+      execute "normal! ".l."G".col."|"
+      execute "normal! v".a:cmd."\<C-C>"
+      if cb != col("'<") || ce != col("'>")
+        break
+      endif
+      let [mn, mx] = [min([line('.'), mn]), max([line('.'), mx])]
+      let l += dir
+    endwhile
+  endfor
+
+  execute printf("normal! %dG%d|\<C-V>%s%dG", mn, col, a:cmd, mx)
+
+  if a:vmode == "\<C-V>"
+    normal! o
+    if pvb[1] < line('.') | execute "normal! ".pvb[1]."G" | endif
+    if pvb[2] < col('.')  | execute "normal! ".pvb[2]."|" | endif
+    normal! o
+    if pve[1] > line('.') | execute "normal! ".pve[1]."G" | endif
+    if pve[2] > col('.')  | execute "normal! ".pve[2]."|" | endif
+  endif
+endfunction
+
+xnoremap <silent> ic mz:<C-U>call <SID>inner_blockwise_column(visualmode(), 'iw')<CR>
+xnoremap <silent> iC mz:<C-U>call <SID>inner_blockwise_column(visualmode(), 'iW')<CR>
+xnoremap <silent> ac mz:<C-U>call <SID>inner_blockwise_column(visualmode(), 'aw')<CR>
+xnoremap <silent> aC mz:<C-U>call <SID>inner_blockwise_column(visualmode(), 'aW')<CR>
+onoremap <silent> ic :<C-U>call   <SID>inner_blockwise_column('',           'iw')<CR>
+onoremap <silent> iC :<C-U>call   <SID>inner_blockwise_column('',           'iW')<CR>
+onoremap <silent> ac :<C-U>call   <SID>inner_blockwise_column('',           'aw')<CR>
+onoremap <silent> aC :<C-U>call   <SID>inner_blockwise_column('',           'aW')<CR>
+
+
+" ----------------------------------------------------------------------------
+" google搜索
+" ----------------------------------------------------------------------------
+function! s:goog(pat, lucky)
+  let q = '"'.substitute(a:pat, '["\n]', ' ', 'g').'"'
+  let q = substitute(q, '[[:punct:] ]',
+       \ '\=printf("%%%02X", char2nr(submatch(0)))', 'g')
+  call system(printf('open "https://www.google.com/search?%sq=%s"',
+                   \ a:lucky ? 'btnI&' : '', q))
+endfunction
+
+nnoremap <leader>? :call <SID>goog(expand("<cWORD>"), 0)<cr>
+nnoremap <leader>! :call <SID>goog(expand("<cWORD>"), 1)<cr>
+xnoremap <leader>? "gy:call <SID>goog(@g, 0)<cr>gv
+xnoremap <leader>! "gy:call <SID>goog(@g, 1)<cr>gv
+
 " ----------------------------------------------------------------------------
 " 快速切换配色
 " ----------------------------------------------------------------------------
@@ -614,5 +731,55 @@ function! SpacevimKillOtherBuffers()
     endif
   endif
 endfunction
+
 nmap <Leader>bK :call SpacevimKillOtherBuffers()<cr>;
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 获取IP地址                                                                           "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"function! getip() range
+  "r!/sbin/ifconfig -a|grep inet|grep -v 127.0.0.1|grep -v inet6|awk '{print $2}'|tr -d "addr:"
+"endfun
+
+"nmap <Leader>wo :call getip()<cr>;
+
+
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> {Left-mapping} :TmuxNavigateLeft<cr>
+nnoremap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
+nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
+nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
+nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
+
+" -- tmux integration ----------------------------------------------------------
+
+" make arrow keys, home/end/pgup/pgdown, and function keys work when inside tmux
+if exists('$TMUX') && (system("tmux show-options -wg xterm-keys | cut -d' ' -f2") =~ '^on')
+  " tmux will send xterm-style keys when its xterm-keys option is on
+  " add 'setw -g xterm-keys on' to your ~/.tmux.conf
+  execute "set <xUp>=\e[1;*A"
+  execute "set <xDown>=\e[1;*B"
+  execute "set <xRight>=\e[1;*C"
+  execute "set <xLeft>=\e[1;*D"
+  execute "set <xHome>=\e[1;*H"
+  execute "set <xEnd>=\e[1;*F"
+  execute "set <Insert>=\e[2;*~"
+  execute "set <Delete>=\e[3;*~"
+  execute "set <PageUp>=\e[5;*~"
+  execute "set <PageDown>=\e[6;*~"
+  execute "set <xF1>=\e[1;*P"
+  execute "set <xF2>=\e[1;*Q"
+  execute "set <xF3>=\e[1;*R"
+  execute "set <xF4>=\e[1;*S"
+  execute "set <F5>=\e[15;*~"
+  execute "set <F6>=\e[17;*~"
+  execute "set <F7>=\e[18;*~"
+  execute "set <F8>=\e[19;*~"
+  execute "set <F9>=\e[20;*~"
+  execute "set <F10>=\e[21;*~"
+  execute "set <F11>=\e[23;*~"
+  execute "set <F12>=\e[24;*~"
+endif
 

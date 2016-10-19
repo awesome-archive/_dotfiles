@@ -250,6 +250,10 @@ alias ocss='open /Users/iuunhao/Desktop/Qianyi/static.qianyilc.com/trunk/FED/new
 alias oimg='open /Users/iuunhao/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic/mobile/images'
 alias opostcss='open /Users/iuunhao/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic/mobile/postcss'
 
+alias browser='browser-sync start --server --directory --files "**/*.css, **/*.html, **/*.js"'
+
+
+
 
 #tmux
 alias t='tmux'
