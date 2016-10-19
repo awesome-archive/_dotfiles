@@ -22,8 +22,8 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-/wikisnips
-/autoload
-/backups
-/plugged
-/session
+./vim/wikisnips/
+./vim/autoload/
+./vim/backups/
+./vim/plugged/
+./vim/session/
