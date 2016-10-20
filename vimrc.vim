@@ -15,7 +15,7 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'rhysd/clever-f.vim'
 "Plug 'pseewald/anyfold'
 
-"Plug 'jceb/vim-orgmode'
+Plug 'jceb/vim-orgmode'
 
 "Plug 'Yggdroot/indentLine'
 
