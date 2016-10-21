@@ -4,23 +4,26 @@ set encoding=utf-8
 
 let anyfold_activate=1
 set foldlevel=0
+
 "插件
 call plug#begin('~/.vim/plugged')
 
 "Plug 'christoomey/vim-tmux-navigator'
+"
 
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'  "恢复会话
 
 Plug 'ayu-theme/ayu-vim'
+
 Plug 'rhysd/clever-f.vim'
 "Plug 'pseewald/anyfold'
 
-Plug 'jceb/vim-orgmode'
+"Plug 'jceb/vim-orgmode'
 
 "Plug 'Yggdroot/indentLine'
 
-
 Plug 'w0ng/vim-hybrid'
+
 Plug 'aperezdc/vim-lining'
 
 Plug 'danro/rename.vim' "文件重命名
@@ -51,13 +54,13 @@ Plug 'ap/vim-css-color', { 'for': ['css','stylus','scss'] } "css颜色显示
 
 Plug 'Chiel92/vim-autoformat' "自动格式化
 
-Plug 'svermeulen/vim-easyclip'
+"Plug 'svermeulen/vim-easyclip'
 
 "Plug 'pangloss/vim-javascript', { 'for': ['html', 'jsx', 'javascript'] }  "js代码补全
 
 "Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } "补全
 
-"Plug 'myhere/vim-nodejs-complete'
+Plug 'myhere/vim-nodejs-complete'
 Plug 'hail2u/vim-css3-syntax'
 "Plug 'cakebaker/scss-syntax.vim'
 
@@ -71,7 +74,6 @@ Plug 'kien/ctrlp.vim' "文件搜索
 Plug 'endel/ctrlp-filetype.vim' "快速切换文件类型
 
 Plug 'kris2k/vim-surround'  "成对符号修改
-
 
 Plug 'scrooloose/syntastic' "语法检查
 
@@ -278,6 +280,7 @@ colorscheme ayu
 colorscheme hybrid
 
 set guifont=Inconsolata_for_Powerline:h18
+
 set cursorline
 
 
@@ -363,6 +366,18 @@ nmap <Leader>L <Plug>(easymotion-overwin-line)
 map  <Leader><Leader> <Plug>(easymotion-bd-w)
 nmap <Leader><Leader> <Plug>(easymotion-overwin-w)
 
+
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+  map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
+
+map <Leader>l <Plug>(easymotion-lineforward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+
+
 " ----------------------------------------------------------------------------
 " NERDT
 " ----------------------------------------------------------------------------
@@ -381,6 +396,9 @@ let g:NERDTreeMapOpenSplit = 's'
 let g:NERDTreeMapOpenVSplit = 'v'
 let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$', '\~$', '\.pyc$', '\.swp$']
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | end
+
+
+
 
 " ----------------------------------------------------------------------------
 " YouCompleteMe
@@ -615,4 +633,5 @@ function! SpacevimKillOtherBuffers()
   endif
 endfunction
 nmap <Leader>bK :call SpacevimKillOtherBuffers()<cr>;
+
 
