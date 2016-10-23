@@ -15,7 +15,7 @@ Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'  "恢复会话
 
 Plug 'ayu-theme/ayu-vim'
 
-Plug 'rhysd/clever-f.vim'
+"Plug 'rhysd/clever-f.vim'
 "Plug 'pseewald/anyfold'
 
 "Plug 'jceb/vim-orgmode'
@@ -40,13 +40,13 @@ Plug 'szw/vim-maximizer'  "tab最大化窗口
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }  "文件管理
 
 Plug 'sirver/ultisnips' "代码片段
-Plug 'honza/vim-snippets' "代码片段
+"Plug 'honza/vim-snippets' "代码片段
 
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' } "补全
 
 Plug 'scrooloose/nerdcommenter' "快速注释
 
-Plug 'mattesgroeger/vim-bookmarks'  "书签增强
+"Plug 'mattesgroeger/vim-bookmarks'  "书签增强
 
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] }  "emmet
 
@@ -58,9 +58,9 @@ Plug 'Chiel92/vim-autoformat' "自动格式化
 
 "Plug 'pangloss/vim-javascript', { 'for': ['html', 'jsx', 'javascript'] }  "js代码补全
 
-"Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } "补全
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } "补全
 
-Plug 'myhere/vim-nodejs-complete'
+"Plug 'myhere/vim-nodejs-complete'
 Plug 'hail2u/vim-css3-syntax'
 "Plug 'cakebaker/scss-syntax.vim'
 
@@ -77,7 +77,7 @@ Plug 'kris2k/vim-surround'  "成对符号修改
 
 Plug 'scrooloose/syntastic' "语法检查
 
-"Plug 'pbrisbin/vim-mkdir' "快速创建子级目录
+Plug 'pbrisbin/vim-mkdir' "快速创建子级目录
 
 Plug 'Lokaltog/vim-easymotion'  "光标定位
 
@@ -186,7 +186,7 @@ endif
 
 " 基本快捷键
 vnoremap p "_dP
-vnoremap <C-c> "*y
+"vnoremap <C-c> "*y
 inoremap <C-V> <C-R>"
 noremap j gj
 noremap k gk
@@ -274,7 +274,7 @@ inoremap <C-^> <C-o><C-^>
 set background=dark
 "set background=light
 
-colorscheme ayu
+"colorscheme ayu
 colorscheme hybrid
 
 set guifont=Inconsolata_for_Powerline:h18
@@ -329,8 +329,8 @@ nnoremap <tab> :MaximizerToggle<CR>
 " ----------------------------------------------------------------------------
 let g:user_emmet_expandabbr_key='<d-j>'
 
-" ----------------------------------------------------------------------------
 " ctrlp
+" ----------------------------------------------------------------------------
 " ----------------------------------------------------------------------------
 let g:ctrlp_map = '<c-E>llllllllllll'
 let g:ctrlp_cmd = 'CtrlP'
@@ -365,10 +365,10 @@ map  <Leader><Leader> <Plug>(easymotion-bd-w)
 nmap <Leader><Leader> <Plug>(easymotion-overwin-w)
 
 
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
-  map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)
+"map  / <Plug>(easymotion-sn)
+"omap / <Plug>(easymotion-tn)
+  "map  n <Plug>(easymotion-next)
+"map  N <Plug>(easymotion-prev)
 
 map <Leader>l <Plug>(easymotion-lineforward)
 map <Leader>j <Plug>(easymotion-j)
