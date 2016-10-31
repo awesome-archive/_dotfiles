@@ -1,9 +1,10 @@
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8
 set encoding=utf-8
-
 let anyfold_activate=1
 set foldlevel=0
+
+set t_Co=256
 
 call plug#begin('~/.vim/plugged')
 "插件
@@ -11,9 +12,17 @@ call plug#begin('~/.vim/plugged')
 "Plug 'christoomey/vim-tmux-navigator'
 "
 
+Plug 'tyrannicaltoucan/vim-quantum'
+
+
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'  "恢复会话
 
 Plug 'ayu-theme/ayu-vim'
+
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+
+"Plug 'lifepillar/vim-mucomplete'
 
 "Plug 'rhysd/clever-f.vim'
 "Plug 'pseewald/anyfold'
@@ -100,7 +109,7 @@ Plug 'ervandew/supertab'  "tab增强
 "Plug 'vim-scripts/mru.vim'  "最近编辑的文件
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } "文件搜索
 
-"Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf.vim'
 "
 "Plug 'airblade/vim-gitgutter'
 "Plug 'tpope/vim-fugitive'
@@ -275,7 +284,8 @@ set background=dark
 "set background=light
 
 "colorscheme ayu
-colorscheme hybrid
+"colorscheme hybrid
+colorscheme quantum
 
 set guifont=Inconsolata_for_Powerline:h18
 
@@ -398,6 +408,10 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 
 
+
+"let g:mucomplete#enable_auto_at_startup = 1
+
+
 " ----------------------------------------------------------------------------
 " YouCompleteMe
 " ----------------------------------------------------------------------------
@@ -416,13 +430,13 @@ let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_cache_omnifunc=0
 set completeopt-=preview
 function! MyTabFunction ()
-	let line = getline('.')
-	let substr = strpart(line, -1, col('.')+1)
-	let substr = matchstr(substr, "[^ \t]*$")
-	if strlen(substr) == 0
-		return "\<tab>"
-	endif
-	return pumvisible() ? "\<c-n>" : "\<c-x>\<c-o>"
+  let line = getline('.')
+  let substr = strpart(line, -1, col('.')+1)
+  let substr = matchstr(substr, "[^ \t]*$")
+  if strlen(substr) == 0
+    return "\<tab>"
+  endif
+  return pumvisible() ? "\<c-n>" : "\<c-x>\<c-o>"
 endfunction
 
 " ----------------------------------------------------------------------------
@@ -633,3 +647,6 @@ endfunction
 nmap <Leader>bK :call SpacevimKillOtherBuffers()<cr>;
 
 
+"set termguicolors
+hi Pmenu ctermbg=white
+hi PmenuSel ctermbg=lightblue
