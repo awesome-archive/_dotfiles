@@ -1,13 +1,9 @@
-
-set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
-set termencoding=utf-8
-set encoding=utf-8
-let anyfold_activate=1
-set foldlevel=0
-
 call plug#begin()
 
 Plug 'scrooloose/nerdtree'
+
+Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'  "恢复会话
+
 
 Plug 'valloric/matchtagalways'
 
@@ -86,10 +82,10 @@ nmap <silent> <Leader>es :so $MYVIMRC<CR>
 
 let mapleader      = ' '
 let maplocalleader = ' '
-set nu
-"set relativenumber
-"set ruler
-"set noshowmode
+""set nu
+set relativenumber
+""set ruler
+set noshowmode
 set autoindent
 set smartindent
 set lazyredraw

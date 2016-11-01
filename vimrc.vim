@@ -1,10 +1,3 @@
-set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
-set termencoding=utf-8
-set encoding=utf-8
-let anyfold_activate=1
-set foldlevel=0
-
-set t_Co=256
 
 call plug#begin('~/.vim/plugged')
 "插件
