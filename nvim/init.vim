@@ -4,6 +4,12 @@ Plug 'scrooloose/nerdtree'
 
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'  "恢复会话
 
+Plug 'christoomey/vim-system-copy'
+
+Plug 'w0ng/vim-hybrid'
+Plug 'ayu-theme/ayu-vim'
+
+
 
 Plug 'valloric/matchtagalways'
 
@@ -15,12 +21,17 @@ Plug 'danro/rename.vim'
 
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' } "补全
 
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 
 Plug 'pelodelfuego/vim-swoop'
+
+
+Plug 'elixir-lang/vim-elixir'
+Plug 'archSeer/elixir.nvim'
+
+Plug 'ddollar/nerdcommenter'
 
 
 "Plug 'bling/vim-airline'
@@ -36,12 +47,20 @@ Plug 'sheerun/vim-polyglot'
 Plug 'dietsche/vim-lastplace'
 Plug 'bronson/vim-trailing-whitespace'
 
+
+Plug 'bfredl/nvim-miniyank'
+
 Plug 'junegunn/vim-easy-align'
 Plug 'aperezdc/vim-lining'
 
 Plug 'honza/vim-snippets' "代码片段
 
+
+Plug 'kien/ctrlp.vim'
+
+
 Plug 'iamcco/dict.vim'  "翻译
+"Plug 'iamcco/dict.nvim'
 
 Plug 'kris2k/vim-surround'  "成对符号修改
 
@@ -55,7 +74,8 @@ Plug 'Chiel92/vim-autoformat' "自动格式化
 
 Plug 'ap/vim-css-color', { 'for': ['css','stylus','scss'] } "css颜色显示
 
-Plug 'scrooloose/nerdcommenter' "快速注释
+Plug 'DoxygenToolkit.vim'
+
 
 Plug 'sirver/ultisnips' "代码片段
 
@@ -68,8 +88,8 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'ervandew/supertab'  "tab增强
 
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } "文件搜索
-Plug 'junegunn/fzf.vim'
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } "文件搜索
+"Plug 'junegunn/fzf.vim'
 vnoremap <silent> <Enter> :EasyAlign<cr>
 
 
@@ -144,7 +164,7 @@ set number
 set nobackup
 set tabstop=4
 
-set guifont=Inconsolata_for_Powerline:h18
+""set guifont=Inconsolata_for_Powerline:h18
 
 set clipboard=unnamed
 
@@ -219,7 +239,10 @@ nnoremap <leader>su :!svn up<CR>
 map <C-A> ggVGY
 map! <C-A> <Esc>ggVGY
 
-colorscheme quantum
+""colorscheme quantum
+""colorscheme hybrid
+colorscheme ayu 
+
 
 vmap <C-c> "+y
 
@@ -343,7 +366,7 @@ let g:gitgutter_highlight_lines = 1
 nnoremap <leader>gs :GitGutterToggle<CR>
 
 let g:tern_request_timeout = 1
-let g:tern_show_signature_in_pum = '0' 
+let g:tern_show_signature_in_pum = '0'
 
 
 " ----------------------------------------------------------------------------
@@ -494,3 +517,87 @@ function QuoteDelim(char)
  return a:char.a:char."\<Esc>i"
  endif
 endf
+
+
+
+
+" Use deoplete.
+let g:tern_request_timeout = 1
+let g:tern_show_signature_in_pum = '0'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+map <leader>p <Plug>(miniyank-startput)
+map <leader>P <Plug>(miniyank-startPut)
+
+map p <Plug>(miniyank-autoput)
+map P <Plug>(miniyank-autoPut)
+
+map <leader>n <Plug>(miniyank-cycle)
+
+
+map <Leader>c <Plug>(miniyank-tochar)
+map <Leader>l <Plug>(miniyank-toline)
+map <Leader>b <Plug>(miniyank-toblock)
+
+
+
+
+
+
+
+
+
+
+" ctrlp
+" "
+" ----------------------------------------------------------------------------
+"  "
+"  ----------------------------------------------------------------------------
+let g:ctrlp_map = '<c-E>llllllllllll'
+let g:ctrlp_cmd = 'CtrlP'
+nnoremap <leader>r :CtrlPMRU<CR>
+nnoremap <leader>bb :CtrlPBuffer<CR>
+nnoremap <leader>ff :CtrlPRoot<CR>
+silent! nnoremap <unique> <silent> <Leader>ft :CtrlPFiletype<CR>
+let g:ctrlp_custom_ignore = {
+
+    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+        \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
+            \ 
+}
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.png,*.jpg,*.jpeg,*.gif "
+MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.pyc,*.png,*.jpg,*.gif  "
+Windows
+let g:ctrlp_working_path_mode=0
+let g:ctrlp_match_window_bottom=1
+let g:ctrlp_max_height=15
+let g:ctrlp_match_window_reversed=0
+let g:ctrlp_mruf_max=500
+let g:ctrlp_follow_symlinks=1
+let g:ctrlp_extensions = ['filetype']
+
+
+
+
+
+
+let g:DoxygenToolkit_briefTag_pre="@Synopsis  "
+let g:DoxygenToolkit_paramTag_pre="@Param "
+let g:DoxygenToolkit_returnTag="@Returns   "
+let g:DoxygenToolkit_blockHeader="-------------------------------"
+let g:DoxygenToolkit_blockFooter="---------------------------------"
+let g:DoxygenToolkit_authorName="Junhao Liu"
+let g:DoxygenToolkit_licenseTag="My own license" <-- !!! Does not end with "\<enter>">

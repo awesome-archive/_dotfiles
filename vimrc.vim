@@ -2,36 +2,23 @@
 call plug#begin('~/.vim/plugged')
 "插件
 
-"Plug 'christoomey/vim-tmux-navigator'
-"
-
-Plug 'tyrannicaltoucan/vim-quantum'
-
-
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'  "恢复会话
 
 Plug 'ayu-theme/ayu-vim'
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'ctjhoa/spacevim'
 
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
-"Plug 'lifepillar/vim-mucomplete'
-
-"Plug 'rhysd/clever-f.vim'
-"Plug 'pseewald/anyfold'
-
-"Plug 'jceb/vim-orgmode'
-
-"Plug 'Yggdroot/indentLine'
-
-Plug 'w0ng/vim-hybrid'
+"Plug 'w0ng/vim-hybrid'
 
 Plug 'aperezdc/vim-lining'
 
 Plug 'danro/rename.vim' "文件重命名
 
+Plug 'pelodelfuego/vim-swoop' "搜索
 
-"Plug 'pelodelfuego/vim-swoop' "搜索
+Plug 'rking/ag.vim'
 
 "Plug 'joshdick/onedark.vim' "配色
 
@@ -42,11 +29,14 @@ Plug 'szw/vim-maximizer'  "tab最大化窗口
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }  "文件管理
 
 Plug 'sirver/ultisnips' "代码片段
-"Plug 'honza/vim-snippets' "代码片段
+Plug 'honza/vim-snippets' "代码片段
 
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' } "补全
 
 Plug 'scrooloose/nerdcommenter' "快速注释
+
+Plug 'mbbill/undotree'
+
 
 "Plug 'mattesgroeger/vim-bookmarks'  "书签增强
 
@@ -100,12 +90,12 @@ Plug 'roman/golden-ratio'  "自动调整窗口大小
 Plug 'ervandew/supertab'  "tab增强
 
 "Plug 'vim-scripts/mru.vim'  "最近编辑的文件
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } "文件搜索
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } "文件搜索
 
-Plug 'junegunn/fzf.vim'
+"Plug 'junegunn/fzf.vim'
 "
-"Plug 'airblade/vim-gitgutter'
-"Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
@@ -276,11 +266,11 @@ inoremap <C-^> <C-o><C-^>
 set background=dark
 "set background=light
 
-"colorscheme ayu
+colorscheme ayu
 "colorscheme hybrid
-colorscheme quantum
+"colorscheme quantum
 
-set guifont=Inconsolata_for_Powerline:h18
+set guifont=Inconsolata_for_Powerline:h24
 
 set cursorline
 
@@ -337,11 +327,11 @@ let g:user_emmet_expandabbr_key='<d-j>'
 " ----------------------------------------------------------------------------
 let g:ctrlp_map = '<c-E>llllllllllll'
 let g:ctrlp_cmd = 'CtrlP'
-nnoremap <leader>r :CtrlPMRU<CR>
-nnoremap <leader>bb :CtrlPBuffer<CR>
-nnoremap <leader>ff :CtrlPRoot<CR>
+" nnoremap <leader>r :CtrlPMRU<CR>
+" nnoremap <leader>bb :CtrlPBuffer<CR>
+" nnoremap <leader>ff :CtrlPRoot<CR>
 silent! nnoremap <unique> <silent> <Leader>ft :CtrlPFiletype<CR>
-let g:ctrlp_custom_ignore = {
+  let g:ctrlp_custom_ignore = {
     \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
     \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
     \ }
@@ -359,13 +349,13 @@ let g:ctrlp_extensions = ['filetype']
 " ----------------------------------------------------------------------------
 " easy-motion
 " ----------------------------------------------------------------------------
-map <Leader> <Plug>(easymotion-prefix)
-map  <Leader>f <Plug>(easymotion-sn)
-nmap <Leader>f <Plug>(easymotion-tn)
-map <Leader>j <Plug>(easymotion-bd-jk)
-nmap <Leader>L <Plug>(easymotion-overwin-line)
-map  <Leader><Leader> <Plug>(easymotion-bd-w)
-nmap <Leader><Leader> <Plug>(easymotion-overwin-w)
+"map <Leader> <Plug>(easymotion-prefix)
+"map  <Leader>f <Plug>(easymotion-sn)
+"nmap <Leader>f <Plug>(easymotion-tn)
+"map <Leader>j <Plug>(easymotion-bd-jk)
+"nmap <Leader>L <Plug>(easymotion-overwin-line)
+"map  <Leader><Leader> <Plug>(easymotion-bd-w)
+"nmap <Leader><Leader> <Plug>(easymotion-overwin-w)
 
 
 "map  / <Plug>(easymotion-sn)
@@ -373,10 +363,10 @@ nmap <Leader><Leader> <Plug>(easymotion-overwin-w)
   "map  n <Plug>(easymotion-next)
 "map  N <Plug>(easymotion-prev)
 
-map <Leader>l <Plug>(easymotion-lineforward)
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-map <Leader>h <Plug>(easymotion-linebackward)
+" map <Leader>l <Plug>(easymotion-lineforward)
+" map <Leader>j <Plug>(easymotion-j)
+" map <Leader>k <Plug>(easymotion-k)
+" map <Leader>h <Plug>(easymotion-linebackward)
 
 
 " ----------------------------------------------------------------------------
