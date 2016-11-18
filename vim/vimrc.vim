@@ -12,8 +12,8 @@ Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 Plug 'terryma/vim-expand-region'
-
 Plug 'othree/xml.vim'
+
 Plug 'othree/html5.vim'
 Plug 'matchit.zip'
 Plug 'asins/vimcdoc'
@@ -548,3 +548,6 @@ function! s:Repl()
   return "p@=RestoreRegister()<cr>"
 endfunction
 vmap <silent> <expr> p <sid>Repl()
+
+nmap <silent> <Leader>llll :!curl -o ./animate.min.css 'http://cdn.bootcss.com/animate.css/3.5.2/animate.min.css'<CR>
+
