@@ -1,9 +1,9 @@
 "插件配置
-execute pathogen#infect()
 
 call plug#begin('~/.vim/plugged')
 
 "配色
+Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'  "恢复会话
 Plug 'rakr/vim-one'
 Plug 'ayu-theme/ayu-vim' 
 Plug 'itchyny/lightline.vim'
