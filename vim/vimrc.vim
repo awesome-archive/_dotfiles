@@ -13,6 +13,11 @@ Plug 'vim-airline/vim-airline-themes'
 
 Plug 'terryma/vim-expand-region'
 
+Plug 'othree/xml.vim'
+Plug 'othree/html5.vim'
+Plug 'matchit.zip'
+Plug 'asins/vimcdoc'
+
 
 Plug 'sirver/ultisnips' "代码片段
 Plug 'honza/vim-snippets' "代码片段
@@ -65,6 +70,7 @@ set termencoding=utf-8
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1 
 set fileencoding=utf-8
+let helptags=$VIM."/vimfiles/doc"
 set helplang=cn
 language messages zh_CN.utf-8 
 set termencoding = cp936
