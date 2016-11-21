@@ -8,6 +8,10 @@ Plug 'rakr/vim-one'
 Plug 'ayu-theme/ayu-vim' 
 Plug 'itchyny/lightline.vim'
 
+Plug 'unblevable/quick-scope'
+
+Plug 'terryma/vim-multiple-cursors'
+
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -20,7 +24,9 @@ Plug 'asins/vimcdoc'
 
 
 Plug 'sirver/ultisnips' "代码片段
+
 Plug 'honza/vim-snippets' "代码片段
+
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }  "补全
 Plug 'Chiel92/vim-autoformat' "自动格式化
 Plug 'szw/vim-maximizer'  "tab最大化窗口
@@ -48,6 +54,7 @@ Plug 'iamcco/dict.vim'  "翻译
 Plug 'ervandew/supertab'  "tab增强
 Plug 'Raimondi/delimitMate' "括号自动完成
 Plug 'junegunn/goyo.vim'
+
 
 
 call plug#end()
@@ -158,6 +165,7 @@ set guifont=Inconsolata_for_Powerline:h24
 
 set clipboard=unnamed
 
+noremap 0 ^
 noremap Y y$
 vnoremap p "_dP
 vmap <C-c> "+y
@@ -551,3 +559,15 @@ vmap <silent> <expr> p <sid>Repl()
 
 nmap <silent> <Leader>llll :!curl -o ./animate.min.css 'http://cdn.bootcss.com/animate.css/3.5.2/animate.min.css'<CR>
 
+
+
+" Your .vimrc
+
+
+
+
+let g:qs_first_occurrence_highlight_color = '#afff5f' " gui vim
+let g:qs_first_occurrence_highlight_color = 155       " terminal vim
+
+let g:qs_second_occurrence_highlight_color = '#5fffff'  " gui vim
+let g:qs_second_occurrence_highlight_color = 81         " terminal vim
