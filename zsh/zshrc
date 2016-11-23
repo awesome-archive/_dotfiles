@@ -2,7 +2,10 @@ export ZSH=/Users/iuunhao/.oh-my-zsh
 # ZSH_THEME="robbyrussell"
 #ZSH_THEME="bureau"
 #ZSH_THEME="kolo"
-ZSH_THEME="sunrise"
+#ZSH_THEME="sunrise"
+#
+ZSH_THEME="cloud"
+
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
