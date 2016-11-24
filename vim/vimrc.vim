@@ -6,17 +6,21 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'  "恢复会话
 Plug 'rakr/vim-one'
 Plug 'ayu-theme/ayu-vim' 
-Plug 'itchyny/lightline.vim'
+
+Plug 'angr.vim'
+Plug 'vim-scripts/TeTrIs.vim'
+
+"Plug 'itchyny/lightline.vim'
 
 Plug 'unblevable/quick-scope'
 
 Plug 'terryma/vim-multiple-cursors'
 
 Plug 'bling/vim-airline'
+
 Plug 'vim-airline/vim-airline-themes'
 
 Plug 'terryma/vim-expand-region'
-Plug 'othree/xml.vim'
 
 Plug 'othree/html5.vim'
 Plug 'matchit.zip'
@@ -27,6 +31,9 @@ Plug 'sirver/ultisnips' "代码片段
 
 Plug 'honza/vim-snippets' "代码片段
 
+Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+
+
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }  "补全
 Plug 'Chiel92/vim-autoformat' "自动格式化
 Plug 'szw/vim-maximizer'  "tab最大化窗口
@@ -36,7 +43,7 @@ Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] }
 
 Plug 'posva/vim-vue'
 
-Plug 'vim-scripts/mru.vim'
+"Plug 'vim-scripts/mru.vim'
 
 Plug 'scrooloose/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -53,9 +60,17 @@ Plug 'iamcco/dict.vim'  "翻译
 
 Plug 'ervandew/supertab'  "tab增强
 Plug 'Raimondi/delimitMate' "括号自动完成
-Plug 'junegunn/goyo.vim'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""
+
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"Plug 'junegunn/fzf.vim'
+
+"Plug 'shougo/deoplete.nvim'
+"let g:deoplete#enable_at_startup = 1
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""
 
 call plug#end()
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
@@ -67,7 +82,8 @@ set autoread
 let mapleader = " "
 let g:mapleader = " "
 nmap <leader>w :w!<cr>
-command W w !sudo tee % > /dev/null
+
+
 set cursorline
 set so=7
 
@@ -79,9 +95,10 @@ set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 set fileencoding=utf-8
 let helptags=$VIM."/vimfiles/doc"
 set helplang=cn
-language messages zh_CN.utf-8 
-set termencoding = cp936
-set ambiwidth=double
+
+"language messages zh_CN.utf-8 
+
+
 
 set wildmenu
 set wildignore=*.o,*~,*.pyc
@@ -110,7 +127,7 @@ set tm=500
 if has("gui_macvim")
     autocmd GUIEnter * set vb t_vb=
 endif
-set foldcolumn=1
+"set foldcolumn=1
 syntax enable 
 if $COLORTERM == 'gnome-terminal'
     set t_Co=256
@@ -159,7 +176,9 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
 "UI
 set background=dark
-colorscheme one 
+"set background=light
+colorscheme ayu 
+"colorscheme angr
 set guifont=Inconsolata_for_Powerline:h24
 
 
@@ -182,11 +201,6 @@ map <Leader>j <C-W>j
 map <Leader>k <C-W>k
 map <Leader>h <C-W>h
 map <Leader>l <C-W>l
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove 
-map <leader>t<leader> :tabnext 
 map <Leader>T :%s/\s\+$//<CR>
 nmap <leader>F :%s//g<LEFT><LEFT>
 map <Leader>push :!bash ~/dotfiles/scripts/push.sh<CR>
@@ -205,9 +219,16 @@ nnoremap <BS> gg
 noremap gV `[v`]
 map q: :q
 
+
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>t<leader> :tabnext 
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove 
+
+
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-set laststatus=2
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+
 
 " ----------------------------------------------------------------------------
 " 移动选中内容
@@ -270,7 +291,7 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_map = '<c-f>'
 map <leader>ff :CtrlP<cr>
 map <leader>bb :CtrlPBuffer<cr>
-"nnoremap <leader>fr :CtrlPMRU<CR>
+nnoremap <leader>fr :CtrlPMRU<CR>
 silent! nnoremap <unique> <silent> <Leader>ft :CtrlPFiletype<CR>
   let g:ctrlp_custom_ignore = {
     \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
@@ -295,7 +316,7 @@ let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
 nmap <Leader>at :NERDTreeToggle<CR>
 nmap <Leader>fd :NERDTreeFind<CR>
 let NERDTreeShowBookmarks=1
-let NERDTreeWinPos="right"
+let NERDTreeWinPos="left"
 let NERDTreeShowHidden=2
 let NERDTreeMinimalUI=1
 let NERDTreeAutoDeleteBuffer=1
@@ -345,40 +366,17 @@ let g:SuperTabRetainCompletionType=2
 " ----------------------------------------------------------------------------
 " syntastic
 " ----------------------------------------------------------------------------
-"let g:syntastic_warning_symbol='!'
-"let g:syntastic_style_error_symbol='»'
-"let g:syntastic_style_warning_symbol='•'
-"let g:syntastic_check_on_open=0
-"let g:syntastic_enable_highlighting = 0
-"let g:syntastic_javascript_checkers = ['eslint']
-
-
 let g:syntastic_style_error_symbol='»'
-let g:syntastic_error_symbol='✘'
-let g:syntastic_warning_symbol='>'
+let g:syntastic_error_symbol='ㄨ'
+let g:syntastic_warning_symbol='﹗'
 let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq=0
 let g:syntastic_enable_highlighting=1
 let g:syntastic_python_checkers=['pyflakes'] " 
 let g:syntastic_javascript_checkers = ['jsl', 'jshint']
 let g:syntastic_html_checkers=['tidy', 'jshint']
-highlight SyntasticErrorSign guifg=white guibg=black
-
-" to see error location list
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_loc_list_height = 5
-function! ToggleErrors()
-    let old_last_winnr = winnr('$')
-    lclose
-    if old_last_winnr == winnr('$')
-        " Nothing was closed, open syntastic error location panel
-        Errors
-    endif
-endfunction
-nnoremap <Leader>s :call ToggleErrors()<cr>
-nnoremap <Leader>sn :lnext<cr>
-nnoremap <Leader>sp :lprevious<cr>
+highlight SyntasticErrorSign guifg=red guibg=#FFF
+highlight SyntasticWarningSign guifg=red guibg=yellow
 
 " ----------------------------------------------------------------------------
 "gitgutter
@@ -395,7 +393,7 @@ nnoremap <leader>gs :GitGutterToggle<CR>
 " ----------------------------------------------------------------------------
 let tern_show_signature_in_pum = 1
 let tern_show_argument_hints = 'on_hold'
-autocmd FileType javascript nnoremap <leader>d :TernDef<CR>
+"autocmd FileType javascript nnoremap <leader>d :TernDef<CR>
 autocmd FileType javascript setlocal omnifunc=tern#Complete
 
 " ----------------------------------------------------------------------------
@@ -461,30 +459,30 @@ nmap <Leader>bK :call SpacevimKillOtherBuffers()<cr>;
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => lightline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ }
+"let g:lightline = {
+      "\ 'colorscheme': 'wombat',
+      "\ }
 
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ ['mode', 'paste'],
-      \             ['fugitive', 'readonly', 'filename', 'modified'] ],
-      \   'right': [ [ 'lineinfo' ], ['percent'] ]
-      \ },
-      \ 'component': {
-      \   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
-      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-      \ },
-      \ 'component_visible_condition': {
-      \   'readonly': '(&filetype!="help"&& &readonly)',
-      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-      \ },
-      \ 'separator': { 'left': ' ', 'right': ' ' },
-      \ 'subseparator': { 'left': ' ', 'right': ' ' }
-      \ }
+"let g:lightline = {
+      "\ 'colorscheme': 'wombat',
+      "\ 'active': {
+      "\   'left': [ ['mode', 'paste'],
+      "\             ['fugitive', 'readonly', 'filename', 'modified'] ],
+      "\   'right': [ [ 'lineinfo' ], ['percent'] ]
+      "\ },
+      "\ 'component': {
+      "\   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
+      "\   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+      "\   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+      "\ },
+      "\ 'component_visible_condition': {
+      "\   'readonly': '(&filetype!="help"&& &readonly)',
+      "\   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+      "\   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+      "\ },
+      "\ 'separator': { 'left': ' ', 'right': ' ' },
+      "\ 'subseparator': { 'left': ' ', 'right': ' ' }
+      "\ }
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -492,31 +490,16 @@ let g:lightline = {
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
 map <leader>g :Ag 
-vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
-map <leader>cc :botright cope<cr>
-map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
-map <leader>n :cn<cr>
-map <leader>p :cp<cr>
 let g:ackprg = 'ag --nogroup --nocolor --column'
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Vimroom
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:goyo_width=100
-let g:goyo_margin_top = 2
-let g:goyo_margin_bottom = 2
-nnoremap <silent> <leader>z :Goyo<cr>
 
 """"""""""""""""""""""""""""""
 " => MRU plugin
 """"""""""""""""""""""""""""""
-let MRU_Max_Entries = 400
-map <leader>fr :MRU<CR>
+"let MRU_Max_Entries = 400
+"map <leader>fr :MRU<CR>
 "--------------------------------------------------------------------------
 "vim-airline
 "--------------------------------------------------------------------------
-Plugin 'vim-airline'    
 let g:airline_theme="one" 
 let g:airline_powerline_fonts = 1   
 let g:airline#extensions#tabline#enabled = 1
@@ -539,23 +522,17 @@ vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
 
-
-
-vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
-    :<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
-omap s :normal vs<CR>
-
-
 " vp doesn't replace paste buffer
-function! RestoreRegister()
-  let @" = s:restore_reg
-  return ''
-endfunction
-function! s:Repl()
-  let s:restore_reg = @"
-  return "p@=RestoreRegister()<cr>"
-endfunction
-vmap <silent> <expr> p <sid>Repl()
+"function! RestoreRegister()
+  "let @" = s:restore_reg
+  "return ''
+"endfunction
+"function! s:Repl()
+  "let s:restore_reg = @"
+  "return "p@=RestoreRegister()<cr>"
+"endfunction
+"vmap <silent> <expr> p <sid>Repl()
+
 
 nmap <silent> <Leader>llll :!curl -o ./animate.min.css 'http://cdn.bootcss.com/animate.css/3.5.2/animate.min.css'<CR>
 
@@ -566,8 +543,8 @@ nmap <silent> <Leader>llll :!curl -o ./animate.min.css 'http://cdn.bootcss.com/a
 
 
 
-let g:qs_first_occurrence_highlight_color = '#afff5f' " gui vim
-let g:qs_first_occurrence_highlight_color = 155       " terminal vim
+"let g:qs_first_occurrence_highlight_color = '#afff5f' " gui vim
+"let g:qs_first_occurrence_highlight_color = 155       " terminal vim
 
-let g:qs_second_occurrence_highlight_color = '#5fffff'  " gui vim
-let g:qs_second_occurrence_highlight_color = 81         " terminal vim
+"let g:qs_second_occurrence_highlight_color = '#5fffff'  " gui vim
+"let g:qs_second_occurrence_highlight_color = 81         " terminal vim
