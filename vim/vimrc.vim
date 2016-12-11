@@ -4,26 +4,32 @@ call plug#begin('~/.vim/plugged')
 
 "配色
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'  "恢复会话
-Plug 'rakr/vim-one'
-Plug 'ayu-theme/ayu-vim' 
+"Plug 'rakr/vim-one'
+"Plug 'ayu-theme/ayu-vim' 
+"Plug 'josuegaleas/jay'
+Plug 'dracula/vim'
+Plug 'ap/vim-css-color'
 
-Plug 'angr.vim'
-Plug 'vim-scripts/TeTrIs.vim'
+
+"Plug 'angr.vim'
+"Plug 'vim-scripts/TeTrIs.vim'
 
 "Plug 'itchyny/lightline.vim'
 
-Plug 'unblevable/quick-scope'
+"Plug 'unblevable/quick-scope'
 
 Plug 'terryma/vim-multiple-cursors'
 
-Plug 'bling/vim-airline'
+"Plug 'bling/vim-airline'
 
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline-themes'
 
 Plug 'terryma/vim-expand-region'
 
 Plug 'othree/html5.vim'
+
 Plug 'matchit.zip'
+
 Plug 'asins/vimcdoc'
 
 
@@ -32,18 +38,17 @@ Plug 'sirver/ultisnips' "代码片段
 Plug 'honza/vim-snippets' "代码片段
 
 Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
-
-
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }  "补全
 Plug 'Chiel92/vim-autoformat' "自动格式化
 Plug 'szw/vim-maximizer'  "tab最大化窗口
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } 
-
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] } 
+Plug 'isRuslan/vim-es6'
 
-Plug 'posva/vim-vue'
+"Plug 'posva/vim-vue'
 
 "Plug 'vim-scripts/mru.vim'
+Plug 'roman/golden-ratio'
 
 Plug 'scrooloose/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -63,11 +68,11 @@ Plug 'Raimondi/delimitMate' "括号自动完成
 
 """""""""""""""""""""""""""""""""""""""""""""""""
 
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-"Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
-"Plug 'shougo/deoplete.nvim'
-"let g:deoplete#enable_at_startup = 1
+Plug 'shougo/deoplete.nvim'
+let g:deoplete#enable_at_startup = 1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""
@@ -90,7 +95,7 @@ set so=7
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 set termencoding=utf-8
-set encoding=utf-8
+"set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1 
 set fileencoding=utf-8
 let helptags=$VIM."/vimfiles/doc"
@@ -142,7 +147,6 @@ if has("gui_running")
     set t_Co=256
     set guitablabel=%M\ %t
 endif
-set encoding=utf8
 set ffs=unix,dos,mac
 set nobackup
 set nowb
@@ -177,8 +181,10 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 "UI
 set background=dark
 "set background=light
-colorscheme ayu 
+"colorscheme ayu 
+"colorscheme jay
 "colorscheme angr
+color dracula
 set guifont=Inconsolata_for_Powerline:h24
 
 
@@ -289,7 +295,7 @@ let g:user_emmet_expandabbr_key='<d-j>'
 let g:ctrlp_working_path_mode = 0
 
 let g:ctrlp_map = '<c-f>'
-map <leader>ff :CtrlP<cr>
+map <leader>ff :FZF<cr>
 map <leader>bb :CtrlPBuffer<cr>
 nnoremap <leader>fr :CtrlPMRU<CR>
 silent! nnoremap <unique> <silent> <Leader>ft :CtrlPFiletype<CR>
@@ -373,7 +379,7 @@ let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq=0
 let g:syntastic_enable_highlighting=1
 let g:syntastic_python_checkers=['pyflakes'] " 
-let g:syntastic_javascript_checkers = ['jsl', 'jshint']
+let g:syntastic_javascript_checkers = ['jsl', 'jshint', 'es6']
 let g:syntastic_html_checkers=['tidy', 'jshint']
 highlight SyntasticErrorSign guifg=red guibg=#FFF
 highlight SyntasticWarningSign guifg=red guibg=yellow
@@ -459,30 +465,30 @@ nmap <Leader>bK :call SpacevimKillOtherBuffers()<cr>;
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => lightline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let g:lightline = {
-      "\ 'colorscheme': 'wombat',
-      "\ }
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ }
 
-"let g:lightline = {
-      "\ 'colorscheme': 'wombat',
-      "\ 'active': {
-      "\   'left': [ ['mode', 'paste'],
-      "\             ['fugitive', 'readonly', 'filename', 'modified'] ],
-      "\   'right': [ [ 'lineinfo' ], ['percent'] ]
-      "\ },
-      "\ 'component': {
-      "\   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
-      "\   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      "\   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-      "\ },
-      "\ 'component_visible_condition': {
-      "\   'readonly': '(&filetype!="help"&& &readonly)',
-      "\   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-      "\   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-      "\ },
-      "\ 'separator': { 'left': ' ', 'right': ' ' },
-      "\ 'subseparator': { 'left': ' ', 'right': ' ' }
-      "\ }
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ ['mode', 'paste'],
+      \             ['fugitive', 'readonly', 'filename', 'modified'] ],
+      \   'right': [ [ 'lineinfo' ], ['percent'] ]
+      \ },
+      \ 'component': {
+      \   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+      \ },
+      \ 'component_visible_condition': {
+      \   'readonly': '(&filetype!="help"&& &readonly)',
+      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+      \ },
+      \ 'separator': { 'left': ' ', 'right': ' ' },
+      \ 'subseparator': { 'left': ' ', 'right': ' ' }
+      \ }
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -500,7 +506,7 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 "--------------------------------------------------------------------------
 "vim-airline
 "--------------------------------------------------------------------------
-let g:airline_theme="one" 
+let g:airline_theme="jay" 
 let g:airline_powerline_fonts = 1   
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
@@ -543,8 +549,9 @@ nmap <silent> <Leader>llll :!curl -o ./animate.min.css 'http://cdn.bootcss.com/a
 
 
 
-"let g:qs_first_occurrence_highlight_color = '#afff5f' " gui vim
-"let g:qs_first_occurrence_highlight_color = 155       " terminal vim
+let g:qs_first_occurrence_highlight_color = '#afff5f' " gui vim
+let g:qs_first_occurrence_highlight_color = 155       " terminal vim
 
-"let g:qs_second_occurrence_highlight_color = '#5fffff'  " gui vim
-"let g:qs_second_occurrence_highlight_color = 81         " terminal vim
+let g:qs_second_occurrence_highlight_color = '#5fffff'  " gui vim
+let g:qs_second_occurrence_highlight_color = 81         " terminal vim
+

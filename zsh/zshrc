@@ -5,6 +5,8 @@ export ZSH=/Users/iuunhao/.oh-my-zsh
 #ZSH_THEME="sunrise"
 #
 ZSH_THEME="cloud"
+ZSH_THEME="miloshadzic"
+
 
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
@@ -247,13 +249,21 @@ alias tyincang='defaults write com.apple.finder AppleShowAllFiles -bool false'
 
 #Enter the directory
 alias cnew='cd /Users/iuunhao/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic && fedx'
+
 alias cg='cd /Users/iuunhao/Desktop/Github'
+
 alias ohtml='open /Users/iuunhao/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic/mobile/html'
 alias ocss='open /Users/iuunhao/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic/mobile/css'
 alias oimg='open /Users/iuunhao/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic/mobile/images'
 alias opostcss='open /Users/iuunhao/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic/mobile/postcss'
 
 alias browser='browser-sync start --server --directory --files "**/*.css, **/*.html, **/*.js"'
+
+alias h='nvim /etc/hosts'
+alias vim='nvim'
+alias v='nvim'
+
+
 
 
 
