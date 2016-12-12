@@ -10,6 +10,8 @@ Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'  "恢复会话
 Plug 'dracula/vim'
 Plug 'ap/vim-css-color'
 
+Plug 'gelguy/cmd2.vim'
+
 
 "Plug 'angr.vim'
 "Plug 'vim-scripts/TeTrIs.vim'
@@ -506,21 +508,21 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 "--------------------------------------------------------------------------
 "vim-airline
 "--------------------------------------------------------------------------
-let g:airline_theme="jay" 
-let g:airline_powerline_fonts = 1   
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#whitespace#symbol = '!'
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-let g:airline_left_sep = '⮀'
-let g:airline_left_alt_sep = '⮁'
-let g:airline_right_sep = '⮂'
-let g:airline_right_alt_sep = '⮃'
-let g:airline_symbols.branch = '⭠'
-let g:airline_symbols.readonly = '⭤'
+"let g:airline_theme="jay" 
+"let g:airline_powerline_fonts = 1   
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#buffer_nr_show = 1
+"let g:airline#extensions#whitespace#enabled = 0
+"let g:airline#extensions#whitespace#symbol = '!'
+"if !exists('g:airline_symbols')
+    "let g:airline_symbols = {}
+"endif
+"let g:airline_left_sep = '⮀'
+"let g:airline_left_alt_sep = '⮁'
+"let g:airline_right_sep = '⮂'
+"let g:airline_right_alt_sep = '⮃'
+"let g:airline_symbols.branch = '⭠'
+"let g:airline_symbols.readonly = '⭤'
 
 
 
@@ -540,7 +542,7 @@ vmap <C-v> <Plug>(expand_region_shrink)
 "vmap <silent> <expr> p <sid>Repl()
 
 
-nmap <silent> <Leader>llll :!curl -o ./animate.min.css 'http://cdn.bootcss.com/animate.css/3.5.2/animate.min.css'<CR>
+"nmap <silent> <Leader>llll :!curl -o ./animate.min.css 'http://cdn.bootcss.com/animate.css/3.5.2/animate.min.css'<CR>
 
 
 
@@ -549,9 +551,16 @@ nmap <silent> <Leader>llll :!curl -o ./animate.min.css 'http://cdn.bootcss.com/a
 
 
 
-let g:qs_first_occurrence_highlight_color = '#afff5f' " gui vim
-let g:qs_first_occurrence_highlight_color = 155       " terminal vim
+"let g:qs_first_occurrence_highlight_color = '#afff5f' " gui vim
+"let g:qs_first_occurrence_highlight_color = 155       " terminal vim
 
-let g:qs_second_occurrence_highlight_color = '#5fffff'  " gui vim
-let g:qs_second_occurrence_highlight_color = 81         " terminal vim
+"let g:qs_second_occurrence_highlight_color = '#5fffff'  " gui vim
+"let g:qs_second_occurrence_highlight_color = 81         " terminal vim
 
+let g:Cmd2_options = {
+          \ '_complete_ignorecase': 1,
+          \ '_complete_uniq_ignorecase': 0,
+          \ '_complete_fuzzy': 1,
+          \ }
+cmap <expr> <Tab> Cmd2#ext#complete#InContext() ? "\<Plug>(Cmd2Complete)" : "\<Tab>"
+set wildcharm=<Tab>
