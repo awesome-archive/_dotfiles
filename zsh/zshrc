@@ -262,6 +262,7 @@ alias browser='browser-sync start --server --directory --files "**/*.css, **/*.h
 alias h='nvim /etc/hosts'
 alias vim='nvim'
 alias v='nvim'
+alias vh='nvim /Applications/XAMPP/xamppfiles/etc/extra/httpd-vhosts.conf'
 
 
 

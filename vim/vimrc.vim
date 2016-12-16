@@ -5,20 +5,25 @@ call plug#begin('~/.vim/plugged')
 "配色
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'  "恢复会话
 "Plug 'rakr/vim-one'
-"Plug 'ayu-theme/ayu-vim' 
+Plug 'ayu-theme/ayu-vim' 
 "Plug 'josuegaleas/jay'
-Plug 'dracula/vim'
-Plug 'ap/vim-css-color'
+"Plug 'dracula/vim'
+"Plug 'ap/vim-css-color'
+
 
 Plug 'gelguy/cmd2.vim'
+
+
+Plug 'iamcco/go-to-file.vim'
+
+Plug 'majutsushi/tagbar'
 
 
 "Plug 'angr.vim'
 "Plug 'vim-scripts/TeTrIs.vim'
 
-"Plug 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim'
 
-"Plug 'unblevable/quick-scope'
 
 Plug 'terryma/vim-multiple-cursors'
 
@@ -59,7 +64,8 @@ Plug 'endel/ctrlp-filetype.vim' "快速切换文件类型
 Plug 'mileszs/ack.vim'
 Plug 'rking/ag.vim'
 
-Plug 'tpope/vim-fugitive'
+"Plug 'airblade/vim-gitgutter'
+"Plug 'tpope/vim-fugitive'
 Plug 'vim-syntastic/syntastic'
 
 Plug 'scrooloose/nerdcommenter' "快速注释
@@ -73,7 +79,8 @@ Plug 'Raimondi/delimitMate' "括号自动完成
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-Plug 'shougo/deoplete.nvim'
+"Plug 'shougo/deoplete.nvim'
+
 let g:deoplete#enable_at_startup = 1
 
 
@@ -140,7 +147,7 @@ if $COLORTERM == 'gnome-terminal'
     set t_Co=256
 endif
 try
-    colorscheme desert
+    "colorscheme desert
 catch
 endtry
 if has("gui_running")
@@ -181,12 +188,9 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
 
 "UI
-set background=dark
-"set background=light
-"colorscheme ayu 
-"colorscheme jay
-"colorscheme angr
-color dracula
+"set background=dark
+"
+
 set guifont=Inconsolata_for_Powerline:h24
 
 
@@ -564,3 +568,24 @@ let g:Cmd2_options = {
           \ }
 cmap <expr> <Tab> Cmd2#ext#complete#InContext() ? "\<Plug>(Cmd2Complete)" : "\<Tab>"
 set wildcharm=<Tab>
+
+
+
+nmap <Leader>tl :TagbarToggle<CR>
+
+nmap <Leader>gf <Plug>gotofile
+
+
+
+set background=light
+colorscheme ayu 
+
+
+
+"设置输入法
+set iminsert=0
+set imsearch=0
+se imd
+au InsertEnter * se noimd
+au InsertLeave * se imd
+au FocusGained * se imd
