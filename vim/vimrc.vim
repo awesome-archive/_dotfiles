@@ -2,34 +2,33 @@
 
 call plug#begin('~/.vim/plugged')
 
+
 "配色
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'  "恢复会话
-"Plug 'rakr/vim-one'
-Plug 'ayu-theme/ayu-vim' 
-"Plug 'josuegaleas/jay'
-"Plug 'dracula/vim'
-"Plug 'ap/vim-css-color'
+
+Plug 'itchyny/vim-cursorword'
+
+Plug 'liuchengxu/space-vim-dark' "配色
+
+Plug 'easymotion/vim-easymotion'  "跳转
+
+Plug 'mileszs/ack.vim'
+Plug 'rking/ag.vim'
+
+Plug 'gelguy/cmd2.vim'  "搜索补全
 
 
-Plug 'gelguy/cmd2.vim'
+"Plug 'majutsushi/tagbar'
 
-
-Plug 'iamcco/go-to-file.vim'
-
-Plug 'majutsushi/tagbar'
-
-
-"Plug 'angr.vim'
-"Plug 'vim-scripts/TeTrIs.vim'
-
-Plug 'itchyny/lightline.vim'
-
+"Plug 'itchyny/lightline.vim'
 
 Plug 'terryma/vim-multiple-cursors'
 
-"Plug 'bling/vim-airline'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-"Plug 'vim-airline/vim-airline-themes'
+Plug 'ybian/smartim'
+
 
 Plug 'terryma/vim-expand-region'
 
@@ -39,52 +38,55 @@ Plug 'matchit.zip'
 
 Plug 'asins/vimcdoc'
 
-
 Plug 'sirver/ultisnips' "代码片段
 
 Plug 'honza/vim-snippets' "代码片段
 
 Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }  "补全
-Plug 'Chiel92/vim-autoformat' "自动格式化
-Plug 'szw/vim-maximizer'  "tab最大化窗口
+
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } 
+
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] } 
+
 Plug 'isRuslan/vim-es6'
+
+Plug 'vim-syntastic/syntastic'
+
+Plug 'Chiel92/vim-autoformat' "自动格式化
 
 "Plug 'posva/vim-vue'
 
-"Plug 'vim-scripts/mru.vim'
-Plug 'roman/golden-ratio'
-
 Plug 'scrooloose/nerdtree'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'endel/ctrlp-filetype.vim' "快速切换文件类型
+Plug 'vim-scripts/mru.vim'
+Plug 'roman/golden-ratio'
+Plug 'szw/vim-maximizer'  "tab最大化窗口
 
-Plug 'mileszs/ack.vim'
-Plug 'rking/ag.vim'
+
+"Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'endel/ctrlp-filetype.vim' "快速切换文件类型
+
 
 "Plug 'airblade/vim-gitgutter'
 "Plug 'tpope/vim-fugitive'
-Plug 'vim-syntastic/syntastic'
 
 Plug 'scrooloose/nerdcommenter' "快速注释
 Plug 'iamcco/dict.vim'  "翻译
 
 Plug 'ervandew/supertab'  "tab增强
+
 Plug 'Raimondi/delimitMate' "括号自动完成
 
-"""""""""""""""""""""""""""""""""""""""""""""""""
-
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-
-"Plug 'shougo/deoplete.nvim'
-
-let g:deoplete#enable_at_startup = 1
+Plug 'junegunn/fzf',             { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'tweekmonster/fzf-filemru'
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""
+
+Plug 'haya14busa/incsearch.vim'
+Plug 'haya14busa/incsearch-easymotion.vim'
+
 
 call plug#end()
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
@@ -92,17 +94,17 @@ silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 set history=500
 filetype plugin on
 filetype indent on
+
 set autoread
 let mapleader = " "
 let g:mapleader = " "
-nmap <leader>w :w!<cr>
+
 
 
 set cursorline
+
 set so=7
 
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
 set termencoding=utf-8
 "set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1 
@@ -110,17 +112,12 @@ set fileencoding=utf-8
 let helptags=$VIM."/vimfiles/doc"
 set helplang=cn
 
-"language messages zh_CN.utf-8 
-
 
 
 set wildmenu
+
 set wildignore=*.o,*~,*.pyc
-if has("win16") || has("win32")
-    set wildignore+=.git\*,.hg\*,.svn\*
-else
-    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
-endif
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 set ruler
 set cmdheight=1
 set hid
@@ -138,24 +135,7 @@ set noerrorbells
 set novisualbell
 set t_vb=
 set tm=500
-if has("gui_macvim")
-    autocmd GUIEnter * set vb t_vb=
-endif
-"set foldcolumn=1
 syntax enable 
-if $COLORTERM == 'gnome-terminal'
-    set t_Co=256
-endif
-try
-    "colorscheme desert
-catch
-endtry
-if has("gui_running")
-    set guioptions-=T
-    set guioptions-=e
-    set t_Co=256
-    set guitablabel=%M\ %t
-endif
 set ffs=unix,dos,mac
 set nobackup
 set nowb
@@ -178,10 +158,9 @@ set guioptions-=T
 set breakindent
 
 set relativenumber
-set ruler
-set noshowmode
-"autocmd InsertLeave * :set relativenumber
-"autocmd InsertEnter * :set norelativenumber
+
+autocmd InsertLeave * :set number
+autocmd InsertEnter * :set number
 
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
@@ -189,10 +168,10 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
 "UI
 "set background=dark
-"
+colorscheme space-vim-dark
 
 set guifont=Inconsolata_for_Powerline:h24
-
+"set guifont=iosevka:h24
 
 set clipboard=unnamed
 
@@ -263,14 +242,13 @@ xnoremap > >gv
 " ----------------------------------------------------------------------------
 "au BufWrite * :Autoformat
 let g:autoformat_autoindent = 0
-let g:autoformat_retab = 0
 let g:autoformat_remove_trailing_spaces = 0
+let g:autoformat_retab = 0
 " ----------------------------------------------------------------------------
 " dict.vim
 " ----------------------------------------------------------------------------
 let g:api_key = "1932136763"
 let g:keyfrom = "aioiyuuko"
-nmap <silent> <Leader>d <Plug>DictSearch
 vmap <silent> <Leader>d <Plug>DictVSearch
 nmap <silent> <Leader><Leader>r <Plug>DictRSearch
 vmap <silent> <Leader><Leader>r <Plug>DictRVSearch
@@ -298,29 +276,26 @@ let g:user_emmet_expandabbr_key='<d-j>'
 """"""""""""""""""""""""""""""
 " => CTRL-P
 """"""""""""""""""""""""""""""
-let g:ctrlp_working_path_mode = 0
+"let g:ctrlp_working_path_mode = 0
 
-let g:ctrlp_map = '<c-f>'
-map <leader>ff :FZF<cr>
-map <leader>bb :CtrlPBuffer<cr>
-nnoremap <leader>fr :CtrlPMRU<CR>
-silent! nnoremap <unique> <silent> <Leader>ft :CtrlPFiletype<CR>
-  let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
-    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
-    \ }
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.png,*.jpg,*.jpeg,*.gif " MacOSX/Linux
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.pyc,*.png,*.jpg,*.gif  " Windows
-let g:ctrlp_working_path_mode=0
-let g:ctrlp_match_window_bottom=1
-let g:ctrlp_max_height=15
-let g:ctrlp_match_window_reversed=0
-let g:ctrlp_mruf_max=500
-let g:ctrlp_follow_symlinks=1
-let g:ctrlp_extensions = ['filetype']
+"let g:ctrlp_map = '<c-f>'
+"silent! nnoremap <unique> <silent> <Leader>ft :CtrlPFiletype<CR>
+  "let g:ctrlp_custom_ignore = {
+    "\ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+    "\ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
+    "\ }
+"set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.png,*.jpg,*.jpeg,*.gif " MacOSX/Linux
+"set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.pyc,*.png,*.jpg,*.gif  " Windows
+"let g:ctrlp_working_path_mode=0
+"let g:ctrlp_match_window_bottom=1
+"let g:ctrlp_max_height=15
+"let g:ctrlp_match_window_reversed=0
+"let g:ctrlp_mruf_max=500
+"let g:ctrlp_follow_symlinks=1
+"let g:ctrlp_extensions = ['filetype']
 
-let g:ctrlp_max_height = 20
-let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
+"let g:ctrlp_max_height = 20
+"let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
 
 " ----------------------------------------------------------------------------
 " NERDT
@@ -508,26 +483,7 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 " => MRU plugin
 """"""""""""""""""""""""""""""
 "let MRU_Max_Entries = 400
-"map <leader>fr :MRU<CR>
-"--------------------------------------------------------------------------
-"vim-airline
-"--------------------------------------------------------------------------
-"let g:airline_theme="jay" 
-"let g:airline_powerline_fonts = 1   
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#buffer_nr_show = 1
-"let g:airline#extensions#whitespace#enabled = 0
-"let g:airline#extensions#whitespace#symbol = '!'
-"if !exists('g:airline_symbols')
-    "let g:airline_symbols = {}
-"endif
-"let g:airline_left_sep = '⮀'
-"let g:airline_left_alt_sep = '⮁'
-"let g:airline_right_sep = '⮂'
-"let g:airline_right_alt_sep = '⮃'
-"let g:airline_symbols.branch = '⭠'
-"let g:airline_symbols.readonly = '⭤'
-
+map <leader>fr :MRU<CR>
 
 
 vmap v <Plug>(expand_region_expand)
@@ -577,15 +533,48 @@ nmap <Leader>gf <Plug>gotofile
 
 
 
-set background=light
-colorscheme ayu 
 
 
 
-"设置输入法
-set iminsert=0
-set imsearch=0
-se imd
-au InsertEnter * se noimd
-au InsertLeave * se imd
-au FocusGained * se imd
+map <leader>ff :FilesMru --tiebreak=end<cr>
+map <leader>bb :Buffers<cr>
+map <leader>fw :Windows<cr>
+
+"nnoremap <leader>fr :CtrlPMRU<CR>
+"
+
+map <Leader> <Plug>(easymotion-prefix)
+
+map  <Leader><Leader> <Plug>(easymotion-bd-w)
+nmap <Leader><Leader> <Plug>(easymotion-overwin-w)
+
+
+
+
+
+
+let g:airline_theme="violet" 
+"let g:airline_powerline_fonts = 1   
+let g:airline#extensions#tabline#enabled = 0
+let g:airline#extensions#tabline#buffer_nr_show = 0
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#whitespace#symbol = '!'
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = '⭠'
+let g:airline_symbols.readonly = '⭤'
+
+
+
+
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+map z/ <Plug>(incsearch-easymotion-/)
+map z? <Plug>(incsearch-easymotion-?)
+map zg/ <Plug>(incsearch-easymotion-stay)
