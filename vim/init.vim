@@ -60,7 +60,11 @@ Plug 'ap/vim-css-color'
 Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+<<<<<<< HEAD:vim/init.vim
+Plug 'tweekmonster/fzf-filemru'
+=======
 "Plug 'tweekmonster/fzf-filemru'
+>>>>>>> 5e54bb370bc6a99f74540851d3bd919cb97a615c:vim/vimrc.vim
 
 "git
 "Plug 'airblade/vim-gitgutter'
@@ -231,6 +235,7 @@ function! ViewInBrowser(name)
     endif
 endfunction
 nmap <Leader>o :call ViewInBrowser("cr")<cr>
+<<<<<<< HEAD:vim/init.vim
 
 " ----------------------------------------------------------------------------
 "关闭其他缓存区
@@ -241,6 +246,18 @@ function! SpacevimKillOtherBuffers()
     let buffer = bufnr('%')
     let last_buffer = bufnr('$')
 
+=======
+
+" ----------------------------------------------------------------------------
+"关闭其他缓存区
+" ----------------------------------------------------------------------------
+function! SpacevimKillOtherBuffers()
+  if confirm('Killing all buffers except "'. @% . '"?')
+    " see https://github.com/vim-scripts/BufOnly.vim/blob/master/plugin/BufOnly.vim
+    let buffer = bufnr('%')
+    let last_buffer = bufnr('$')
+
+>>>>>>> 5e54bb370bc6a99f74540851d3bd919cb97a615c:vim/vimrc.vim
     let delete_count = 0
     let n = 1
     while n <= last_buffer
