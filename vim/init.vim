@@ -3,7 +3,10 @@
 """""""""""""
 call plug#begin('~/.config/nvim/plugged')
 
+"配色
 Plug 'atweiden/vim-colors-behelit'
+Plug 'ajh17/Spacegray.vim'
+Plug 'morhetz/gruvbox'
 
 "会话
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
@@ -14,8 +17,8 @@ Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 "搜索
-Plug 'mileszs/ack.vim'
-Plug 'rking/ag.vim'
+"Plug 'mileszs/ack.vim'
+"Plug 'rking/ag.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
 "Plug 'gelguy/cmd2.vim'
@@ -40,9 +43,9 @@ Plug 'Raimondi/delimitMate'
 Plug 'terryma/vim-expand-region'
 "Plug 'kien/rainbow_parentheses.vim'
 "Plug 'Yggdroot/indentLine'
-Plug 'bronson/vim-trailing-whitespace'
+"Plug 'bronson/vim-trailing-whitespace'
 Plug 'vim-scripts/YankRing.vim'
-Plug 'sjl/gundo.vim' 
+Plug 'sjl/gundo.vim'
 "语言
 Plug 'othree/html5.vim'
 Plug 'matchit.zip'
@@ -51,7 +54,7 @@ Plug 'matchit.zip'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] }
-Plug 'isRuslan/vim-es6'
+"Plug 'isRuslan/vim-es6'
 "Plug 'vim-syntastic/syntastic'
 Plug 'ap/vim-css-color'
 "Plug 'posva/vim-vue'
@@ -60,15 +63,11 @@ Plug 'ap/vim-css-color'
 Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-<<<<<<< HEAD:vim/init.vim
 Plug 'tweekmonster/fzf-filemru'
-=======
-"Plug 'tweekmonster/fzf-filemru'
->>>>>>> 5e54bb370bc6a99f74540851d3bd919cb97a615c:vim/vimrc.vim
 
 "git
-"Plug 'airblade/vim-gitgutter'
-"Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
@@ -138,16 +137,19 @@ set relativenumber
 "autocmd InsertLeave * :set relativenumber
 "autocmd InsertEnter * :set number
 
-"autocmd InsertLeave * se nocul
-"autocmd InsertEnter * se cul
+autocmd InsertLeave * se nocul
+autocmd InsertEnter * se cul
 
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
 "UI设置
+"set t_Co=256
 set background=dark
+"set background=light
 "colorscheme space-vim-dark
-colorscheme behelit
+colorscheme gruvbox
+
 "set guifont=Inconsolata_for_Powerline:h24
 
 """""""""""""
@@ -182,8 +184,8 @@ vnoremap <silent> y y`]
 vnoremap <silent> p p`]
 nnoremap <silent> p p`]
 
-nnoremap <CR> <C-d>
-nnoremap <BS> <C-u>
+nnoremap <CR> G
+nnoremap <BS> gg
 
 noremap gV `[v`]
 map q: :q
@@ -193,6 +195,7 @@ map <leader>to :tabonly<cr>
 map <leader>t<leader> :tabnext
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove
+
 
 nnoremap <tab>   <c-w>w
 
@@ -235,7 +238,6 @@ function! ViewInBrowser(name)
     endif
 endfunction
 nmap <Leader>o :call ViewInBrowser("cr")<cr>
-<<<<<<< HEAD:vim/init.vim
 
 " ----------------------------------------------------------------------------
 "关闭其他缓存区
@@ -246,18 +248,6 @@ function! SpacevimKillOtherBuffers()
     let buffer = bufnr('%')
     let last_buffer = bufnr('$')
 
-=======
-
-" ----------------------------------------------------------------------------
-"关闭其他缓存区
-" ----------------------------------------------------------------------------
-function! SpacevimKillOtherBuffers()
-  if confirm('Killing all buffers except "'. @% . '"?')
-    " see https://github.com/vim-scripts/BufOnly.vim/blob/master/plugin/BufOnly.vim
-    let buffer = bufnr('%')
-    let last_buffer = bufnr('$')
-
->>>>>>> 5e54bb370bc6a99f74540851d3bd919cb97a615c:vim/vimrc.vim
     let delete_count = 0
     let n = 1
     while n <= last_buffer
@@ -407,29 +397,12 @@ autocmd FileType javascript setlocal omnifunc=tern#Complete
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Ag
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
-map <leader>g :Ag
-let g:ackprg = 'ag --nogroup --nocolor --column'
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vim-expand-region
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => cmd2
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let g:Cmd2_options = {
-          "\ '_complete_ignorecase': 1,
-          "\ '_complete_uniq_ignorecase': 0,
-          "\ '_complete_fuzzy': 1,
-          "\ }
-"cmap <expr> <Tab> Cmd2#ext#complete#InContext() ? "\<Plug>(Cmd2Complete)" : "\<Tab>"
-"set wildcharm=<Tab>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => fzf
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -455,24 +428,6 @@ map  <Leader><Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => airline
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:airline_theme="violet"
-let g:airline#extensions#tabline#enabled = 0
-let g:airline#extensions#tabline#buffer_nr_show = 0
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#whitespace#symbol = '!'
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => incsearch
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map / <Plug>(incsearch-easymotion-/)
@@ -484,3 +439,20 @@ map g/ <Plug>(incsearch-easymotion-stay)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>fh :GundoToggle<cr>
 
+"let g:spacegray_italicize_comments = 1
+"let g:spacegray_underline_search = 1
+
+let g:airline_theme="gruvbox" 
+let g:airline_powerline_fonts = 1  
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#whitespace#symbol = '!'
+let g:airline_left_sep = '⮀'
+let g:airline_left_alt_sep = '⮁'
+let g:airline_right_sep = '⮂'
+let g:airline_right_alt_sep = '⮃'
+let g:airline_symbols.branch = '⭠'
+let g:airline_symbols.readonly = '⭤'
