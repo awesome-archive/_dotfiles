@@ -247,6 +247,10 @@ alias tyanshi='sudo shutdown -h 20:00'
 alias txianshi='defaults write com.apple.finder AppleShowAllFiles -bool true'
 alias tyincang='defaults write com.apple.finder AppleShowAllFiles -bool false'
 
+
+alias tubiaoyincang = 'defaults write com.apple.finder CreateDesktop -bool false; killall Finder'
+alias tubiaoxianshi = 'defaults write com.apple.finder CreateDesktop -bool true; killall Finder'
+
 #Enter the directory
 alias cnew='cd /Users/iuunhao/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic && fedx'
 

@@ -1,12 +1,18 @@
 """""""""""""
 "  插件配置
 """""""""""""
-call plug#begin('~/.config/nvim/plugged')
+call plug#begin('~/.vim/plugged')
+
+
+
+Plug 'sjbach/lusty'
+
 
 "配色
 Plug 'atweiden/vim-colors-behelit'
 Plug 'ajh17/Spacegray.vim'
 Plug 'morhetz/gruvbox'
+
 
 "会话
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
@@ -30,7 +36,7 @@ Plug 'terryma/vim-multiple-cursors'
 
 "辅助
 "Plug 'ybian/smartim'
-"Plug 'asins/vimcdoc'
+Plug 'asins/vimcdoc'
 Plug 'Chiel92/vim-autoformat'
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
@@ -43,9 +49,12 @@ Plug 'Raimondi/delimitMate'
 Plug 'terryma/vim-expand-region'
 "Plug 'kien/rainbow_parentheses.vim'
 "Plug 'Yggdroot/indentLine'
-"Plug 'bronson/vim-trailing-whitespace'
+Plug 'bronson/vim-trailing-whitespace'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'sjl/gundo.vim'
+
+Plug 'nathanaelkane/vim-command-w'
+
 "语言
 Plug 'othree/html5.vim'
 Plug 'matchit.zip'
@@ -55,15 +64,17 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] }
 "Plug 'isRuslan/vim-es6'
-"Plug 'vim-syntastic/syntastic'
+Plug 'vim-syntastic/syntastic'
 Plug 'ap/vim-css-color'
 "Plug 'posva/vim-vue'
+Plug 'Junza/Spink'
 
 "文件操作
 Plug 'scrooloose/nerdtree'
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'tweekmonster/fzf-filemru'
+"Plug 'junegunn/fzf.vim'
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"Plug 'tweekmonster/fzf-filemru'
+Plug 'kien/ctrlp.vim'
 
 "git
 Plug 'airblade/vim-gitgutter'
@@ -150,7 +161,9 @@ set background=dark
 "colorscheme space-vim-dark
 colorscheme gruvbox
 
-"set guifont=Inconsolata_for_Powerline:h24
+set guifont=Inconsolata_for_Powerline:h24
+"set guifont=FiraMono-Regular:h24
+
 
 """""""""""""
 "  默认快捷键设置
@@ -368,14 +381,14 @@ let g:SuperTabRetainCompletionType=2
 " ----------------------------------------------------------------------------
 " syntastic
 " ----------------------------------------------------------------------------
-"let g:syntastic_style_error_symbol='»'
-"let g:syntastic_error_symbol='ㄨ'
-"let g:syntastic_warning_symbol='﹗'
-"let g:syntastic_check_on_open=0
-"let g:syntastic_check_on_wq=0
-"let g:syntastic_enable_highlighting=1
-"let g:syntastic_javascript_checkers = ['jsl', 'jshint', 'es6']
-"let g:syntastic_html_checkers=['tidy', 'jshint']
+let g:syntastic_style_error_symbol='»'
+let g:syntastic_error_symbol='ㄨ'
+let g:syntastic_warning_symbol='﹗'
+let g:syntastic_check_on_open=0
+let g:syntastic_check_on_wq=0
+let g:syntastic_enable_highlighting=1
+let g:syntastic_javascript_checkers = ['jsl', 'jshint', 'es6']
+let g:syntastic_html_checkers=['tidy', 'jshint']
 
 " ----------------------------------------------------------------------------
 "gitgutter
@@ -406,19 +419,19 @@ vmap <C-v> <Plug>(expand_region_shrink)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => fzf
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>ff :FZF<cr>
-map <leader>bb :Buffers<cr>
-map <leader>fw :Windows<cr>
-map <leader>fr :History<cr>
-map <leader>spp :Snippets<cr>
-map <leader>ft :Filetypes<cr>
-map <leader>he :Helptags<cr>
-map <leader>ma :Marks<cr>
-map <leader>ta :BTags<cr>
-map <leader>co :Colors<cr>
-map <leader>jk :BLines<cr>
-map <leader>kl :Lines<cr>
-map <leader>tl :Tags<cr>
+"map <leader>ff :FZF<cr>
+"map <leader>bb :Buffers<cr>
+"map <leader>fw :Windows<cr>
+"map <leader>fr :History<cr>
+""map <leader>spp :Snippets<cr>
+"map <leader>ft :Filetypes<cr>
+""map <leader>he :Helptags<cr>
+"map <leader>ma :Marks<cr>
+"map <leader>ta :BTags<cr>
+""map <leader>co :Colors<cr>
+"map <leader>jk :BLines<cr>
+"map <leader>kl :Lines<cr>
+""map <leader>tl :Tags<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => easymotion
@@ -442,14 +455,53 @@ map <leader>fh :GundoToggle<cr>
 "let g:spacegray_italicize_comments = 1
 "let g:spacegray_underline_search = 1
 
+
+""""""""""""""""""""""""""""""
+" => CTRL-P
+""""""""""""""""""""""""""""""
+let g:ctrlp_working_path_mode = 0
+
+let g:ctrlp_map = '<c-f>'
+map <leader>ff :CtrlP<cr>
+map <leader>bb :CtrlPBuffer<cr>
+nnoremap <leader>fr :CtrlPMRU<CR>
+silent! nnoremap <unique> <silent> <Leader>ft :CtrlPFiletype<CR>
+  let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
+    \ }
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.png,*.jpg,*.jpeg,*.gif " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.pyc,*.png,*.jpg,*.gif  " Windows
+let g:ctrlp_working_path_mode=0
+let g:ctrlp_match_window_bottom=1
+let g:ctrlp_max_height=15
+let g:ctrlp_match_window_reversed=0
+let g:ctrlp_mruf_max=500
+let g:ctrlp_follow_symlinks=1
+let g:ctrlp_extensions = ['filetype']
+
+let g:ctrlp_max_height = 20
+let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
+
+
+
+macmenu &File.Close key=<nop>
+nmap <D-w> :CommandW<CR>
+imap <D-w> <Esc>:CommandW<CR>
+
+
+"--------------------------------------------------------------------------
+"vim-airline
+"--------------------------------------------------------------------------
 let g:airline_theme="gruvbox" 
-let g:airline_powerline_fonts = 1  
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline_powerline_fonts = 1   
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#symbol = '!'
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
 let g:airline_left_sep = '⮀'
 let g:airline_left_alt_sep = '⮁'
 let g:airline_right_sep = '⮂'
