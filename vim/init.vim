@@ -40,8 +40,8 @@ Plug 'asins/vimcdoc'
 Plug 'Chiel92/vim-autoformat'
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'roman/golden-ratio'
-"Plug 'szw/vim-maximizer'
+"Plug 'roman/golden-ratio'
+Plug 'szw/vim-maximizer'
 Plug 'scrooloose/nerdcommenter'
 Plug 'iamcco/dict.vim'
 Plug 'ervandew/supertab'
@@ -161,7 +161,7 @@ set background=dark
 "colorscheme space-vim-dark
 colorscheme gruvbox
 
-set guifont=Inconsolata_for_Powerline:h24
+set guifont=Inconsolata_for_Powerline:h30
 "set guifont=FiraMono-Regular:h24
 
 
@@ -210,7 +210,7 @@ map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove
 
 
-nnoremap <tab>   <c-w>w
+"nnoremap <tab>   <c-w>w
 
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
@@ -318,7 +318,7 @@ let g:UltiSnipsEditSplit="vertical"
 " ----------------------------------------------------------------------------
 " vim-maximizer
 " ----------------------------------------------------------------------------
-"nnoremap <tab> :MaximizerToggle<CR>
+nnoremap <tab> :MaximizerToggle<CR>
 
 " ----------------------------------------------------------------------------
 " emmet
@@ -493,8 +493,8 @@ imap <D-w> <Esc>:CommandW<CR>
 "--------------------------------------------------------------------------
 "vim-airline
 "--------------------------------------------------------------------------
-let g:airline_theme="gruvbox" 
-let g:airline_powerline_fonts = 1   
+let g:airline_theme="gruvbox"
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#whitespace#enabled = 0
@@ -508,3 +508,10 @@ let g:airline_right_sep = '⮂'
 let g:airline_right_alt_sep = '⮃'
 let g:airline_symbols.branch = '⭠'
 let g:airline_symbols.readonly = '⭤'
+
+
+
+nmap <Leader>hv :e /Applications/XAMPP/xamppfiles/etc/extra/httpd-vhosts.conf<CR>
+nmap <Leader>hh :e /etc/hosts<CR>
+
+
