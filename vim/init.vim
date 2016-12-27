@@ -3,28 +3,18 @@
 """""""""""""
 call plug#begin('~/.vim/plugged')
 
-
-
-Plug 'sjbach/lusty'
-
-
-"配色
-Plug 'atweiden/vim-colors-behelit'
-Plug 'ajh17/Spacegray.vim'
-Plug 'morhetz/gruvbox'
-
-
 "会话
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 
 "UI
 Plug 'liuchengxu/space-vim-dark'
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
+Plug 'ajh17/Spacegray.vim'
+Plug 'morhetz/gruvbox'
 
 "搜索
-"Plug 'mileszs/ack.vim'
-"Plug 'rking/ag.vim'
+Plug 'mileszs/ack.vim'
+Plug 'rking/ag.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
 "Plug 'gelguy/cmd2.vim'
@@ -52,18 +42,20 @@ Plug 'terryma/vim-expand-region'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'sjl/gundo.vim'
+Plug 'tpope/vim-repeat'
+Plug 'mbriggs/mark.vim'
+Plug 'mattesgroeger/vim-bookmarks'
 
-Plug 'nathanaelkane/vim-command-w'
 
 "语言
 Plug 'othree/html5.vim'
 Plug 'matchit.zip'
-"Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
-"Plug 'pangloss/vim-javascript'
+Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+Plug 'pangloss/vim-javascript'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] }
-"Plug 'isRuslan/vim-es6'
+Plug 'isRuslan/vim-es6'
 Plug 'vim-syntastic/syntastic'
 Plug 'ap/vim-css-color'
 "Plug 'posva/vim-vue'
@@ -75,6 +67,8 @@ Plug 'scrooloose/nerdtree'
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "Plug 'tweekmonster/fzf-filemru'
 Plug 'kien/ctrlp.vim'
+Plug 'endel/ctrlp-filetype.vim'
+
 
 "git
 Plug 'airblade/vim-gitgutter'
@@ -147,7 +141,7 @@ set matchtime=5
 set relativenumber
 "autocmd InsertLeave * :set relativenumber
 "autocmd InsertEnter * :set number
-
+se nocul
 autocmd InsertLeave * se nocul
 autocmd InsertEnter * se cul
 
@@ -159,9 +153,9 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 set background=dark
 "set background=light
 "colorscheme space-vim-dark
-colorscheme gruvbox
+colorscheme Spacegray
 
-set guifont=Inconsolata_for_Powerline:h30
+set guifont=Inconsolata_for_Powerline:h20
 "set guifont=FiraMono-Regular:h24
 
 
@@ -341,7 +335,7 @@ let NERDTreeDirArrows=2
 let NERDTreeHighlightCursorline=1
 let g:NERDTreeMapOpenSplit = 's'
 let g:NERDTreeMapOpenVSplit = 'v'
-let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$', '\~$', '\.pyc$', '\.swp$']
+let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$', '\~$', '\.pyc$', '\.swp$', '\.DS_Store']
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | end
 
 " ----------------------------------------------------------------------------
@@ -464,11 +458,12 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_map = '<c-f>'
 map <leader>ff :CtrlP<cr>
 map <leader>bb :CtrlPBuffer<cr>
+let g:ctrlp_max_depth = 100
 nnoremap <leader>fr :CtrlPMRU<CR>
 silent! nnoremap <unique> <silent> <Leader>ft :CtrlPFiletype<CR>
   let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
-    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
+    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm|Trash)$',
+    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc|DS_Store)$',
     \ }
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.png,*.jpg,*.jpeg,*.gif " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.pyc,*.png,*.jpg,*.gif  " Windows
@@ -480,38 +475,37 @@ let g:ctrlp_mruf_max=500
 let g:ctrlp_follow_symlinks=1
 let g:ctrlp_extensions = ['filetype']
 
-let g:ctrlp_max_height = 20
+let g:ctrlp_max_height = 50
 let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
 
 
 
-macmenu &File.Close key=<nop>
+"macmenu &File.Close key=<nop>
 nmap <D-w> :CommandW<CR>
 imap <D-w> <Esc>:CommandW<CR>
 
 
-"--------------------------------------------------------------------------
-"vim-airline
-"--------------------------------------------------------------------------
-let g:airline_theme="gruvbox"
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#whitespace#symbol = '!'
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-let g:airline_left_sep = '⮀'
-let g:airline_left_alt_sep = '⮁'
-let g:airline_right_sep = '⮂'
-let g:airline_right_alt_sep = '⮃'
-let g:airline_symbols.branch = '⭠'
-let g:airline_symbols.readonly = '⭤'
 
 
 
 nmap <Leader>hv :e /Applications/XAMPP/xamppfiles/etc/extra/httpd-vhosts.conf<CR>
 nmap <Leader>hh :e /etc/hosts<CR>
+nmap <Leader>to :!open . & webpack -d -w<CR>
+
+
+
+let g:lightline = {
+      \ 'colorscheme': 'powerline',
+      \ 'component': {
+      \   'readonly': '%{&readonly?"⭤":""}',
+      \ }
+      \ }
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  Bookmark
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+highlight BookmarkSign ctermbg=NONE ctermfg=160
+highlight BookmarkLine ctermbg=194 ctermfg=NONE
+let g:bookmark_highlight_lines = 1
 
 

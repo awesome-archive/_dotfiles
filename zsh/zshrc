@@ -3,9 +3,7 @@ export ZSH=/Users/iuunhao/.oh-my-zsh
 #ZSH_THEME="bureau"
 #ZSH_THEME="kolo"
 #ZSH_THEME="sunrise"
-#
-ZSH_THEME="cloud"
-ZSH_THEME="miloshadzic"
+ZSH_THEME="robbyrussell"
 
 
 plugins=(git)
@@ -214,7 +212,6 @@ alias la='ls -a'
 alias pacman='sudo pacman-color'
 alias p='sudo pacman-color'
 alias y='yaourt'
-alias h='htop'
 alias cls='clear'
 
 alias mkdir='mkdir -p'
@@ -238,6 +235,10 @@ alias gst='git status'
 alias glg='git log --pretty=format:"%h %s" --graph'
 alias gre='git reset --hard HEAD~1'
 
+alias h='vim /etc/hosts'
+alias v='vim'
+alias vh='vim /Applications/XAMPP/xamppfiles/etc/extra/httpd-vhosts.conf'
+alias web='webpack -d -w'
 
 
 alias tchongqi='sudo shutdown -r now'
@@ -248,8 +249,7 @@ alias txianshi='defaults write com.apple.finder AppleShowAllFiles -bool true'
 alias tyincang='defaults write com.apple.finder AppleShowAllFiles -bool false'
 
 
-alias tubiaoyincang = 'defaults write com.apple.finder CreateDesktop -bool false; killall Finder'
-alias tubiaoxianshi = 'defaults write com.apple.finder CreateDesktop -bool true; killall Finder'
+
 
 #Enter the directory
 alias cnew='cd /Users/iuunhao/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic && fedx'
@@ -263,11 +263,6 @@ alias opostcss='open /Users/iuunhao/Desktop/Qianyi/static.qianyilc.com/trunk/FED
 
 alias browser='browser-sync start --server --directory --files "**/*.css, **/*.html, **/*.js"'
 
-alias h='nvim /etc/hosts'
-alias vim='nvim'
-alias v='nvim'
-alias vh='nvim /Applications/XAMPP/xamppfiles/etc/extra/httpd-vhosts.conf'
-alias w='webpack -d -w'
 
 
 
