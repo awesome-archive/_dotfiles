@@ -63,11 +63,11 @@ Plug 'Junza/Spink'
 
 "文件操作
 Plug 'scrooloose/nerdtree'
-"Plug 'junegunn/fzf.vim'
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-"Plug 'tweekmonster/fzf-filemru'
-Plug 'kien/ctrlp.vim'
-Plug 'endel/ctrlp-filetype.vim'
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'tweekmonster/fzf-filemru'
+"Plug 'kien/ctrlp.vim'
+"Plug 'endel/ctrlp-filetype.vim'
 
 
 "git
@@ -413,19 +413,19 @@ vmap <C-v> <Plug>(expand_region_shrink)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => fzf
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"map <leader>ff :FZF<cr>
-"map <leader>bb :Buffers<cr>
-"map <leader>fw :Windows<cr>
-"map <leader>fr :History<cr>
-""map <leader>spp :Snippets<cr>
-"map <leader>ft :Filetypes<cr>
-""map <leader>he :Helptags<cr>
-"map <leader>ma :Marks<cr>
-"map <leader>ta :BTags<cr>
-""map <leader>co :Colors<cr>
-"map <leader>jk :BLines<cr>
-"map <leader>kl :Lines<cr>
-""map <leader>tl :Tags<cr>
+map <leader>ff :FZF<cr>
+map <leader>bb :Buffers<cr>
+map <leader>fw :Windows<cr>
+map <leader>fr :History<cr>
+"map <leader>spp :Snippets<cr>
+map <leader>ft :Filetypes<cr>
+"map <leader>he :Helptags<cr>
+map <leader>ma :Marks<cr>
+map <leader>ta :BTags<cr>
+"map <leader>co :Colors<cr>
+map <leader>jk :BLines<cr>
+map <leader>kl :Lines<cr>
+"map <leader>tl :Tags<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => easymotion
@@ -453,30 +453,30 @@ map <leader>fh :GundoToggle<cr>
 """"""""""""""""""""""""""""""
 " => CTRL-P
 """"""""""""""""""""""""""""""
-let g:ctrlp_working_path_mode = 0
+"let g:ctrlp_working_path_mode = 0
 
-let g:ctrlp_map = '<c-f>'
-map <leader>ff :CtrlP<cr>
-map <leader>bb :CtrlPBuffer<cr>
-let g:ctrlp_max_depth = 100
-nnoremap <leader>fr :CtrlPMRU<CR>
-silent! nnoremap <unique> <silent> <Leader>ft :CtrlPFiletype<CR>
-  let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm|Trash)$',
-    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc|DS_Store)$',
-    \ }
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.png,*.jpg,*.jpeg,*.gif " MacOSX/Linux
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.pyc,*.png,*.jpg,*.gif  " Windows
-let g:ctrlp_working_path_mode=0
-let g:ctrlp_match_window_bottom=1
-let g:ctrlp_max_height=15
-let g:ctrlp_match_window_reversed=0
-let g:ctrlp_mruf_max=500
-let g:ctrlp_follow_symlinks=1
-let g:ctrlp_extensions = ['filetype']
+"let g:ctrlp_map = '<c-f>'
+"map <leader>ff :CtrlP<cr>
+"map <leader>bb :CtrlPBuffer<cr>
+"let g:ctrlp_max_depth = 100
+"nnoremap <leader>fr :CtrlPMRU<CR>
+"silent! nnoremap <unique> <silent> <Leader>ft :CtrlPFiletype<CR>
+  "let g:ctrlp_custom_ignore = {
+    "\ 'dir':  '\v[\/]\.(git|hg|svn|rvm|Trash)$',
+    "\ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc|DS_Store)$',
+    "\ }
+"set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.png,*.jpg,*.jpeg,*.gif " MacOSX/Linux
+"set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.pyc,*.png,*.jpg,*.gif  " Windows
+"let g:ctrlp_working_path_mode=0
+"let g:ctrlp_match_window_bottom=1
+"let g:ctrlp_max_height=15
+"let g:ctrlp_match_window_reversed=0
+"let g:ctrlp_mruf_max=500
+"let g:ctrlp_follow_symlinks=1
+"let g:ctrlp_extensions = ['filetype']
 
-let g:ctrlp_max_height = 50
-let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
+"let g:ctrlp_max_height = 50
+"let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
 
 
 
@@ -495,7 +495,7 @@ nmap <Leader>to :!open . & webpack -d -w<CR>
 
 
 let g:lightline = {
-      \ 'colorscheme': 'powerline',
+      \ 'colorscheme': 'wombat',
       \ 'component': {
       \   'readonly': '%{&readonly?"⭤":""}',
       \ }
