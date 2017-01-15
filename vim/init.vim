@@ -1,3 +1,20 @@
+"判断操作系统是否是 Windows 还是 Linux
+let g:iswindows = 0
+let g:islinux = 0
+if(has("win32") || has("win64") || has("win95") || has("win16"))
+    let g:iswindows = 1
+else
+    let g:islinux = 1
+endif
+
+"判断是终端还是 Gvim
+if has("gui_running")
+    let g:isGUI = 1
+else
+    let g:isGUI = 0
+endif
+
+
 """""""""""""
 "  插件配置
 """""""""""""
@@ -66,12 +83,15 @@ Plug 'Junza/Spink'
 
 "文件操作
 Plug 'scrooloose/nerdtree'
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'tweekmonster/fzf-filemru'
-"Plug 'kien/ctrlp.vim'
-"Plug 'endel/ctrlp-filetype.vim'
 
+if g:isGUI
+    Plug 'kien/ctrlp.vim'
+    Plug 'endel/ctrlp-filetype.vim'
+else
+    Plug 'junegunn/fzf.vim'
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'tweekmonster/fzf-filemru'
+endif
 
 "git
 Plug 'airblade/vim-gitgutter'
@@ -320,7 +340,12 @@ let g:UltiSnipsEditSplit="vertical"
 " ----------------------------------------------------------------------------
 " emmet
 " ----------------------------------------------------------------------------
-let g:user_emmet_expandabbr_key='<d-j>'
+if g:iswindows
+    let g:user_emmet_expandabbr_key='<a-j>'
+else
+    let g:user_emmet_expandabbr_key='<d-j>'
+endif
+
 
 " ----------------------------------------------------------------------------
 " NERDT
@@ -413,22 +438,6 @@ vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => fzf
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>ff :FZF<cr>
-map <leader>bb :Buffers<cr>
-map <leader>fw :Windows<cr>
-map <leader>fr :History<cr>
-"map <leader>spp :Snippets<cr>
-map <leader>ft :Filetypes<cr>
-"map <leader>he :Helptags<cr>
-map <leader>ma :Marks<cr>
-map <leader>ta :BTags<cr>
-"map <leader>co :Colors<cr>
-map <leader>jk :BLines<cr>
-map <leader>kl :Lines<cr>
-"map <leader>tl :Tags<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => easymotion
@@ -452,34 +461,54 @@ map <leader>fh :GundoToggle<cr>
 "let g:spacegray_italicize_comments = 1
 "let g:spacegray_underline_search = 1
 
+if g:isGUI
+    """"""""""""""""""""""""""""""
+    " => CTRL-P
+    """"""""""""""""""""""""""""""
+    let g:ctrlp_working_path_mode = 0
 
-""""""""""""""""""""""""""""""
-" => CTRL-P
-""""""""""""""""""""""""""""""
-"let g:ctrlp_working_path_mode = 0
+    let g:ctrlp_map = '<c-f>'
+    map <leader>ff :CtrlP<cr>
+    map <leader>bb :CtrlPBuffer<cr>
+    let g:ctrlp_max_depth = 100
+    nnoremap <leader>fr :CtrlPMRU<CR>
+    silent! nnoremap <unique> <silent> <Leader>ft :CtrlPFiletype<CR>
+      let g:ctrlp_custom_ignore = {
+        \ 'dir':  '\v[\/]\.(git|hg|svn|rvm|Trash)$',
+        \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc|DS_Store)$',
+        \ }
+    set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.png,*.jpg,*.jpeg,*.gif " MacOSX/Linux
+    set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.pyc,*.png,*.jpg,*.gif  " Windows
+    let g:ctrlp_working_path_mode=0
+    let g:ctrlp_match_window_bottom=1
+    let g:ctrlp_max_height=15
+    let g:ctrlp_match_window_reversed=0
+    let g:ctrlp_mruf_max=500
+    let g:ctrlp_follow_symlinks=1
+    let g:ctrlp_extensions = ['filetype']
 
-"let g:ctrlp_map = '<c-f>'
-"map <leader>ff :CtrlP<cr>
-"map <leader>bb :CtrlPBuffer<cr>
-"let g:ctrlp_max_depth = 100
-"nnoremap <leader>fr :CtrlPMRU<CR>
-"silent! nnoremap <unique> <silent> <Leader>ft :CtrlPFiletype<CR>
-  "let g:ctrlp_custom_ignore = {
-    "\ 'dir':  '\v[\/]\.(git|hg|svn|rvm|Trash)$',
-    "\ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc|DS_Store)$',
-    "\ }
-"set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.png,*.jpg,*.jpeg,*.gif " MacOSX/Linux
-"set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.pyc,*.png,*.jpg,*.gif  " Windows
-"let g:ctrlp_working_path_mode=0
-"let g:ctrlp_match_window_bottom=1
-"let g:ctrlp_max_height=15
-"let g:ctrlp_match_window_reversed=0
-"let g:ctrlp_mruf_max=500
-"let g:ctrlp_follow_symlinks=1
-"let g:ctrlp_extensions = ['filetype']
+    let g:ctrlp_max_height = 50
+    let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
+else
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " => fzf
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    map <leader>ff :FZF<cr>
+    map <leader>bb :Buffers<cr>
+    map <leader>fw :Windows<cr>
+    map <leader>fr :History<cr>
+    "map <leader>spp :Snippets<cr>
+    map <leader>ft :Filetypes<cr>
+    "map <leader>he :Helptags<cr>
+    map <leader>ma :Marks<cr>
+    map <leader>ta :BTags<cr>
+    "map <leader>co :Colors<cr>
+    map <leader>jk :BLines<cr>
+    map <leader>kl :Lines<cr>
+    "map <leader>tl :Tags<cr>
+endif
 
-"let g:ctrlp_max_height = 50
-"let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
+
 
 
 
