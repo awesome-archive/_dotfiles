@@ -212,6 +212,7 @@ alias la='ls -a'
 alias pacman='sudo pacman-color'
 alias p='sudo pacman-color'
 alias y='yaourt'
+
 alias cls='clear'
 
 alias mkdir='mkdir -p'
@@ -222,7 +223,6 @@ alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
 
 alias vi='vim'
-alias v='vim'
 
 alias gcl='git clone'
 alias gad='git add .'
@@ -235,31 +235,29 @@ alias gst='git status'
 alias glg='git log --pretty=format:"%h %s" --graph'
 alias gre='git reset --hard HEAD~1'
 
-alias h='vim /etc/hosts'
+alias h='nvim /etc/hosts'
 alias v='vim'
-alias vh='vim /Applications/XAMPP/xamppfiles/etc/extra/httpd-vhosts.conf'
+alias n='nvim'
+alias vh='nvim /Applications/XAMPP/xamppfiles/etc/extra/httpd-vhosts.conf'
 alias web='webpack -d -w'
 
 
-alias tchongqi='sudo shutdown -r now'
-alias tguanji='sudo shutdown -h now'
-alias tyanshi='sudo shutdown -h 20:00'
+alias chongqi='sudo shutdown -r now'
+alias guanji='sudo shutdown -h now'
+alias yanshi='sudo shutdown -h 20:00'
 
-alias txianshi='defaults write com.apple.finder AppleShowAllFiles -bool true'
-alias tyincang='defaults write com.apple.finder AppleShowAllFiles -bool false'
-
-
-
+alias xianshi='defaults write com.apple.finder AppleShowAllFiles -bool true'
+alias yincang='defaults write com.apple.finder AppleShowAllFiles -bool false'
 
 #Enter the directory
-alias cnew='cd /Users/iuunhao/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic && fedx'
+alias cnew='cd ~/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic && fedx'
+alias cg='cd ~/Desktop/MyGithub'
+alias cdes='cd ~/Desktop/'
 
-alias cg='cd /Users/iuunhao/Desktop/Github'
-
-alias ohtml='open /Users/iuunhao/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic/mobile/html'
-alias ocss='open /Users/iuunhao/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic/mobile/css'
-alias oimg='open /Users/iuunhao/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic/mobile/images'
-alias opostcss='open /Users/iuunhao/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic/mobile/postcss'
+alias ohtml='open ~/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic/mobile/html'
+alias ocss='open ~/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic/mobile/css'
+alias oimg='open ~/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic/mobile/images'
+alias opostcss='open ~/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic/mobile/postcss'
 
 alias browser='browser-sync start --server --directory --files "**/*.css, **/*.html, **/*.js"'
 

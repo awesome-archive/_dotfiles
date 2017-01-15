@@ -61,6 +61,9 @@ Plug 'ap/vim-css-color'
 "Plug 'posva/vim-vue'
 Plug 'Junza/Spink'
 
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"let g:deoplete#enable_at_startup = 1
+
 "文件操作
 Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf.vim'
@@ -312,7 +315,7 @@ let g:UltiSnipsEditSplit="vertical"
 " ----------------------------------------------------------------------------
 " vim-maximizer
 " ----------------------------------------------------------------------------
-nnoremap <tab> :MaximizerToggle<CR>
+"nnoremap <tab> :MaximizerToggle<CR>
 
 " ----------------------------------------------------------------------------
 " emmet
@@ -375,14 +378,14 @@ let g:SuperTabRetainCompletionType=2
 " ----------------------------------------------------------------------------
 " syntastic
 " ----------------------------------------------------------------------------
-let g:syntastic_style_error_symbol='»'
-let g:syntastic_error_symbol='ㄨ'
-let g:syntastic_warning_symbol='﹗'
-let g:syntastic_check_on_open=0
-let g:syntastic_check_on_wq=0
-let g:syntastic_enable_highlighting=1
-let g:syntastic_javascript_checkers = ['jsl', 'jshint', 'es6']
-let g:syntastic_html_checkers=['tidy', 'jshint']
+"let g:syntastic_style_error_symbol='»'
+"let g:syntastic_error_symbol='ㄨ'
+"let g:syntastic_warning_symbol='﹗'
+"let g:syntastic_check_on_open=0
+"let g:syntastic_check_on_wq=0
+"let g:syntastic_enable_highlighting=1
+"let g:syntastic_javascript_checkers = ['jsl', 'jshint', 'es6']
+"let g:syntastic_html_checkers=['tidy', 'jshint']
 
 " ----------------------------------------------------------------------------
 "gitgutter
