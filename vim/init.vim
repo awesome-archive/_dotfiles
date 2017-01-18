@@ -21,7 +21,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 "会话
-"Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
+Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 
 "UI
 "Plug 'liuchengxu/space-vim-dark'
@@ -610,7 +610,7 @@ let g:ale_lint_on_enter = 0
 
 " AirLine Settings
 let g:airline_powerline_fonts = 1
-let g:airline_theme='simple'
+"let g:airline_theme='simple'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 set ambiwidth=double
