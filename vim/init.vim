@@ -24,17 +24,23 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 
 "UI
-Plug 'liuchengxu/space-vim-dark'
-Plug 'itchyny/lightline.vim'
+"Plug 'liuchengxu/space-vim-dark'
+"Plug 'itchyny/lightline.vim'
 Plug 'ajh17/Spacegray.vim'
-Plug 'morhetz/gruvbox'
+"Plug 'morhetz/gruvbox'
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 "搜索
-Plug 'mileszs/ack.vim'
+"Plug 'mileszs/ack.vim'
 Plug 'rking/ag.vim'
-Plug 'haya14busa/incsearch.vim'
-Plug 'haya14busa/incsearch-easymotion.vim'
+"Plug 'haya14busa/incsearch.vim'
+"Plug 'haya14busa/incsearch-easymotion.vim'
 "Plug 'gelguy/cmd2.vim'
+"Plug 'justinmk/vim-sneak'
+Plug 'rhysd/clever-f.vim'
+
 
 "跳转
 Plug 'easymotion/vim-easymotion'
@@ -43,11 +49,11 @@ Plug 'terryma/vim-multiple-cursors'
 
 "辅助
 "Plug 'ybian/smartim'
-Plug 'asins/vimcdoc'
+"Plug 'asins/vimcdoc'
 Plug 'Chiel92/vim-autoformat'
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
-"Plug 'roman/golden-ratio'
+Plug 'roman/golden-ratio'
 Plug 'szw/vim-maximizer'
 Plug 'scrooloose/nerdcommenter'
 Plug 'iamcco/dict.vim'
@@ -56,13 +62,15 @@ Plug 'Raimondi/delimitMate'
 Plug 'terryma/vim-expand-region'
 "Plug 'kien/rainbow_parentheses.vim'
 "Plug 'Yggdroot/indentLine'
-Plug 'bronson/vim-trailing-whitespace'
+"Plug 'bronson/vim-trailing-whitespace'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'sjl/gundo.vim'
 Plug 'tpope/vim-repeat'
 Plug 'mbriggs/mark.vim'
 Plug 'mattesgroeger/vim-bookmarks'
 
+Plug 'mhinz/vim-signify'
+"Plug 'terryma/vim-smooth-scroll'
 
 "语言
 Plug 'othree/html5.vim'
@@ -73,10 +81,14 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] }
 Plug 'isRuslan/vim-es6'
-Plug 'vim-syntastic/syntastic'
+"Plug 'vim-syntastic/syntastic'
+Plug 'w0rp/ale'
 Plug 'ap/vim-css-color'
 "Plug 'posva/vim-vue'
 Plug 'Junza/Spink'
+Plug 'chemzqm/wxapp.vim'
+"Plug 'godlygeek/tabular'
+
 
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "let g:deoplete#enable_at_startup = 1
@@ -94,8 +106,8 @@ else
 endif
 
 "git
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
+"Plug 'airblade/vim-gitgutter'
+"Plug 'tpope/vim-fugitive'
 
 call plug#end()
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
@@ -161,7 +173,8 @@ set breakindent
 set clipboard=unnamed
 set matchtime=5
 
-set relativenumber
+"set relativenumber
+set  nu
 "autocmd InsertLeave * :set relativenumber
 "autocmd InsertEnter * :set number
 se nocul
@@ -178,8 +191,12 @@ set background=dark
 "colorscheme space-vim-dark
 colorscheme Spacegray
 
-set guifont=Inconsolata_for_Powerline:h20
-"set guifont=FiraMono-Regular:h24
+if g:isGUI
+    set guifont=Inconsolata_for_Powerline:h20
+    "set guifont=FiraMono-Regular:h24
+    "set guifont=Aix:h14
+endif
+
 
 
 """""""""""""
@@ -335,7 +352,7 @@ let g:UltiSnipsEditSplit="vertical"
 " ----------------------------------------------------------------------------
 " vim-maximizer
 " ----------------------------------------------------------------------------
-"nnoremap <tab> :MaximizerToggle<CR>
+nnoremap <tab> :MaximizerToggle<CR>
 
 " ----------------------------------------------------------------------------
 " emmet
@@ -449,50 +466,76 @@ nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => incsearch
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map / <Plug>(incsearch-easymotion-/)
-map ? <Plug>(incsearch-easymotion-?)
-map g/ <Plug>(incsearch-easymotion-stay)
+"map / <Plug>(incsearch-easymotion-/)
+"map ? <Plug>(incsearch-easymotion-?)
+"map g/ <Plug>(incsearch-easymotion-stay)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Gundo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>fh :GundoToggle<cr>
 
-"let g:spacegray_italicize_comments = 1
+"let g":spacegray_italicize_comments = 1
 "let g:spacegray_underline_search = 1
 
 if g:isGUI
     """"""""""""""""""""""""""""""
     " => CTRL-P
     """"""""""""""""""""""""""""""
-    let g:ctrlp_working_path_mode = 0
+    "let g:ctrlp_working_path_mode = 0
 
-    let g:ctrlp_map = '<c-f>'
+    "let g:ctrlp_map = '<c-f>'
+    "map <leader>ff :CtrlP<cr>
+    "map <leader>bb :CtrlPBuffer<cr>
+    "let g:ctrlp_max_depth = 100
+    "nnoremap <leader>fr :CtrlPMRU<CR>
+    "silent! nnoremap <unique> <silent> <Leader>ft :CtrlPFiletype<CR>
+      "let g:ctrlp_custom_ignore = {
+        "\ 'dir':  '\v[\/]\.(git|hg|svn|rvm|Trash)$',
+        "\ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc|DS_Store)$',
+        "\ }
+    "set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.png,*.jpg,*.jpeg,*.gif " MacOSX/Linux
+    "set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.pyc,*.png,*.jpg,*.gif  " Windows
+    "let g:ctrlp_working_path_mode=0
+    "let g:ctrlp_match_window_bottom=1
+    "let g:ctrlp_max_height=15
+    "let g:ctrlp_match_window_reversed=0
+    "let g:ctrlp_mruf_max=500
+    "let g:ctrlp_follow_symlinks=1
+    "let g:ctrlp_extensions = ['filetype']
+
+    "let g:ctrlp_max_height = 50
+    "let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
+
+    " CTRLP
+    
     map <leader>ff :CtrlP<cr>
     map <leader>bb :CtrlPBuffer<cr>
-    let g:ctrlp_max_depth = 100
     nnoremap <leader>fr :CtrlPMRU<CR>
-    silent! nnoremap <unique> <silent> <Leader>ft :CtrlPFiletype<CR>
-      let g:ctrlp_custom_ignore = {
-        \ 'dir':  '\v[\/]\.(git|hg|svn|rvm|Trash)$',
-        \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc|DS_Store)$',
-        \ }
-    set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.png,*.jpg,*.jpeg,*.gif " MacOSX/Linux
-    set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.pyc,*.png,*.jpg,*.gif  " Windows
-    let g:ctrlp_working_path_mode=0
-    let g:ctrlp_match_window_bottom=1
-    let g:ctrlp_max_height=15
-    let g:ctrlp_match_window_reversed=0
-    let g:ctrlp_mruf_max=500
-    let g:ctrlp_follow_symlinks=1
-    let g:ctrlp_extensions = ['filetype']
+    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+    let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+          \ --ignore .git
+          \ --ignore .svn
+          \ --ignore .hg
+          \ --ignore .DS_Store
+          \ --ignore .logs
+          \ --ignore .log
+          \ --ignore .idea
+          \ --ignore .swp
+          \ --ignore "**/*.pyc"
+          \ -g ""'
 
-    let g:ctrlp_max_height = 50
-    let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
+    " ag is fast enough that CtrlP doesn't need to cache
+    let g:ctrlp_use_caching = 0
+    let g:ctrlp_custom_ignore = {
+      \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+      \ 'file': '\v\.(exe|so|dll)$',
+      \ }
 else
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " => fzf
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    set rtp+=~/.fzf
     map <leader>ff :FZF<cr>
     map <leader>bb :Buffers<cr>
     map <leader>fw :Windows<cr>
@@ -526,12 +569,12 @@ nmap <Leader>to :!open . & webpack -d -w<CR>
 
 
 
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'component': {
-      \   'readonly': '%{&readonly?"⭤":""}',
-      \ }
-      \ }
+"let g:lightline = {
+      "\ 'colorscheme': 'wombat',
+      "\ 'component': {
+      "\   'readonly': '%{&readonly?"⭤":""}',
+      "\ }
+      "\ }
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  Bookmark
@@ -539,5 +582,45 @@ let g:lightline = {
 highlight BookmarkSign ctermbg=NONE ctermfg=160
 highlight BookmarkLine ctermbg=194 ctermfg=NONE
 let g:bookmark_highlight_lines = 1
+
+
+"ale
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_enter = 0
+
+"Sneak
+"nmap f <Plug>Sneak_s
+"nmap F <Plug>Sneak_S
+"xmap f <Plug>Sneak_s
+"xmap F <Plug>Sneak_S
+"omap f <Plug>Sneak_s
+"omap F <Plug>Sneak_S
+
+"clever-f.vim
+
+
+
+"smooth_scroll
+"noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+"noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+"noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+"noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+
+
+" AirLine Settings
+let g:airline_powerline_fonts = 1
+let g:airline_theme='simple'
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+set ambiwidth=double
+language messages zh_CN.utf-8 
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+set encoding=utf-8
+set langmenu=zh_CN.UTF-8
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+
 
 
