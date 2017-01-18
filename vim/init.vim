@@ -32,6 +32,9 @@ Plug 'ajh17/Spacegray.vim'
 Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 
+
+"Plug 'eugen0329/vim-esearch'
+
 "搜索
 "Plug 'mileszs/ack.vim'
 "Plug 'rking/ag.vim'
@@ -192,7 +195,7 @@ set background=dark
 colorscheme Spacegray
 
 if g:isGUI
-    set guifont=Inconsolata_for_Powerline:h20
+    "set guifont=Inconsolata_for_Powerline:h20
     "set guifont=FiraMono-Regular:h24
     "set guifont=Aix:h14
 endif
@@ -619,8 +622,7 @@ source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 set encoding=utf-8
 set langmenu=zh_CN.UTF-8
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
-
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#buffer_nr_show = 1
 
 
