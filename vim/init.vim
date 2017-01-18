@@ -21,7 +21,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 "会话
-Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
+"Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 
 "UI
 "Plug 'liuchengxu/space-vim-dark'
@@ -30,11 +30,11 @@ Plug 'ajh17/Spacegray.vim'
 "Plug 'morhetz/gruvbox'
 
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline-themes'
 
 "搜索
 "Plug 'mileszs/ack.vim'
-Plug 'rking/ag.vim'
+"Plug 'rking/ag.vim'
 "Plug 'haya14busa/incsearch.vim'
 "Plug 'haya14busa/incsearch-easymotion.vim'
 "Plug 'gelguy/cmd2.vim'
@@ -53,21 +53,21 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'Chiel92/vim-autoformat'
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'roman/golden-ratio'
+"Plug 'roman/golden-ratio'
 Plug 'szw/vim-maximizer'
 Plug 'scrooloose/nerdcommenter'
 Plug 'iamcco/dict.vim'
 Plug 'ervandew/supertab'
 Plug 'Raimondi/delimitMate'
-Plug 'terryma/vim-expand-region'
+"Plug 'terryma/vim-expand-region'
 "Plug 'kien/rainbow_parentheses.vim'
 "Plug 'Yggdroot/indentLine'
 "Plug 'bronson/vim-trailing-whitespace'
-Plug 'vim-scripts/YankRing.vim'
-Plug 'sjl/gundo.vim'
-Plug 'tpope/vim-repeat'
-Plug 'mbriggs/mark.vim'
-Plug 'mattesgroeger/vim-bookmarks'
+"Plug 'vim-scripts/YankRing.vim'
+"Plug 'sjl/gundo.vim'
+"Plug 'tpope/vim-repeat'
+"Plug 'mbriggs/mark.vim'
+"Plug 'mattesgroeger/vim-bookmarks'
 
 Plug 'mhinz/vim-signify'
 "Plug 'terryma/vim-smooth-scroll'
