@@ -26,11 +26,13 @@ Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 "UI
 "Plug 'liuchengxu/space-vim-dark'
 "Plug 'itchyny/lightline.vim'
-Plug 'ajh17/Spacegray.vim'
+"Plug 'ajh17/Spacegray.vim'
 "Plug 'morhetz/gruvbox'
 
 Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'AlessandroYorba/Monrovia'
 
 
 "Plug 'eugen0329/vim-esearch'
@@ -52,24 +54,24 @@ Plug 'terryma/vim-multiple-cursors'
 
 "辅助
 "Plug 'ybian/smartim'
-"Plug 'asins/vimcdoc'
+Plug 'asins/vimcdoc'
 Plug 'Chiel92/vim-autoformat'
 Plug 'sirver/ultisnips'
-Plug 'honza/vim-snippets'
+Plug 'honza/vim-snip"pets'
 "Plug 'roman/golden-ratio'
 Plug 'szw/vim-maximizer'
 Plug 'scrooloose/nerdcommenter'
 Plug 'iamcco/dict.vim'
 Plug 'ervandew/supertab'
 Plug 'Raimondi/delimitMate'
-"Plug 'terryma/vim-expand-region'
+Plug 'terryma/vim-expand-region'
 "Plug 'kien/rainbow_parentheses.vim'
 "Plug 'Yggdroot/indentLine'
 "Plug 'bronson/vim-trailing-whitespace'
-"Plug 'vim-scripts/YankRing.vim'
+Plug 'vim-scripts/YankRing.vim'
 "Plug 'sjl/gundo.vim'
-"Plug 'tpope/vim-repeat'
-"Plug 'mbriggs/mark.vim'
+Plug 'tpope/vim-repeat'
+Plug 'mbriggs/mark.vim'
 "Plug 'mattesgroeger/vim-bookmarks'
 
 Plug 'mhinz/vim-signify'
@@ -192,7 +194,9 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 set background=dark
 "set background=light
 "colorscheme space-vim-dark
-colorscheme Spacegray
+"colorscheme Spacegray
+set termguicolors
+colorscheme monrovia
 
 if g:isGUI
     "set guifont=Inconsolata_for_Powerline:h20
@@ -229,7 +233,8 @@ nmap <silent> <Leader>ev :e $MYVIMRC<CR>
 nmap <silent> <Leader>es :so $MYVIMRC<CR>
 nmap <silent> <Leader>pl :PlugInstall<CR>
 nmap <silent> <Leader>ez :e ~/dotfiles/zhs/zshrc<CR>
-
+nnoremap <S-h> 0
+nnoremap <S-l> $
 vnoremap <silent> y y`]
 vnoremap <silent> p p`]
 nnoremap <silent> p p`]
@@ -613,7 +618,7 @@ let g:ale_lint_on_enter = 0
 
 " AirLine Settings
 let g:airline_powerline_fonts = 1
-"let g:airline_theme='simple'
+let g:airline_theme='simple'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 set ambiwidth=double
