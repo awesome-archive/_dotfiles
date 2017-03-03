@@ -33,7 +33,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 Plug 'AlessandroYorba/Monrovia'
-
+Plug 'morhetz/gruvbox'
 
 "Plug 'eugen0329/vim-esearch'
 
@@ -57,7 +57,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'asins/vimcdoc'
 Plug 'Chiel92/vim-autoformat'
 Plug 'sirver/ultisnips'
-Plug 'honza/vim-snip"pets'
+Plug 'honza/vim-snippets'
 "Plug 'roman/golden-ratio'
 Plug 'szw/vim-maximizer'
 Plug 'scrooloose/nerdcommenter'
@@ -93,7 +93,7 @@ Plug 'ap/vim-css-color'
 Plug 'Junza/Spink'
 Plug 'chemzqm/wxapp.vim'
 "Plug 'godlygeek/tabular'
-
+Plug 'wavded/vim-stylus'
 
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "let g:deoplete#enable_at_startup = 1
@@ -196,7 +196,7 @@ set background=dark
 "colorscheme space-vim-dark
 "colorscheme Spacegray
 set termguicolors
-colorscheme monrovia
+colorscheme gruvbox
 
 if g:isGUI
     "set guifont=Inconsolata_for_Powerline:h20
@@ -617,10 +617,32 @@ let g:ale_lint_on_enter = 0
 
 
 " AirLine Settings
-let g:airline_powerline_fonts = 1
-let g:airline_theme='simple'
+hi paste       cterm=bold ctermfg=149 ctermbg=239 gui=bold guifg=#99CC66 guibg=#3a3a3a
+hi ale_error   cterm=None ctermfg=197 ctermbg=237 gui=None guifg=#CC0033 guibg=#3a3a3a
+hi ale_warning cterm=None ctermfg=214 ctermbg=237 gui=None guifg=#FFFF66 guibg=#3a3a3a
+
+hi User1 cterm=bold ctermfg=232 ctermbg=179 gui=Bold guifg=#333300 guibg=#FFBF48
+hi User2 cterm=None ctermfg=214 ctermbg=243 gui=None guifg=#FFBB7D guibg=#666666
+hi User3 cterm=None ctermfg=251 ctermbg=241 gui=None guifg=#c6c6c6 guibg=#585858
+hi User4 cterm=Bold ctermfg=177 ctermbg=239 gui=Bold guifg=#d75fd7 guibg=#4e4e4e
+hi User5 cterm=None ctermfg=208 ctermbg=238 gui=None guifg=#ff8700 guibg=#3a3a3a
+hi User6 cterm=Bold ctermfg=178 ctermbg=237 gui=Bold guifg=#FFE920 guibg=#444444
+hi User7 cterm=None ctermfg=250 ctermbg=238 gui=None guifg=#bcbcbc guibg=#444444
+hi User8 cterm=None ctermfg=249 ctermbg=239 gui=None guifg=#b2b2b2 guibg=#4e4e4e
+hi User9 cterm=None ctermfg=249 ctermbg=241 gui=None guifg=#b2b2b2 guibg=#606060
+
+
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+
+let g:airline_symbols = {}
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.whitespace = 'Ξ'
+
 set ambiwidth=double
 language messages zh_CN.utf-8 
 source $VIMRUNTIME/delmenu.vim
