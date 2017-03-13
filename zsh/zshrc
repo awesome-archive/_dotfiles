@@ -260,6 +260,7 @@ alias oimg='open ~/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic/mobile
 alias opostcss='open ~/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic/mobile/postcss'
 
 alias browser='browser-sync start --server --directory --files "**/*.css, **/*.html, **/*.js"'
+alias cb='gcc demo.c && ./a.out'
 
 
 #浏览器

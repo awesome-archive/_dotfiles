@@ -1,6 +1,6 @@
 "判断操作系统是否是 Windows 还是 Linux
-let g:iswindows = 0
-let g:islinux = 0
+        let g:iswindows = 0
+    let g:islinux = 0
 if(has("win32") || has("win64") || has("win95") || has("win16"))
     let g:iswindows = 1
 else
@@ -28,12 +28,16 @@ Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 "Plug 'itchyny/lightline.vim'
 "Plug 'ajh17/Spacegray.vim'
 "Plug 'morhetz/gruvbox'
+Plug 'junegunn/seoul256.vim'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+Plug 'c.vim'
+
 Plug 'AlessandroYorba/Monrovia'
 Plug 'morhetz/gruvbox'
+Plug 'liuchengxu/space-vim-dark'
 
 "Plug 'eugen0329/vim-esearch'
 
@@ -73,6 +77,7 @@ Plug 'vim-scripts/YankRing.vim'
 Plug 'tpope/vim-repeat'
 Plug 'mbriggs/mark.vim'
 "Plug 'mattesgroeger/vim-bookmarks'
+Plug 'justinmk/vim-gtfo'
 
 Plug 'mhinz/vim-signify'
 "Plug 'terryma/vim-smooth-scroll'
@@ -191,17 +196,20 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
 "UI设置
 "set t_Co=256
-set background=dark
+"set background=dark
 "set background=light
+    "colorscheme Spacegray
+"set termguicolors
+"colorscheme gruvbox
 "colorscheme space-vim-dark
-"colorscheme Spacegray
-set termguicolors
-colorscheme gruvbox
+colorscheme seoul256
+"hi Comment cterm=italic
 
-if g:isGUI
-    "set guifont=Inconsolata_for_Powerline:h20
-    "set guifont=FiraMono-Regular:h24
-    "set guifont=Aix:h14
+if has('gui_running')
+  set guifont=Menlo:h14 columns=80 lines=40
+  silent! colo seoul256-light
+else
+  silent! colo seoul256-light
 endif
 
 
@@ -616,6 +624,28 @@ let g:ale_lint_on_enter = 0
 "noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 
 
+
+
+set ambiwidth=double
+language messages zh_CN.utf-8
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+set encoding=utf-8
+set langmenu=zh_CN.UTF-8
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#buffer_nr_show = 1
+
+
+
+"编译c
+map <Leader>c :call CompileRunGcc()<CR>
+func! CompileRunGcc()
+    exec "w"
+    exec "!gcc % -o %<"
+    exec "! ./%<"
+endfunc
+
+
 " AirLine Settings
 hi paste       cterm=bold ctermfg=149 ctermbg=239 gui=bold guifg=#99CC66 guibg=#3a3a3a
 hi ale_error   cterm=None ctermfg=197 ctermbg=237 gui=None guifg=#CC0033 guibg=#3a3a3a
@@ -631,7 +661,6 @@ hi User7 cterm=None ctermfg=250 ctermbg=238 gui=None guifg=#bcbcbc guibg=#444444
 hi User8 cterm=None ctermfg=249 ctermbg=239 gui=None guifg=#b2b2b2 guibg=#4e4e4e
 hi User9 cterm=None ctermfg=249 ctermbg=241 gui=None guifg=#b2b2b2 guibg=#606060
 
-
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 
@@ -642,14 +671,3 @@ let g:airline_symbols.linenr = '¶'
 let g:airline_symbols.branch = '⎇'
 let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.whitespace = 'Ξ'
-
-set ambiwidth=double
-language messages zh_CN.utf-8 
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
-set encoding=utf-8
-set langmenu=zh_CN.UTF-8
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#buffer_nr_show = 1
-
-
