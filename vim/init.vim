@@ -195,21 +195,20 @@ vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
 "UI设置
-"set t_Co=256
-"set background=dark
+set t_Co=256
+set background=dark
 "set background=light
     "colorscheme Spacegray
-"set termguicolors
+set termguicolors
 "colorscheme gruvbox
 "colorscheme space-vim-dark
-colorscheme seoul256
-"hi Comment cterm=italic
 
 if has('gui_running')
   set guifont=Menlo:h14 columns=80 lines=40
-  silent! colo seoul256-light
+  silent! colo seoul256
 else
-  silent! colo seoul256-light
+  silent! colo seoul256
+  "silent! colo seoul256-light
 endif
 
 
@@ -598,9 +597,6 @@ else
 endif
 
 
-
-
-
 "macmenu &File.Close key=<nop>
 nmap <D-w> :CommandW<CR>
 imap <D-w> <Esc>:CommandW<CR>
@@ -656,14 +652,11 @@ let g:ale_lint_on_enter = 0
 
 
 
-set ambiwidth=double
 language messages zh_CN.utf-8
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 set encoding=utf-8
 set langmenu=zh_CN.UTF-8
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#buffer_nr_show = 1
 
 
 
@@ -675,15 +668,184 @@ func! CompileRunGcc()
     exec "! ./%<"
 endfunc
 
-let g:airline_theme='simple'
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-let g:airline_symbols = {}
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.whitespace = 'Ξ'
+
+
+
+function! S_buf_num()
+    let l:circled_num_list = ['① ', '② ', '③ ', '④ ', '⑤ ', '⑥ ', '⑦ ', '⑧ ', '⑨ ', '⑩ ',
+                \             '⑪ ', '⑫ ', '⑬ ', '⑭ ', '⑮ ', '⑯ ', '⑰ ', '⑱ ', '⑲ ', '⑳ ']
+
+    return bufnr('%') > 20 ? bufnr('%') : l:circled_num_list[bufnr('%')-1]
+endfunction
+
+function! S_buf_total_num()
+    return len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
+endfunction
+
+function! S_full_path()
+    if &filetype ==# 'startify'
+        return ''
+    else
+        return expand('%:p:t')
+    endif
+endfunction
+
+function! S_fugitive()
+    if !exists('g:loaded_fugitive')
+        return ''
+    endif
+    let l:head = fugitive#head()
+    return empty(l:head) ? '' : ' ⎇ '.l:head . ' '
+endfunction
+
+function! S_ale_error()
+    if !exists('g:loaded_ale')
+        return ''
+    endif
+    return !empty(ALEGetError())?ALEGetError():''
+endfunction
+
+function! S_ale_warning()
+    if !exists('g:loaded_ale')
+        return ''
+    endif
+    return !empty(ALEGetWarning())?ALEGetWarning():''
+endfunction
+
+ function! ALEGetError()
+     let l:res = ale#statusline#Status()
+     if l:res ==# 'OK'
+         return ''
+     else
+         let l:e_w = split(l:res)
+         if len(l:e_w) == 2 || match(l:e_w, 'E') > -1
+             return ' •' . matchstr(l:e_w[0], '\d\+') .' '
+         endif
+     endif
+ endfunction
+
+ function! ALEGetWarning()
+     let l:res = ale#statusline#Status()
+     if l:res ==# 'OK'
+         return ''
+     else
+         let l:e_w = split(l:res)
+         if len(l:e_w) == 2
+             return ' •' . matchstr(l:e_w[1], '\d\+')
+         elseif match(l:e_w, 'W') > -1
+             return ' •' . matchstr(l:e_w[0], '\d\+')
+         endif
+     endif
+ endfunction
+
+function! File_size(f)
+    let l:size = getfsize(expand(a:f))
+    if l:size == 0 || l:size == -1 || l:size == -2
+        return ''
+    endif
+    if l:size < 1024
+        return l:size.' bytes'
+    elseif l:size < 1024*1024
+        return printf('%.1f', l:size/1024.0).'k'
+    elseif l:size < 1024*1024*1024
+        return printf('%.1f', l:size/1024.0/1024.0) . 'm'
+    else
+        return printf('%.1f', l:size/1024.0/1024.0/1024.0) . 'g'
+    endif
+endfunction
+
+function! MyStatusLine()
+
+    set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+    if has('gui_running')
+        let l:buf_num = '%1* [B-%n] [W-%{winnr()}] %*'
+    else
+        let l:buf_num = '%1* %{S_buf_num()} ❖ %{winnr()} %*'
+    let l:tot = '%2*[TOT:%{S_buf_total_num()}]%*'
+    let l:fs = '%3* %{File_size(@%)} %*'
+    let l:fp = '%4* %{S_full_path()} %*'
+    let l:paste = "%#paste#%{&paste?'⎈ paste ':''}%*"
+    let l:ale_e = '%#ale_error#%{S_ale_error()}%*'
+    let l:ale_w = '%#ale_warning#%{S_ale_warning()}%*'
+    let l:git = '%6*%{S_fugitive()}%*'
+    let l:m_r_f = '%7* %m%r%y %*'
+    let l:ff = '%8* %{&ff} |'
+    let l:enc = " %{''.(&fenc!=''?&fenc:&enc).''} | %{(&bomb?\",BOM\":\"\")}"
+    let l:pos = '%l:%c%V %*'
+    let l:pct = '%9* %P %*'
+
+    hi User1 cterm=bold ctermfg=232 ctermbg=179
+    hi User2 cterm=None ctermfg=214 ctermbg=242
+    hi User3 cterm=None ctermfg=251 ctermbg=240
+    hi User4 cterm=bold ctermfg=169 ctermbg=239
+    hi User5 cterm=None ctermfg=208 ctermbg=238
+    hi User6 cterm=None ctermfg=246 ctermbg=237
+    hi User7 cterm=None ctermfg=250 ctermbg=238
+    hi User8 cterm=None ctermfg=249 ctermbg=240
+
+    return l:buf_num.l:tot.'%<'.l:fs.l:fp.l:git.l:paste.l:ale_e.l:ale_w.
+                \   '%='.l:m_r_f.l:ff.l:enc.l:pos.l:pct
+endfunction
+set statusline=%!MyStatusLine()
+
+
+" ----------------------------------------------------------------------------
+" <F8> | Color scheme selector
+" ----------------------------------------------------------------------------
+
+" ----------------------------------------------------------------------------
+" :CopyRTF
+" ----------------------------------------------------------------------------
+function! s:colors(...)
+  return filter(map(filter(split(globpath(&rtp, 'colors/*.vim'), "\n"),
+        \                  'v:val !~ "^/usr/"'),
+        \           'fnamemodify(v:val, ":t:r")'),
+        \       '!a:0 || stridx(v:val, a:1) >= 0')
+endfunction
+
+function! s:copy_rtf(line1, line2, ...)
+  let [ft, cs, nu] = [&filetype, g:colors_name, &l:nu]
+  let lines = getline(1, '$')
+
+  tab new
+  setlocal buftype=nofile bufhidden=wipe nonumber
+  let &filetype = ft
+  call setline(1, lines)
+
+  execute 'colo' get(a:000, 0, 'seoul256-light')
+  hi Normal ctermbg=NONE guibg=NONE
+
+  let lines = getline(a:line1, a:line2)
+  let indent = repeat(' ', min(map(filter(copy(lines), '!empty(v:val)'), 'len(matchstr(v:val, "^ *"))')))
+  call setline(a:line1, map(lines, 'substitute(v:val, indent, "", "")'))
+
+  call tohtml#Convert2HTML(a:line1, a:line2)
+  g/^\(pre\|body\) {/s/background-color: #[0-9]*; //
+  silent %write !textutil -convert rtf -textsizemultiplier 1.3 -stdin -stdout | pbcopy
+
+  bd!
+  tabclose
+
+  let &l:nu = nu
+  execute 'colorscheme' cs
+endfunction
+
+if s:darwin
+  command! -range=% -nargs=? -complete=customlist,s:colors CopyRTF call s:copy_rtf(<line1>, <line2>, <f-args>)
+endif
+
+
+
+function! s:rotate_colors()
+  if !exists('s:colors')
+    let s:colors = s:colors()
+  endif
+  let name = remove(s:colors, 0)
+  call add(s:colors, name)
+  execute 'colorscheme' name
+  redraw
+  echo name
+endfunction
+nnoremap <silent> <F8> :call <SID>rotate_colors()<cr>
 
 
