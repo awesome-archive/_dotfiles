@@ -30,8 +30,8 @@ Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 "Plug 'morhetz/gruvbox'
 Plug 'junegunn/seoul256.vim'
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
 
 Plug 'c.vim'
 
@@ -551,20 +551,50 @@ else
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " => fzf
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    set rtp+=~/.fzf
-    map <leader>ff :FZF<cr>
-    map <leader>bb :Buffers<cr>
-    map <leader>fw :Windows<cr>
-    map <leader>fr :History<cr>
-    "map <leader>spp :Snippets<cr>
-    map <leader>ft :Filetypes<cr>
-    "map <leader>he :Helptags<cr>
-    map <leader>ma :Marks<cr>
-    map <leader>ta :BTags<cr>
-    "map <leader>co :Colors<cr>
-    map <leader>jk :BLines<cr>
-    map <leader>kl :Lines<cr>
-    "map <leader>tl :Tags<cr>
+    let g:fzf_files_options = printf('--preview "%s {} | head -'.&lines.'"',
+          \ g:plugs['fzf.vim'].dir.'/bin/preview.rb')
+
+    " nnoremap <silent> <Leader>ff :Files<CR>
+    nnoremap <silent> <expr> <Leader>ff (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Files\<cr>"
+    nnoremap <silent> <Leader>C        :Colors<CR>
+    nnoremap <silent> <Leader>bb  :Buffers<CR>
+    nnoremap <silent> <Leader>ag       :Ag <C-R><C-W><CR>
+    nnoremap <silent> <Leader>AG       :Ag <C-R><C-A><CR>
+    xnoremap <silent> <Leader>ag       y:Ag <C-R>"<CR>
+    nnoremap <leader>jk :BLines<cr>
+    nnoremap <silent> <leader>ft :Filetypes<cr>
+    nnoremap <silent> <leader>kl :Lines<cr>
+    nnoremap <silent> <leader>fr :History<cr>
+    " nnoremap <silent> q: :History:<CR>
+    " nnoremap <silent> q/ :History/<CR>
+
+
+    inoremap <expr> <c-x><c-t> fzf#complete('tmuxwords.rb --all-but-current --scroll 500 --min 5')
+    imap <c-x><c-k> <plug>(fzf-complete-word)
+    imap <c-x><c-f> <plug>(fzf-complete-path)
+    imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+    imap <c-x><c-l> <plug>(fzf-complete-line)
+
+    nmap <leader><tab> <plug>(fzf-maps-n)
+    xmap <leader><tab> <plug>(fzf-maps-x)
+    omap <leader><tab> <plug>(fzf-maps-o)
+
+    function! s:plugs_sink(line)
+      let dir = g:plugs[a:line].dir
+      for pat in ['doc/*.txt', 'README.md']
+        let match = get(split(globpath(dir, pat), "\n"), 0, '')
+        if len(match)
+          execute 'tabedit' match
+          return
+        endif
+      endfor
+      tabnew
+      execute 'Explore' dir
+    endfunction
+
+    command! PlugHelp call fzf#run(fzf#wrap({
+      \ 'source':  sort(keys(g:plugs)),
+      \ 'sink':    function('s:plugs_sink')}))
 endif
 
 
@@ -645,25 +675,9 @@ func! CompileRunGcc()
     exec "! ./%<"
 endfunc
 
-
-" AirLine Settings
-hi paste       cterm=bold ctermfg=149 ctermbg=239 gui=bold guifg=#99CC66 guibg=#3a3a3a
-hi ale_error   cterm=None ctermfg=197 ctermbg=237 gui=None guifg=#CC0033 guibg=#3a3a3a
-hi ale_warning cterm=None ctermfg=214 ctermbg=237 gui=None guifg=#FFFF66 guibg=#3a3a3a
-
-hi User1 cterm=bold ctermfg=232 ctermbg=179 gui=Bold guifg=#333300 guibg=#FFBF48
-hi User2 cterm=None ctermfg=214 ctermbg=243 gui=None guifg=#FFBB7D guibg=#666666
-hi User3 cterm=None ctermfg=251 ctermbg=241 gui=None guifg=#c6c6c6 guibg=#585858
-hi User4 cterm=Bold ctermfg=177 ctermbg=239 gui=Bold guifg=#d75fd7 guibg=#4e4e4e
-hi User5 cterm=None ctermfg=208 ctermbg=238 gui=None guifg=#ff8700 guibg=#3a3a3a
-hi User6 cterm=Bold ctermfg=178 ctermbg=237 gui=Bold guifg=#FFE920 guibg=#444444
-hi User7 cterm=None ctermfg=250 ctermbg=238 gui=None guifg=#bcbcbc guibg=#444444
-hi User8 cterm=None ctermfg=249 ctermbg=239 gui=None guifg=#b2b2b2 guibg=#4e4e4e
-hi User9 cterm=None ctermfg=249 ctermbg=241 gui=None guifg=#b2b2b2 guibg=#606060
-
+let g:airline_theme='simple'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
-
 let g:airline_symbols = {}
 let g:airline_symbols.linenr = '␊'
 let g:airline_symbols.linenr = '␤'
@@ -671,3 +685,5 @@ let g:airline_symbols.linenr = '¶'
 let g:airline_symbols.branch = '⎇'
 let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.whitespace = 'Ξ'
+
+
