@@ -737,8 +737,8 @@ function! File_size(f)
 endfunction
 
 function! MyStatusLine()
-
     set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+
     if has('gui_running')
         let l:buf_num = '%1* [B-%n] [W-%{winnr()}] %*'
     else
