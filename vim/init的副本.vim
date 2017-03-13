@@ -195,7 +195,7 @@ set termguicolors
 "colorscheme space-vim-dark
 
 if has('gui_running')
-  set guifont=Menlo:h18
+  set guifont=Menlo:h14 columns=80 lines=40
   silent! colo seoul256
 else
   silent! colo seoul256
@@ -254,11 +254,20 @@ map <leader>tm :tabmove
 
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
+
 " ----------------------------------------------------------------------------
 " 移动选中内容
 " ----------------------------------------------------------------------------
 nnoremap <silent> <C-k> :move-2<cr>
 nnoremap <silent> <C-j> :move+<cr>
+nnoremap <silent> <C-h> <<
+nnoremap <silent> <C-l> >>
+xnoremap <silent> <C-k> :move-2<cr>gv
+xnoremap <silent> <C-j> :move'>+<cr>gv
+xnoremap <silent> <C-h> <gv
+xnoremap <silent> <C-l> >gv
+xnoremap < <gv
+xnoremap > >gv
 
 " ----------------------------------------------------------------------------
 " 预览文件
