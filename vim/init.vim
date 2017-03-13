@@ -1,6 +1,6 @@
 "判断操作系统是否是 Windows 还是 Linux
-        let g:iswindows = 0
-    let g:islinux = 0
+let g:iswindows = 0
+let g:islinux = 0
 if(has("win32") || has("win64") || has("win95") || has("win16"))
     let g:iswindows = 1
 else
@@ -21,23 +21,13 @@ endif
 call plug#begin('~/.vim/plugged')
 
 "会话
-Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
+"Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 
 "UI
-"Plug 'liuchengxu/space-vim-dark'
-"Plug 'itchyny/lightline.vim'
-"Plug 'ajh17/Spacegray.vim'
-"Plug 'morhetz/gruvbox'
 Plug 'junegunn/seoul256.vim'
-
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
-
-Plug 'c.vim'
-
-Plug 'AlessandroYorba/Monrovia'
-Plug 'morhetz/gruvbox'
-Plug 'liuchengxu/space-vim-dark'
+"Plug 'AlessandroYorba/Monrovia'
+"Plug 'morhetz/gruvbox'
+"Plug 'liuchengxu/space-vim-dark'
 
 "Plug 'eugen0329/vim-esearch'
 
@@ -58,7 +48,7 @@ Plug 'terryma/vim-multiple-cursors'
 
 "辅助
 "Plug 'ybian/smartim'
-Plug 'asins/vimcdoc'
+"Plug 'asins/vimcdoc'
 Plug 'Chiel92/vim-autoformat'
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
@@ -72,10 +62,10 @@ Plug 'terryma/vim-expand-region'
 "Plug 'kien/rainbow_parentheses.vim'
 "Plug 'Yggdroot/indentLine'
 "Plug 'bronson/vim-trailing-whitespace'
-Plug 'vim-scripts/YankRing.vim'
+"Plug 'vim-scripts/YankRing.vim'
 "Plug 'sjl/gundo.vim'
 Plug 'tpope/vim-repeat'
-Plug 'mbriggs/mark.vim'
+"Plug 'mbriggs/mark.vim'
 "Plug 'mattesgroeger/vim-bookmarks'
 Plug 'justinmk/vim-gtfo'
 
@@ -96,9 +86,10 @@ Plug 'w0rp/ale'
 Plug 'ap/vim-css-color'
 "Plug 'posva/vim-vue'
 Plug 'Junza/Spink'
-Plug 'chemzqm/wxapp.vim'
+"Plug 'chemzqm/wxapp.vim'
 "Plug 'godlygeek/tabular'
 Plug 'wavded/vim-stylus'
+Plug 'c.vim'
 
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "let g:deoplete#enable_at_startup = 1
@@ -670,7 +661,7 @@ endfunc
 
 
 
-
+"状态栏
 function! S_buf_num()
     let l:circled_num_list = ['① ', '② ', '③ ', '④ ', '⑤ ', '⑥ ', '⑦ ', '⑧ ', '⑨ ', '⑩ ',
                 \             '⑪ ', '⑫ ', '⑬ ', '⑭ ', '⑮ ', '⑯ ', '⑰ ', '⑱ ', '⑲ ', '⑳ ']
@@ -829,10 +820,7 @@ function! s:copy_rtf(line1, line2, ...)
   let &l:nu = nu
   execute 'colorscheme' cs
 endfunction
-
-if s:darwin
-  command! -range=% -nargs=? -complete=customlist,s:colors CopyRTF call s:copy_rtf(<line1>, <line2>, <f-args>)
-endif
+command! -range=% -nargs=? -complete=customlist,s:colors CopyRTF call s:copy_rtf(<line1>, <line2>, <f-args>)
 
 
 
@@ -847,5 +835,3 @@ function! s:rotate_colors()
   echo name
 endfunction
 nnoremap <silent> <F8> :call <SID>rotate_colors()<cr>
-
-
