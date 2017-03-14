@@ -1,3 +1,4 @@
+"初始化配置
 "判断操作系统是否是 Windows 还是 Linux
 let g:iswindows = 0
 let g:islinux = 0
@@ -6,7 +7,6 @@ if(has("win32") || has("win64") || has("win95") || has("win16"))
 else
     let g:islinux = 1
 endif
-
 "判断是终端还是 Gvim
 if has("gui_running")
     let g:isGUI = 1
@@ -16,7 +16,7 @@ endif
 
 
 """""""""""""
-"  插件配置
+"  插件列表
 """""""""""""
 call plug#begin('~/.vim/plugged')
 
@@ -29,7 +29,6 @@ Plug 'junegunn/seoul256.vim'
 "Plug 'morhetz/gruvbox'
 "Plug 'liuchengxu/space-vim-dark'
 
-"Plug 'eugen0329/vim-esearch'
 
 "搜索
 "Plug 'mileszs/ack.vim'
@@ -38,38 +37,35 @@ Plug 'junegunn/seoul256.vim'
 "Plug 'haya14busa/incsearch-easymotion.vim'
 "Plug 'gelguy/cmd2.vim'
 "Plug 'justinmk/vim-sneak'
-Plug 'rhysd/clever-f.vim'
+"Plug 'eugen0329/vim-esearch'
 
 
 "跳转
-Plug 'easymotion/vim-easymotion'
-Plug 'terryma/vim-multiple-cursors'
-"Plug 'majutsushi/tagbar'
-
-"辅助
-"Plug 'ybian/smartim'
-"Plug 'asins/vimcdoc'
-Plug 'Chiel92/vim-autoformat'
-Plug 'sirver/ultisnips'
-Plug 'honza/vim-snippets'
-"Plug 'roman/golden-ratio'
-Plug 'szw/vim-maximizer'
-Plug 'scrooloose/nerdcommenter'
-Plug 'iamcco/dict.vim'
-Plug 'ervandew/supertab'
+Plug 'easymotion/vim-easymotion'                            "快速搜索
+Plug 'terryma/vim-multiple-cursors'                         "多点编辑
+Plug 'rhysd/clever-f.vim'                                   "F增强多行搜索
+Plug 'asins/vimcdoc'                                        "中文帮助文档
+Plug 'Chiel92/vim-autoformat'                               "自动格式化
+Plug 'sirver/ultisnips'                                     "代码片段
+Plug 'honza/vim-snippets'                                   "代码片段
+Plug 'roman/golden-ratio'                                   "窗口自动缩放
+Plug 'szw/vim-maximizer'                                    "窗口最大化
+Plug 'scrooloose/nerdcommenter'                             "注释插件
+Plug 'iamcco/dict.vim'                                      "翻译插件
+Plug 'ervandew/supertab'                                    "TAB增强
 Plug 'Raimondi/delimitMate'
-Plug 'terryma/vim-expand-region'
+Plug 'terryma/vim-expand-region'                            "V选择增强
 "Plug 'kien/rainbow_parentheses.vim'
 "Plug 'Yggdroot/indentLine'
 "Plug 'bronson/vim-trailing-whitespace'
 "Plug 'vim-scripts/YankRing.vim'
 "Plug 'sjl/gundo.vim'
-Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-repeat'                                     "替换增强
 "Plug 'mbriggs/mark.vim'
 "Plug 'mattesgroeger/vim-bookmarks'
-Plug 'justinmk/vim-gtfo'
-Plug 'danro/rename.vim'
-Plug 'mhinz/vim-signify'
+Plug 'justinmk/vim-gtfo'                                    "当前文件跳转
+Plug 'danro/rename.vim'                                     "文件重命名
+Plug 'mhinz/vim-signify'                                    "版本控制显示
 "Plug 'terryma/vim-smooth-scroll'
 
 "语言
