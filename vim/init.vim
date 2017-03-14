@@ -68,7 +68,7 @@ Plug 'tpope/vim-repeat'
 "Plug 'mbriggs/mark.vim'
 "Plug 'mattesgroeger/vim-bookmarks'
 Plug 'justinmk/vim-gtfo'
-
+Plug 'danro/rename.vim'
 Plug 'mhinz/vim-signify'
 "Plug 'terryma/vim-smooth-scroll'
 
