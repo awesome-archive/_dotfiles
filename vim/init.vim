@@ -21,14 +21,17 @@ endif
 call plug#begin('~/.vim/plugged')
 
 "会话
-"Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
+Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 
 "UI
 Plug 'junegunn/seoul256.vim'
 "Plug 'AlessandroYorba/Monrovia'
 "Plug 'morhetz/gruvbox'
 "Plug 'liuchengxu/space-vim-dark'
+Plug 'joshdick/onedark.vim'
 
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 "搜索
 "Plug 'mileszs/ack.vim'
@@ -39,6 +42,7 @@ Plug 'junegunn/seoul256.vim'
 "Plug 'justinmk/vim-sneak'
 "Plug 'eugen0329/vim-esearch'
 
+Plug 'tomasr/molokai'
 
 "跳转
 Plug 'easymotion/vim-easymotion'                            "快速搜索
@@ -48,7 +52,7 @@ Plug 'asins/vimcdoc'                                        "中文帮助文档
 Plug 'Chiel92/vim-autoformat'                               "自动格式化
 Plug 'sirver/ultisnips'                                     "代码片段
 Plug 'honza/vim-snippets'                                   "代码片段
-Plug 'roman/golden-ratio'                                   "窗口自动缩放
+"Plug 'roman/golden-ratio'                                   "窗口自动缩放
 Plug 'szw/vim-maximizer'                                    "窗口最大化
 Plug 'scrooloose/nerdcommenter'                             "注释插件
 Plug 'iamcco/dict.vim'                                      "翻译插件
@@ -80,7 +84,7 @@ Plug 'isRuslan/vim-es6'
 "Plug 'vim-syntastic/syntastic'
 Plug 'w0rp/ale'
 Plug 'ap/vim-css-color'
-"Plug 'posva/vim-vue'
+Plug 'posva/vim-vue'
 Plug 'Junza/Spink'
 "Plug 'chemzqm/wxapp.vim'
 "Plug 'godlygeek/tabular'
@@ -184,6 +188,7 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 "UI设置
 set t_Co=256
 set background=dark
+let g:rehash256 = 1
 "set background=light
     "colorscheme Spacegray
 set termguicolors
@@ -191,10 +196,13 @@ set termguicolors
 "colorscheme space-vim-dark
 
 if has('gui_running')
-  set guifont=Menlo:h18
-  silent! colo seoul256
+  set guifont=Menlo:h20
+  silent! colo onedark
 else
-  silent! colo seoul256
+  "silent! colo seoul256
+  silent! colo onedark
+"let g:molokai_original = 1
+"colorscheme molokai
   "silent! colo seoul256-light
 endif
 
@@ -367,7 +375,7 @@ let NERDTreeWinPos="left"
 let NERDTreeShowHidden=2
 let NERDTreeMinimalUI=1
 let NERDTreeAutoDeleteBuffer=1
-let NERDTreeQuitOnOpen=1
+let NERDTreeQuitOnOpen=0
 let NERDTreeChDirMode=2
 let NERDTreeDirArrows=2
 let NERDTreeHighlightCursorline=1
@@ -576,8 +584,6 @@ endif
 
 
 "macmenu &File.Close key=<nop>
-nmap <D-w> :CommandW<CR>
-imap <D-w> <Esc>:CommandW<CR>
 
 
 
@@ -764,7 +770,7 @@ function! MyStatusLine()
     return l:buf_num.l:tot.'%<'.l:fs.l:fp.l:git.l:paste.l:ale_e.l:ale_w.
                 \   '%='.l:m_r_f.l:ff.l:enc.l:pos.l:pct
 endfunction
-set statusline=%!MyStatusLine()
+"set statusline=%!MyStatusLine()
 
 
 " ----------------------------------------------------------------------------
@@ -822,3 +828,20 @@ function! s:rotate_colors()
   echo name
 endfunction
 nnoremap <silent> <F8> :call <SID>rotate_colors()<cr>
+
+let g:airline_powerline_fonts = 1   
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#whitespace#symbol = '!'
+"set guifont=Consolas\ for\ Powerline\ FixedD:h11
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_left_sep = '⮀'
+let g:airline_left_alt_sep = '⮁'
+let g:airline_right_sep = '⮂'
+let g:airline_right_alt_sep = '⮃'
+let g:airline_symbols.branch = '⭠'
+let g:airline_symbols.readonly = '⭤'
