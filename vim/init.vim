@@ -32,6 +32,9 @@ Plug 'joshdick/onedark.vim'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-scripts/Solarized'
+Plug 'lysyi3m/osx-terminal-themes'
+
 
 "搜索
 "Plug 'mileszs/ack.vim'
@@ -188,10 +191,10 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 "UI设置
 set t_Co=256
 set background=dark
-let g:rehash256 = 1
+"let g:rehash256 = 1
 "set background=light
     "colorscheme Spacegray
-set termguicolors
+"set termguicolors
 "colorscheme gruvbox
 "colorscheme space-vim-dark
 
@@ -205,6 +208,7 @@ else
 "colorscheme molokai
   "silent! colo seoul256-light
 endif
+
 
 
 
@@ -839,9 +843,16 @@ let g:airline#extensions#whitespace#symbol = '!'
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
-let g:airline_left_sep = '⮀'
-let g:airline_left_alt_sep = '⮁'
-let g:airline_right_sep = '⮂'
-let g:airline_right_alt_sep = '⮃'
+"let g:airline_left_sep = '⮀'
+"let g:airline_left_alt_sep = '⮁'
+"let g:airline_right_sep = '⮂'
+"let g:airline_right_alt_sep = '⮃'
+"let g:airline_symbols.branch = '⭠'
+"let g:airline_symbols.readonly = '⭤'
+
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = '⭠'
 let g:airline_symbols.readonly = '⭤'
