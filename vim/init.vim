@@ -168,7 +168,7 @@ map <Leader>puw :!bash ~/vimwiki/push.sh<CR>
 nmap <silent> <Leader>ev :e $MYVIMRC<CR>
 nmap <silent> <Leader>es :so $MYVIMRC<CR>
 nmap <silent> <Leader>pl :PlugInstall<CR>
-nmap <silent> <Leader>ez :e ~/dotfiles/zhs/zshrc<CR>
+nmap <silent> <Leader>ez :e ~/dotfiles/zsh/zshrc<CR>
 nnoremap <S-h> 0
 nnoremap <S-l> $
 vnoremap <silent> y y`]
