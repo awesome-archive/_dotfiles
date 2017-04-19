@@ -6,7 +6,7 @@ rm ~/.config/nvim
 
 ln -s ~/dotfiles/zsh/zshrc ~/.zshrc
 ln -s ~/dotfiles/vim/init.vim ~/.vimrc
-ln -s ~/dotfiles/vim/init.vim ~/init.vim
+ln -s ~/dotfiles/vim/init.vim ~/.vim/init.vim
 ln -s ~/.vim/ ~/.config/nvim
 ln -s  ~/dotfiles/UltiSnips/ ~/.vim/UltiSnips
 
