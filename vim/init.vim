@@ -6,14 +6,15 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 "UI
 Plug 'joshdick/onedark.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+"Plug 'tell-k/vim-autopep8'
 
 "跳转
 Plug 'easymotion/vim-easymotion'                            "快速搜索
 Plug 'terryma/vim-multiple-cursors'                         "多点编辑
 Plug 'rhysd/clever-f.vim'                                   "F增强多行搜索
-Plug 'asins/vimcdoc'                                        "中文帮助文档
+"Plug 'asins/vimcdoc'                                        "中文帮助文档
 Plug 'Chiel92/vim-autoformat'                               "自动格式化
 Plug 'sirver/ultisnips'                                     "代码片段
 Plug 'honza/vim-snippets'                                   "代码片段
@@ -28,28 +29,35 @@ Plug 'vim-scripts/YankRing.vim'
 Plug 'tpope/vim-repeat'                                     "替换增强
 Plug 'justinmk/vim-gtfo'                                    "当前文件跳转
 Plug 'danro/rename.vim'                                     "文件重命名
-Plug 'mhinz/vim-signify'                                    "版本控制显示
+"Plug 'mhinz/vim-signify'                                    "版本控制显示
 
 "语言
 Plug 'othree/html5.vim'
 Plug 'matchit.zip'
 Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 Plug 'pangloss/vim-javascript'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
+"Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
+
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] }
+"Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] }
 Plug 'isRuslan/vim-es6'
 Plug 'w0rp/ale'
 Plug 'ap/vim-css-color'
-Plug 'posva/vim-vue'
+"Plug 'posva/vim-vue'
 Plug 'Junza/Spink'
+"Plug 'digitaltoad/vim-pug'
 "Plug 'chemzqm/wxapp.vim'
-Plug 'wavded/vim-stylus'
+"Plug 'wavded/vim-stylus'
 "文件操作
 Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'tweekmonster/fzf-filemru'
+
+"Plug 'vimwiki/vimwiki'
+
 
 call plug#end()
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
@@ -150,6 +158,7 @@ map <Leader>l <C-W>l
 map <Leader>T :%s/\s\+$//<CR>
 nmap <leader>F :%s//g<LEFT><LEFT>
 map <Leader>push :!bash ~/dotfiles/scripts/push.sh<CR>
+map <Leader>puw :!bash ~/vimwiki/push.sh<CR>
 nmap <silent> <Leader>ev :e $MYVIMRC<CR>
 nmap <silent> <Leader>es :so $MYVIMRC<CR>
 nmap <silent> <Leader>pl :PlugInstall<CR>
@@ -264,7 +273,7 @@ nnoremap <tab> :MaximizerToggle<CR>
 " ----------------------------------------------------------------------------
 " emmet
 " ----------------------------------------------------------------------------
-let g:user_emmet_expandabbr_key='<d-j>'
+"let g:user_emmet_expandabbr_key='<d-j>'
 " ----------------------------------------------------------------------------
 " NERDT
 " ----------------------------------------------------------------------------
@@ -284,32 +293,34 @@ let g:NERDTreeMapOpenVSplit = 'v'
 let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$', '\~$', '\.pyc$', '\.swp$', '\.DS_Store']
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | end
 
+let g:deoplete#enable_at_startup = 1
+
 " ----------------------------------------------------------------------------
 " YouCompleteMe
 " ----------------------------------------------------------------------------
-let g:ycm_min_num_of_chars_for_completion = 1
-let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_min_num_of_chars_for_completion = 1
-let g:ycm_complete_in_comments=1
-let g:ycm_confirm_extra_conf=0
-let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_collect_identifiers_from_tags_files=1
-let g:ycm_complete_in_comments = 1
-let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
-let g:ycm_complete_in_comments=1
-let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
-let g:ycm_seed_identifiers_with_syntax=1
-let g:ycm_cache_omnifunc=0
-set completeopt-=preview
-function! MyTabFunction ()
-  let line = getline('.')
-  let substr = strpart(line, -1, col('.')+1)
-  let substr = matchstr(substr, "[^ \t]*$")
-  if strlen(substr) == 0
-    return "\<tab>"
-  endif
-  return pumvisible() ? "\<c-n>" : "\<c-x>\<c-o>"
-endfunction
+"let g:ycm_min_num_of_chars_for_completion = 1
+"let g:ycm_autoclose_preview_window_after_completion=1
+"let g:ycm_min_num_of_chars_for_completion = 1
+"let g:ycm_complete_in_comments=1
+"let g:ycm_confirm_extra_conf=0
+"let g:ycm_autoclose_preview_window_after_completion=1
+"let g:ycm_collect_identifiers_from_tags_files=1
+"let g:ycm_complete_in_comments = 1
+"let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
+"let g:ycm_complete_in_comments=1
+"let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+"let g:ycm_seed_identifiers_with_syntax=1
+"let g:ycm_cache_omnifunc=0
+"set completeopt-=preview
+"function! MyTabFunction ()
+  "let line = getline('.')
+  "let substr = strpart(line, -1, col('.')+1)
+  "let substr = matchstr(substr, "[^ \t]*$")
+  "if strlen(substr) == 0
+    "return "\<tab>"
+  "endif
+  "return pumvisible() ? "\<c-n>" : "\<c-x>\<c-o>"
+"endfunction
 
 " ----------------------------------------------------------------------------
 " SuperTab
@@ -412,17 +423,21 @@ source $VIMRUNTIME/menu.vim
 set encoding=utf-8
 set langmenu=zh_CN.UTF-8
 
-let g:airline_powerline_fonts = 1   
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#whitespace#symbol = '!'
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = '⭠'
-let g:airline_symbols.readonly = '⭤'
+"let g:airline_powerline_fonts = 1   
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#buffer_nr_show = 1
+"let g:airline#extensions#whitespace#enabled = 0
+"let g:airline#extensions#whitespace#symbol = '!'
+"if !exists('g:airline_symbols')
+    "let g:airline_symbols = {}
+"endif
+"let g:airline_left_sep = ''
+"let g:airline_left_alt_sep = ''
+"let g:airline_right_sep = ''
+"let g:airline_right_alt_sep = ''
+"let g:airline_symbols.branch = '⭠'
+"let g:airline_symbols.readonly = '⭤'
+
+
+let g:vimwiki_list = [{'path': '~/vimwiki',  'template_path': '~/vimwiki/template', 'template_default': 'default.tpl', 'path_html': '~/vimwiki/vimwiki_html'}]
+
