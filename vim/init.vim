@@ -6,9 +6,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 "UI
 Plug 'joshdick/onedark.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'tyrannicaltoucan/vim-quantum'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+"Plug 'tyrannicaltoucan/vim-quantum'
 Plug 'morhetz/gruvbox'
 "Plug 'tell-k/vim-autopep8'
 
@@ -441,48 +441,48 @@ source $VIMRUNTIME/menu.vim
 set encoding=utf-8
 set langmenu=zh_CN.UTF-8
 
-let g:airline_powerline_fonts = 1   
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#whitespace#symbol = '!'
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = '⭠'
-let g:airline_symbols.readonly = '⭤'
+"let g:airline_powerline_fonts = 1   
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#buffer_nr_show = 1
+"let g:airline#extensions#whitespace#enabled = 0
+"let g:airline#extensions#whitespace#symbol = '!'
+"if !exists('g:airline_symbols')
+    "let g:airline_symbols = {}
+"endif
+"let g:airline_left_sep = ''
+"let g:airline_left_alt_sep = ''
+"let g:airline_right_sep = ''
+"let g:airline_right_alt_sep = ''
+"let g:airline_symbols.branch = '⭠'
+"let g:airline_symbols.readonly = '⭤'
 
-"function! Buf_total_num()
-    "return len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
-"endfunction
-"function! File_size(f)
-    "let l:size = getfsize(expand(a:f))
-    "if l:size == 0 || l:size == -1 || l:size == -2
-        "return ''
-    "endif
-    "if l:size < 1024
-        "return l:size.' bytes'
-    "elseif l:size < 1024*1024
-        "return printf('%.1f', l:size/1024.0).'k'
-    "elseif l:size < 1024*1024*1024
-        "return printf('%.1f', l:size/1024.0/1024.0) . 'm'
-    "else
-        "return printf('%.1f', l:size/1024.0/1024.0/1024.0) . 'g'
-    "endif
-"endfunction
-"set statusline=%<%1*[B-%n]%*
-"" TOT is an abbreviation for total
-"set statusline+=%2*[TOT:%{Buf_total_num()}]%*
-"set statusline+=%3*\ %{File_size(@%)}\ %*
-"set statusline+=%4*\ %F\ %*
-"set statusline+=%5*『\ %{exists('g:loaded_ale')?ALEGetStatusLine():''}』%{exists('g:loaded_fugitive')?fugitive#statusline():''}%*
-"set statusline+=%6*\ %m%r%y\ %*
-"set statusline+=%=%7*\ %{&ff}\ \|\ %{\"\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"\ \|\"}\ %-14.(%l:%c%V%)%*
-"set statusline+=%8*\ %P\ %*
+function! Buf_total_num()
+    return len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
+endfunction
+function! File_size(f)
+    let l:size = getfsize(expand(a:f))
+    if l:size == 0 || l:size == -1 || l:size == -2
+        return ''
+    endif
+    if l:size < 1024
+        return l:size.' bytes'
+    elseif l:size < 1024*1024
+        return printf('%.1f', l:size/1024.0).'k'
+    elseif l:size < 1024*1024*1024
+        return printf('%.1f', l:size/1024.0/1024.0) . 'm'
+    else
+        return printf('%.1f', l:size/1024.0/1024.0/1024.0) . 'g'
+    endif
+endfunction
+set statusline=%<%1*[B-%n]%*
+" TOT is an abbreviation for total
+set statusline+=%2*[TOT:%{Buf_total_num()}]%*
+set statusline+=%3*\ %{File_size(@%)}\ %*
+set statusline+=%4*\ %F\ %*
+set statusline+=%5*『\ %{exists('g:loaded_ale')?ALEGetStatusLine():''}』%{exists('g:loaded_fugitive')?fugitive#statusline():''}%*
+set statusline+=%6*\ %m%r%y\ %*
+set statusline+=%=%7*\ %{&ff}\ \|\ %{\"\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"\ \|\"}\ %-14.(%l:%c%V%)%*
+set statusline+=%8*\ %P\ %*
 
 
 let g:vimwiki_list = [{'path': '~/vimwiki',  'template_path': '~/vimwiki/template', 'template_default': 'default.tpl', 'path_html': '~/vimwiki/vimwiki_html'}]
