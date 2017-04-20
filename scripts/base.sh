@@ -21,6 +21,9 @@ ln -s ~/dotfiles/zsh/zshrc ~/.zshrc
 echo '设置终端默认为zsh'
 chsh -s /bin/zsh
 
+echo '安装brew基本组件'
+brew tap phinze/homebrew-cask brew install brew-cask
+
 echo '安装ack'
 brew install ack
 
@@ -33,8 +36,6 @@ brew install tree
 echo '安装tmux'
 brew install tmux
 
-echo '安装macvim'
-brew install macvim
 
 echo '安装tig'
 brew install tig
@@ -50,6 +51,25 @@ brew install neovim/neovim/neovim
 
 echo '安装fzf'
 brew install fzf
+
+###############
+
+echo '可视化软件安装'
+
+echo '安装macvim'
+brew cask install macvim
+
+echo '安装chrome'
+brew cask install google-chrome
+
+echo '安装teamviewer'
+brew cask install teamviewer
+
+echo '安装teamviewer'
+brew cask install teamviewer
+
+###############
+
 
 echo '安装npm基本插件'
 npm i -g jshint csscomb js-beautify jsonlint http-server gulp webpack
