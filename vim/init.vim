@@ -32,14 +32,12 @@ Plug 'tpope/vim-repeat'                                     "替换增强
 Plug 'justinmk/vim-gtfo'                                    "当前文件跳转
 Plug 'danro/rename.vim'                                     "文件重命名
 Plug 'mhinz/vim-signify'                                    "版本控制显示
-
 "语言
 Plug 'othree/html5.vim'
 Plug 'matchit.zip'
 Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 Plug 'pangloss/vim-javascript'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
-
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] }
 Plug 'isRuslan/vim-es6'
@@ -53,7 +51,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'tweekmonster/fzf-filemru'
-
 "js
 Plug 'othree/html5.vim'
 Plug 'othree/yajs.vim'
@@ -63,53 +60,46 @@ Plug 'moll/vim-node'
 "css
 Plug 'hail2u/vim-css3-syntax', {'for':['css','scss', 'styl', 'less']}
 Plug 'valloric/MatchTagAlways', { 'for': ['html', 'css', 'javascript'] }
-
-
-
-
-
-
 call plug#end()
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 """""""""""""
 "  基础设置
 """""""""""""
+set termguicolors
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+set clipboard+=unnamedplus
+set nopaste
+autocmd BufWritePre * %s/\s\+$//e
+set noshowmode
+set noswapfile
+filetype on
+set  number
+set tabstop=2 shiftwidth=2 expandtab
+set conceallevel=0
+set virtualedit=
+set wildmenu
+set laststatus=2
+set wrap linebreak nolist
+set wildmode=full
+let mapleader = ' '
+autocmd BufReadPost *
+      \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+      \   exe "normal! g'\"" |
+      \ endif
+" center buffer around cursor when opening files
+autocmd BufRead * normal zz
+set updatetime=500
+set complete=.,w,b,u,t,k
+autocmd InsertEnter * let save_cwd = getcwd() | set autochdir
+autocmd InsertLeave * set noautochdir | execute 'cd' fnameescape(save_cwd)
 
-  set termguicolors
-  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-  set clipboard+=unnamedplus
-  set nopaste
-  autocmd BufWritePre * %s/\s\+$//e
-  set noshowmode
-  set noswapfile
-  filetype on
-  set  number
-  set tabstop=2 shiftwidth=2 expandtab
-  set conceallevel=0
-  set virtualedit=
-  set wildmenu
-  set laststatus=2
-  set wrap linebreak nolist
-  set wildmode=full
-  let mapleader = ' '
-  autocmd BufReadPost *
-              \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-              \   exe "normal! g'\"" |
-              \ endif
-              " center buffer around cursor when opening files
-  autocmd BufRead * normal zz
-  set updatetime=500
-  set complete=.,w,b,u,t,k
-  autocmd InsertEnter * let save_cwd = getcwd() | set autochdir
-  autocmd InsertLeave * set noautochdir | execute 'cd' fnameescape(save_cwd)
+let g:indentLine_char='│'
+let g:indentLine_color_gui = '#74818b'
+let g:table_mode_corner="|"
 
-  let g:indentLine_char='│'
-  let g:indentLine_color_gui = '#74818b'
-  let g:table_mode_corner="|"
-
-  set formatoptions+=t
-  set inccommand=nosplit
-  set shortmess=atI
+set formatoptions+=t
+set inccommand=nosplit
+set shortmess=atI
 
 
 
