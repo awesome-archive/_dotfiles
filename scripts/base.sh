@@ -19,6 +19,9 @@ echo '安装zsh'
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 ln -s ~/dotfiles/zsh/zshrc ~/.zshrc
 
+echo '设置终端默认为zsh'
+chsh -s /bin/zsh
+
 echo '安装ack'
 brew install ack
 
@@ -77,6 +80,11 @@ ln -s  ~/dotfiles/UltiSnips/ ~/.vim/UltiSnips
 
 echo '链接nvim'
 ln -s ~/.vim ~/.config/nvim
+
+
+echo '打开隐藏文件'
+defaults write com.apple.finder AppleShowAllFiles -bool true
+
 
 #插件安装
 vim +PlugInstall +PlugUpdate +PlugClean! +qall
