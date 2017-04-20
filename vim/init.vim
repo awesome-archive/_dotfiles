@@ -31,34 +31,42 @@ Plug 'vim-scripts/YankRing.vim'
 Plug 'tpope/vim-repeat'                                     "替换增强
 Plug 'justinmk/vim-gtfo'                                    "当前文件跳转
 Plug 'danro/rename.vim'                                     "文件重命名
-"Plug 'mhinz/vim-signify'                                    "版本控制显示
+Plug 'mhinz/vim-signify'                                    "版本控制显示
 
 "语言
 Plug 'othree/html5.vim'
 Plug 'matchit.zip'
 Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 Plug 'pangloss/vim-javascript'
-"Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
-
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
 
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-"Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] }
+Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] }
 Plug 'isRuslan/vim-es6'
 Plug 'w0rp/ale'
 Plug 'ap/vim-css-color'
 "Plug 'posva/vim-vue'
 Plug 'Junza/Spink'
 "Plug 'digitaltoad/vim-pug'
-"Plug 'chemzqm/wxapp.vim'
-"Plug 'wavded/vim-stylus'
 "文件操作
 Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'tweekmonster/fzf-filemru'
 
-"Plug 'vimwiki/vimwiki'
+"js
+Plug 'othree/html5.vim'
+Plug 'othree/yajs.vim'
+Plug 'othree/jsdoc-syntax.vim'
+Plug 'heavenshell/vim-jsdoc'
+Plug 'moll/vim-node'
+"css
+Plug 'hail2u/vim-css3-syntax', {'for':['css','scss', 'styl', 'less']}
+Plug 'valloric/MatchTagAlways', { 'for': ['html', 'css', 'javascript'] }
+
+
+
+
 
 
 call plug#end()
@@ -66,70 +74,52 @@ silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 """""""""""""
 "  基础设置
 """""""""""""
-set history=500
-filetype plugin on
-filetype indent on
-set autoread
-let mapleader = " "
-let g:mapleader = " "
-set cursorline
-set so=5
+
+  set termguicolors
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+  set clipboard+=unnamedplus
+  set nopaste
+  autocmd BufWritePre * %s/\s\+$//e
+  set noshowmode
+  set noswapfile
+  filetype on
+  set  number
+  set tabstop=2 shiftwidth=2 expandtab
+  set conceallevel=0
+  set virtualedit=
+  set wildmenu
+  set laststatus=2
+  set wrap linebreak nolist
+  set wildmode=full
+  let mapleader = ' '
+  autocmd BufReadPost *
+              \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+              \   exe "normal! g'\"" |
+              \ endif
+              " center buffer around cursor when opening files
+  autocmd BufRead * normal zz
+  set updatetime=500
+  set complete=.,w,b,u,t,k
+  autocmd InsertEnter * let save_cwd = getcwd() | set autochdir
+  autocmd InsertLeave * set noautochdir | execute 'cd' fnameescape(save_cwd)
+
+  let g:indentLine_char='│'
+  let g:indentLine_color_gui = '#74818b'
+  let g:table_mode_corner="|"
+
+  set formatoptions+=t
+  set inccommand=nosplit
+  set shortmess=atI
+
+
+
 set termencoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 set fileencoding=utf-8
 let helptags=$VIM."/vimfiles/doc"
 set helplang=cn
-set wildmenu
-set wildignore=*.o,*~,*.pyc
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
-set ruler
-set cmdheight=1
-set hid
-set backspace=eol,start,indent
-set whichwrap+=<,>,h,l
-set ignorecase
-set smartcase
-set hlsearch
-set incsearch
-set lazyredraw
-set magic
-set showmatch
-set mat=2
-set noerrorbells
-set novisualbell
-set t_vb=
-set tm=500
-syntax enable
-set ffs=unix,dos,mac
-set nobackup
-set nowb
-set noswapfile
-set expandtab
-set smarttab
-set shiftwidth=4
-set tabstop=4
-set lbr
-set tw=500
-set ai
-set si
-set wrap
-set guioptions-=l
-set guioptions-=L
-set guioptions-=r
-set guioptions-=R
-set guioptions-=m
-set guioptions-=T
-set breakindent
-set clipboard=unnamed
-set matchtime=5
-set mouse-=a "禁用鼠标
-set  nu
-se nocul
-autocmd InsertLeave * se nocul
-autocmd InsertEnter * se cul
 
-vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
-vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+set mouse-=a "禁用鼠标
 
 "UI设置
 set t_Co=256
@@ -188,7 +178,7 @@ imap <RIGHT> <Nop>
 imap <UP> <Nop>
 imap <DOWN> <Nop>
 
-"map <leader>t :tabnext
+map <leader>t :tabnext<cr>
 map <leader>tc :tabclose<cr>
 
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -291,7 +281,24 @@ nnoremap <tab> :MaximizerToggle<CR>
 " ----------------------------------------------------------------------------
 " emmet
 " ----------------------------------------------------------------------------
-"let g:user_emmet_expandabbr_key='<d-j>'
+function! s:expand_html_tab()
+  let line = getline('.')
+  if col('.') < len(line)
+    let line = matchstr(line, '[">][^<"]*\%'.col('.').'c[^>"]*[<"]')
+    if len(line) >= 2
+      return "\<C-n>"
+    endif
+  endif
+  if emmet#isExpandable()
+    return emmet#expandAbbrIntelligent("\<tab>")
+  endif
+  return "\<tab>"
+endfunction
+autocmd FileType html,css,scss imap <silent><buffer><expr><tab> <sid>expand_html_tab()
+let g:user_emmet_mode='a'
+let g:user_emmet_complete_tag = 0
+let g:user_emmet_install_global = 0
+autocmd FileType html,css,scss EmmetInstall
 " ----------------------------------------------------------------------------
 " NERDT
 " ----------------------------------------------------------------------------
@@ -316,29 +323,29 @@ let g:deoplete#enable_at_startup = 1
 " ----------------------------------------------------------------------------
 " YouCompleteMe
 " ----------------------------------------------------------------------------
-"let g:ycm_min_num_of_chars_for_completion = 1
-"let g:ycm_autoclose_preview_window_after_completion=1
-"let g:ycm_min_num_of_chars_for_completion = 1
-"let g:ycm_complete_in_comments=1
-"let g:ycm_confirm_extra_conf=0
-"let g:ycm_autoclose_preview_window_after_completion=1
-"let g:ycm_collect_identifiers_from_tags_files=1
-"let g:ycm_complete_in_comments = 1
-"let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
-"let g:ycm_complete_in_comments=1
-"let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
-"let g:ycm_seed_identifiers_with_syntax=1
-"let g:ycm_cache_omnifunc=0
-"set completeopt-=preview
-"function! MyTabFunction ()
-  "let line = getline('.')
-  "let substr = strpart(line, -1, col('.')+1)
-  "let substr = matchstr(substr, "[^ \t]*$")
-  "if strlen(substr) == 0
-    "return "\<tab>"
-  "endif
-  "return pumvisible() ? "\<c-n>" : "\<c-x>\<c-o>"
-"endfunction
+let g:ycm_min_num_of_chars_for_completion = 1
+let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_min_num_of_chars_for_completion = 1
+let g:ycm_complete_in_comments=1
+let g:ycm_confirm_extra_conf=0
+let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_collect_identifiers_from_tags_files=1
+let g:ycm_complete_in_comments = 1
+let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
+let g:ycm_complete_in_comments=1
+let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+let g:ycm_seed_identifiers_with_syntax=1
+let g:ycm_cache_omnifunc=0
+set completeopt-=preview
+function! MyTabFunction ()
+  let line = getline('.')
+  let substr = strpart(line, -1, col('.')+1)
+  let substr = matchstr(substr, "[^ \t]*$")
+  if strlen(substr) == 0
+    return "\<tab>"
+  endif
+  return pumvisible() ? "\<c-n>" : "\<c-x>\<c-o>"
+endfunction
 
 " ----------------------------------------------------------------------------
 " SuperTab
@@ -441,7 +448,7 @@ source $VIMRUNTIME/menu.vim
 set encoding=utf-8
 set langmenu=zh_CN.UTF-8
 
-"let g:airline_powerline_fonts = 1   
+"let g:airline_powerline_fonts = 1
 "let g:airline#extensions#tabline#enabled = 1
 "let g:airline#extensions#tabline#buffer_nr_show = 1
 "let g:airline#extensions#whitespace#enabled = 0
@@ -486,4 +493,5 @@ set statusline+=%8*\ %P\ %*
 
 
 let g:vimwiki_list = [{'path': '~/vimwiki',  'template_path': '~/vimwiki/template', 'template_default': 'default.tpl', 'path_html': '~/vimwiki/vimwiki_html'}]
+
 
