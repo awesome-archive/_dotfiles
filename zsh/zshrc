@@ -1,4 +1,4 @@
-export ZSH=/Users/iuunhao/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 
 ZSH_THEME="robbyrussell"
 ZSH_THEME="af-magic"
@@ -17,7 +17,7 @@ preexec () { print -Pn "\e]0;%n@%M//%/\ $1\a" }
 esac
 
 #编辑器
-export EDITOR=vim
+export EDITOR=nvim
 
 #允许在交互模式中使用注释  例如：
 setopt INTERACTIVE_COMMENTS
@@ -100,7 +100,7 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
 
-alias vi='vim'
+alias vi='nvim'
 
 alias gcl='git clone'
 alias gad='git add .'
@@ -114,8 +114,7 @@ alias glg='git log --pretty=format:"%h %s" --graph'
 alias gre='git reset --hard HEAD~1'
 
 alias h='nvim /etc/hosts'
-alias v='vim'
-alias n='nvim'
+alias v='nvim'
 alias vh='nvim /Applications/XAMPP/xamppfiles/etc/extra/httpd-vhosts.conf'
 alias web='webpack -d -w'
 
