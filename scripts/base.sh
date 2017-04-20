@@ -18,7 +18,6 @@ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/i
 echo '删除zshrc'
 rm -rf ~/.zshrc
 ln -s ~/dotfiles/zsh/zshrc ~/.zshrc
-
 echo '设置终端默认为zsh'
 chsh -s /bin/zsh
 

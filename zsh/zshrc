@@ -91,11 +91,10 @@ alias pacman='sudo pacman-color'
 alias p='sudo pacman-color'
 alias y='yaourt'
 
-alias cls='clear'
+alias c='clear'
 
 alias mkdir='mkdir -p'
 
-alias cls='tput reset'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
