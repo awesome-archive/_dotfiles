@@ -48,6 +48,9 @@ brew install node
 echo '安装nvim'
 brew install neovim/neovim/neovim
 
+echo '安装fzf'
+brew install fzf
+
 echo '安装npm基本插件'
 npm i -g jshint csscomb js-beautify jsonlint http-server gulp webpack
 
