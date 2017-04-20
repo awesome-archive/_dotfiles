@@ -13,10 +13,10 @@ echo '安装brew'
 # zsh
 echo '卸载zsh'
 rm -rf ~/.oh-my-zsh
-echo '删除zshrc'
-rm -rf ~/.zshrc
 echo '安装zsh'
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+echo '删除zshrc'
+rm -rf ~/.zshrc
 ln -s ~/dotfiles/zsh/zshrc ~/.zshrc
 
 echo '设置终端默认为zsh'
