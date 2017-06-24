@@ -111,7 +111,7 @@
 [core]
   autocrlf = false
   editor = vim
-  excludesfile = ~/dotfiles/git/gitignore
+	excludesfile = /Users/iuunhao/dotfiles/git/gitignore
 [advice]
   statusHints = false
 [diff]
@@ -128,3 +128,9 @@
 [user]
 	name = iuunhao
 	email = html.5@foxmail.com
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
