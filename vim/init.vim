@@ -9,8 +9,8 @@ Plug 'joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tyrannicaltoucan/vim-quantum'
-Plug 'morhetz/gruvbox'
 "Plug 'tell-k/vim-autopep8'
+Plug 'drewtempelmeyer/palenight.vim'
 
 "跳转
 Plug 'easymotion/vim-easymotion'                            "快速搜索
@@ -41,7 +41,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] }
-Plug 'isRuslan/vim-es6'
+"Plug 'isRuslan/vim-es6'
 Plug 'w0rp/ale'
 Plug 'ap/vim-css-color'
 "Plug 'posva/vim-vue'
@@ -453,11 +453,15 @@ let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = '⭠'
-let g:airline_symbols.readonly = '⭤'
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
 
 
 
 let g:vimwiki_list = [{'path': '~/vimwiki',  'template_path': '~/vimwiki/template', 'template_default': 'default.tpl', 'path_html': '~/vimwiki/vimwiki_html'}]
 
+
+set background=dark
+colorscheme palenight
+let g:palenight_terminal_italics=1
 
