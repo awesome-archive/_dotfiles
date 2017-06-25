@@ -70,8 +70,10 @@ set noshowmode
 set noswapfile
 filetype on
 set  number
-set shiftwidth=4
+set smartindent
 set tabstop=4
+set shiftwidth=4
+set expandtab
 set softtabstop=4
 set conceallevel=0
 set virtualedit=
