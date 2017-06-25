@@ -14,6 +14,7 @@ Plug 'drewtempelmeyer/palenight.vim'
 Plug 'itchyny/lightline.vim'
 
 "辅助增强
+Plug 'vimwiki/vimwiki'
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'                         "多点编辑
 Plug 'easymotion/vim-easymotion'                            "快速搜索
