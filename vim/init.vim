@@ -36,8 +36,6 @@ Plug 'mhinz/vim-signify'                                    "版本控制显示
 Plug 'ervandew/supertab'
 
 "语言
-Plug 'plasticscafe/vim-stylus-autocompile'
-Plug 'othree/csscomplete.vim'
 Plug 'matchit.zip'
 Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 Plug 'pangloss/vim-javascript'
@@ -400,20 +398,7 @@ let g:tern#filetypes = [
 " ----------------------------------------------------------------------------
 map <Leader>hv :e /Applications/XAMPP/xamppfiles/etc/extra/httpd-vhosts.conf<CR>
 map <Leader>hh :e /etc/hosts<CR>
-map <Leader>to :!open . & gulp<CR>
-
+map <Leader>to :!open .<CR>
 map <Leader>push :!bash ~/dotfiles/scripts/push.sh<CR>
 map <Leader>puw :!bash ~/vimwiki/push.sh<CR>
-
 map <silent> <Leader>ez :e ~/dotfiles/zsh/zshrc<CR>
-
-
-
-au User CmSetup call cm#register_source({'name' : 'cm-css',
-        \ 'priority': 9,
-        \ 'scoping': 1,
-        \ 'scopes': ['css','scss', 'styl', 'less', 'sass'],
-        \ 'abbreviation': 'css',
-        \ 'cm_refresh_patterns':[':\s+\w*$'],
-        \ 'cm_refresh': {'omnifunc': 'csscomplete#CompleteCSS'},
-        \ })
