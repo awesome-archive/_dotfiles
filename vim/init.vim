@@ -36,12 +36,14 @@ Plug 'mhinz/vim-signify'                                    "版本控制显示
 Plug 'ervandew/supertab'
 
 "语言
+Plug 'plasticscafe/vim-stylus-autocompile'
+Plug 'othree/csscomplete.vim'
 Plug 'matchit.zip'
 Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 Plug 'pangloss/vim-javascript'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
+Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'styl'] }
 Plug 'isRuslan/vim-es6'
 Plug 'w0rp/ale'
 Plug 'ap/vim-css-color'
@@ -404,3 +406,14 @@ map <Leader>push :!bash ~/dotfiles/scripts/push.sh<CR>
 map <Leader>puw :!bash ~/vimwiki/push.sh<CR>
 
 map <silent> <Leader>ez :e ~/dotfiles/zsh/zshrc<CR>
+
+
+
+au User CmSetup call cm#register_source({'name' : 'cm-css',
+        \ 'priority': 9,
+        \ 'scoping': 1,
+        \ 'scopes': ['css','scss', 'styl', 'less', 'sass'],
+        \ 'abbreviation': 'css',
+        \ 'cm_refresh_patterns':[':\s+\w*$'],
+        \ 'cm_refresh': {'omnifunc': 'csscomplete#CompleteCSS'},
+        \ })
