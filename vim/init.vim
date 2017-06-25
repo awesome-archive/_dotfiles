@@ -5,12 +5,13 @@ call plug#begin('~/.vim/plugged')
 "会话
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 "UI
-Plug 'joshdick/onedark.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'tyrannicaltoucan/vim-quantum'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+"Plug 'tyrannicaltoucan/vim-quantum'
 "Plug 'tell-k/vim-autopep8'
 Plug 'drewtempelmeyer/palenight.vim'
+
+Plug 'itchyny/lightline.vim'
 
 "跳转
 Plug 'easymotion/vim-easymotion'                            "快速搜索
@@ -118,11 +119,9 @@ set mouse-=a "禁用鼠标
 set t_Co=256
 set background=dark
 set guifont=Menlo:h20
-"silent! colo onedark
-set termguicolors
-colorscheme quantum
-"colorscheme gruvbox
-
+set background=dark
+colorscheme palenight
+let g:palenight_terminal_italics=1
 
 """""""""""""
 "  默认快捷键设置
@@ -461,7 +460,7 @@ let g:airline_symbols.readonly = ''
 let g:vimwiki_list = [{'path': '~/vimwiki',  'template_path': '~/vimwiki/template', 'template_default': 'default.tpl', 'path_html': '~/vimwiki/vimwiki_html'}]
 
 
-set background=dark
-colorscheme palenight
-let g:palenight_terminal_italics=1
+let g:lightline = {
+      \ 'colorscheme': 'Dracula',
+      \ }
 
