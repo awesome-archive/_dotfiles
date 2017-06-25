@@ -12,13 +12,14 @@ Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 Plug 'drewtempelmeyer/palenight.vim'
 
 Plug 'itchyny/lightline.vim'
+Plug 'tpope/vim-surround'
+Plug 'billyvg/tigris.nvim'
 
 "补全代码
 Plug 'roxma/nvim-completion-manager'
 
 "Plug 'othree/csscomplete.vim'
 "Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
-
 
 "跳转
 Plug 'easymotion/vim-easymotion'                            "快速搜索
@@ -28,11 +29,11 @@ Plug 'rhysd/clever-f.vim'                                   "F增强多行搜索
 Plug 'Chiel92/vim-autoformat'                               "自动格式化
 Plug 'sirver/ultisnips'                                     "代码片段
 Plug 'honza/vim-snippets'                                   "代码片段
-"Plug 'roman/golden-ratio'                                   "窗口自动缩放
+Plug 'roman/golden-ratio'                                   "窗口自动缩放
 Plug 'szw/vim-maximizer'                                    "窗口最大化
 Plug 'scrooloose/nerdcommenter'                             "注释插件
 Plug 'iamcco/dict.vim'                                      "翻译插件
-Plug 'ervandew/supertab'                                    "TAB增强
+"Plug 'ervandew/supertab'                                    "TAB增强
 Plug 'Raimondi/delimitMate'
 Plug 'terryma/vim-expand-region'                            "V选择增强
 Plug 'vim-scripts/YankRing.vim'
@@ -40,6 +41,7 @@ Plug 'tpope/vim-repeat'                                     "替换增强
 Plug 'justinmk/vim-gtfo'                                    "当前文件跳转
 Plug 'danro/rename.vim'                                     "文件重命名
 Plug 'mhinz/vim-signify'                                    "版本控制显示
+
 "语言
 "Plug 'othree/html5.vim'
 Plug 'matchit.zip'
@@ -49,7 +51,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 "Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] }
+Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
 Plug 'isRuslan/vim-es6'
 Plug 'w0rp/ale'
 Plug 'ap/vim-css-color'
@@ -64,14 +66,16 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'tweekmonster/fzf-filemru'
 "js
-Plug 'othree/html5.vim'
+"Plug 'othree/html5.vim'
 Plug 'othree/yajs.vim'
 Plug 'othree/jsdoc-syntax.vim'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'moll/vim-node'
+
 "css
 Plug 'hail2u/vim-css3-syntax', {'for':['css','scss', 'styl', 'less']}
 Plug 'valloric/MatchTagAlways', { 'for': ['html', 'css', 'javascript'] }
+
 call plug#end()
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 """""""""""""
@@ -121,11 +125,10 @@ set fileencoding=utf-8
 let helptags=$VIM."/vimfiles/doc"
 set helplang=cn
 
-set mouse-=a "禁用鼠标
+"set mouse-=a "禁用鼠标
 
 "UI设置
 set t_Co=256
-set background=dark
 set guifont=Menlo:h20
 set background=dark
 colorscheme palenight
@@ -166,17 +169,6 @@ vnoremap <silent> p p`]
 nnoremap <silent> p p`]
 noremap gV `[v`]
 map q: :q
-
-
-map <LEFT> <Nop>
-map <RIGHT> <Nop>
-map <UP> <Nop>
-map <DOWN> <Nop>
-
-imap <LEFT> <Nop>
-imap <RIGHT> <Nop>
-imap <UP> <Nop>
-imap <DOWN> <Nop>
 
 map <leader>t :tabnext<cr>
 map <leader>tc :tabclose<cr>
@@ -294,6 +286,7 @@ nnoremap <tab> :MaximizerToggle<CR>
   "endif
   "return "\<tab>"
 "endfunction
+"
 "autocmd FileType html,css,scss imap <silent><buffer><expr><tab> <sid>expand_html_tab()
 "let g:user_emmet_mode='a'
 "let g:user_emmet_complete_tag = 0
@@ -463,4 +456,12 @@ let g:tern#filetypes = [
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+inoremap <C-d> <DELETE>
+
 
