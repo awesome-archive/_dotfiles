@@ -13,6 +13,13 @@ Plug 'drewtempelmeyer/palenight.vim'
 
 Plug 'itchyny/lightline.vim'
 
+"补全代码
+Plug 'roxma/nvim-completion-manager'
+
+"Plug 'othree/csscomplete.vim'
+"Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
+
+
 "跳转
 Plug 'easymotion/vim-easymotion'                            "快速搜索
 Plug 'terryma/vim-multiple-cursors'                         "多点编辑
@@ -40,9 +47,10 @@ Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 Plug 'pangloss/vim-javascript'
 "Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+"Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] }
-"Plug 'isRuslan/vim-es6'
+Plug 'isRuslan/vim-es6'
 Plug 'w0rp/ale'
 Plug 'ap/vim-css-color'
 "Plug 'posva/vim-vue'
@@ -273,24 +281,24 @@ nnoremap <tab> :MaximizerToggle<CR>
 " ----------------------------------------------------------------------------
 " emmet
 " ----------------------------------------------------------------------------
-function! s:expand_html_tab()
-  let line = getline('.')
-  if col('.') < len(line)
-    let line = matchstr(line, '[">][^<"]*\%'.col('.').'c[^>"]*[<"]')
-    if len(line) >= 2
-      return "\<C-n>"
-    endif
-  endif
-  if emmet#isExpandable()
-    return emmet#expandAbbrIntelligent("\<tab>")
-  endif
-  return "\<tab>"
-endfunction
-autocmd FileType html,css,scss imap <silent><buffer><expr><tab> <sid>expand_html_tab()
-let g:user_emmet_mode='a'
-let g:user_emmet_complete_tag = 0
-let g:user_emmet_install_global = 0
-autocmd FileType html,css,scss EmmetInstall
+"function! s:expand_html_tab()
+  "let line = getline('.')
+  "if col('.') < len(line)
+    "let line = matchstr(line, '[">][^<"]*\%'.col('.').'c[^>"]*[<"]')
+    "if len(line) >= 2
+      "return "\<C-n>"
+    "endif
+  "endif
+  "if emmet#isExpandable()
+    "return emmet#expandAbbrIntelligent("\<tab>")
+  "endif
+  "return "\<tab>"
+"endfunction
+"autocmd FileType html,css,scss imap <silent><buffer><expr><tab> <sid>expand_html_tab()
+"let g:user_emmet_mode='a'
+"let g:user_emmet_complete_tag = 0
+"let g:user_emmet_install_global = 0
+"autocmd FileType html,css,scss EmmetInstall
 " ----------------------------------------------------------------------------
 " NERDT
 " ----------------------------------------------------------------------------
@@ -313,38 +321,11 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 let g:deoplete#enable_at_startup = 1
 
 " ----------------------------------------------------------------------------
-" YouCompleteMe
-" ----------------------------------------------------------------------------
-"let g:ycm_min_num_of_chars_for_completion = 1
-"let g:ycm_autoclose_preview_window_after_completion=1
-"let g:ycm_min_num_of_chars_for_completion = 1
-"let g:ycm_complete_in_comments=1
-"let g:ycm_confirm_extra_conf=0
-"let g:ycm_autoclose_preview_window_after_completion=1
-"let g:ycm_collect_identifiers_from_tags_files=1
-"let g:ycm_complete_in_comments = 1
-"let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
-"let g:ycm_complete_in_comments=1
-"let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
-"let g:ycm_seed_identifiers_with_syntax=1
-"let g:ycm_cache_omnifunc=0
-"set completeopt-=preview
-"function! MyTabFunction ()
-  "let line = getline('.')
-  "let substr = strpart(line, -1, col('.')+1)
-  "let substr = matchstr(substr, "[^ \t]*$")
-  "if strlen(substr) == 0
-    "return "\<tab>"
-  "endif
-  "return pumvisible() ? "\<c-n>" : "\<c-x>\<c-o>"
-"endfunction
-
-" ----------------------------------------------------------------------------
 " SuperTab
 " ----------------------------------------------------------------------------
-let g:SuperTabDefultCompletionType='context'
-let g:SuperTabDefaultCompletionType = '<C-X><C-U>'
-let g:SuperTabRetainCompletionType=2
+"let g:SuperTabDefultCompletionType='context'
+"let g:SuperTabDefaultCompletionType = '<C-X><C-U>'
+"let g:SuperTabRetainCompletionType=2
 
 " ----------------------------------------------------------------------------
 "gitgutter
@@ -433,6 +414,9 @@ nmap <Leader>to :!open . & webpack -d -w<CR>
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
 let g:ale_lint_on_enter = 0
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\}
 
 language messages zh_CN.utf-8
 source $VIMRUNTIME/delmenu.vim
@@ -463,4 +447,20 @@ let g:vimwiki_list = [{'path': '~/vimwiki',  'template_path': '~/vimwiki/templat
 let g:lightline = {
       \ 'colorscheme': 'Dracula',
       \ }
+
+
+" Use deoplete.
+let g:tern_request_timeout = 1
+let g:tern_show_signature_in_pum = '0'  " This do disable full signature type on autocomplete
+
+"Add extra filetypes
+let g:tern#filetypes = [
+                \ 'jsx',
+                \ 'javascript.jsx',
+                \ 'vue'
+                \ ]
+
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
