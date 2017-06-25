@@ -1,31 +1,24 @@
-"""""""""""""
-"  插件列表
-"""""""""""""
+"copyright 2014-2017 by iuunhao <wncss.com>
+
+
+" ----------------------------------------------------------------------------
+" 插件列表
+" ----------------------------------------------------------------------------
 call plug#begin('~/.vim/plugged')
-"会话
+
+"保存会话
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
+
 "UI
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
-"Plug 'tyrannicaltoucan/vim-quantum'
-"Plug 'tell-k/vim-autopep8'
 Plug 'drewtempelmeyer/palenight.vim'
-
 Plug 'itchyny/lightline.vim'
+
+"辅助增强
 Plug 'tpope/vim-surround'
-Plug 'billyvg/tigris.nvim'
-
-"补全代码
-Plug 'roxma/nvim-completion-manager'
-
-"Plug 'othree/csscomplete.vim'
-"Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
-
-"跳转
-Plug 'easymotion/vim-easymotion'                            "快速搜索
 Plug 'terryma/vim-multiple-cursors'                         "多点编辑
+Plug 'easymotion/vim-easymotion'                            "快速搜索
 Plug 'rhysd/clever-f.vim'                                   "F增强多行搜索
-"Plug 'asins/vimcdoc'                                        "中文帮助文档
+Plug 'asins/vimcdoc'                                        "中文帮助文档
 Plug 'Chiel92/vim-autoformat'                               "自动格式化
 Plug 'sirver/ultisnips'                                     "代码片段
 Plug 'honza/vim-snippets'                                   "代码片段
@@ -33,7 +26,6 @@ Plug 'roman/golden-ratio'                                   "窗口自动缩放
 Plug 'szw/vim-maximizer'                                    "窗口最大化
 Plug 'scrooloose/nerdcommenter'                             "注释插件
 Plug 'iamcco/dict.vim'                                      "翻译插件
-"Plug 'ervandew/supertab'                                    "TAB增强
 Plug 'Raimondi/delimitMate'
 Plug 'terryma/vim-expand-region'                            "V选择增强
 Plug 'vim-scripts/YankRing.vim'
@@ -41,46 +33,43 @@ Plug 'tpope/vim-repeat'                                     "替换增强
 Plug 'justinmk/vim-gtfo'                                    "当前文件跳转
 Plug 'danro/rename.vim'                                     "文件重命名
 Plug 'mhinz/vim-signify'                                    "版本控制显示
+Plug 'ervandew/supertab'
 
 "语言
-"Plug 'othree/html5.vim'
 Plug 'matchit.zip'
 Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 Plug 'pangloss/vim-javascript'
-"Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-"Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
 Plug 'isRuslan/vim-es6'
 Plug 'w0rp/ale'
 Plug 'ap/vim-css-color'
-"Plug 'posva/vim-vue'
 Plug 'Junza/Spink'
 Plug 'digitaltoad/vim-pug'
 Plug 'wavded/vim-stylus'
+Plug 'billyvg/tigris.nvim'
+Plug 'roxma/nvim-completion-manager'
+Plug 'othree/yajs.vim'
+Plug 'othree/jsdoc-syntax.vim'
+Plug 'heavenshell/vim-jsdoc'
+Plug 'moll/vim-node'
+Plug 'hail2u/vim-css3-syntax', {'for':['css','scss', 'styl', 'less']}
+Plug 'valloric/MatchTagAlways', { 'for': ['html', 'css', 'javascript'] }
+"Plug 'posva/vim-vue'
 
 "文件操作
 Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'tweekmonster/fzf-filemru'
-"js
-"Plug 'othree/html5.vim'
-Plug 'othree/yajs.vim'
-Plug 'othree/jsdoc-syntax.vim'
-Plug 'heavenshell/vim-jsdoc'
-Plug 'moll/vim-node'
-
-"css
-Plug 'hail2u/vim-css3-syntax', {'for':['css','scss', 'styl', 'less']}
-Plug 'valloric/MatchTagAlways', { 'for': ['html', 'css', 'javascript'] }
 
 call plug#end()
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
-"""""""""""""
-"  基础设置
-"""""""""""""
+
+" ----------------------------------------------------------------------------
+" 基础设置
+" ----------------------------------------------------------------------------
 set termguicolors
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 set clipboard+=unnamedplus
@@ -102,41 +91,33 @@ autocmd BufReadPost *
       \ if line("'\"") > 0 && line ("'\"") <= line("$") |
       \   exe "normal! g'\"" |
       \ endif
-" center buffer around cursor when opening files
 autocmd BufRead * normal zz
 set updatetime=500
 set complete=.,w,b,u,t,k
 autocmd InsertEnter * let save_cwd = getcwd() | set autochdir
 autocmd InsertLeave * set noautochdir | execute 'cd' fnameescape(save_cwd)
-
-let g:indentLine_char='│'
-let g:indentLine_color_gui = '#74818b'
-let g:table_mode_corner="|"
-
 set formatoptions+=t
-"set inccommand=nosplit
 set shortmess=atI
-
-
-
 set termencoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 set fileencoding=utf-8
-let helptags=$VIM."/vimfiles/doc"
 set helplang=cn
-
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 "set mouse-=a "禁用鼠标
 
-"UI设置
+" ----------------------------------------------------------------------------
+" UI设置
+" ----------------------------------------------------------------------------
 set t_Co=256
 set guifont=Menlo:h20
 set background=dark
 colorscheme palenight
 let g:palenight_terminal_italics=1
+let g:lightline = { 'colorscheme': 'Dracula' }
 
-"""""""""""""
-"  默认快捷键设置
-"""""""""""""
+" ----------------------------------------------------------------------------
+" 默认快捷键设置
+" ----------------------------------------------------------------------------
 noremap 0 ^
 noremap Y y$
 vnoremap p "_dP
@@ -156,12 +137,9 @@ map <Leader>h <C-W>h
 map <Leader>l <C-W>l
 map <Leader>T :%s/\s\+$//<CR>
 nmap <leader>F :%s//g<LEFT><LEFT>
-map <Leader>push :!bash ~/dotfiles/scripts/push.sh<CR>
-map <Leader>puw :!bash ~/vimwiki/push.sh<CR>
 nmap <silent> <Leader>ev :e $MYVIMRC<CR>
 nmap <silent> <Leader>es :so $MYVIMRC<CR>
 nmap <silent> <Leader>pl :PlugInstall<CR>
-nmap <silent> <Leader>ez :e ~/dotfiles/zsh/zshrc<CR>
 nnoremap <S-h> 0
 nnoremap <S-l> $
 vnoremap <silent> y y`]
@@ -169,11 +147,14 @@ vnoremap <silent> p p`]
 nnoremap <silent> p p`]
 noremap gV `[v`]
 map q: :q
-
 map <leader>t :tabnext<cr>
 map <leader>tc :tabclose<cr>
 
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+inoremap <C-d> <DELETE>
 
 " ----------------------------------------------------------------------------
 " 移动选中内容
@@ -266,32 +247,12 @@ let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 let g:UltiSnipsEditSplit="vertical"
+
 " ----------------------------------------------------------------------------
 " vim-maximizer
 " ----------------------------------------------------------------------------
 nnoremap <tab> :MaximizerToggle<CR>
-" ----------------------------------------------------------------------------
-" emmet
-" ----------------------------------------------------------------------------
-"function! s:expand_html_tab()
-  "let line = getline('.')
-  "if col('.') < len(line)
-    "let line = matchstr(line, '[">][^<"]*\%'.col('.').'c[^>"]*[<"]')
-    "if len(line) >= 2
-      "return "\<C-n>"
-    "endif
-  "endif
-  "if emmet#isExpandable()
-    "return emmet#expandAbbrIntelligent("\<tab>")
-  "endif
-  "return "\<tab>"
-"endfunction
-"
-"autocmd FileType html,css,scss imap <silent><buffer><expr><tab> <sid>expand_html_tab()
-"let g:user_emmet_mode='a'
-"let g:user_emmet_complete_tag = 0
-"let g:user_emmet_install_global = 0
-"autocmd FileType html,css,scss EmmetInstall
+
 " ----------------------------------------------------------------------------
 " NERDT
 " ----------------------------------------------------------------------------
@@ -311,14 +272,19 @@ let g:NERDTreeMapOpenVSplit = 'v'
 let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$', '\~$', '\.pyc$', '\.swp$', '\.DS_Store']
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | end
 
+" ----------------------------------------------------------------------------
+" deoplete
+" ----------------------------------------------------------------------------
 let g:deoplete#enable_at_startup = 1
+let g:tern_request_timeout = 1
+let g:tern_show_signature_in_pum = '0'
 
 " ----------------------------------------------------------------------------
 " SuperTab
 " ----------------------------------------------------------------------------
-"let g:SuperTabDefultCompletionType='context'
-"let g:SuperTabDefaultCompletionType = '<C-X><C-U>'
-"let g:SuperTabRetainCompletionType=2
+let g:SuperTabDefultCompletionType='context'
+let g:SuperTabDefaultCompletionType = '<C-X><C-U>'
+let g:SuperTabRetainCompletionType=2
 
 " ----------------------------------------------------------------------------
 "gitgutter
@@ -335,7 +301,6 @@ nnoremap <leader>gs :GitGutterToggle<CR>
 " ----------------------------------------------------------------------------
 let tern_show_signature_in_pum = 1
 let tern_show_argument_hints = 'on_hold'
-"autocmd FileType javascript nnoremap <leader>d :TernDef<CR>
 autocmd FileType javascript setlocal omnifunc=tern#Complete
 
 
@@ -345,15 +310,12 @@ autocmd FileType javascript setlocal omnifunc=tern#Complete
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => easymotion
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <Leader> <Plug>(easymotion-prefix)
 map  <Leader><Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => fzf
@@ -399,11 +361,10 @@ command! PlugHelp call fzf#run(fzf#wrap({
             \ 'source':  sort(keys(g:plugs)),
             \ 'sink':    function('s:plugs_sink')}))
 
-nmap <Leader>hv :e /Applications/XAMPP/xamppfiles/etc/extra/httpd-vhosts.conf<CR>
-nmap <Leader>hh :e /etc/hosts<CR>
-nmap <Leader>to :!open . & webpack -d -w<CR>
 
-"ale
+" ----------------------------------------------------------------------------
+" ale
+" ----------------------------------------------------------------------------
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
 let g:ale_lint_on_enter = 0
@@ -411,57 +372,35 @@ let g:ale_linters = {
 \   'javascript': ['eslint'],
 \}
 
-language messages zh_CN.utf-8
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
-set encoding=utf-8
-set langmenu=zh_CN.UTF-8
-
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#whitespace#symbol = '!'
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
+"language messages zh_CN.utf-8
+"source $VIMRUNTIME/delmenu.vim
+"source $VIMRUNTIME/menu.vim
+"set encoding=utf-8
+"set langmenu=zh_CN.UTF-8
 
 
-
+" ----------------------------------------------------------------------------
+" vimWiki
+" ----------------------------------------------------------------------------
 let g:vimwiki_list = [{'path': '~/vimwiki',  'template_path': '~/vimwiki/template', 'template_default': 'default.tpl', 'path_html': '~/vimwiki/vimwiki_html'}]
 
-
-let g:lightline = {
-      \ 'colorscheme': 'Dracula',
-      \ }
-
-
-" Use deoplete.
-let g:tern_request_timeout = 1
-let g:tern_show_signature_in_pum = '0'  " This do disable full signature type on autocomplete
-
-"Add extra filetypes
+" ----------------------------------------------------------------------------
+" deoplete-ternjs
+" ----------------------------------------------------------------------------
 let g:tern#filetypes = [
                 \ 'jsx',
                 \ 'javascript.jsx',
                 \ 'vue'
                 \ ]
 
+" ----------------------------------------------------------------------------
+" 自定义命令
+" ----------------------------------------------------------------------------
+map <Leader>hv :e /Applications/XAMPP/xamppfiles/etc/extra/httpd-vhosts.conf<CR>
+map <Leader>hh :e /etc/hosts<CR>
+map <Leader>to :!open . & gulp<CR>
 
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+map <Leader>push :!bash ~/dotfiles/scripts/push.sh<CR>
+map <Leader>puw :!bash ~/vimwiki/push.sh<CR>
 
-
-inoremap <C-h> <Left>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
-inoremap <C-d> <DELETE>
-
-
+map <silent> <Leader>ez :e ~/dotfiles/zsh/zshrc<CR>
