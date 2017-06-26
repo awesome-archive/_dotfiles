@@ -2,6 +2,11 @@
 " ----------------------------------------------------------------------------
 " 插件列表
 " ----------------------------------------------------------------------------
+let g:python_host_skip_check=1
+let g:python_host_prog = '/usr/local/bin/python'
+let g:python3_host_skip_check=1
+let g:python3_host_prog = '/usr/local/bin/python3'
+"
 call plug#begin('~/.vim/plugged')
 "保存会话
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
