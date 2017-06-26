@@ -2,10 +2,10 @@
 " ----------------------------------------------------------------------------
 " 插件列表
 " ----------------------------------------------------------------------------
-let g:python_host_skip_check=1
-let g:python_host_prog = '/usr/local/bin/python'
-let g:python3_host_skip_check=1
-let g:python3_host_prog = '/usr/local/bin/python3'
+"let g:python_host_skip_check=1
+"let g:python_host_prog = '/usr/local/bin/python'
+"let g:python3_host_skip_check=1
+"let g:python3_host_prog = '/usr/local/bin/python3'
 "
 call plug#begin('~/.vim/plugged')
 
@@ -382,4 +382,21 @@ map <Leader>to :!open .<CR>
 map <Leader>push :!bash ~/dotfiles/scripts/push.sh<CR>
 map <Leader>puw :!bash ~/vimwiki/push.sh<CR>
 map <silent> <Leader>ez :e ~/dotfiles/zsh/zshrc<CR>
+
+
+let g:fzf_colors =
+\ {'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Identifier'],
+  \ 'fg+':     ['fg', 'CursorLine', 'Normal', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'Normal'],
+  \ 'hl+':     ['fg', 'Identifier'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'prompt':  ['fg', 'Identifier'],
+  \ 'pointer': ['fg', 'Keyword'],
+  \ 'marker':  ['fg', 'CursorLineNr'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment']}
+
+
 
