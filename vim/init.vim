@@ -9,9 +9,6 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 "
 call plug#begin('~/.vim/plugged')
 
-Plug 'Shougo/denite.nvim'
-
-
 
 "保存会话
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
@@ -20,6 +17,7 @@ Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'itchyny/lightline.vim'
 "辅助增强
+Plug 'Shougo/denite.nvim'
 Plug 'vimwiki/vimwiki'
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'                         "多点编辑
@@ -302,16 +300,16 @@ nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:fzf_files_options = printf('--preview "%s {} | head -'.&lines.'"',
             \ g:plugs['fzf.vim'].dir.'/bin/preview.rb')
-"nnoremap <silent> <expr> <Leader>ff (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Files\<cr>"
+nnoremap <silent> <expr> <Leader>ls (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Files\<cr>"
 nnoremap <silent> <Leader>C        :Colors<CR>
-nnoremap <silent> <Leader>bb  :Buffers<CR>
+nnoremap <silent> <Leader>be  :Buffers<CR>
 nnoremap <silent> <Leader>ag       :Ag <C-R><C-W><CR>
 nnoremap <silent> <Leader>AG       :Ag <C-R><C-A><CR>
 xnoremap <silent> <Leader>ag       y:Ag <C-R>"<CR>
-nnoremap <leader>jk :BLines<cr>
+nnoremap <silent> <leader>sl :BLines<cr>
 nnoremap <silent> <leader>ft :Filetypes<cr>
 nnoremap <silent> <leader>kl :Lines<cr>
-nnoremap <silent> <leader>fr :History<cr>
+nnoremap <silent> <leader>rd :History<cr>
 inoremap <expr> <c-x><c-t> fzf#complete('tmuxwords.rb --all-but-current --scroll 500 --min 5')
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
@@ -350,6 +348,31 @@ let g:vimwiki_list = [{'path': '~/vimwiki',  'template_path': '~/vimwiki/templat
 " deoplete-ternjs
 " ----------------------------------------------------------------------------
 let g:tern#filetypes = ['jsx', 'javascript.jsx', 'vue']
+
+" ----------------- -----------------------------------------------------------
+" denite
+" ----------------------------------------------------------------------------
+nnoremap <silent> <C-p> :Denite command<CR>
+call denite#custom#map('insert', '<ESC>', '<denite:quit>',
+    \ 'noremap')
+call denite#custom#map('insert', 'jj', '<denite:enter_mode:normal>',
+    \ 'noremap')
+call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>',
+    \ 'noremap')
+call denite#custom#map('insert', '<C-n>', '<denite:move_to_next_line>',
+    \ 'noremap')
+call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>',
+    \ 'noremap')
+call denite#custom#map('insert', '<C-p>', '<denite:move_to_previous_line>',
+    \ 'noremap')
+call denite#custom#map('insert', '<C-d>', '<denite:scroll_window_downwards>',
+            \ 'noremap')
+call denite#custom#map('insert', '<C-u>', '<denite:scroll_window_upwards>',
+            \ 'noremap')
+call denite#custom#map('insert', '<C-h>', '<denite:move_caret_to_left>',
+            \ 'noremap')
+call denite#custom#map('insert', '<C-l>', '<denite:move_caret_to_right>',
+            \ 'noremap')
 " ----------------------------------------------------------------------------
 " 自定义命令
 " ----------------------------------------------------------------------------
@@ -360,136 +383,3 @@ map <Leader>push :!bash ~/dotfiles/scripts/push.sh<CR>
 map <Leader>puw :!bash ~/vimwiki/push.sh<CR>
 map <silent> <Leader>ez :e ~/dotfiles/zsh/zshrc<CR>
 
-
-augroup nerd_loader
-  autocmd!
-  autocmd VimEnter * silent! autocmd! FileExplorer
-  autocmd BufEnter,BufNew *
-        \  if isdirectory(expand('<amatch>'))
-        \|   call plug#load('nerdtree')
-        \|   execute 'autocmd! nerd_loader'
-        \| endif
-augroup END
-
-
-map <Leader>ff :Denite command<CR>
-
-
-call denite#custom#var('file_rec', 'command',
-	\ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-	" For ripgrep
-	" Note: It is slower than ag
-	call denite#custom#var('file_rec', 'command',
-	\ ['rg', '--files', '--glob', '!.git', ''])
-	" For Pt(the platinum searcher)
-	" NOTE: It also supports windows.
-	call denite#custom#var('file_rec', 'command',
-	\ ['pt', '--follow', '--nocolor', '--nogroup',
-	\  (has('win32') ? '-g:' : '-g='), ''])
-
-	" Change mappings.
-	call denite#custom#map(
-	      \ 'insert',
-	      \ '<C-j>',
-	      \ '<denite:move_to_next_line>',
-	      \ 'noremap'
-	      \)
-	call denite#custom#map(
-	      \ 'insert',
-	      \ '<C-k>',
-	      \ '<denite:move_to_previous_line>',
-	      \ 'noremap'
-	      \)
-
-	" Change matchers.
-	call denite#custom#source(
-	\ 'file_mru', 'matchers', ['matcher_fuzzy', 'matcher_project_files'])
-	call denite#custom#source(
-	\ 'file_rec', 'matchers', ['matcher_cpsm'])
-
-	" Change sorters.
-	call denite#custom#source(
-	\ 'file_rec', 'sorters', ['sorter_sublime'])
-
-	" Add custom menus
-	let s:menus = {}
-
-	let s:menus.zsh = {
-		\ 'description': 'Edit your import zsh configuration'
-		\ }
-	let s:menus.zsh.file_candidates = [
-		\ ['FZF'],
-		\ ['zshenv', '~/.zshenv'],
-		\ ]
-
-	let s:menus.my_commands = {
-		\ 'description': 'Example commands'
-		\ }
-	let s:menus.my_commands.command_candidates = [
-		\ ['fzf', 'FZF'],
-		\ ['Open zsh menu', 'Denite menu:zsh'],
-		\ ]
-
-	call denite#custom#var('menu', 'menus', s:menus)
-
-	" Ag command on grep source
-	call denite#custom#var('grep', 'command', ['ag'])
-	call denite#custom#var('grep', 'default_opts',
-			\ ['-i', '--vimgrep'])
-	call denite#custom#var('grep', 'recursive_opts', [])
-	call denite#custom#var('grep', 'pattern_opt', [])
-	call denite#custom#var('grep', 'separator', ['--'])
-	call denite#custom#var('grep', 'final_opts', [])
-
-	" Ack command on grep source
-	call denite#custom#var('grep', 'command', ['ack'])
-	call denite#custom#var('grep', 'default_opts',
-			\ ['--ackrc', $HOME.'/.ackrc', '-H',
-			\  '--nopager', '--nocolor', '--nogroup', '--column'])
-	call denite#custom#var('grep', 'recursive_opts', [])
-	call denite#custom#var('grep', 'pattern_opt', ['--match'])
-	call denite#custom#var('grep', 'separator', ['--'])
-	call denite#custom#var('grep', 'final_opts', [])
-
-	" Ripgrep command on grep source
-	call denite#custom#var('grep', 'command', ['rg'])
-	call denite#custom#var('grep', 'default_opts',
-			\ ['--vimgrep', '--no-heading'])
-	call denite#custom#var('grep', 'recursive_opts', [])
-	call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
-	call denite#custom#var('grep', 'separator', ['--'])
-	call denite#custom#var('grep', 'final_opts', [])
-
-	" Pt command on grep source
-	call denite#custom#var('grep', 'command', ['pt'])
-	call denite#custom#var('grep', 'default_opts',
-			\ ['--nogroup', '--nocolor', '--smart-case'])
-	call denite#custom#var('grep', 'recursive_opts', [])
-	call denite#custom#var('grep', 'pattern_opt', [])
-	call denite#custom#var('grep', 'separator', ['--'])
-	call denite#custom#var('grep', 'final_opts', [])
-
-	" jvgrep command on grep source
-	call denite#custom#var('grep', 'command', ['jvgrep'])
-	call denite#custom#var('grep', 'default_opts', [])
-	call denite#custom#var('grep', 'recursive_opts', ['-R'])
-	call denite#custom#var('grep', 'pattern_opt', [])
-	call denite#custom#var('grep', 'separator', [])
-	call denite#custom#var('grep', 'final_opts', [])
-
-	" Define alias
-	call denite#custom#alias('source', 'file_rec/git', 'file_rec')
-	call denite#custom#var('file_rec/git', 'command',
-	      \ ['git', 'ls-files', '-co', '--exclude-standard'])
-
-	" Change default prompt
-	call denite#custom#option('default', 'prompt', '>')
-
-	" Change ignore_globs
-	call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
-	      \ [ '.git/', '.ropeproject/', '__pycache__/',
-	      \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
-
-
-hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white
-hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white
