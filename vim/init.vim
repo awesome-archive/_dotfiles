@@ -9,7 +9,6 @@
 "
 call plug#begin('~/.vim/plugged')
 
-
 "保存会话
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 Plug 'dNitro/vim-pug-complete', { 'for': ['jade', 'pug'] }
@@ -18,7 +17,7 @@ Plug 'dNitro/vim-pug-complete', { 'for': ['jade', 'pug'] }
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'itchyny/lightline.vim'
 "辅助增强
-Plug 'Shougo/denite.nvim'
+"Plug 'Shougo/denite.nvim'
 Plug 'vimwiki/vimwiki'
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'                         "多点编辑
@@ -301,16 +300,16 @@ nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:fzf_files_options = printf('--preview "%s {} | head -'.&lines.'"',
             \ g:plugs['fzf.vim'].dir.'/bin/preview.rb')
-nnoremap <silent> <expr> <Leader>ls (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Files\<cr>"
+nnoremap <silent> <expr> <Leader>ff (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Files\<cr>"
 nnoremap <silent> <Leader>C        :Colors<CR>
-nnoremap <silent> <Leader>be  :Buffers<CR>
+nnoremap <silent> <Leader>bb  :Buffers<CR>
 nnoremap <silent> <Leader>ag       :Ag <C-R><C-W><CR>
 nnoremap <silent> <Leader>AG       :Ag <C-R><C-A><CR>
 xnoremap <silent> <Leader>ag       y:Ag <C-R>"<CR>
-nnoremap <silent> <leader>sl :BLines<cr>
+nnoremap <silent> <leader>jl :BLines<cr>
 nnoremap <silent> <leader>ft :Filetypes<cr>
-nnoremap <silent> <leader>kl :Lines<cr>
-nnoremap <silent> <leader>rd :History<cr>
+nnoremap <silent> <leader>jk :Lines<cr>
+nnoremap <silent> <leader>fr :History<cr>
 inoremap <expr> <c-x><c-t> fzf#complete('tmuxwords.rb --all-but-current --scroll 500 --min 5')
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
@@ -353,27 +352,27 @@ let g:tern#filetypes = ['jsx', 'javascript.jsx', 'vue']
 " ----------------- -----------------------------------------------------------
 " denite
 " ----------------------------------------------------------------------------
-nnoremap <silent> <C-p> :Denite command<CR>
-call denite#custom#map('insert', '<ESC>', '<denite:quit>',
-    \ 'noremap')
-call denite#custom#map('insert', 'jj', '<denite:enter_mode:normal>',
-    \ 'noremap')
-call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>',
-    \ 'noremap')
-call denite#custom#map('insert', '<C-n>', '<denite:move_to_next_line>',
-    \ 'noremap')
-call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>',
-    \ 'noremap')
-call denite#custom#map('insert', '<C-p>', '<denite:move_to_previous_line>',
-    \ 'noremap')
-call denite#custom#map('insert', '<C-d>', '<denite:scroll_window_downwards>',
-            \ 'noremap')
-call denite#custom#map('insert', '<C-u>', '<denite:scroll_window_upwards>',
-            \ 'noremap')
-call denite#custom#map('insert', '<C-h>', '<denite:move_caret_to_left>',
-            \ 'noremap')
-call denite#custom#map('insert', '<C-l>', '<denite:move_caret_to_right>',
-            \ 'noremap')
+"nnoremap <silent> <C-p> :Denite command<CR>
+"call denite#custom#map('insert', '<ESC>', '<denite:quit>',
+    "\ 'noremap')
+"call denite#custom#map('insert', 'jj', '<denite:enter_mode:normal>',
+    "\ 'noremap')
+"call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>',
+    "\ 'noremap')
+"call denite#custom#map('insert', '<C-n>', '<denite:move_to_next_line>',
+    "\ 'noremap')
+"call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>',
+    "\ 'noremap')
+"call denite#custom#map('insert', '<C-p>', '<denite:move_to_previous_line>',
+    "\ 'noremap')
+"call denite#custom#map('insert', '<C-d>', '<denite:scroll_window_downwards>',
+            "\ 'noremap')
+"call denite#custom#map('insert', '<C-u>', '<denite:scroll_window_upwards>',
+            "\ 'noremap')
+"call denite#custom#map('insert', '<C-h>', '<denite:move_caret_to_left>',
+            "\ 'noremap')
+"call denite#custom#map('insert', '<C-l>', '<denite:move_caret_to_right>',
+            "\ 'noremap')
 " ----------------------------------------------------------------------------
 " 自定义命令
 " ----------------------------------------------------------------------------
