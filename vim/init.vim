@@ -12,6 +12,7 @@ call plug#begin('~/.vim/plugged')
 
 "保存会话
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
+Plug 'dNitro/vim-pug-complete', { 'for': ['jade', 'pug'] }
 
 "UI
 Plug 'drewtempelmeyer/palenight.vim'
@@ -397,6 +398,5 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'CursorLineNr'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment']}
-
 
 
