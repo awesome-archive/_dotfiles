@@ -155,6 +155,8 @@ inoremap <C-l> <Right>
 inoremap <C-d> <DELETE>
 nnoremap <d-[> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 vnoremap <d-]> zf
+noremap j jzz
+noremap k kzz
 " ----------------------------------------------------------------------------
 " 移动选中内容
 " ----------------------------------------------------------------------------
@@ -397,5 +399,3 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'CursorLineNr'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment']}
-
-
