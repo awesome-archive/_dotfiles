@@ -11,11 +11,11 @@ call plug#begin('~/.vim/plugged')
 
 "保存会话
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
-Plug 'dNitro/vim-pug-complete', { 'for': ['jade', 'pug'] }
 
 "UI
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'itchyny/lightline.vim'
+Plug 'junegunn/seoul256.vim'
 "辅助增强
 "Plug 'Shougo/denite.nvim'
 Plug 'vimwiki/vimwiki'
@@ -114,6 +114,7 @@ set background=dark
 colorscheme palenight
 let g:palenight_terminal_italics=1
 let g:lightline = { 'colorscheme': 'Dracula' }
+
 " ----------------------------------------------------------------------------
 " 默认快捷键设置
 " ----------------------------------------------------------------------------
@@ -155,8 +156,6 @@ inoremap <C-l> <Right>
 inoremap <C-d> <DELETE>
 nnoremap <d-[> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 vnoremap <d-]> zf
-noremap j jzz
-noremap k kzz
 " ----------------------------------------------------------------------------
 " 移动选中内容
 " ----------------------------------------------------------------------------
@@ -399,3 +398,4 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'CursorLineNr'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment']}
+
