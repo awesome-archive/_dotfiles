@@ -412,6 +412,3 @@ colorscheme ayu
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,pug EmmetInstall
 
-
-
-map <Leader>ll :!bash ~/vimwiki/push.sh<CR>
