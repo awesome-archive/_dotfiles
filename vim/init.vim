@@ -12,10 +12,14 @@ call plug#begin('~/.vim/plugged')
 "保存会话
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'shougo/vimshell.vim'
+
 "UI
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/seoul256.vim'
+Plug 'ayu-theme/ayu-vim'
 "辅助增强
 "Plug 'Shougo/denite.nvim'
 Plug 'vimwiki/vimwiki'
@@ -45,7 +49,7 @@ Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 Plug 'pangloss/vim-javascript'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'styl'] }
+Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'styl', 'pug'] }
 Plug 'isRuslan/vim-es6'
 Plug 'w0rp/ale'
 Plug 'ap/vim-css-color'
@@ -109,9 +113,9 @@ set fdm=manual
 " UI设置
 " ----------------------------------------------------------------------------
 set t_Co=256
-set guifont=Menlo:h20
+"set guifont=Menlo:h20
 set background=dark
-colorscheme palenight
+colorscheme seoul256
 let g:palenight_terminal_italics=1
 let g:lightline = { 'colorscheme': 'Dracula' }
 
@@ -399,3 +403,15 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment']}
 
+set termguicolors
+let ayucolor="light"
+let ayucolor="dark"
+let ayucolor="mirage"
+colorscheme ayu
+
+let g:user_emmet_install_global = 0
+autocmd FileType html,css,pug EmmetInstall
+
+
+
+map <Leader>ll :!bash ~/vimwiki/push.sh<CR>
