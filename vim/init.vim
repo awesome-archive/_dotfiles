@@ -16,14 +16,12 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'shougo/vimshell.vim'
 
 "UI
-Plug 'drewtempelmeyer/palenight.vim'
 Plug 'itchyny/lightline.vim'
-Plug 'junegunn/seoul256.vim'
 Plug 'ayu-theme/ayu-vim'
 "辅助增强
 "Plug 'Shougo/denite.nvim'
-Plug 'vimwiki/vimwiki'
-Plug 'tpope/vim-surround'
+"Plug 'vimwiki/vimwiki'
+"Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'                         "多点编辑
 Plug 'easymotion/vim-easymotion'                            "快速搜索
 Plug 'rhysd/clever-f.vim'                                   "F增强多行搜索
@@ -115,7 +113,6 @@ set fdm=manual
 set t_Co=256
 "set guifont=Menlo:h20
 set background=dark
-colorscheme seoul256
 let g:palenight_terminal_italics=1
 let g:lightline = { 'colorscheme': 'Dracula' }
 
