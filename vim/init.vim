@@ -2,18 +2,10 @@
 " ----------------------------------------------------------------------------
 " 插件列表
 " ----------------------------------------------------------------------------
-"let g:python_host_skip_check=1
-"let g:python_host_prog = '/usr/local/bin/python'
-"let g:python3_host_skip_check=1
-"let g:python3_host_prog = '/usr/local/bin/python3'
-"
 call plug#begin('~/.vim/plugged')
 
 "保存会话
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
-
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'shougo/vimshell.vim'
 
 "UI
 Plug 'itchyny/lightline.vim'
@@ -45,7 +37,17 @@ Plug 'ervandew/supertab'
 Plug 'matchit.zip'
 Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 Plug 'pangloss/vim-javascript'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'roxma/nvim-completion-manager'
+if !has('nvim')
+    Plug 'roxma/vim-hug-neovim-rpc'
+endif
+Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+
+Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
+autocmd FileType php LanguageClientStart
+
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'styl', 'pug'] }
 Plug 'isRuslan/vim-es6'
@@ -62,6 +64,8 @@ Plug 'heavenshell/vim-jsdoc'
 Plug 'moll/vim-node'
 Plug 'hail2u/vim-css3-syntax', {'for':['css','scss', 'styl', 'less']}
 Plug 'valloric/MatchTagAlways', { 'for': ['html', 'css', 'javascript'] }
+Plug 'posva/vim-vue'
+Plug 'chemzqm/wxapp.vim'
 "文件操作
 Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf.vim'
@@ -107,6 +111,8 @@ set termguicolors
 set ttimeout
 set ttimeoutlen=0
 set fdm=manual
+"set breakindentopt+=sbr
+set breakindent
 " ----------------------------------------------------------------------------
 " UI设置
 " ----------------------------------------------------------------------------
@@ -408,4 +414,42 @@ colorscheme ayu
 
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,pug EmmetInstall
+
+function! Buf_total_num()
+    return len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
+endfunction
+function! File_size(f)
+    let l:size = getfsize(expand(a:f))
+    if l:size == 0 || l:size == -1 || l:size == -2
+        return ''
+    endif
+    if l:size < 1024
+        return l:size.' bytes'
+    elseif l:size < 1024*1024
+        return printf('%.1f', l:size/1024.0).'k'
+    elseif l:size < 1024*1024*1024
+        return printf('%.1f', l:size/1024.0/1024.0) . 'm'
+    else
+        return printf('%.1f', l:size/1024.0/1024.0/1024.0) . 'g'
+    endif
+endfunction
+set statusline=%<%1*[B-%n]%*
+" TOT is an abbreviation for total
+set statusline+=%2*[TOT:%{Buf_total_num()}]%*
+set statusline+=%3*\ %{File_size(@%)}\ %*
+set statusline+=%4*\ %F\ %*
+set statusline+=%5*『\ %{exists('g:loaded_ale')?ALEGetStatusLine():''}』%{exists('g:loaded_fugitive')?fugitive#statusline():''}%*
+set statusline+=%6*\ %m%r%y\ %*
+set statusline+=%=%7*\ %{&ff}\ \|\ %{\"\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"\ \|\"}\ %-14.(%l:%c%V%)%*
+set statusline+=%8*\ %P\ %*
+" default bg for statusline is 236 in space-vim-dark
+hi User1 cterm=bold ctermfg=232 ctermbg=179
+hi User2 cterm=None ctermfg=214 ctermbg=242
+hi User3 cterm=None ctermfg=251 ctermbg=240
+hi User4 cterm=bold ctermfg=169 ctermbg=239
+hi User5 cterm=None ctermfg=208 ctermbg=238
+hi User6 cterm=None ctermfg=246 ctermbg=237
+hi User7 cterm=None ctermfg=250 ctermbg=238
+hi User8 cterm=None ctermfg=249 ctermbg=240
+
 
