@@ -7,7 +7,6 @@ ZSH_THEME="sunrise"
 
 plugins=(git)
 
-source $ZSH/oh-my-zsh.sh
 
 #标题栏
 case $TERM in (*xterm*|*rxvt*|(dt|k|E)term)
@@ -175,3 +174,5 @@ COLOR_LIGHTPURPLE="\e[1;35m"
 COLOR_YELLOW="\e[1;33m"
 COLOR_WHITE="\e[1;37m"
 COLOR_NONE="\e[0m"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
