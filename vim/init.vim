@@ -163,6 +163,10 @@ inoremap <C-l> <Right>
 inoremap <C-d> <DELETE>
 nnoremap <d-[> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 vnoremap <d-]> zf
+
+
+map <Leader>r :!node %<CR>
+
 " ----------------------------------------------------------------------------
 " 移动选中内容
 " ----------------------------------------------------------------------------
@@ -416,9 +420,3 @@ colorscheme ayu
 
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,pug EmmetInstall
-
-
-
-
-
-
