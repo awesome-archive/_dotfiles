@@ -40,14 +40,13 @@ Plug 'ervandew/supertab'
 Plug 'vim-scripts/matchit.zip'
 Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 Plug 'pangloss/vim-javascript'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'roxma/nvim-completion-manager'
 if !has('nvim')
     Plug 'roxma/vim-hug-neovim-rpc'
 endif
 Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
-Plug 'roxma/python-support.nvim'
 
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'styl', 'pug'] }
@@ -364,18 +363,6 @@ let g:vimwiki_list = [{'path': '~/vimwiki',  'template_path': '~/vimwiki/templat
 " ----------------------------------------------------------------------------
 let g:tern#filetypes = ['jsx', 'javascript.jsx', 'vue']
 
-" ----------------------------------------------------------------------------
-" nvim-completion-manager
-" ----------------------------------------------------------------------------
-let g:cm_sources_override = {
-    \ 'cm-tags': {'enable':0}
-    \ }
-set shortmess+=c
-let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'jedi')
-let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'mistune')
-let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'psutil')
-let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'setproctitle')
-
 " ----------------- -----------------------------------------------------------
 " denite
 " ----------------------------------------------------------------------------
@@ -433,5 +420,3 @@ colorscheme ayu
 
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,pug EmmetInstall
-
-
