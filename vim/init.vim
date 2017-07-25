@@ -3,7 +3,6 @@
 " 插件列表
 " ----------------------------------------------------------------------------
 
-
 call plug#begin('~/.vim/plugged')
 
 "保存会话
@@ -16,7 +15,7 @@ Plug 'ayu-theme/ayu-vim'
 "辅助增强
 "Plug 'Shougo/denite.nvim'
 "Plug 'vimwiki/vimwiki'
-"Plug 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'                         "多点编辑
 Plug 'easymotion/vim-easymotion'                            "快速搜索
 Plug 'rhysd/clever-f.vim'                                   "F增强多行搜索
@@ -36,6 +35,7 @@ Plug 'justinmk/vim-gtfo'                                    "当前文件跳转
 Plug 'danro/rename.vim'                                     "文件重命名
 Plug 'mhinz/vim-signify'                                    "版本控制显示
 Plug 'ervandew/supertab'
+
 "语言
 Plug 'vim-scripts/matchit.zip'
 Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
@@ -47,8 +47,9 @@ if !has('nvim')
 endif
 Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+Plug 'othree/csscomplete.vim'
 
-Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+"Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'styl', 'pug'] }
 Plug 'isRuslan/vim-es6'
 "Plug 'w0rp/ale'
@@ -420,3 +421,17 @@ colorscheme ayu
 
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,pug EmmetInstall
+
+
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
+au User CmSetup call cm#register_source({'name' : 'cm-css',
+        \ 'priority': 9,
+        \ 'scoping': 1,
+        \ 'scopes': ['css','scss'],
+        \ 'abbreviation': 'css',
+        \ 'word_pattern': '[\w\-]+',
+        \ 'cm_refresh_patterns':['[\w\-]+\s*:\s+'],
+        \ 'cm_refresh': {'omnifunc': 'csscomplete#CompleteCSS'},
+        \ })
+
+
