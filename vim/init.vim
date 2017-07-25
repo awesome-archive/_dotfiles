@@ -397,6 +397,7 @@ map <Leader>to :!open .<CR>
 map <Leader>push :!bash ~/dotfiles/scripts/push.sh<CR>
 map <Leader>puw :!bash ~/vimwiki/push.sh<CR>
 map <silent> <Leader>ez :e ~/dotfiles/zsh/zshrc<CR>
+map <silent> <Leader>sdemo :!touch index.html & touch app.js & touch css.less<CR>
 
 
 let g:fzf_colors =
@@ -421,6 +422,7 @@ colorscheme ayu
 
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,pug EmmetInstall
+let g:user_emmet_expandabbr_key = '<D-e>'
 
 
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
@@ -433,5 +435,18 @@ au User CmSetup call cm#register_source({'name' : 'cm-css',
         \ 'cm_refresh_patterns':['[\w\-]+\s*:\s+'],
         \ 'cm_refresh': {'omnifunc': 'csscomplete#CompleteCSS'},
         \ })
+
+let g:NERDSpaceDelims=1
+let g:NERDAltDelims_python = 1
+
+
+
+
+
+
+
+
+
+
 
 
