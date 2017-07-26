@@ -40,7 +40,7 @@ Plug 'ervandew/supertab'
 Plug 'vim-scripts/matchit.zip'
 Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 Plug 'pangloss/vim-javascript'
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'roxma/nvim-completion-manager'
 if !has('nvim')
     Plug 'roxma/vim-hug-neovim-rpc'
