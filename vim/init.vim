@@ -1,6 +1,6 @@
 "copyright 2014-2017 by iuunhao <wncss.com>
-" ----------------------------------------------------------------------------
 " 插件列表
+" ----------------------------------------------------------------------------
 " ----------------------------------------------------------------------------
 
 call plug#begin('~/.vim/plugged')
@@ -40,7 +40,7 @@ Plug 'ervandew/supertab'
 Plug 'vim-scripts/matchit.zip'
 Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 Plug 'pangloss/vim-javascript'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'roxma/nvim-completion-manager'
 if !has('nvim')
     Plug 'roxma/vim-hug-neovim-rpc'
@@ -435,18 +435,27 @@ au User CmSetup call cm#register_source({'name' : 'cm-css',
         \ 'cm_refresh_patterns':['[\w\-]+\s*:\s+'],
         \ 'cm_refresh': {'omnifunc': 'csscomplete#CompleteCSS'},
         \ })
+let g:cm_sources_override = {
+    \ 'cm-tags': {'enable':0}
+    \ }
 
 let g:NERDSpaceDelims=1
 let g:NERDAltDelims_python = 1
 
 
-
-
-
-
-
-
-
-
-
-
+" autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
+" autocmd FileType python set omnifunc=pythoncomplete#Complete
+" autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+" autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+" autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+" autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+" autocmd FileType java set omnifunc=javacomplete#Complete
+" if has("autocmd") && exists("+omnifunc")
+     " autocmd Filetype *
+   " \ if &omnifunc == "" |
+   " \   setlocal omnifunc=syntaxcomplete#Complete |
+   " \ endif
+" endif
+" let g:rubycomplete_buffer_loading = 1
+" let g:rubycomplete_classes_in_global = 1
+" "let g:rubycomplete_rails = 1
