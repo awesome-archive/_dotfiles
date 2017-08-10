@@ -8,6 +8,9 @@ call plug#begin('~/.vim/plugged')
 "保存会话
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 
+Plug 'osyo-manga/vim-brightest'
+" Plug 'jacoborus/tender'
+
 "UI
 Plug 'itchyny/lightline.vim'
 Plug 'ayu-theme/ayu-vim'
@@ -313,7 +316,7 @@ nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:fzf_files_options = printf('--preview "%s {} | head -'.&lines.'"',
             \ g:plugs['fzf.vim'].dir.'/bin/preview.rb')
-nnoremap <silent> <expr> <Leader>ff (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Files\<cr>"
+nnoremap <silent> <expr> <Leader>ff (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Files \<cr>"
 nnoremap <silent> <Leader>C        :Colors<CR>
 nnoremap <silent> <Leader>bb  :Buffers<CR>
 nnoremap <silent> <Leader>ag       :Ag <C-R><C-W><CR>
@@ -459,3 +462,30 @@ let g:NERDAltDelims_python = 1
 " let g:rubycomplete_buffer_loading = 1
 " let g:rubycomplete_classes_in_global = 1
 " "let g:rubycomplete_rails = 1
+
+" BrightestEnable
+
+" BrightestDisable
+"
+
+let g:brightest#highlight = {
+\   "group" : "BrightestUnderline"
+\}
+
+let g:brightest#pattern = '\k\+'
+
+
+let g:brightest#enable_filetypes = {
+\    "cpp" : 0
+\}
+
+let g:brightest#enable_filetypes = {
+\    "_"   : 0,
+\    "vim" : 1,
+\    "css" : 1,
+\    "html" : 1,
+\    "js" : 1,
+\    "md" : 1
+\}
+
+" let g:lightline = { 'colorscheme': 'tender' }
