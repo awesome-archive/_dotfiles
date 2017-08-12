@@ -152,8 +152,8 @@ nmap <leader>F :%s//g<LEFT><LEFT>
 nmap <silent> <Leader>ev :e $MYVIMRC<CR>
 nmap <silent> <Leader>es :so $MYVIMRC<CR>
 nmap <silent> <Leader>pl :PlugInstall<CR>
-nnoremap <S-h> ^
-nnoremap <S-l> $
+" nnoremap <S-h> ^
+" nnoremap <S-l> $
 vnoremap <silent> y y`]
 vnoremap <silent> p p`]
 nnoremap <silent> p p`]
