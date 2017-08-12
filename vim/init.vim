@@ -12,8 +12,9 @@ Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 " Plug 'jacoborus/tender'
 
 "UI
-Plug 'itchyny/lightline.vim'
-Plug 'ayu-theme/ayu-vim'
+" Plug 'itchyny/lightline.vim'
+" Plug 'ayu-theme/ayu-vim'
+Plug 'junegunn/seoul256.vim'
 
 "辅助增强
 "Plug 'Shougo/denite.nvim'
@@ -167,7 +168,7 @@ inoremap <C-l> <Right>
 inoremap <C-d> <DELETE>
 nnoremap <d-[> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 vnoremap <d-]> zf
-
+nnoremap <leader>mf :Autoformat<CR>
 
 map <Leader>r :!node %<CR>
 
@@ -417,11 +418,9 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment']}
 
-set termguicolors
-let ayucolor="light"
-let ayucolor="dark"
-let ayucolor="mirage"
-colorscheme ayu
+let g:seoul256_background = 234
+colo seoul256
+
 
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,pug EmmetInstall
@@ -497,5 +496,6 @@ let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_layout = { 'window': '-tabnew' }
 let g:fzf_buffers_jump = 1
 " let g:fzf_commands_expect = 'alt-enter,ctrl-x'
+
 
 
