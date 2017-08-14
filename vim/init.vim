@@ -17,6 +17,7 @@ Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 Plug 'junegunn/seoul256.vim'
 
 "辅助增强
+Plug 'haya14busa/incsearch.vim'
 "Plug 'Shougo/denite.nvim'
 "Plug 'vimwiki/vimwiki'
 " Plug 'tpope/vim-surround'
@@ -312,6 +313,9 @@ vmap <C-v> <Plug>(expand_region_shrink)
 map <Leader> <Plug>(easymotion-prefix)
 map  <Leader><Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
+map <Leader>l <Plug>(easymotion-bd-jk)
+nmap <Leader>l <Plug>(easymotion-overwin-line)
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => fzf
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
