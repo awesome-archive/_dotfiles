@@ -18,6 +18,7 @@ Plug 'junegunn/seoul256.vim'
 
 "辅助增强
 Plug 'haya14busa/incsearch.vim'
+Plug 'haya14busa/incsearch-easymotion.vim'
 "Plug 'Shougo/denite.nvim'
 "Plug 'vimwiki/vimwiki'
 " Plug 'tpope/vim-surround'
@@ -496,10 +497,24 @@ let g:brightest#enable_filetypes = {
 "
 
 
-let g:fzf_layout = { 'window': 'enew' }
-let g:fzf_layout = { 'window': '-tabnew' }
+" let g:fzf_layout = { 'window': 'enew' }
+" let g:fzf_layout = { 'window': '-tabnew' }
 let g:fzf_buffers_jump = 1
 " let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 
 
 
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+set hlsearch
+let g:incsearch#auto_nohlsearch = 1
+map z/ <Plug>(incsearch-easymotion-/)
+map z? <Plug>(incsearch-easymotion-?)
+map zg/ <Plug>(incsearch-easymotion-stay)
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
