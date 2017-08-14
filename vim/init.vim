@@ -320,13 +320,21 @@ nmap <Leader>l <Plug>(easymotion-overwin-line)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => fzf
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:fzf_files_options = printf('--preview "%s {} | head -'.&lines.'"',
-            \ g:plugs['fzf.vim'].dir.'/bin/preview.rb')
-nnoremap <silent> <expr> <Leader>ff (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Files \<cr>"
+
+
+
+if has('nvim')
+  let $FZF_DEFAULT_OPTS .= ' --inline-info'
+  " let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
+endif
+
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+nnoremap <silent> <expr> <Leader>ff (expand('&') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Files\<cr>"
+
 nnoremap <silent> <Leader>C        :Colors<CR>
 nnoremap <silent> <Leader>bb  :Buffers<CR>
-nnoremap <silent> <Leader>ag       :Ag <C-R><C-W><CR>
-nnoremap <silent> <Leader>AG       :Ag <C-R><C-A><CR>
 xnoremap <silent> <Leader>ag       y:Ag <C-R>"<CR>
 nnoremap <silent> <leader>jl :BLines<cr>
 nnoremap <silent> <leader>ft :Filetypes<cr>
@@ -342,7 +350,7 @@ xmap <leader><tab> <plug>(fzf-maps-x)
 omap <leader><tab> <plug>(fzf-maps-o)
 function! s:plugs_sink(line)
     let dir = g:plugs[a:line].dir
-    for pat in ['doc/*.txt', 'README.md']
+    for pat in ['doc/*.txt', 'README.md', 'node_modules/']
         let match = get(split(globpath(dir, pat), "\n"), 0, '')
         if len(match)
             execute 'tabedit' match
@@ -352,6 +360,27 @@ function! s:plugs_sink(line)
     tabnew
     execute 'Explore' dir
 endfunction
+nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
+nnoremap <silent> K :call SearchWordWithAg()<CR>
+vnoremap <silent> K :call SearchVisualSelectionWithAg()<CR>
+
+function! SearchWordWithAg()
+  execute 'Ag' expand('<cword>')
+endfunction
+
+function! SearchVisualSelectionWithAg() range
+  let old_reg = getreg('"')
+  let old_regtype = getregtype('"')
+  let old_clipboard = &clipboard
+  set clipboard&
+  normal! ""gvy
+  let selection = getreg('"')
+  call setreg('"', old_reg, old_regtype)
+  let &clipboard = old_clipboard
+  execute 'Ag' selection
+endfunction
+
+
 command! PlugHelp call fzf#run(fzf#wrap({
             \ 'source':  sort(keys(g:plugs)),
             \ 'sink':    function('s:plugs_sink')}))
@@ -518,3 +547,9 @@ map *  <Plug>(incsearch-nohl-*)
 map #  <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
+
+
+
+
+
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
