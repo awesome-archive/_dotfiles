@@ -2,60 +2,44 @@
 " 插件列表
 " ----------------------------------------------------------------------------
 " ----------------------------------------------------------------------------
-
 call plug#begin('~/.vim/plugged')
-
 "保存会话
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
-
 "UI
 Plug 'itchyny/lightline.vim'
 Plug 'mikker/lightline-theme-pencil'
 Plug 'ayu-theme/ayu-vim'
 Plug 'junegunn/seoul256.vim'
 Plug 'mikker/vim-dimcil'
-" Plug 'Yggdroot/indentLine'
-" Plug 'liuchengxu/eleline.vim'
-"
 Plug 'benjie/neomake-local-eslint.vim'
-
 "辅助增强
-
 Plug 'sbdchd/neoformat'
 Plug 'mattesgroeger/vim-bookmarks'
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
-"Plug 'Shougo/denite.nvim'
-"Plug 'vimwiki/vimwiki'
-" Plug 'tpope/vim-surround'
-Plug 'terryma/vim-multiple-cursors'                         "多点编辑
-Plug 'easymotion/vim-easymotion'                            "快速搜索
-Plug 'rhysd/clever-f.vim'                                   "F增强多行搜索
-" Plug 'asins/vimcdoc'                                        "中文帮助文档
-Plug 'Chiel92/vim-autoformat'                               "自动格式化
-Plug 'sirver/ultisnips'                                     "代码片段
-Plug 'honza/vim-snippets'                                   "代码片段
-Plug 'roman/golden-ratio'                                   "窗口自动缩放
-Plug 'szw/vim-maximizer'                                    "窗口最大化
-Plug 'scrooloose/nerdcommenter'                             "注释插件
-Plug 'iamcco/dict.vim'                                      "翻译插件
+Plug 'tpope/vim-surround'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'easymotion/vim-easymotion'
+Plug 'rhysd/clever-f.vim'
+Plug 'Chiel92/vim-autoformat'
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'roman/golden-ratio'
+Plug 'szw/vim-maximizer'
+Plug 'scrooloose/nerdcommenter'
+Plug 'iamcco/dict.vim'
 Plug 'Raimondi/delimitMate'
-" Plug 'terryma/vim-expand-region'                            "V选择增强
 Plug 'vim-scripts/YankRing.vim'
-Plug 'tpope/vim-repeat'                                     "替换增强
-" Plug 'justinmk/vim-gtfo'                                    "当前文件跳转
-Plug 'danro/rename.vim'                                     "文件重命名
-Plug 'mhinz/vim-signify'                                    "版本控制显示
+Plug 'tpope/vim-repeat'
+Plug 'justinmk/vim-gtfo'
+Plug 'danro/rename.vim'
+Plug 'mhinz/vim-signify'
 Plug 'ervandew/supertab'
-
-
 "语言
 Plug 'sheerun/vim-polyglot'
-
 Plug 'vim-scripts/matchit.zip'
 Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 Plug 'pangloss/vim-javascript'
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'roxma/nvim-completion-manager'
 if !has('nvim')
     Plug 'roxma/vim-hug-neovim-rpc'
@@ -64,14 +48,11 @@ Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'othree/csscomplete.vim'
 
-"Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'styl', 'pug'] }
 Plug 'isRuslan/vim-es6'
-"Plug 'w0rp/ale'
+Plug 'w0rp/ale'
 Plug 'ap/vim-css-color'
 Plug 'Junza/Spink'
-" Plug 'digitaltoad/vim-pug'
-" Plug 'wavded/vim-stylus'
 Plug 'billyvg/tigris.nvim'
 Plug 'roxma/nvim-completion-manager'
 Plug 'othree/yajs.vim'
@@ -79,8 +60,9 @@ Plug 'othree/jsdoc-syntax.vim'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'moll/vim-node'
 Plug 'hail2u/vim-css3-syntax', {'for':['css','scss', 'styl', 'less']}
-" Plug 'valloric/MatchTagAlways', { 'for': ['html', 'css', 'javascript'] }
 Plug 'posva/vim-vue'
+" Plug 'digitaltoad/vim-pug'
+" Plug 'wavded/vim-stylus'
 " Plug 'chemzqm/wxapp.vim'
 "文件操作
 Plug 'scrooloose/nerdtree'
@@ -127,32 +109,26 @@ set termguicolors
 set ttimeout
 set ttimeoutlen=0
 set fdm=manual
-"set breakindentopt+=sbr
 set breakindent
-
 " set cuc
 " set cul
 " ----------------------------------------------------------------------------
 " UI设置
 " ----------------------------------------------------------------------------
-
 let g:lightline = {'colorscheme': 'one'}
 set t_Co=256
-"set guifont=Menlo:h20
 let g:palenight_terminal_italics=1
 " let g:seoul256_background = 236
 " set background=dark
 " set background=light
 " colo seoul256
 " colo seoul256-light
-
 " set termguicolors
 " let ayucolor="mirage"
 " let ayucolor="dark"
 " let ayucolor="light"
 " colorscheme ayu
 colorscheme dimcil
-
 " ----------------------------------------------------------------------------
 " 默认快捷键设置
 " ----------------------------------------------------------------------------
@@ -194,10 +170,6 @@ inoremap <C-l> <Right>
 inoremap <C-d> <DELETE>
 nnoremap <d-[> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 vnoremap <d-]> zf
-nnoremap <leader>mf :Autoformat<CR>
-
-map <Leader>r :!node %<CR>
-
 " ----------------------------------------------------------------------------
 " 移动选中内容
 " ----------------------------------------------------------------------------
@@ -266,7 +238,6 @@ vmap <silent> <Leader>d <Plug>DictVSearch
 nmap <silent> <Leader><Leader>r <Plug>DictRSearch
 vmap <silent> <Leader><Leader>r <Plug>DictRVSearch
 let g:vikiUseParentSuffix = 1
-
 " ----------------------------------------------------------------------------
 " UltiSnips
 " ----------------------------------------------------------------------------
@@ -283,6 +254,12 @@ nmap <leader>mf :Neoformat<cr>
 " vim-maximizer
 " ----------------------------------------------------------------------------
 nnoremap <tab> :MaximizerToggle<CR>
+" ----------------------------------------------------------------------------
+" emmet
+" ----------------------------------------------------------------------------
+let g:user_emmet_install_global = 0
+autocmd FileType html,css,pug EmmetInstall
+let g:user_emmet_expandabbr_key = '<D-e>'
 " ----------------------------------------------------------------------------
 " NERDT
 " ----------------------------------------------------------------------------
@@ -315,20 +292,46 @@ map  <Leader><Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
 map <Leader>k <Plug>(easymotion-bd-jk)
 nmap <Leader>k <Plug>(easymotion-overwin-line)
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => bookmark
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:bookmark_auto_close = 1
-
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => nvim-completion-manager
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
+au User CmSetup call cm#register_source({'name' : 'cm-css',
+        \ 'priority': 9,
+        \ 'scoping': 1,
+        \ 'scopes': ['css','scss'],
+        \ 'abbreviation': 'css',
+        \ 'word_pattern': '[\w\-]+',
+        \ 'cm_refresh_patterns':['[\w\-]+\s*:\s+'],
+        \ 'cm_refresh': {'omnifunc': 'csscomplete#CompleteCSS'},
+        \ })
+let g:cm_sources_override = {
+    \ 'cm-tags': {'enable':0}
+    \ }
+let g:NERDSpaceDelims=1
+let g:NERDAltDelims_python = 1
+let g:brightest#highlight = {"group" : "BrightestUnderline"}
+let g:brightest#pattern = '\k\+'
+let g:brightest#enable_filetypes = {"cpp" : 0}
+let g:brightest#enable_filetypes = {
+\    "_"   : 0,
+\    "vim" : 1,
+\    "css" : 1,
+\    "html" : 1,
+\    "js" : 1,
+\    "md" : 1
+\}
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => incsearch
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set hlsearch
 let g:incsearch#auto_nohlsearch = 1
-map / <Plug>(incsearch-easymotion-/)
-map ? <Plug>(incsearch-easymotion-?)
+map z/ <Plug>(incsearch-easymotion-/)
+map z? <Plug>(incsearch-easymotion-?)
 map g/ <Plug>(incsearch-easymotion-stay)
 map n  <Plug>(incsearch-nohl-n)
 map N  <Plug>(incsearch-nohl-N)
@@ -342,16 +345,13 @@ map g# <Plug>(incsearch-nohl-g#)
 let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_layout = { 'window': '-tabnew' }
 let g:fzf_buffers_jump = 1
-
 if has('nvim')
   let $FZF_DEFAULT_OPTS .= ' --inline-info'
 endif
-
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 nnoremap <silent> <expr> <Leader>ff (expand('&') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Files\<cr>"
-
 nnoremap <silent> <Leader>C        :Colors<CR>
 nnoremap <silent> <Leader>bb  :Buffers<CR>
 xnoremap <silent> <Leader>ag       y:Ag <C-R>"<CR>
@@ -398,14 +398,9 @@ function! SearchVisualSelectionWithAg() range
   let &clipboard = old_clipboard
   execute 'Ag' selection
 endfunction
-
-
 command! PlugHelp call fzf#run(fzf#wrap({
             \ 'source':  sort(keys(g:plugs)),
             \ 'sink':    function('s:plugs_sink')}))
-
-
-
 let g:fzf_colors =
 \ {'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
@@ -425,7 +420,7 @@ let g:fzf_colors =
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
 let g:ale_lint_on_enter = 0
-"let g:ale_linters = {'javascript': ['eslint']}
+let g:ale_linters = {'javascript': ['eslint']}
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
 " ----------------------------------------------------------------------------
@@ -435,54 +430,6 @@ map <Leader>hv :e /Applications/XAMPP/xamppfiles/etc/extra/httpd-vhosts.conf<CR>
 map <Leader>hh :e /etc/hosts<CR>
 map <Leader>to :!open .<CR>
 map <Leader>push :!bash ~/dotfiles/scripts/push.sh<CR>
-map <Leader>puw :!bash ~/vimwiki/push.sh<CR>
 map <silent> <Leader>ez :e ~/dotfiles/zsh/zshrc<CR>
 map <silent> <Leader>sdemo :!touch index.html & touch app.js & touch css.less<CR>
-
-
-
-
-
-let g:user_emmet_install_global = 0
-autocmd FileType html,css,pug EmmetInstall
-let g:user_emmet_expandabbr_key = '<D-e>'
-
-
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
-au User CmSetup call cm#register_source({'name' : 'cm-css',
-        \ 'priority': 9,
-        \ 'scoping': 1,
-        \ 'scopes': ['css','scss'],
-        \ 'abbreviation': 'css',
-        \ 'word_pattern': '[\w\-]+',
-        \ 'cm_refresh_patterns':['[\w\-]+\s*:\s+'],
-        \ 'cm_refresh': {'omnifunc': 'csscomplete#CompleteCSS'},
-        \ })
-let g:cm_sources_override = {
-    \ 'cm-tags': {'enable':0}
-    \ }
-
-let g:NERDSpaceDelims=1
-let g:NERDAltDelims_python = 1
-
-
-
-let g:brightest#highlight = {
-\   "group" : "BrightestUnderline"
-\}
-
-let g:brightest#pattern = '\k\+'
-
-
-let g:brightest#enable_filetypes = {
-\    "cpp" : 0
-\}
-
-let g:brightest#enable_filetypes = {
-\    "_"   : 0,
-\    "vim" : 1,
-\    "css" : 1,
-\    "html" : 1,
-\    "js" : 1,
-\    "md" : 1
-\}
+map <Leader>r :!node %<CR>
