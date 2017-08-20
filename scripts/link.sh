@@ -16,6 +16,12 @@ rm ~/.vimrc
 echo '删除gitignore'
 rm ~/.gitignore
 
+
+echo '安装vim-plug'
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+
 echo '链接vimrc'
 ln -s ~/dotfiles/vim/init.vim ~/.vimrc
 ln -s ~/dotfiles/vim/init.vim ~/.vim/init.vim

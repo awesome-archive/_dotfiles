@@ -64,9 +64,7 @@ pip3 install --user neovim jedi mistune psutil setproctitle
 echo '安装fzf'
 brew install fzf
 
-echo '安装vim-plug'
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 
 echo '安装zsh'
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
