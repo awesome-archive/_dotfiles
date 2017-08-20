@@ -117,17 +117,17 @@ set breakindent
 " ----------------------------------------------------------------------------
 let g:lightline = {'colorscheme': 'one'}
 set t_Co=256
-let g:palenight_terminal_italics=1
-let g:seoul256_background = 236
-set background=dark
+" let g:palenight_terminal_italics=1
+" let g:seoul256_background = 236
+" set background=dark
 " set background=light
-colo seoul256
+" colo seoul256
 " colo seoul256-light
-" set termguicolors
-" let ayucolor="mirage"
-" let ayucolor="dark"
-" let ayucolor="light"
-" colorscheme ayu
+set termguicolors
+let ayucolor="light"
+let ayucolor="dark"
+let ayucolor="mirage"
+colorscheme ayu
 " colorscheme dimcil
 " ----------------------------------------------------------------------------
 " 默认快捷键设置
