@@ -1,6 +1,6 @@
 
 export ZSH=~/.oh-my-zsh
-ZSH_THEME="robbyrussell"
+ZSH_THEME="cloud"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
@@ -108,8 +108,8 @@ alias gre='git reset --hard'
 alias a='atom'
 alias h='nvim /etc/hosts'
 alias v='nvim'
-alias vim='nvim'
-alias vi='nvim'
+#alias vim='nvim'
+#alias vi='nvim'
 alias vh='nvim /Applications/XAMPP/xamppfiles/etc/extra/httpd-vhosts.conf'
 alias web='webpack -d -w'
 
