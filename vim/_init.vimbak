@@ -5,19 +5,6 @@
 call plug#begin('~/.vim/plugged')
 "保存会话
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
-
-Plug '1995eaton/vim-better-css-completion'
-Plug 'vim-scripts/AutoComplPop'
-
-function! BuildYCM(info)
-  if a:info.status == 'installed' || a:info.force
-    !./install.py --clang-completer --gocode-completer
-  endif
-endfunction
-Plug 'Valloric/YouCompleteMe', { 'for': ['c', 'cpp'], 'do': function('BuildYCM') }
-Plug 'othree/javascript-libraries-syntax.vim'
-
-
 "UI
 Plug 'itchyny/lightline.vim'
 Plug 'mikker/lightline-theme-pencil'
@@ -27,18 +14,17 @@ Plug 'mikker/vim-dimcil'
 Plug 'benjie/neomake-local-eslint.vim'
 "辅助增强
 Plug 'sbdchd/neoformat'
-
 Plug 'mattesgroeger/vim-bookmarks'
-
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'easymotion/vim-easymotion'
 Plug 'rhysd/clever-f.vim'
+Plug 'Chiel92/vim-autoformat'
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
-"Plug 'roman/golden-ratio'
+Plug 'roman/golden-ratio'
 Plug 'szw/vim-maximizer'
 Plug 'scrooloose/nerdcommenter'
 Plug 'iamcco/dict.vim'
@@ -52,18 +38,23 @@ Plug 'ervandew/supertab'
 "语言
 Plug 'sheerun/vim-polyglot'
 Plug 'vim-scripts/matchit.zip'
-
 Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
-
 Plug 'pangloss/vim-javascript'
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-
+Plug 'roxma/nvim-completion-manager'
+if !has('nvim')
+    Plug 'roxma/vim-hug-neovim-rpc'
+endif
+Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+Plug 'othree/csscomplete.vim'
 
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'styl', 'pug'] }
 Plug 'isRuslan/vim-es6'
 Plug 'w0rp/ale'
 Plug 'ap/vim-css-color'
 Plug 'Junza/Spink'
+Plug 'billyvg/tigris.nvim'
+Plug 'roxma/nvim-completion-manager'
 Plug 'othree/yajs.vim'
 Plug 'othree/jsdoc-syntax.vim'
 Plug 'heavenshell/vim-jsdoc'
@@ -91,7 +82,6 @@ autocmd BufWritePre * %s/\s\+$//e
 set noshowmode
 set noswapfile
 filetype on
-set vb
 set  number
 set smartindent
 set tabstop=4
@@ -115,7 +105,7 @@ set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 set fileencoding=utf-8
 set helplang=cn
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-" set termguicolors
+set termguicolors
 set ttimeout
 set ttimeoutlen=0
 set fdm=manual
@@ -126,11 +116,32 @@ set breakindent
 " ----------------------------------------------------------------------------
 " UI设置
 " ----------------------------------------------------------------------------
+let g:lightline = {'colorscheme': 'one'}
 set t_Co=256
-let g:palenight_terminal_italics=1
-let g:seoul256_background = 236
+" let g:palenight_terminal_italics=1
+" let g:seoul256_background = 236
 set background=dark
-colo seoul256
+" set background=light
+" colo seoul256
+" colo seoul256-light
+" set termguicolors
+" let ayucolor="dark"
+" let ayucolor="mirage"
+" let ayucolor="light"
+" colorscheme ayu
+" colorscheme dimcil
+
+
+if $COLORTERM == 'gnome-terminal'
+    set t_Co=256
+endif
+
+try
+    colorscheme desert
+catch
+endtry
+
+set background=dark
 
 " ----------------------------------------------------------------------------
 " 默认快捷键设置
@@ -263,7 +274,6 @@ nnoremap <tab> :MaximizerToggle<CR>
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,pug EmmetInstall
 let g:user_emmet_expandabbr_key = '<D-e>'
-let g:user_emmet_leader_key='<leader>e'         " 当前将`<C-y>,`替换为`<leader>y,`
 " ----------------------------------------------------------------------------
 " NERDT
 " ----------------------------------------------------------------------------
@@ -303,32 +313,32 @@ let g:bookmark_auto_close = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => nvim-completion-manager
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
-" au User CmSetup call cm#register_source({'name' : 'cm-css',
-        " \ 'priority': 9,
-        " \ 'scoping': 1,
-        " \ 'scopes': ['css','scss'],
-        " \ 'abbreviation': 'css',
-        " \ 'word_pattern': '[\w\-]+',
-        " \ 'cm_refresh_patterns':['[\w\-]+\s*:\s+'],
-        " \ 'cm_refresh': {'omnifunc': 'csscomplete#CompleteCSS'},
-        " \ })
-" let g:cm_sources_override = {
-    " \ 'cm-tags': {'enable':0}
-    " \ }
-" let g:NERDSpaceDelims=1
-" let g:NERDAltDelims_python = 1
-" let g:brightest#highlight = {"group" : "BrightestUnderline"}
-" let g:brightest#pattern = '\k\+'
-" let g:brightest#enable_filetypes = {"cpp" : 0}
-" let g:brightest#enable_filetypes = {
-" \    "_"   : 0,
-" \    "vim" : 1,
-" \    "css" : 1,
-" \    "html" : 1,
-" \    "js" : 1,
-" \    "md" : 1
-" \}
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
+au User CmSetup call cm#register_source({'name' : 'cm-css',
+        \ 'priority': 9,
+        \ 'scoping': 1,
+        \ 'scopes': ['css','scss'],
+        \ 'abbreviation': 'css',
+        \ 'word_pattern': '[\w\-]+',
+        \ 'cm_refresh_patterns':['[\w\-]+\s*:\s+'],
+        \ 'cm_refresh': {'omnifunc': 'csscomplete#CompleteCSS'},
+        \ })
+let g:cm_sources_override = {
+    \ 'cm-tags': {'enable':0}
+    \ }
+let g:NERDSpaceDelims=1
+let g:NERDAltDelims_python = 1
+let g:brightest#highlight = {"group" : "BrightestUnderline"}
+let g:brightest#pattern = '\k\+'
+let g:brightest#enable_filetypes = {"cpp" : 0}
+let g:brightest#enable_filetypes = {
+\    "_"   : 0,
+\    "vim" : 1,
+\    "css" : 1,
+\    "html" : 1,
+\    "js" : 1,
+\    "md" : 1
+\}
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => incsearch
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -463,100 +473,3 @@ let g:lightline = {
       \ 'separator': { 'left': ' ', 'right': ' ' },
       \ 'subseparator': { 'left': ' ', 'right': ' ' }
       \ }
-
-
-" ----------------------------------------------------------------------------
-" YouCompleteMe
-" ----------------------------------------------------------------------------
-
-let g:ycm_min_num_of_chars_for_completion = 1
-let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_min_num_of_chars_for_completion = 1
-let g:ycm_complete_in_comments=1
-let g:ycm_confirm_extra_conf=0
-let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_collect_identifiers_from_tags_files=1
-let g:ycm_complete_in_comments = 1
-let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
-let g:ycm_complete_in_comments=1
-let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
-let g:ycm_seed_identifiers_with_syntax=1
-let g:ycm_cache_omnifunc=0
-set completeopt-=preview
-function! MyTabFunction ()
-  let line = getline('.')
-  let substr = strpart(line, -1, col('.')+1)
-  let substr = matchstr(substr, "[^ \t]*$")
-  if strlen(substr) == 0
-    return "\<tab>"
-  endif
-  return pumvisible() ? "\<c-n>" : "\<c-x>\<c-o>"
-endfunction
-
-let g:ycm_autoclose_preview_window_after_completion = 1
-"let g:ycm_complete_in_strings = 1
-let g:ycm_complete_in_comments = 1
-let g:ycm_key_list_select_completion = ['<Tab>', '<C-j>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_semantic_triggers =  {
-            \   'c' : ['->', '.'],
-            \   'objc' : ['->', '.'],
-            \   'ocaml' : ['.', '#'],
-            \   'cpp,objcpp' : ['->', '.', '::'],
-            \   'perl' : ['->'],
-            \   'php' : ['->', '::', '(', 'use ', 'namespace ', '\'],
-            \   'cs,java,typescript,d,python,perl6,scala,vb,elixir,go' : ['.', 're!(?=[a-zA-Z]{3,4})'],
-            \   'html': ['<', '"', '</', ' '],
-            \   'vim' : ['re![_a-za-z]+[_\w]*\.'],
-            \   'ruby' : ['.', '::'],
-            \   'lua' : ['.', ':'],
-            \   'erlang' : [':'],
-            \   'haskell' : ['.', 're!.'],
-            \   'scss,css': [ 're!^\s{2,4}', 're!:\s+' ],
-            \ }
-
-"inoremap <tab> <c-r>=MyTabFunction()<cr>
-
-
-" ----------------------------------------------------------------------------
-" SuperTab
-" ----------------------------------------------------------------------------
-let g:SuperTabDefultCompletionType='context'
-"let g:SuperTabDefaultCompletionType = '<C-X><C-U>'
-
-let g:SuperTabRetainCompletionType = 2
-let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
-
-
-" ----------------------------------------------------------------------------
-" tern_for_vim
-" ----------------------------------------------------------------------------
-let tern_show_signature_in_pum = 1
-let tern_show_argument_hints = 'on_hold'
-"autocmd FileType javascript nnoremap <leader>d :TernDef<CR>
-autocmd FileType javascript setlocal omnifunc=tern#Complete
-
-
-let g:used_javascript_libs = 'jquery,react,vue'
-
-
-
-function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-  exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
-  exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-endfunction
-
-call NERDTreeHighlightFile('jade',   'green', 'none', 'green', '#151515')
-call NERDTreeHighlightFile('md',     'blue', 'none', '#3366FF', '#151515')
-call NERDTreeHighlightFile('yml',    'magenta', 'none', 'yellow', '#E70350')
-call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('conf',   'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('json',   'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('html',   'green', 'none', 'green', '#04E703')
-call NERDTreeHighlightFile('styl',   'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('css',    'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
-call NERDTreeHighlightFile('js',     'Red', 'none', '#ffa500', '#151515')
-call NERDTreeHighlightFile('php',    'Magenta', 'none', '#ff00ff', '#151515')
-

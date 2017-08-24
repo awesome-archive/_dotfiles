@@ -154,6 +154,12 @@ alias ssh_iuunhao='ssh iuunhao@123.57.140.93'
 alias ghuiyauncheng='git reset --hard'
 alias gshanchufenzhi='git push origin :'
 
+alias subl="'/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl'"
+alias nano="subl"
+export EDITOR="subl"
+
+
+
 COLOR_BLACK="\e[0;30m"
 COLOR_BLUE="\e[0;34m"
 COLOR_GREEN="\e[0;32m"
