@@ -12,7 +12,7 @@ preexec () { print -Pn "\e]0;%n@%M//%/\ $1\a" }
 esac
 
 #编辑器
-export EDITOR=nvim
+export EDITOR=vim
 
 #允许在交互模式中使用注释  例如：
 setopt INTERACTIVE_COMMENTS
@@ -106,11 +106,9 @@ alias glog='tig'
 alias gre='git reset --hard'
 
 alias a='atom'
-alias h='nvim /etc/hosts'
-alias v='nvim'
-#alias vim='nvim'
-#alias vi='nvim'
-alias vh='nvim /Applications/XAMPP/xamppfiles/etc/extra/httpd-vhosts.conf'
+alias vim='mvim -v'
+alias h='mvim -v /etc/hosts'
+alias vh='mvim -v /Applications/XAMPP/xamppfiles/etc/extra/httpd-vhosts.conf'
 alias web='webpack -d -w'
 
 

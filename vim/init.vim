@@ -5,19 +5,6 @@
 call plug#begin('~/.vim/plugged')
 "保存会话
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
-
-Plug '1995eaton/vim-better-css-completion'
-Plug 'vim-scripts/AutoComplPop'
-
-function! BuildYCM(info)
-  if a:info.status == 'installed' || a:info.force
-    !./install.py --clang-completer --gocode-completer
-  endif
-endfunction
-Plug 'Valloric/YouCompleteMe', { 'for': ['c', 'cpp'], 'do': function('BuildYCM') }
-Plug 'othree/javascript-libraries-syntax.vim'
-
-
 "UI
 Plug 'itchyny/lightline.vim'
 Plug 'mikker/lightline-theme-pencil'
@@ -26,10 +13,8 @@ Plug 'junegunn/seoul256.vim'
 Plug 'mikker/vim-dimcil'
 Plug 'benjie/neomake-local-eslint.vim'
 "辅助增强
-Plug 'sbdchd/neoformat'
-
+Plug 'Chiel92/vim-autoformat'
 Plug 'mattesgroeger/vim-bookmarks'
-
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'tpope/vim-surround'
@@ -50,15 +35,20 @@ Plug 'danro/rename.vim'
 Plug 'mhinz/vim-signify'
 Plug 'ervandew/supertab'
 "语言
+Plug '1995eaton/vim-better-css-completion'
+Plug 'vim-scripts/AutoComplPop'
+function! BuildYCM(info)
+  if a:info.status == 'installed' || a:info.force
+    !./install.py --clang-completer --gocode-completer
+  endif
+endfunction
+Plug 'Valloric/YouCompleteMe', { 'for': ['c', 'cpp'], 'do': function('BuildYCM') }
+Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'vim-scripts/matchit.zip'
-
 Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
-
 Plug 'pangloss/vim-javascript'
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-
-
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'styl', 'pug'] }
 Plug 'isRuslan/vim-es6'
 Plug 'w0rp/ale'
@@ -75,9 +65,9 @@ Plug 'posva/vim-vue'
 " Plug 'chemzqm/wxapp.vim'
 "文件操作
 Plug 'scrooloose/nerdtree'
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'tweekmonster/fzf-filemru'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'endel/ctrlp-filetype.vim'
+Plug 'vim-scripts/mru.vim'
 call plug#end()
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 " ----------------------------------------------------------------------------
@@ -118,10 +108,25 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " set termguicolors
 set ttimeout
 set ttimeoutlen=0
-set fdm=manual
 set breakindent
 " set cuc
 " set cul
+set cindent
+set autoread
+set autoindent
+set smartindent
+set foldenable
+set fdm=manual
+
+if has("gui_running")
+    "au GUIEnter * simalt ~x " 窗口启动时自动最大化
+    set guioptions-=m " 隐藏菜单栏
+    set guioptions-=T " 隐藏工具栏
+    set guioptions-=L " 隐藏左侧滚动条
+    set guioptions-=r " 隐藏右侧滚动条
+    set guioptions-=b " 隐藏底部滚动条
+    set showtabline=0 " 隐藏Tab栏
+endif
 
 " ----------------------------------------------------------------------------
 " UI设置
@@ -131,7 +136,8 @@ let g:palenight_terminal_italics=1
 let g:seoul256_background = 236
 set background=dark
 colo seoul256
-
+set guifont=Inconsolata_for_Powerline:h24
+"colorscheme peaksea
 " ----------------------------------------------------------------------------
 " 默认快捷键设置
 " ----------------------------------------------------------------------------
@@ -251,8 +257,6 @@ let g:UltiSnipsEditSplit="vertical"
 " ----------------------------------------------------------------------------
 " Neoformat
 " ----------------------------------------------------------------------------
-let g:neoformat_enabled_javascript = ['prettier']
-nmap <leader>mf :Neoformat<cr>
 " ----------------------------------------------------------------------------
 " vim-maximizer
 " ----------------------------------------------------------------------------
@@ -343,81 +347,6 @@ map *  <Plug>(incsearch-nohl-*)
 map #  <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => fzf
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:fzf_layout = { 'window': 'enew' }
-let g:fzf_layout = { 'window': '-tabnew' }
-let g:fzf_buffers_jump = 1
-if has('nvim')
-  let $FZF_DEFAULT_OPTS .= ' --inline-info'
-endif
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-
-nnoremap <silent> <expr> <Leader>ff (expand('&') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Files\<cr>"
-nnoremap <silent> <Leader>C        :Colors<CR>
-nnoremap <silent> <Leader>bb  :Buffers<CR>
-xnoremap <silent> <Leader>ag       y:Ag <C-R>"<CR>
-nnoremap <silent> <leader>jl :BLines<cr>
-nnoremap <silent> <leader>ft :Filetypes<cr>
-nnoremap <silent> <leader>jk :Lines<cr>
-nnoremap <silent> <leader>fr :History<cr>
-inoremap <expr> <c-x><c-t> fzf#complete('tmuxwords.rb --all-but-current --scroll 500 --min 5')
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-imap <c-x><c-l> <plug>(fzf-complete-line)
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
-function! s:plugs_sink(line)
-    let dir = g:plugs[a:line].dir
-    for pat in ['doc/*.txt', 'README.md', 'node_modules/']
-        let match = get(split(globpath(dir, pat), "\n"), 0, '')
-        if len(match)
-            execute 'tabedit' match
-            return
-        endif
-    endfor
-    tabnew
-    execute 'Explore' dir
-endfunction
-nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
-nnoremap <silent> K :call SearchWordWithAg()<CR>
-vnoremap <silent> K :call SearchVisualSelectionWithAg()<CR>
-
-function! SearchWordWithAg()
-  execute 'Ag' expand('<cword>')
-endfunction
-
-function! SearchVisualSelectionWithAg() range
-  let old_reg = getreg('"')
-  let old_regtype = getregtype('"')
-  let old_clipboard = &clipboard
-  set clipboard&
-  normal! ""gvy
-  let selection = getreg('"')
-  call setreg('"', old_reg, old_regtype)
-  let &clipboard = old_clipboard
-  execute 'Ag' selection
-endfunction
-command! PlugHelp call fzf#run(fzf#wrap({
-            \ 'source':  sort(keys(g:plugs)),
-            \ 'sink':    function('s:plugs_sink')}))
-let g:fzf_colors =
-\ {'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Identifier'],
-  \ 'fg+':     ['fg', 'CursorLine', 'Normal', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'Normal'],
-  \ 'hl+':     ['fg', 'Identifier'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'prompt':  ['fg', 'Identifier'],
-  \ 'pointer': ['fg', 'Keyword'],
-  \ 'marker':  ['fg', 'CursorLineNr'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment']}
 " ----------------------------------------------------------------------------
 " ale
 " ----------------------------------------------------------------------------
@@ -560,3 +489,50 @@ call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
 call NERDTreeHighlightFile('js',     'Red', 'none', '#ffa500', '#151515')
 call NERDTreeHighlightFile('php',    'Magenta', 'none', '#ff00ff', '#151515')
 
+
+
+
+""""""""""""""""""""""""""""""
+" => CTRL-P
+""""""""""""""""""""""""""""""
+let g:ctrlp_working_path_mode = 0
+
+let g:ctrlp_map = '<c-f>'
+map <leader>ff :CtrlP<cr>
+map <leader>bb :CtrlPBuffer<cr>
+"nnoremap <leader>fr :CtrlPMRU<CR>
+silent! nnoremap <unique> <silent> <Leader>ft :CtrlPFiletype<CR>
+  let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
+    \ }
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.png,*.jpg,*.jpeg,*.gif " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.pyc,*.png,*.jpg,*.gif  " Windows
+let g:ctrlp_working_path_mode=0
+let g:ctrlp_match_window_bottom=1
+let g:ctrlp_max_height=15
+let g:ctrlp_match_window_reversed=0
+let g:ctrlp_mruf_max=500
+let g:ctrlp_follow_symlinks=1
+let g:ctrlp_extensions = ['filetype']
+
+let g:ctrlp_max_height = 20
+let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
+
+""""""""""""""""""""""""""""""
+" => MRU plugin
+""""""""""""""""""""""""""""""
+let MRU_Max_Entries = 400
+map <leader>fr :MRU<CR>
+" ----------------------------------------------------------------------------
+" Autoformat
+" ----------------------------------------------------------------------------
+"au BufWrite * :Autoformat
+let g:autoformat_autoindent = 0
+let g:autoformat_retab = 0
+let g:autoformat_remove_trailing_spaces = 0
+nmap <leader>mf :autoformat<cr>
+
+if has("gui_macvim")
+    set transparency=10
+endif
