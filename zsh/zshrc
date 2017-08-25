@@ -2,6 +2,8 @@
 export ZSH=~/.oh-my-zsh
 ZSH_THEME="cloud"
 ZSH_THEME="norm"
+ZSH_THEME="fishy"
+
 
 
 
@@ -151,7 +153,7 @@ alias tdev='tmux-session dev'
 alias te='crontab -e'
 
 alias ssh_root='ssh root@123.57.140.93'
-alias ssh_iuunhao='ssh iuunhao@123.57.140.93'
+alias ali='ssh iuunhao@123.57.140.93'
 
 #git
 alias ghuiyauncheng='git reset --hard'
