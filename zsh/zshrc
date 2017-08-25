@@ -1,8 +1,8 @@
 
 export ZSH=~/.oh-my-zsh
 ZSH_THEME="cloud"
-ZSH_THEME="af-magic"
-ZSH_THEME="alanpeabody"
+ZSH_THEME="norm"
+
 
 
 plugins=(git)
