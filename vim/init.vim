@@ -7,11 +7,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 "UI
 Plug 'itchyny/lightline.vim'
-Plug 'mikker/lightline-theme-pencil'
-Plug 'ayu-theme/ayu-vim'
 Plug 'junegunn/seoul256.vim'
-Plug 'mikker/vim-dimcil'
-Plug 'benjie/neomake-local-eslint.vim'
 "辅助增强
 Plug 'Chiel92/vim-autoformat'
 Plug 'mattesgroeger/vim-bookmarks'
@@ -30,12 +26,11 @@ Plug 'iamcco/dict.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'tpope/vim-repeat'
-Plug 'justinmk/vim-gtfo'
+"Plug 'justinmk/vim-gtfo'
 Plug 'danro/rename.vim'
 Plug 'mhinz/vim-signify'
 Plug 'ervandew/supertab'
 "语言
-Plug '1995eaton/vim-better-css-completion'
 Plug 'vim-scripts/AutoComplPop'
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
@@ -52,13 +47,14 @@ Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'styl', 'pug'] }
 Plug 'isRuslan/vim-es6'
 Plug 'w0rp/ale'
-Plug 'ap/vim-css-color'
 Plug 'Junza/Spink'
 Plug 'othree/yajs.vim'
 Plug 'othree/jsdoc-syntax.vim'
 Plug 'heavenshell/vim-jsdoc'
-Plug 'moll/vim-node'
+"Plug 'moll/vim-node'
 Plug 'hail2u/vim-css3-syntax', {'for':['css','scss', 'styl', 'less']}
+Plug '1995eaton/vim-better-css-completion'
+Plug 'ap/vim-css-color'
 Plug 'posva/vim-vue'
 " Plug 'digitaltoad/vim-pug'
 " Plug 'wavded/vim-stylus'
@@ -172,6 +168,7 @@ noremap gV `[v`]
 map q: :q
 map <leader>t :tabnext<cr>
 map <leader>tc :tabclose<cr>
+inoremap jj <Esc>
 inoremap <C-h> <Left>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>

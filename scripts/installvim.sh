@@ -10,3 +10,4 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 echo '链接vimrc'
 ln -s ~/dotfiles/vim/init.vim ~/.vimrc
+

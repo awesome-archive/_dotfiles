@@ -106,6 +106,7 @@ alias glog='tig'
 alias gre='git reset --hard'
 
 alias a='atom'
+alias vi='vim'
 alias vim='mvim -v'
 alias h='mvim -v /etc/hosts'
 alias vh='mvim -v /Applications/XAMPP/xamppfiles/etc/extra/httpd-vhosts.conf'
