@@ -1,8 +1,7 @@
-
 export ZSH=~/.oh-my-zsh
-ZSH_THEME="cloud"
 ZSH_THEME="norm"
 ZSH_THEME="fishy"
+ZSH_THEME="cloud"
 
 
 
@@ -113,11 +112,9 @@ alias gre='git reset --hard'
 
 alias a='atom'
 alias vi='vim'
-alias vim='mvim -v'
 alias h='mvim -v /etc/hosts'
 alias vh='mvim -v /Applications/XAMPP/xamppfiles/etc/extra/httpd-vhosts.conf'
 alias web='webpack -d -w'
-
 
 alias chongqi='sudo shutdown -r now'
 alias guanji='sudo shutdown -h now'
@@ -162,6 +159,11 @@ alias gshanchufenzhi='git push origin :'
 alias subl="'/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl'"
 alias nano="subl"
 export EDITOR="subl"
+
+
+#server aliyun ubuntu14.04
+alias cd_nginx_confd='cd /etc/nginx/conf.d'
+alias dpull='cd ~/dotfiles/ && git pull && source ~/dotfiles/zsh/zshrc'
 
 
 
