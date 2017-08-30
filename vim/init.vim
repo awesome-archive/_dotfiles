@@ -1,395 +1,244 @@
-"copyright 2014-2017 by iuunhao <wncss.com>
-" 插件列表
-" ----------------------------------------------------------------------------
-" ----------------------------------------------------------------------------
+let mapleader = ' '
+let g:mapleader = ' '
+syntax on
+set history=1000
+filetype on
+filetype plugin on
+filetype indent on
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+set nocompatible
+set autoread   
+set shortmess=atI
+set noshowmode
+set noswapfile
+
+set magic     
+set title    
+set nobackup 
+
+set novisualbell   
+set noerrorbells  
+set visualbell t_vb=  
+set t_vb=
+set tm=500
+" show location
+"set cursorcolumn
+"set cursorline
+
+" movement
+set scrolloff=10
+
+
+" show
+set ruler    
+set number  
+set nowrap
+set showcmd                     
+set showmode                  
+set showmatch                  
+set matchtime=2              
+
+" search
+set hlsearch                 
+set incsearch                 
+set ignorecase                 
+set smartcase                   
+
+" tab
+set expandtab                   
+set smarttab
+set shiftround
+
+" indent
+set autoindent smartindent shiftround
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4 
+
+" NOT SUPPORT
+" fold
+set foldenable
+set foldmethod=indent
+set foldlevel=10
+let g:FoldMethod = 0
+map <leader>zz :call ToggleFold()<cr>
+fun! ToggleFold()
+    if g:FoldMethod == 0
+        exe "normal! zM"
+        let g:FoldMethod = 1
+    else
+        exe "normal! zR"
+        let g:FoldMethod = 0
+    endif
+endfun
+
+" encoding
+set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+set termencoding=utf-8
+set ffs=unix,dos,mac
+set formatoptions+=m
+set formatoptions+=B
+
+" select & complete
+set selection=inclusive
+set selectmode=mouse,key
+
+set completeopt=longest,menu
+set wildmenu                 
+set wildmode=longest,list,full
+set wildignore=*.o,*~,*.pyc,*.class
+
+" others
+set backspace=indent,eol,start
+set whichwrap+=<,>,h,l
+
+autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+fun! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+
+" ============================ key map ============================
+
+nnoremap k gk
+nnoremap gk k
+nnoremap j gj
+nnoremap gj j
+
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+nnoremap <F2> :set nu! nu?<CR>
+nnoremap <F3> :set list! list?<CR>
+nnoremap <F4> :set wrap! wrap?<CR>
+au InsertLeave * set nopaste
+nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
+
+nnoremap <leader>q :q<CR>
+map <Leader>sa ggVG"
+
+nnoremap U <C-r>
+
+nnoremap ' `
+nnoremap ` '
+
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
+nnoremap <silent> * *zz
+nnoremap <silent> # #zz
+nnoremap <silent> g* g*zz
+noremap <silent><leader>/ :nohls<CR>
+vnoremap < <gv
+vnoremap > >gv
+nnoremap ; :
+" save
+cmap w!! w !sudo tee >/dev/null %
+inoremap ' ''<ESC>i
+inoremap " ""<ESC>i
+inoremap ( ()<ESC>i
+inoremap [ []<ESC>i
+inoremap { {<CR>}<ESC>O
+if has("gui_running")
+    set guioptions-=L
+    set guioptions-=r
+    set guioptions-=b
+    set showtabline=0
+endif
+
+vmap <C-c> "+y
+nmap y "+p
+noremap y "+y
+vnoremap <silent> p "+p
+nmap p "+p
+vnoremap p "_dP
+vnoremap <silent> y y`]
+vnoremap <silent> p p`]
+nnoremap <silent> p p`]
+noremap 0 ^
+map <Leader>cd :cd %:p:h<CR>
+nmap <leader>F :%s//g<LEFT><LEFT>
+nmap <silent> <Leader>ev :e $MYVIMRC<CR>
+nmap <silent> <Leader>es :so $MYVIMRC<CR>
+nmap <silent> <Leader>pl :PlugInstall<CR>
+inoremap jj <Esc>
+
+map <Leader>j <C-W>j
+map <Leader>k <C-W>k
+map <Leader>h <C-W>h
+map <Leader>l <C-W>l
+
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+inoremap <C-d> <DELETE>
+
+nnoremap <silent> <C-k> :move-2<cr>
+nnoremap <silent> <C-j> :move+<cr>
+
+
 call plug#begin('~/.vim/plugged')
-"保存会话
-Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
-"UI
-Plug 'itchyny/lightline.vim'
-Plug 'junegunn/seoul256.vim'
-"辅助增强
-Plug 'Chiel92/vim-autoformat'
-Plug 'mattesgroeger/vim-bookmarks'
-Plug 'haya14busa/incsearch.vim'
-Plug 'haya14busa/incsearch-easymotion.vim'
-Plug 'tpope/vim-surround'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'easymotion/vim-easymotion'
-Plug 'rhysd/clever-f.vim'
-Plug 'sirver/ultisnips'
-Plug 'honza/vim-snippets'
-"Plug 'roman/golden-ratio'
-Plug 'szw/vim-maximizer'
-Plug 'scrooloose/nerdcommenter'
-Plug 'iamcco/dict.vim'
-Plug 'Raimondi/delimitMate'
-Plug 'vim-scripts/YankRing.vim'
-Plug 'tpope/vim-repeat'
-"Plug 'justinmk/vim-gtfo'
-Plug 'danro/rename.vim'
-Plug 'mhinz/vim-signify'
-Plug 'ervandew/supertab'
-"语言
-Plug 'vim-scripts/AutoComplPop'
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
     !./install.py --clang-completer --gocode-completer
   endif
 endfunction
 Plug 'Valloric/YouCompleteMe', { 'for': ['c', 'cpp'], 'do': function('BuildYCM') }
-Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'sheerun/vim-polyglot'
-Plug 'vim-scripts/matchit.zip'
-Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
-Plug 'pangloss/vim-javascript'
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'styl', 'pug'] }
-Plug 'isRuslan/vim-es6'
+Plug 'ervandew/supertab'
+Plug 'vim-scripts/AutoComplPop'
+Plug 'Chiel92/vim-autoformat'
+Plug 'scrooloose/nerdcommenter'
+Plug 'terryma/vim-multiple-cursors'
 Plug 'w0rp/ale'
-Plug 'Junza/Spink'
-Plug 'othree/yajs.vim'
-Plug 'othree/jsdoc-syntax.vim'
-Plug 'heavenshell/vim-jsdoc'
-"Plug 'moll/vim-node'
-Plug 'hail2u/vim-css3-syntax', {'for':['css','scss', 'styl', 'less']}
+
+
 Plug '1995eaton/vim-better-css-completion'
 Plug 'ap/vim-css-color'
+Plug 'hail2u/vim-css3-syntax', {'for':['css','scss', 'styl', 'less']}
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'isruslan/vim-es6'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'Junza/Spink'
+Plug 'othree/jsdoc-syntax.vim'
+Plug 'heavenshell/vim-jsdoc'
 Plug 'posva/vim-vue'
-" Plug 'digitaltoad/vim-pug'
-" Plug 'wavded/vim-stylus'
-" Plug 'chemzqm/wxapp.vim'
-"文件操作
+
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'endel/ctrlp-filetype.vim'
-Plug 'vim-scripts/mru.vim'
+Plug 'iamcco/dict.vim'
+
+Plug 'joshdick/onedark.vim'
+Plug 'junegunn/seoul256.vim'
+
+Plug 'haya14busa/incsearch.vim'
+Plug 'rhysd/clever-f.vim'
+Plug 'szw/vim-maximizer'
+Plug 'mhinz/vim-signify'
+Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
+Plug 'itchyny/lightline.vim'
+
+Plug 'ybian/smartim'
+
 call plug#end()
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
-" ----------------------------------------------------------------------------
-" 基础设置
-" ----------------------------------------------------------------------------
-let mapleader = ' '
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-set clipboard+=unnamedplus
-set nopaste
-autocmd BufWritePre * %s/\s\+$//e
-set noshowmode
-set noswapfile
-filetype on
-set vb
-set  number
-set smartindent
-set tabstop=4
-set shiftwidth=4
-set expandtab
-set softtabstop=4
-set conceallevel=0
-set virtualedit=
-set wildmenu
-set laststatus=2
-set wrap linebreak nolist
-set wildmode=full
-autocmd BufRead * normal zz
-set updatetime=500
-set complete=.,w,b,u,t,k
-autocmd InsertEnter * let save_cwd = getcwd() | set autochdir
-autocmd InsertLeave * set noautochdir | execute 'cd' fnameescape(save_cwd)
-set formatoptions+=t
-set shortmess=atI
-set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
-set fileencoding=utf-8
-set helplang=cn
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-" set termguicolors
-set ttimeout
-set ttimeoutlen=0
-set breakindent
-" set cuc
-" set cul
-set cindent
-set autoread
-set autoindent
-set smartindent
-set foldenable
-set fdm=manual
 
-if has("gui_running")
-    "au GUIEnter * simalt ~x " 窗口启动时自动最大化
-    set guioptions-=m " 隐藏菜单栏
-    set guioptions-=T " 隐藏工具栏
-    set guioptions-=L " 隐藏左侧滚动条
-    set guioptions-=r " 隐藏右侧滚动条
-    set guioptions-=b " 隐藏底部滚动条
-    set showtabline=0 " 隐藏Tab栏
-endif
 
-" ----------------------------------------------------------------------------
-" UI设置
-" ----------------------------------------------------------------------------
-set t_Co=256
-let g:palenight_terminal_italics=1
-let g:seoul256_background = 236
+" theme
+"set t_Co=256
+"let g:seoul256_background = 233
 set background=dark
-colo seoul256
-set guifont=Inconsolata_for_Powerline:h24
-"colorscheme peaksea
-" ----------------------------------------------------------------------------
-" 默认快捷键设置
-" ----------------------------------------------------------------------------
-noremap 0 ^
-noremap Y y$
-vnoremap p "_dP
-vmap <C-c> "+y
-noremap j gj
-noremap k gk
-nmap j gj
-nmap k gk
-nnoremap t <C-^>
-map <silent> <leader><cr> :noh<cr>
-map <Leader>cd :cd %:p:h<CR>
-nnoremap <leader>\ :vs<CR>
-nnoremap <leader>- :sp<CR>
-map <Leader>j <C-W>j
-map <Leader>k <C-W>k
-map <Leader>h <C-W>h
-map <Leader>l <C-W>l
-map <Leader>T :%s/\s\+$//<CR>
-nmap <leader>F :%s//g<LEFT><LEFT>
-nmap <silent> <Leader>ev :e $MYVIMRC<CR>
-nmap <silent> <Leader>es :so $MYVIMRC<CR>
-nmap <silent> <Leader>pl :PlugInstall<CR>
-" nnoremap <S-h> ^
-" nnoremap <S-l> $
-vnoremap <silent> y y`]
-vnoremap <silent> p p`]
-nnoremap <silent> p p`]
-noremap gV `[v`]
-map q: :q
-map <leader>t :tabnext<cr>
-map <leader>tc :tabclose<cr>
-inoremap jj <Esc>
-inoremap <C-h> <Left>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
-inoremap <C-d> <DELETE>
-nnoremap <d-[> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
-vnoremap <d-]> zf
-" ----------------------------------------------------------------------------
-" 移动选中内容
-" ----------------------------------------------------------------------------
-nnoremap <silent> <C-k> :move-2<cr>
-nnoremap <silent> <C-j> :move+<cr>
-" ----------------------------------------------------------------------------
-" 预览文件
-" ----------------------------------------------------------------------------
-function! ViewInBrowser(name)
-    let file = expand("%:p")
-    let l:browsers = {
-        \"cr":"open -a \"Google Chrome\"",
-        \"ff":"open -a Firefox",
-    \}
-    let htdocs='/Users/111iuunhao/Desktop/Qianyi'
-    let strpos = stridx(file, substitute(htdocs, '\\\\', '\', "g"))
-    let file = '"'. file . '"'
-    exec ":update " .file
-    if strpos == -1
-        exec ":silent ! ". l:browsers[a:name] ." file://". file
-    else
-        let file=substitute(file, htdocs, "http://10.101.29.95", "g")
-                let file=substitute(file, '\\', '/', "g")
-        exec ":silent ! ". l:browsers[a:name] file
-    endif
-endfunction
-nmap <Leader>o :call ViewInBrowser("cr")<cr>
-" ----------------------------------------------------------------------------
-"关闭其他缓存区
-" ----------------------------------------------------------------------------
-function! SpacevimKillOtherBuffers()
-  if confirm('Killing all buffers except "'. @% . '"?')
-    let buffer = bufnr('%')
-    let last_buffer = bufnr('$')
-    let delete_count = 0
-    let n = 1
-    while n <= last_buffer
-      if n != buffer && buflisted(n)
-        if getbufvar(n, '&modified')
-          echohl ErrorMsg
-          echomsg 'No write since last change for buffer'
-                \ n
-          echohl None
-        else
-          silent exe 'bdel ' . n
-          if ! buflisted(n)
-            let delete_count = delete_count+1
-          endif
-        endif
-      endif
-      let n = n+1
-    endwhile
-    if delete_count == 1
-      echomsg delete_count 'Buffer deleted'
-    elseif delete_count > 1
-      echomsg delete_count 'Buffers deleted'
-    endif
-  endif
-endfunction
-nmap <Leader>bK :call SpacevimKillOtherBuffers()<cr>;
-" dict.vim
-" ----------------------------------------------------------------------------
-let g:api_key = "1932136763"
-let g:keyfrom = "aioiyuuko"
-vmap <silent> <Leader>d <Plug>DictVSearch
-nmap <silent> <Leader><Leader>r <Plug>DictRSearch
-vmap <silent> <Leader><Leader>r <Plug>DictRVSearch
-let g:vikiUseParentSuffix = 1
-" ----------------------------------------------------------------------------
-" UltiSnips
-" ----------------------------------------------------------------------------
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-let g:UltiSnipsEditSplit="vertical"
-" ----------------------------------------------------------------------------
-" Neoformat
-" ----------------------------------------------------------------------------
-" ----------------------------------------------------------------------------
-" vim-maximizer
-" ----------------------------------------------------------------------------
-nnoremap <tab> :MaximizerToggle<CR>
-" ----------------------------------------------------------------------------
-" emmet
-" ----------------------------------------------------------------------------
-let g:user_emmet_install_global = 0
-autocmd FileType html,css,pug EmmetInstall
-let g:user_emmet_expandabbr_key = '<D-e>'
-let g:user_emmet_leader_key='<leader>e'         " 当前将`<C-y>,`替换为`<leader>y,`
-" ----------------------------------------------------------------------------
-" NERDT
-" ----------------------------------------------------------------------------
-nmap <Leader>at :NERDTreeToggle<CR>
-nmap <Leader>fd :NERDTreeFind<CR>
-let NERDTreeShowBookmarks=1
-let NERDTreeWinPos="left"
-let NERDTreeShowHidden=2
-let NERDTreeMinimalUI=0
-let NERDTreeAutoDeleteBuffer=1
-let NERDTreeQuitOnOpen=0
-let NERDTreeChDirMode=1
-let NERDTreeDirArrows= 0
-let NERDTreeHighlightCursorline=1
-let g:NERDTreeMapOpenSplit = 's'
-let g:NERDTreeMapOpenVSplit = 'v'
-let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$', '\~$', '\.pyc$', '\.swp$', '\.DS_Store']
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | end
-" ----------------------------------------------------------------------------
-" SuperTab
-" ----------------------------------------------------------------------------
-let g:SuperTabDefultCompletionType='context'
-let g:SuperTabDefaultCompletionType = '<C-X><C-U>'
-let g:SuperTabRetainCompletionType=2
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => easymotion
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <Leader> <Plug>(easymotion-prefix)
-map  <Leader><Leader>w <Plug>(easymotion-bd-w)
-nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
-map <Leader>k <Plug>(easymotion-bd-jk)
-nmap <Leader>k <Plug>(easymotion-overwin-line)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => bookmark
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:bookmark_auto_close = 1
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => nvim-completion-manager
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
-" au User CmSetup call cm#register_source({'name' : 'cm-css',
-        " \ 'priority': 9,
-        " \ 'scoping': 1,
-        " \ 'scopes': ['css','scss'],
-        " \ 'abbreviation': 'css',
-        " \ 'word_pattern': '[\w\-]+',
-        " \ 'cm_refresh_patterns':['[\w\-]+\s*:\s+'],
-        " \ 'cm_refresh': {'omnifunc': 'csscomplete#CompleteCSS'},
-        " \ })
-" let g:cm_sources_override = {
-    " \ 'cm-tags': {'enable':0}
-    " \ }
-" let g:NERDSpaceDelims=1
-" let g:NERDAltDelims_python = 1
-" let g:brightest#highlight = {"group" : "BrightestUnderline"}
-" let g:brightest#pattern = '\k\+'
-" let g:brightest#enable_filetypes = {"cpp" : 0}
-" let g:brightest#enable_filetypes = {
-" \    "_"   : 0,
-" \    "vim" : 1,
-" \    "css" : 1,
-" \    "html" : 1,
-" \    "js" : 1,
-" \    "md" : 1
-" \}
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => incsearch
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set hlsearch
-let g:incsearch#auto_nohlsearch = 1
-map z/ <Plug>(incsearch-easymotion-/)
-map z? <Plug>(incsearch-easymotion-?)
-map g/ <Plug>(incsearch-easymotion-stay)
-map n  <Plug>(incsearch-nohl-n)
-map N  <Plug>(incsearch-nohl-N)
-map *  <Plug>(incsearch-nohl-*)
-map #  <Plug>(incsearch-nohl-#)
-map g* <Plug>(incsearch-nohl-g*)
-map g# <Plug>(incsearch-nohl-g#)
-" ----------------------------------------------------------------------------
-" ale
-" ----------------------------------------------------------------------------
-let g:ale_lint_on_save = 1
-let g:ale_lint_on_text_changed = 0
-let g:ale_lint_on_enter = 0
-let g:ale_linters = {'javascript': ['eslint']}
-let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '--'
-" ----------------------------------------------------------------------------
-" 自定义命令
-" ----------------------------------------------------------------------------
-map <Leader>hv :e /Applications/XAMPP/xamppfiles/etc/extra/httpd-vhosts.conf<CR>
-map <Leader>hh :e /etc/hosts<CR>
-map <Leader>to :!open .<CR>
-map <Leader>push :!bash ~/dotfiles/scripts/push.sh<CR>
-map <silent> <Leader>ez :e ~/dotfiles/zsh/zshrc<CR>
-map <silent> <Leader>sdemo :!touch index.html & touch app.js & touch css.less<CR>
-map <Leader>r :!node %<CR>
-
-
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ }
-
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ ['mode', 'paste'],
-      \             ['fugitive', 'readonly', 'filename', 'modified'] ],
-      \   'right': [ [ 'lineinfo' ], ['percent'] ]
-      \ },
-      \ 'component': {
-      \   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
-      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-      \ },
-      \ 'component_visible_condition': {
-      \   'readonly': '(&filetype!="help"&& &readonly)',
-      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-      \ },
-      \ 'separator': { 'left': ' ', 'right': ' ' },
-      \ 'subseparator': { 'left': ' ', 'right': ' ' }
-      \ }
-
+"colo seoul256
+"set guifont=Inconsolata_for_Powerline:h24
+colorscheme onedark
 
 " ----------------------------------------------------------------------------
 " YouCompleteMe
@@ -441,86 +290,41 @@ let g:ycm_semantic_triggers =  {
             \   'haskell' : ['.', 're!.'],
             \   'scss,css': [ 're!^\s{2,4}', 're!:\s+' ],
             \ }
-
-"inoremap <tab> <c-r>=MyTabFunction()<cr>
-
-
 " ----------------------------------------------------------------------------
 " SuperTab
 " ----------------------------------------------------------------------------
 let g:SuperTabDefultCompletionType='context'
-"let g:SuperTabDefaultCompletionType = '<C-X><C-U>'
-
-let g:SuperTabRetainCompletionType = 2
-let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
-
+let g:SuperTabDefaultCompletionType = '<C-X><C-U>'
+let g:SuperTabRetainCompletionType=2
 
 " ----------------------------------------------------------------------------
-" tern_for_vim
+" NERDT
 " ----------------------------------------------------------------------------
-let tern_show_signature_in_pum = 1
-let tern_show_argument_hints = 'on_hold'
-"autocmd FileType javascript nnoremap <leader>d :TernDef<CR>
-autocmd FileType javascript setlocal omnifunc=tern#Complete
+nmap <Leader>at :NERDTreeToggle<CR>
+nmap <Leader>fd :NERDTreeFind<CR>
+let NERDTreeShowBookmarks=1
+let NERDTreeWinPos="left"
+let NERDTreeShowHidden=2
+let NERDTreeMinimalUI=0
+let NERDTreeAutoDeleteBuffer=1
+let NERDTreeQuitOnOpen=0
+let NERDTreeChDirMode=1
+let NERDTreeDirArrows= 0
+let NERDTreeHighlightCursorline=1
+let g:NERDTreeMapOpenSplit = 's'
+let g:NERDTreeMapOpenVSplit = 'v'
+let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$', '\~$', '\.pyc$', '\.swp$', '\.DS_Store']
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | end
 
+" dict.vim
+" ----------------------------------------------------------------------------
+let g:api_key = "1932136763"
+let g:keyfrom = "aioiyuuko"
+vmap <silent> <Leader>d <Plug>DictVSearch
+nmap <silent> <Leader><Leader>r <Plug>DictRSearch
+vmap <silent> <Leader><Leader>r <Plug>DictRVSearch
+let g:vikiUseParentSuffix = 1
 
-let g:used_javascript_libs = 'jquery,react,vue'
-
-
-
-function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-  exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
-  exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-endfunction
-
-call NERDTreeHighlightFile('jade',   'green', 'none', 'green', '#151515')
-call NERDTreeHighlightFile('md',     'blue', 'none', '#3366FF', '#151515')
-call NERDTreeHighlightFile('yml',    'magenta', 'none', 'yellow', '#E70350')
-call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('conf',   'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('json',   'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('html',   'green', 'none', 'green', '#04E703')
-call NERDTreeHighlightFile('styl',   'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('css',    'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
-call NERDTreeHighlightFile('js',     'Red', 'none', '#ffa500', '#151515')
-call NERDTreeHighlightFile('php',    'Magenta', 'none', '#ff00ff', '#151515')
-
-
-
-
-""""""""""""""""""""""""""""""
-" => CTRL-P
-""""""""""""""""""""""""""""""
-let g:ctrlp_working_path_mode = 0
-
-let g:ctrlp_map = '<c-f>'
-map <leader>ff :CtrlP<cr>
-map <leader>bb :CtrlPBuffer<cr>
-"nnoremap <leader>fr :CtrlPMRU<CR>
-silent! nnoremap <unique> <silent> <Leader>ft :CtrlPFiletype<CR>
-  let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
-    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
-    \ }
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.png,*.jpg,*.jpeg,*.gif " MacOSX/Linux
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.pyc,*.png,*.jpg,*.gif  " Windows
-let g:ctrlp_working_path_mode=0
-let g:ctrlp_match_window_bottom=1
-let g:ctrlp_max_height=15
-let g:ctrlp_match_window_reversed=0
-let g:ctrlp_mruf_max=500
-let g:ctrlp_follow_symlinks=1
-let g:ctrlp_extensions = ['filetype']
-
-let g:ctrlp_max_height = 20
-let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
-
-""""""""""""""""""""""""""""""
-" => MRU plugin
-""""""""""""""""""""""""""""""
-let MRU_Max_Entries = 400
-map <leader>fr :MRU<CR>
 " ----------------------------------------------------------------------------
 " Autoformat
 " ----------------------------------------------------------------------------
@@ -528,8 +332,164 @@ map <leader>fr :MRU<CR>
 let g:autoformat_autoindent = 0
 let g:autoformat_retab = 0
 let g:autoformat_remove_trailing_spaces = 0
-nmap <leader>mf :autoformat<cr>
+nmap <leader>mf :Autoformat<cr>
 
-if has("gui_macvim")
-    set transparency=10
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => incsearch
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set hlsearch
+let g:incsearch#auto_nohlsearch = 1
+map z/ <Plug>(incsearch-easymotion-/)
+map z? <Plug>(incsearch-easymotion-?)
+map g/ <Plug>(incsearch-easymotion-stay)
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
+
+" ----------------------------------------------------------------------------
+" UltiSnips
+" ----------------------------------------------------------------------------
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+let g:UltiSnipsEditSplit="vertical"
+" ----------------------------------------------------------------------------
+" vim-maximizer
+" ----------------------------------------------------------------------------
+nnoremap <tab> :MaximizerToggle<CR>
+
+" ----------------------------------------------------------------------------
+" 预览文件
+" ----------------------------------------------------------------------------
+function! ViewInBrowser(name)
+    let file = expand("%:p")
+    let l:browsers = {
+        \"cr":"open -a \"Google Chrome\"",
+        \"ff":"open -a Firefox",
+    \}
+    let htdocs='/Users/111iuunhao/Desktop/Qianyi'
+    let strpos = stridx(file, substitute(htdocs, '\\\\', '\', "g"))
+    let file = '"'. file . '"'
+    exec ":update " .file
+    if strpos == -1
+        exec ":silent ! ". l:browsers[a:name] ." file://". file
+    else
+        let file=substitute(file, htdocs, "http://10.101.29.95", "g")
+                let file=substitute(file, '\\', '/', "g")
+        exec ":silent ! ". l:browsers[a:name] file
+    endif
+endfunction
+nmap <Leader>o :call ViewInBrowser("cr")<cr>
+" ----------------------------------------------------------------------------
+
+"关闭其他缓存区
+" ----------------------------------------------------------------------------
+function! SpacevimKillOtherBuffers()
+  if confirm('Killing all buffers except "'. @% . '"?')
+    let buffer = bufnr('%')
+    let last_buffer = bufnr('$')
+    let delete_count = 0
+    let n = 1
+    while n <= last_buffer
+      if n != buffer && buflisted(n)
+        if getbufvar(n, '&modified')
+          echohl ErrorMsg
+          echomsg 'No write since last change for buffer'
+                \ n
+          echohl None
+        else
+          silent exe 'bdel ' . n
+          if ! buflisted(n)
+            let delete_count = delete_count+1
+          endif
+        endif
+      endif
+      let n = n+1
+    endwhile
+    if delete_count == 1
+      echomsg delete_count 'Buffer deleted'
+    elseif delete_count > 1
+      echomsg delete_count 'Buffers deleted'
+    endif
+  endif
+endfunction
+nmap <Leader>bK :call SpacevimKillOtherBuffers()<cr>;
+
+" ----------------------------------------------------------------------------
+" ALE
+" ----------------------------------------------------------------------------
+let g:ale_linters = {'java': [], 'yaml': []}
+let g:ale_fixers = {'ruby': ['rubocop']}
+let g:ale_lint_delay = 1000
+nmap ]a <Plug>(ale_next_wrap)
+nmap [a <Plug>(ale_previous_wrap)
+
+" ============================================================================
+" FZF {{{
+" ============================================================================
+
+if has('nvim')
+  let $FZF_DEFAULT_OPTS .= ' --inline-info'
+  " let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
 endif
+
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+nnoremap <silent> <expr> <Leader>ff (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Files\<cr>"
+nnoremap <silent> <Leader>C        :Colors<CR>
+nnoremap <silent> <Leader>bb  :Buffers<CR>
+nnoremap <silent> <leader>ft :Filetypes<cr>
+nnoremap <silent> <Leader>ag       :Ag <C-R><C-W><CR>
+nnoremap <silent> <Leader>AG       :Ag <C-R><C-A><CR>
+xnoremap <silent> <Leader>ag       y:Ag <C-R>"<CR>
+nnoremap <silent> <Leader>`        :Marks<CR>
+" nnoremap <silent> q: :History:<CR>
+" nnoremap <silent> q/ :History/<CR>
+
+inoremap <expr> <c-x><c-t> fzf#complete('tmuxwords.rb --all-but-current --scroll 500 --min 5')
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+function! s:plugs_sink(line)
+  let dir = g:plugs[a:line].dir
+  for pat in ['doc/*.txt', 'README.md']
+    let match = get(split(globpath(dir, pat), "\n"), 0, '')
+    if len(match)
+      execute 'tabedit' match f
+      return
+    endif
+  endfor
+  tabnew
+  execute 'Explore' dir
+endfunction
+
+command! PlugHelp call fzf#run(fzf#wrap({
+  \ 'source':  sort(keys(g:plugs)),
+  \ 'sink':    function('s:plugs_sink')}))
+
+
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ }
+
+" ----------------------------------------------------------------------------
+" 自定义命令
+" ----------------------------------------------------------------------------
+map <Leader>hv :e /Applications/XAMPP/xamppfiles/etc/extra/httpd-vhosts.conf<CR>
+map <Leader>hh :e /etc/hosts<CR>
+map <Leader>to :!open .<CR>
+map <Leader>push :!bash ~/dotfiles/scripts/push.sh<CR>
+map <silent> <Leader>ez :e ~/dotfiles/zsh/zshrc<CR>
+map <silent> <Leader>sdemo :!touch index.html & touch app.js & touch css.less<CR>
+map <Leader>r :!node %<CR>
