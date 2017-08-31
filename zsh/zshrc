@@ -1,5 +1,4 @@
 export ZSH=~/.oh-my-zsh
-#ZSH_THEME="fishy"
 #ZSH_THEME="cloud"
 ZSH_THEME="norm"
 
@@ -109,8 +108,9 @@ alias gre='git reset --hard'
 
 alias a='atom'
 alias vi='vim'
-alias h='mvim -v /etc/hosts'
-alias vh='mvim -v /Applications/XAMPP/xamppfiles/etc/extra/httpd-vhosts.conf'
+alias vim='sudo mvim -v'
+alias h='sudo mvim -v /etc/hosts'
+alias vh='sudo mvim -v /Applications/XAMPP/xamppfiles/etc/extra/httpd-vhosts.conf'
 alias web='webpack -d -w'
 
 alias chongqi='sudo shutdown -r now'
@@ -184,3 +184,8 @@ COLOR_WHITE="\e[1;37m"
 COLOR_NONE="\e[0m"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+
+
+

@@ -184,7 +184,7 @@ inoremap <C-d> <DELETE>
 nnoremap <silent> <C-k> :move-2<cr>
 nnoremap <silent> <C-j> :move+<cr>
 
-
+nnoremap <slent><Leader>W :w !sudo tee %<CR>
 
 call plug#begin('~/.vim/plugged')
 function! BuildYCM(info)
@@ -198,7 +198,7 @@ Plug 'vim-scripts/AutoComplPop'
 Plug 'Chiel92/vim-autoformat'
 Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'w0rp/ale'
+"Plug 'w0rp/ale'
 
 
 Plug '1995eaton/vim-better-css-completion'
@@ -237,11 +237,11 @@ silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 
 " theme
 "set t_Co=256
-"let g:seoul256_background = 233
+let g:seoul256_background = 233
 set background=dark
-"colo seoul256
+colo seoul256
 "set guifont=Inconsolata_for_Powerline:h24
-colorscheme onedark
+"colorscheme onedark
 
 " ----------------------------------------------------------------------------
 " YouCompleteMe
@@ -486,6 +486,12 @@ let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ }
 
+function! Multiple_cursors_before()
+  let g:smartim_disable = 1
+endfunction
+function! Multiple_cursors_after()
+  unlet g:smartim_disable
+endfunction
 " ----------------------------------------------------------------------------
 " 自定义命令
 " ----------------------------------------------------------------------------
@@ -496,3 +502,5 @@ map <Leader>push :!bash ~/dotfiles/scripts/push.sh<CR>
 map <silent> <Leader>ez :e ~/dotfiles/zsh/zshrc<CR>
 map <silent> <Leader>sdemo :!touch index.html & touch app.js & touch css.less<CR>
 map <Leader>r :!node %<CR>
+
+map! :w :w ! sudo tee %<CR>
