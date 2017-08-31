@@ -12,6 +12,7 @@ set autoread
 set shortmess=atI
 set noshowmode
 set noswapfile
+set clipboard=unnamed
 
 set magic     
 set title    
@@ -54,7 +55,7 @@ set shiftround
 set autoindent smartindent shiftround
 set shiftwidth=4
 set tabstop=4
-set softtabstop=4 
+set softtabstop=4
 
 " NOT SUPPORT
 " fold
@@ -151,15 +152,16 @@ if has("gui_running")
     set showtabline=0
 endif
 
-vmap <C-c> "+y
-nmap y "+p
-noremap y "+y
-vnoremap <silent> p "+p
-nmap p "+p
-vnoremap p "_dP
 vnoremap <silent> y y`]
 vnoremap <silent> p p`]
 nnoremap <silent> p p`]
+noremap gV `[v`]
+noremap 0 ^
+noremap Y y$
+vnoremap p "_dP
+vmap <C-c> "+y
+
+
 noremap 0 ^
 map <Leader>cd :cd %:p:h<CR>
 nmap <leader>F :%s//g<LEFT><LEFT>
@@ -181,6 +183,7 @@ inoremap <C-d> <DELETE>
 
 nnoremap <silent> <C-k> :move-2<cr>
 nnoremap <silent> <C-j> :move+<cr>
+
 
 
 call plug#begin('~/.vim/plugged')
