@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-
-#设置全局git
 ~
+
+echo 'git配置'
 git config --global user.name "iuunhao"
 git config --global user.email "html.5@foxmail.com"
 ssh-keygen -t rsa -C "html.5@foxmail.com"

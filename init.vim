@@ -8,54 +8,72 @@ filetype indent on
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 set nocompatible
-set autoread   
+set autoread
 set shortmess=atI
 set noshowmode
-set noswapfile
 set clipboard=unnamed
 
-set magic     
-set title    
-set nobackup 
+set magic
+set title
+set nobackup
+set nowb
+set noswapfile
 
-set novisualbell   
-set noerrorbells  
-set visualbell t_vb=  
+set novisualbell
+set noerrorbells
+set visualbell t_vb=
 set t_vb=
 set tm=500
 " show location
 "set cursorcolumn
 "set cursorline
+set lazyredraw
+
+if has("gui_macvim")
+    autocmd GUIEnter * set vb t_vb=
+endif
 
 " movement
 set scrolloff=10
 
+set wildignore=*.o,*~,*.pyc
+if has("win16") || has("win32")
+    set wildignore+=.git\*,.hg\*,.svn\*
+else
+    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+endif
 
 " show
-set ruler    
-set number  
+set ruler
+set number
 set nowrap
-set showcmd                     
-set showmode                  
-set showmatch                  
-set matchtime=2              
+set showcmd
+set showmode
+set showmatch
+set matchtime=2
 
 " search
-set hlsearch                 
-set incsearch                 
-set ignorecase                 
-set smartcase                   
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
 
 " tab
-set expandtab                   
+set expandtab
 set smarttab
 set shiftround
 
 " indent
 set autoindent smartindent shiftround
-set shiftwidth=4
-set tabstop=4
-set softtabstop=4
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
+
+vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+
+set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+
 
 " NOT SUPPORT
 " fold
@@ -87,7 +105,7 @@ set selection=inclusive
 set selectmode=mouse,key
 
 set completeopt=longest,menu
-set wildmenu                 
+set wildmenu
 set wildmode=longest,list,full
 set wildignore=*.o,*~,*.pyc,*.class
 
@@ -102,6 +120,10 @@ fun! <SID>StripTrailingWhitespaces()
     %s/\s\+$//e
     call cursor(l, c)
 endfun
+
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+set laststatus=2
 
 " ============================ key map ============================
 
@@ -137,14 +159,12 @@ nnoremap <silent> g* g*zz
 noremap <silent><leader>/ :nohls<CR>
 vnoremap < <gv
 vnoremap > >gv
-nnoremap ; :
+"nnoremap ; :
+"nnoremap : ;
 " save
 cmap w!! w !sudo tee >/dev/null %
-inoremap ' ''<ESC>i
-inoremap " ""<ESC>i
-inoremap ( ()<ESC>i
-inoremap [ []<ESC>i
-inoremap { {<CR>}<ESC>O
+
+
 if has("gui_running")
     set guioptions-=L
     set guioptions-=r
@@ -161,6 +181,7 @@ noremap Y y$
 vnoremap p "_dP
 vmap <C-c> "+y
 
+map <silent> <leader><cr> :noh<cr>
 
 noremap 0 ^
 map <Leader>cd :cd %:p:h<CR>
@@ -181,10 +202,15 @@ inoremap <C-k> <Up>
 inoremap <C-l> <Right>
 inoremap <C-d> <DELETE>
 
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+
 nnoremap <silent> <C-k> :move-2<cr>
 nnoremap <silent> <C-j> :move+<cr>
 
-
+nnoremap <slent><Leader>W :w !sudo tee %<CR>
 
 call plug#begin('~/.vim/plugged')
 function! BuildYCM(info)
@@ -192,115 +218,101 @@ function! BuildYCM(info)
     !./install.py --clang-completer --gocode-completer
   endif
 endfunction
-Plug 'Valloric/YouCompleteMe', { 'for': ['c', 'cpp'], 'do': function('BuildYCM') }
-Plug 'ervandew/supertab'
-Plug 'vim-scripts/AutoComplPop'
-Plug 'Chiel92/vim-autoformat'
-Plug 'scrooloose/nerdcommenter'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'w0rp/ale'
+"Plug 'Valloric/YouCompleteMe', { 'for': ['c', 'cpp'], 'do': function('BuildYCM') }
 
-
-Plug '1995eaton/vim-better-css-completion'
-Plug 'ap/vim-css-color'
-Plug 'hail2u/vim-css3-syntax', {'for':['css','scss', 'styl', 'less']}
-Plug 'sirver/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'isruslan/vim-es6'
-Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'Junza/Spink'
-Plug 'othree/jsdoc-syntax.vim'
-Plug 'heavenshell/vim-jsdoc'
-Plug 'posva/vim-vue'
-
-
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'scrooloose/nerdtree'
-Plug 'iamcco/dict.vim'
-
-Plug 'joshdick/onedark.vim'
+" 配色
 Plug 'junegunn/seoul256.vim'
 
-Plug 'haya14busa/incsearch.vim'
-Plug 'rhysd/clever-f.vim'
-Plug 'szw/vim-maximizer'
-Plug 'mhinz/vim-signify'
-Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
-Plug 'itchyny/lightline.vim'
+" 基本
 
-Plug 'ybian/smartim'
+
+" 括号补全
+Plug 'jiangmiao/auto-pairs'
+
+" 自动菜单
+"Plug 'vim-scripts/AutoComplPop'
+" 自动格式化
+Plug 'Chiel92/vim-autoformat'
+" 注释
+Plug 'scrooloose/nerdcommenter'
+
+" 多光标编辑
+Plug 'terryma/vim-multiple-cursors'
+
+" css补全
+"Plug '1995eaton/vim-better-css-completion'
+"Plug 'npacker/vim-css3complete'
+"Plug 'yuratomo/css3-complete'
+Plug 'css3-mod'
+
+" 将当前目录设置为根
+Plug 'airblade/vim-rooter'
+
+" js增强
+Plug 'pangloss/vim-javascript'
+
+" 配对修改
+Plug 'tpope/vim-surround'
+
+" css颜色显示
+Plug 'ap/vim-css-color'
+
+" 代码片段
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
+
+" vue
+Plug 'posva/vim-vue'
+
+" 文件搜索
+Plug 'kien/ctrlp.vim'
+Plug 'endel/ctrlp-filetype.vim'
+Plug 'tacahiroy/ctrlp-funky'
+
+" 文件管理
+Plug 'scrooloose/nerdtree'
+
+" 翻译
+Plug 'iamcco/dict.vim'
+
+" 搜索增强
+Plug 'haya14busa/incsearch.vim'
+"Plug 'rhysd/clever-f.vim'
+
+" git状态
+Plug 'mhinz/vim-signify'
+
+" 历史文件列表
+Plug 'mru.vim'
+
+" 窗口最大化
+Plug 'szw/vim-maximizer'
+
+Plug 'roxma/nvim-completion-manager'
+Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
+if !has('nvim')
+    Plug 'roxma/vim-hug-neovim-rpc'
+endif
+Plug 'othree/javascript-libraries-syntax.vim'
 
 call plug#end()
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 
 
+
 " theme
-"set t_Co=256
-"let g:seoul256_background = 233
+set t_Co=256
+let g:seoul256_background = 233
 set background=dark
-"colo seoul256
-"set guifont=Inconsolata_for_Powerline:h24
-colorscheme onedark
+colo seoul256
+set guifont=Inconsolata_for_Powerline:h24
 
-" ----------------------------------------------------------------------------
-" YouCompleteMe
-" ----------------------------------------------------------------------------
-
-let g:ycm_min_num_of_chars_for_completion = 1
-let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_min_num_of_chars_for_completion = 1
-let g:ycm_complete_in_comments=1
-let g:ycm_confirm_extra_conf=0
-let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_collect_identifiers_from_tags_files=1
-let g:ycm_complete_in_comments = 1
-let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
-let g:ycm_complete_in_comments=1
-let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
-let g:ycm_seed_identifiers_with_syntax=1
-let g:ycm_cache_omnifunc=0
-set completeopt-=preview
-function! MyTabFunction ()
-  let line = getline('.')
-  let substr = strpart(line, -1, col('.')+1)
-  let substr = matchstr(substr, "[^ \t]*$")
-  if strlen(substr) == 0
-    return "\<tab>"
-  endif
-  return pumvisible() ? "\<c-n>" : "\<c-x>\<c-o>"
-endfunction
-
-let g:ycm_autoclose_preview_window_after_completion = 1
-"let g:ycm_complete_in_strings = 1
-let g:ycm_complete_in_comments = 1
-let g:ycm_key_list_select_completion = ['<Tab>', '<C-j>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_semantic_triggers =  {
-            \   'c' : ['->', '.'],
-            \   'objc' : ['->', '.'],
-            \   'ocaml' : ['.', '#'],
-            \   'cpp,objcpp' : ['->', '.', '::'],
-            \   'perl' : ['->'],
-            \   'php' : ['->', '::', '(', 'use ', 'namespace ', '\'],
-            \   'cs,java,typescript,d,python,perl6,scala,vb,elixir,go' : ['.', 're!(?=[a-zA-Z]{3,4})'],
-            \   'html': ['<', '"', '</', ' '],
-            \   'vim' : ['re![_a-za-z]+[_\w]*\.'],
-            \   'ruby' : ['.', '::'],
-            \   'lua' : ['.', ':'],
-            \   'erlang' : [':'],
-            \   'haskell' : ['.', 're!.'],
-            \   'scss,css': [ 're!^\s{2,4}', 're!:\s+' ],
-            \ }
 " ----------------------------------------------------------------------------
 " SuperTab
 " ----------------------------------------------------------------------------
 let g:SuperTabDefultCompletionType='context'
 let g:SuperTabDefaultCompletionType = '<C-X><C-U>'
-let g:SuperTabRetainCompletionType=2
-
-" ----------------------------------------------------------------------------
+let g:SuperTabRetainCompletionType=2 " ----------------------------------------------------------------------------
 " NERDT
 " ----------------------------------------------------------------------------
 nmap <Leader>at :NERDTreeToggle<CR>
@@ -422,70 +434,23 @@ function! SpacevimKillOtherBuffers()
 endfunction
 nmap <Leader>bK :call SpacevimKillOtherBuffers()<cr>;
 
-" ----------------------------------------------------------------------------
-" ALE
-" ----------------------------------------------------------------------------
-let g:ale_linters = {'java': [], 'yaml': []}
-let g:ale_fixers = {'ruby': ['rubocop']}
-let g:ale_lint_delay = 1000
-nmap ]a <Plug>(ale_next_wrap)
-nmap [a <Plug>(ale_previous_wrap)
 
-" ============================================================================
-" FZF {{{
-" ============================================================================
+""""""""""""""""""""""""""""""
+" => MRU plugin
+""""""""""""""""""""""""""""""
+let MRU_Max_Entries = 400
+map <leader>fr :MRU<CR>
+""""""""""""""""""""""""""""""
+" => CTRL-P
+""""""""""""""""""""""""""""""
+let g:ctrlp_working_path_mode = 0
 
-if has('nvim')
-  let $FZF_DEFAULT_OPTS .= ' --inline-info'
-  " let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
-endif
+let g:ctrlp_map = '<c-f>'
+map <leader>ff :CtrlP<cr>
+map <leader>bb :CtrlPBuffer<cr>
 
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-
-nnoremap <silent> <expr> <Leader>ff (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Files\<cr>"
-nnoremap <silent> <Leader>C        :Colors<CR>
-nnoremap <silent> <Leader>bb  :Buffers<CR>
-nnoremap <silent> <leader>ft :Filetypes<cr>
-nnoremap <silent> <Leader>ag       :Ag <C-R><C-W><CR>
-nnoremap <silent> <Leader>AG       :Ag <C-R><C-A><CR>
-xnoremap <silent> <Leader>ag       y:Ag <C-R>"<CR>
-nnoremap <silent> <Leader>`        :Marks<CR>
-" nnoremap <silent> q: :History:<CR>
-" nnoremap <silent> q/ :History/<CR>
-
-inoremap <expr> <c-x><c-t> fzf#complete('tmuxwords.rb --all-but-current --scroll 500 --min 5')
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-imap <c-x><c-l> <plug>(fzf-complete-line)
-
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
-
-function! s:plugs_sink(line)
-  let dir = g:plugs[a:line].dir
-  for pat in ['doc/*.txt', 'README.md']
-    let match = get(split(globpath(dir, pat), "\n"), 0, '')
-    if len(match)
-      execute 'tabedit' match f
-      return
-    endif
-  endfor
-  tabnew
-  execute 'Explore' dir
-endfunction
-
-command! PlugHelp call fzf#run(fzf#wrap({
-  \ 'source':  sort(keys(g:plugs)),
-  \ 'sink':    function('s:plugs_sink')}))
-
-
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ }
-
+let g:ctrlp_max_height = 20
+let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
 " ----------------------------------------------------------------------------
 " 自定义命令
 " ----------------------------------------------------------------------------
@@ -496,3 +461,94 @@ map <Leader>push :!bash ~/dotfiles/scripts/push.sh<CR>
 map <silent> <Leader>ez :e ~/dotfiles/zsh/zshrc<CR>
 map <silent> <Leader>sdemo :!touch index.html & touch app.js & touch css.less<CR>
 map <Leader>r :!node %<CR>
+
+map! :w :w ! sudo tee %<CR>
+
+
+
+set shortmess+=c
+au User CmSetup call cm#register_source({'name' : 'cm-css',
+        \ 'priority': 9,
+        \ 'scoping': 1,
+        \ 'scopes': ['css','scss'],
+        \ 'abbreviation': 'css',
+        \ 'word_pattern': '[\w\-]+',
+        \ 'cm_refresh_patterns':['[\w\-]+\s*:\s+'],
+        \ 'cm_refresh': {'omnifunc': 'csscomplete#CompleteCSS'},
+        \ })
+
+
+
+" ctrlp-filetype
+let g:ctrlp_extensions = ['filetype']
+silent! nnoremap <unique> <silent> <Leader>ft :CtrlPFiletype<CR>
+
+
+nnoremap <Leader>fu :CtrlPFunky<Cr>
+" narrow the list down with a word under cursor
+nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+
+
+let g:used_javascript_libs = 'vue'
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Helper functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Returns true if paste mode is enabled
+function! HasPaste()
+    if &paste
+        return 'PASTE MODE  '
+    endif
+    return ''
+endfunction
+
+" Don't close window, when deleting a buffer
+command! Bclose call <SID>BufcloseCloseIt()
+function! <SID>BufcloseCloseIt()
+   let l:currentBufNum = bufnr("%")
+   let l:alternateBufNum = bufnr("#")
+
+   if buflisted(l:alternateBufNum)
+     buffer #
+   else
+     bnext
+   endif
+
+   if bufnr("%") == l:currentBufNum
+     new
+   endif
+
+   if buflisted(l:currentBufNum)
+     execute("bdelete! ".l:currentBufNum)
+   endif
+endfunction
+
+function! CmdLine(str)
+    exe "menu Foo.Bar :" . a:str
+    emenu Foo.Bar
+    unmenu Foo
+endfunction
+
+function! VisualSelection(direction, extra_filter) range
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+
+    let l:pattern = escape(@", "\\/.*'$^~[]")
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+    if a:direction == 'gv'
+        call CmdLine("Ack '" . l:pattern . "' " )
+    elseif a:direction == 'replace'
+        call CmdLine("%s" . '/'. l:pattern . '/')
+    endif
+
+    let @/ = l:pattern
+    let @" = l:saved_reg
+endfunction
+
+
+
+let g:javascript_plugin_jsdoc = 1
+

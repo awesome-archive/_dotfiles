@@ -1,0 +1,193 @@
+# This file is read by sublimious. Feel free to put your stuff here.
+
+"""
+Change the following line to True to activate sublimious
+By changing it to true, you are aware that this will wipe your configuration.
+Please make sure that you have a backup in place! (eg backup User/)
+
+I mean, seriously. This will delete ALL your sublime setting files
+"""
+nuke_everything = True
+
+# Layer configuration. These layers will get installed upon reload
+# Check sublimious/layers for all available layers
+layers = [
+    'core',
+
+    'osx',
+    'git',
+    # 'python',
+    'javascript',
+    # 'markdown',
+    # 'coffee',
+    # 'php',
+    # 'elixir',
+    # 'clojure'
+]
+
+"""
+Everything that is not part of a layer.
+These packages will be installed through package control
+"""
+additional_packages = [
+    "ProjectManager",
+    "Vue Syntax Highlight",
+    "Vuejs Snippets",
+    "Vuejs Complete Package",
+    "HTML-CSS-JS Prettify",
+    "HostsEdit",
+    "All Autocomplete",
+    "CSS3",
+    "HTML5",
+    "BracketHighlighter",
+    "DocBlockr",
+    "Vuejs Snippets",
+    "sublimious",
+    "Emmet",
+    "Sync Settings",
+    "AutoFileName",
+    "SublimeCodeIntel",
+    "JsFormat",
+    "Agila Theme",
+    "orgmode",
+    "Gutter Color",
+    # "Theme - Monokai Pro",
+]
+
+"""
+Put your own config in here or override defaults
+"""
+user_config = {
+    # Sublimious general
+    # How long should sublimious wait before showing you the overlay?
+    # "shortcut_overlay_timeout": 1
+    # "show_shortcut_overlay": True
+
+    # Style!
+    "theme": "Agila Neon.sublime-theme",
+    "color_scheme": "Packages/Agila Theme/Agila Neon Monocyanide.tmTheme",
+    "theme": "Agila.sublime-theme",
+    "color_scheme": "Packages/Agila Theme/Agila Oceanic Next.tmTheme",
+    "theme": "Agila Classic.sublime-theme",
+    "color_scheme": "Packages/Agila Theme/Agila Classic Oceanic Next.tmTheme",
+    "theme": "Agila Cobalt.sublime-theme",
+    "color_scheme": "Packages/Agila Theme/Agila Cobalt.tmTheme",
+    "theme": "Agila Dracula.sublime-theme",
+    "color_scheme": "Packages/Agila Theme/Agila Dracula.tmTheme",
+    "theme_agila_compact_sidebar": True,
+    "theme_agila_sidebar_light_icons": True,
+    "theme_agila_compact_tab": True,
+
+
+    "indent_guide_options": ["draw_normal", "draw_active"],
+    "font_options": ["no_italic"],
+    # "font_face": "Source Code Pro",
+    # "font_face": "Andale Mono",
+    "font_face": "Inconsolata-g",
+
+    "font_size": 22,
+    "line_padding_bottom": 2,
+    "line_padding_top": 2,
+
+    # These lines are responsible for editor appearance
+    "line_numbers": True,
+    "draw_white_space": "selection",
+    "word_wrap": True,
+    "word_separators": "./\\()\"':,.;<>~!@#$%^&*|+=[]{}`~?",
+
+    "folder_exclude_patterns": [
+        "**/.svn",
+        "**/.git",
+        "**/.vscode",
+        "**/.hg",
+        "**/CVS",
+        "**/node_modules"
+    ],
+    "vintage_ctrl_keys": True,
+    "highlight_line": False,
+    "tab_size": 4,
+    "bold_folder_labels": True,
+    "translate_tabs_to_spaces": True,
+    "ignored_packages":[],
+    "package_settings": {
+         "Sublime​Code​Intel":{
+            "codeintel_disabled_languages": ["Mason", "XBL", "XUL", "RHTML", "Python", "Ruby", "Python3", "XSLT", "Django", "Perl", "Twig", "Smarty", "Tcl", "TemplateToolkit", "PHP"]
+        },
+        "SyncSettings":{
+            "access_token": "7f2b3f816780af726b817c946597b12d7c9bf108",
+            "gist_id": "661c427ccbfbc7c842db51eafd224293"
+        },
+        "HTMLPrettify": {
+            "global_file_rules":
+            {
+                "html":
+                {
+                    "allowed_file_extensions": ["htm", "html", "xhtml", "shtml", "xml", "svg", "vue"],
+                    "allowed_file_syntaxes": ["html", "xml"],
+                    "disallowed_file_patterns": []
+                },
+
+                "css":
+                {
+                    "allowed_file_extensions": ["css", "scss", "sass", "less"],
+                    "allowed_file_syntaxes": ["css", "sass", "less"],
+                    "disallowed_file_patterns": []
+                },
+
+                "js":
+                {
+                    "allowed_file_extensions": ["js"],
+                    "allowed_file_syntaxes": ["javascript", "ecma"],
+                    "disallowed_file_patterns": []
+                },
+
+                "json":
+                {
+                    "allowed_file_extensions": [
+                        "json",
+                        "babelrc",
+                        "eslintrc",
+                        "jshintrc",
+                        "jsbeautifyrc",
+                        "sublime-settings",
+                        "sublime-keymap",
+                        "sublime-commands",
+                        "sublime-menu"
+                    ],
+                    "allowed_file_syntaxes": ["json"],
+                    "disallowed_file_patterns": []
+                }
+            }
+        },
+        "JsFormat":{
+            "indent_size": 4,
+            "indent_char": " ",
+            "eol": "\n",
+            "indent_level": 0,
+            "indent_with_tabs": False,
+            "preserve_newlines": True,
+            "max_preserve_newlines": 10,
+            "jslint_happy": False,
+            "space_after_anon_function": False,
+            "brace_style": "collapse",
+            "keep_array_indentation": False,
+            "keep_function_indentation": False,
+            "space_before_conditional": True,
+            "break_chained_methods": False,
+            "eval_code": False,
+            "unescape_strings": False,
+            "wrap_line_length": 0,
+            "wrap_attributes": "auto",
+            "wrap_attributes_indent_size": 4,
+            "end_with_newline": True
+        }
+    }
+}
+
+
+
+
+
+
+
+
