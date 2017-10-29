@@ -34,7 +34,7 @@ if has("gui_macvim")
 endif
 
 " movement
-set scrolloff=10
+set scrolloff=3
 
 set wildignore=*.o,*~,*.pyc
 if has("win16") || has("win32")
@@ -243,7 +243,7 @@ Plug 'terryma/vim-multiple-cursors'
 "Plug '1995eaton/vim-better-css-completion'
 "Plug 'npacker/vim-css3complete'
 "Plug 'yuratomo/css3-complete'
-Plug 'css3-mod'
+Plug 'vim-scripts/css3-mod'
 
 " 将当前目录设置为根
 Plug 'airblade/vim-rooter'
@@ -283,7 +283,7 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'mhinz/vim-signify'
 
 " 历史文件列表
-Plug 'mru.vim'
+Plug 'vim-scripts/mru.vim'
 
 " 窗口最大化
 Plug 'szw/vim-maximizer'
