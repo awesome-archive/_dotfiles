@@ -222,6 +222,7 @@ endfunction
 
 " 配色
 Plug 'junegunn/seoul256.vim'
+Plug 'morhetz/gruvbox'
 
 " 基本
 
@@ -304,7 +305,8 @@ silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 set t_Co=256
 let g:seoul256_background = 233
 set background=dark
-colo seoul256
+"colo seoul256
+colorscheme gruvbox
 set guifont=Inconsolata_for_Powerline:h24
 
 " ----------------------------------------------------------------------------
