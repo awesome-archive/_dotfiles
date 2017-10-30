@@ -108,8 +108,8 @@ alias gre='git reset --hard'
 
 alias a='atom'
 alias vi='vim'
-alias vim='sudo mvim -v'
-alias h='sudo mvim -v /etc/hosts'
+#alias vim='sudo mvim -v'
+#alias h='sudo mvim -v /etc/hosts'
 alias vh='sudo mvim -v /Applications/XAMPP/xamppfiles/etc/extra/httpd-vhosts.conf'
 alias web='webpack -d -w'
 
@@ -129,6 +129,8 @@ alias ohtml='open ~/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic/mobil
 alias ocss='open ~/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic/mobile/css'
 alias oimg='open ~/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic/mobile/images'
 alias opostcss='open ~/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic/mobile/postcss'
+alias cdwncss='cd ~/Desktop/MaYun/wncss/'
+alias cdst='cd ~/Desktop/st_pro.qianyilc.com/ && git pull origin f-v1'
 
 alias browser='browser-sync start --server --directory --files "**/*.css, **/*.html, **/*.js"'
 alias cb='gcc demo.c && ./a.out'
@@ -147,7 +149,7 @@ alias tdev='tmux-session dev'
 alias te='crontab -e'
 
 alias ssh_root='ssh root@123.57.140.93'
-alias ali='ssh iuunhao@123.57.140.93'
+alias ali='ssh -p 11111 iuunhao@123.57.140.93'
 
 #git
 alias ghuiyauncheng='git reset --hard'
@@ -189,3 +191,7 @@ COLOR_NONE="\e[0m"
 
 
 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

@@ -8,19 +8,19 @@ filetype indent on
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 set nocompatible
-set autoread   
+set autoread
 set shortmess=atI
 set noshowmode
 set noswapfile
 set clipboard=unnamed
 
-set magic     
-set title    
-set nobackup 
+set magic
+set title
+set nobackup
 
-set novisualbell   
-set noerrorbells  
-set visualbell t_vb=  
+set novisualbell
+set noerrorbells
+set visualbell t_vb=
 set t_vb=
 set tm=500
 " show location
@@ -32,30 +32,30 @@ set scrolloff=10
 
 
 " show
-set ruler    
-set number  
+set ruler
+set number
 set nowrap
-set showcmd                     
-set showmode                  
-set showmatch                  
-set matchtime=2              
+set showcmd
+set showmode
+set showmatch
+set matchtime=2
 
 " search
-set hlsearch                 
-set incsearch                 
-set ignorecase                 
-set smartcase                   
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
 
 " tab
-set expandtab                   
+set expandtab
 set smarttab
 set shiftround
 
 " indent
 set autoindent smartindent shiftround
-set shiftwidth=4
-set tabstop=4
-set softtabstop=4
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
 
 " NOT SUPPORT
 " fold
@@ -87,7 +87,7 @@ set selection=inclusive
 set selectmode=mouse,key
 
 set completeopt=longest,menu
-set wildmenu                 
+set wildmenu
 set wildmode=longest,list,full
 set wildignore=*.o,*~,*.pyc,*.class
 
@@ -192,7 +192,7 @@ function! BuildYCM(info)
     !./install.py --clang-completer --gocode-completer
   endif
 endfunction
-Plug 'Valloric/YouCompleteMe', { 'for': ['c', 'cpp'], 'do': function('BuildYCM') }
+"Plug 'Valloric/YouCompleteMe', { 'for': ['c', 'cpp'], 'do': function('BuildYCM') }
 Plug 'ervandew/supertab'
 Plug 'vim-scripts/AutoComplPop'
 Plug 'Chiel92/vim-autoformat'
@@ -228,18 +228,28 @@ Plug 'szw/vim-maximizer'
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 Plug 'itchyny/lightline.vim'
+Plug 'pangloss/vim-javascript'
 
 Plug 'ybian/smartim'
+
+"buquan
+Plug 'roxma/nvim-completion-manager'
+if !has('nvim')
+    Plug 'roxma/vim-hug-neovim-rpc'
+endif
+Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
+
 
 call plug#end()
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 
 
+
 " theme
 "set t_Co=256
-let g:seoul256_background = 233
-set background=dark
-colo seoul256
+""let g:seoul256_background = 233
+""set background=dark
+"colo seoul256
 "set guifont=Inconsolata_for_Powerline:h24
 "colorscheme onedark
 
@@ -247,60 +257,58 @@ colo seoul256
 " YouCompleteMe
 " ----------------------------------------------------------------------------
 
-let g:ycm_min_num_of_chars_for_completion = 1
-let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_min_num_of_chars_for_completion = 1
-let g:ycm_complete_in_comments=1
-let g:ycm_confirm_extra_conf=0
-let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_collect_identifiers_from_tags_files=1
-let g:ycm_complete_in_comments = 1
-let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
-let g:ycm_complete_in_comments=1
-let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
-let g:ycm_seed_identifiers_with_syntax=1
-let g:ycm_cache_omnifunc=0
-set completeopt-=preview
-function! MyTabFunction ()
-  let line = getline('.')
-  let substr = strpart(line, -1, col('.')+1)
-  let substr = matchstr(substr, "[^ \t]*$")
-  if strlen(substr) == 0
-    return "\<tab>"
-  endif
-  return pumvisible() ? "\<c-n>" : "\<c-x>\<c-o>"
-endfunction
+"let g:ycm_min_num_of_chars_for_completion = 1
+"let g:ycm_autoclose_preview_window_after_completion=1
+"let g:ycm_min_num_of_chars_for_completion = 1
+"let g:ycm_complete_in_comments=1
+"let g:ycm_confirm_extra_conf=0
+"let g:ycm_autoclose_preview_window_after_completion=1
+"let g:ycm_collect_identifiers_from_tags_files=1
+"let g:ycm_complete_in_comments = 1
+"let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
+"let g:ycm_complete_in_comments=1
+"let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+"let g:ycm_seed_identifiers_with_syntax=1
+"let g:ycm_cache_omnifunc=0
+"set completeopt-=preview
+"function! MyTabFunction ()
+  "let line = getline('.')
+  "let substr = strpart(line, -1, col('.')+1)
+  "let substr = matchstr(substr, "[^ \t]*$")
+  "if strlen(substr) == 0
+    "return "\<tab>"
+  "endif
+  "return pumvisible() ? "\<c-n>" : "\<c-x>\<c-o>"
+"endfunction
 
-let g:ycm_autoclose_preview_window_after_completion = 1
-"let g:ycm_complete_in_strings = 1
-let g:ycm_complete_in_comments = 1
-let g:ycm_key_list_select_completion = ['<Tab>', '<C-j>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_semantic_triggers =  {
-            \   'c' : ['->', '.'],
-            \   'objc' : ['->', '.'],
-            \   'ocaml' : ['.', '#'],
-            \   'cpp,objcpp' : ['->', '.', '::'],
-            \   'perl' : ['->'],
-            \   'php' : ['->', '::', '(', 'use ', 'namespace ', '\'],
-            \   'cs,java,typescript,d,python,perl6,scala,vb,elixir,go' : ['.', 're!(?=[a-zA-Z]{3,4})'],
-            \   'html': ['<', '"', '</', ' '],
-            \   'vim' : ['re![_a-za-z]+[_\w]*\.'],
-            \   'ruby' : ['.', '::'],
-            \   'lua' : ['.', ':'],
-            \   'erlang' : [':'],
-            \   'haskell' : ['.', 're!.'],
-            \   'scss,css': [ 're!^\s{2,4}', 're!:\s+' ],
-            \ }
+"let g:ycm_autoclose_preview_window_after_completion = 1
+""let g:ycm_complete_in_strings = 1
+"let g:ycm_complete_in_comments = 1
+"let g:ycm_key_list_select_completion = ['<Tab>', '<C-j>', '<Down>']
+"let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
+"let g:ycm_seed_identifiers_with_syntax = 1
+"let g:ycm_semantic_triggers =  {
+            "\   'c' : ['->', '.'],
+            "\   'objc' : ['->', '.'],
+            "\   'ocaml' : ['.', '#'],
+            "\   'cpp,objcpp' : ['->', '.', '::'],
+            "\   'perl' : ['->'],
+            "\   'php' : ['->', '::', '(', 'use ', 'namespace ', '\'],
+            "\   'cs,java,typescript,d,python,perl6,scala,vb,elixir,go' : ['.', 're!(?=[a-zA-Z]{3,4})'],
+            "\   'html': ['<', '"', '</', ' '],
+            "\   'vim' : ['re![_a-za-z]+[_\w]*\.'],
+            "\   'ruby' : ['.', '::'],
+            "\   'lua' : ['.', ':'],
+            "\   'erlang' : [':'],
+            "\   'haskell' : ['.', 're!.'],
+            "\   'scss,css': [ 're!^\s{2,4}', 're!:\s+' ],
+            "\ }
 " ----------------------------------------------------------------------------
 " SuperTab
 " ----------------------------------------------------------------------------
 let g:SuperTabDefultCompletionType='context'
 let g:SuperTabDefaultCompletionType = '<C-X><C-U>'
-let g:SuperTabRetainCompletionType=2
-
-" ----------------------------------------------------------------------------
+let g:SuperTabRetainCompletionType=2 " ----------------------------------------------------------------------------
 " NERDT
 " ----------------------------------------------------------------------------
 nmap <Leader>at :NERDTreeToggle<CR>
@@ -466,7 +474,7 @@ omap <leader><tab> <plug>(fzf-maps-o)
 
 function! s:plugs_sink(line)
   let dir = g:plugs[a:line].dir
-  for pat in ['doc/*.txt', 'README.md']
+  for pat in ['doc/*.txt', 'README.md', 'node_modules']
     let match = get(split(globpath(dir, pat), "\n"), 0, '')
     if len(match)
       execute 'tabedit' match f
@@ -481,10 +489,6 @@ command! PlugHelp call fzf#run(fzf#wrap({
   \ 'source':  sort(keys(g:plugs)),
   \ 'sink':    function('s:plugs_sink')}))
 
-
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ }
 
 function! Multiple_cursors_before()
   let g:smartim_disable = 1
@@ -504,3 +508,11 @@ map <silent> <Leader>sdemo :!touch index.html & touch app.js & touch css.less<CR
 map <Leader>r :!node %<CR>
 
 map! :w :w ! sudo tee %<CR>
+
+
+
+"buquan
+
+"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+set cm_refresh_length=1
