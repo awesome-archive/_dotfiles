@@ -165,6 +165,8 @@ alias cd_nginx_confd='cd /etc/nginx/conf.d'
 alias dpull='cd ~/dotfiles/ && git pull && source ~/dotfiles/zsh/zshrc'
 
 
+alias f='fzf $(find . -type f | grep -v .git | grep -v node_modules | fzf -q "$LBUFFER")'
+
 
 COLOR_BLACK="\e[0;30m"
 COLOR_BLUE="\e[0;34m"
@@ -187,11 +189,9 @@ COLOR_NONE="\e[0m"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-
-
-
-
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+
