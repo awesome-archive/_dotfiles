@@ -34,7 +34,7 @@ if has("gui_macvim")
 endif
 
 " movement
-set scrolloff=3
+set scrolloff=10
 
 set wildignore=*.o,*~,*.pyc
 if has("win16") || has("win32")
@@ -222,10 +222,9 @@ endfunction
 
 " 配色
 Plug 'junegunn/seoul256.vim'
-Plug 'morhetz/gruvbox'
 
 " 基本
-
+Plug 'christoomey/vim-tmux-navigator'
 
 " 括号补全
 Plug 'jiangmiao/auto-pairs'
@@ -244,7 +243,7 @@ Plug 'terryma/vim-multiple-cursors'
 "Plug '1995eaton/vim-better-css-completion'
 "Plug 'npacker/vim-css3complete'
 "Plug 'yuratomo/css3-complete'
-Plug 'vim-scripts/css3-mod'
+Plug 'css3-mod'
 
 " 将当前目录设置为根
 Plug 'airblade/vim-rooter'
@@ -266,12 +265,9 @@ Plug 'honza/vim-snippets'
 Plug 'posva/vim-vue'
 
 " 文件搜索
-"Plug 'kien/ctrlp.vim'
-"Plug 'endel/ctrlp-filetype.vim'
-"Plug 'tacahiroy/ctrlp-funky'
-
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+Plug 'kien/ctrlp.vim'
+Plug 'endel/ctrlp-filetype.vim'
+Plug 'tacahiroy/ctrlp-funky'
 
 " 文件管理
 Plug 'scrooloose/nerdtree'
@@ -287,7 +283,7 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'mhinz/vim-signify'
 
 " 历史文件列表
-Plug 'vim-scripts/mru.vim'
+Plug 'mru.vim'
 
 " 窗口最大化
 Plug 'szw/vim-maximizer'
@@ -308,8 +304,7 @@ silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 set t_Co=256
 let g:seoul256_background = 233
 set background=dark
-"colo seoul256
-colorscheme gruvbox
+colo seoul256
 set guifont=Inconsolata_for_Powerline:h24
 
 " ----------------------------------------------------------------------------
@@ -560,118 +555,49 @@ let g:javascript_plugin_jsdoc = 1
 
 
 
+let g:tmux_navigator_no_mappings = 1
 
-" ============================================================================
-" FZF {{{
-" ============================================================================
+nnoremap <silent> {Left-Mapping} :TmuxNavigateLeft<cr>
+nnoremap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
+nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
+nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
+nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
 
-if has('nvim')
-  let $FZF_DEFAULT_OPTS .= ' --inline-info'
-  " let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
-endif
 
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-
-nnoremap <silent> <expr> <Leader>ff (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Files\<cr>"
-nnoremap <silent> <Leader>C        :Colors<CR>
-nnoremap <silent> <Leader>bb  :Buffers<CR>
-" ============================================================================
-" FZF {{{
-" ============================================================================
-
-if has('nvim')
-  let $FZF_DEFAULT_OPTS .= ' --inline-info'
-  " let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
-endif
-
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-
-nnoremap <silent> <expr> <Leader>ff (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Files\<cr>"
-nnoremap <silent> <Leader>C        :Colors<CR>
-nnoremap <silent> <Leader>bb  :Buffers<CR>
-nnoremap <silent> <leader>ft :Filetypes<cr>
-nnoremap <silent> <Leader>ag       :Ag <C-R><C-W><CR>
-nnoremap <silent> <Leader>AG       :Ag <C-R><C-A><CR>
-xnoremap <silent> <Leader>ag       y:Ag <C-R>"<CR>
-nnoremap <silent> <Leader>`        :Marks<CR>
-" nnoremap <silent> q: :History:<CR>
-" nnoremap <silent> q/ :History/<CR>
-
-inoremap <expr> <c-x><c-t> fzf#complete('tmuxwords.rb --all-but-current --scroll 500 --min 5')
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-imap <c-x><c-l> <plug>(fzf-complete-line)
-
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
-
-function! s:plugs_sink(line)
-  let dir = g:plugs[a:line].dir
-  for pat in ['doc/*.txt', 'README.md', 'node_modules']
-    let match = get(split(globpath(dir, pat), "\n"), 0, '')
-    if len(match)
-      execute 'tabedit' match f
-      return
+function! Buf_total_num()
+    return len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
+endfunction
+function! File_size(f)
+    let l:size = getfsize(expand(a:f))
+    if l:size == 0 || l:size == -1 || l:size == -2
+        return ''
     endif
-  endfor
-  tabnew
-  execute 'Explore' dir
-endfunction
-
-command! PlugHelp call fzf#run(fzf#wrap({
-  \ 'source':  sort(keys(g:plugs)),
-  \ 'sink':    function('s:plugs_sink')}))
-
-
-function! Multiple_cursors_before()
-  let g:smartim_disable = 1
-endfunction
-function! Multiple_cursors_after()
-  unlet g:smartim_disable
-endfunction
-nnoremap <silent> <leader>ft :Filetypes<cr>
-nnoremap <silent> <Leader>ag       :Ag <C-R><C-W><CR>
-nnoremap <silent> <Leader>AG       :Ag <C-R><C-A><CR>
-xnoremap <silent> <Leader>ag       y:Ag <C-R>"<CR>
-nnoremap <silent> <Leader>`        :Marks<CR>
-" nnoremap <silent> q: :History:<CR>
-" nnoremap <silent> q/ :History/<CR>
-
-inoremap <expr> <c-x><c-t> fzf#complete('tmuxwords.rb --all-but-current --scroll 500 --min 5')
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-imap <c-x><c-l> <plug>(fzf-complete-line)
-
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
-
-function! s:plugs_sink(line)
-  let dir = g:plugs[a:line].dir
-  for pat in ['doc/*.txt', 'README.md', 'node_modules']
-    let match = get(split(globpath(dir, pat), "\n"), 0, '')
-    if len(match)
-      execute 'tabedit' match f
-      return
+    if l:size < 1024
+        return l:size.' bytes'
+    elseif l:size < 1024*1024
+        return printf('%.1f', l:size/1024.0).'k'
+    elseif l:size < 1024*1024*1024
+        return printf('%.1f', l:size/1024.0/1024.0) . 'm'
+    else
+        return printf('%.1f', l:size/1024.0/1024.0/1024.0) . 'g'
     endif
-  endfor
-  tabnew
-  execute 'Explore' dir
 endfunction
+set statusline=%<%1*[B-%n]%*
+" TOT is an abbreviation for total
+set statusline+=%2*[TOT:%{Buf_total_num()}]%*
+set statusline+=%3*\ %{File_size(@%)}\ %*
+set statusline+=%4*\ %F\ %*
+set statusline+=%5*『\ %{exists('g:loaded_ale')?ALEGetStatusLine():''}』%{exists('g:loaded_fugitive')?fugitive#statusline():''}%*
+set statusline+=%6*\ %m%r%y\ %*
+set statusline+=%=%7*\ %{&ff}\ \|\ %{\"\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"\ \|\"}\ %-14.(%l:%c%V%)%*
+set statusline+=%8*\ %P\ %*
+" default bg for statusline is 236 in space-vim-dark
+hi User1 cterm=bold ctermfg=232 ctermbg=179
+hi User2 cterm=None ctermfg=214 ctermbg=242
+hi User3 cterm=None ctermfg=251 ctermbg=240
+hi User4 cterm=bold ctermfg=169 ctermbg=239
+hi User5 cterm=None ctermfg=208 ctermbg=238
+hi User6 cterm=None ctermfg=246 ctermbg=237
+hi User7 cterm=None ctermfg=250 ctermbg=238
+hi User8 cterm=None ctermfg=249 ctermbg=240
 
-command! PlugHelp call fzf#run(fzf#wrap({
-  \ 'source':  sort(keys(g:plugs)),
-  \ 'sink':    function('s:plugs_sink')}))
-
-
-function! Multiple_cursors_before()
-  let g:smartim_disable = 1
-endfunction
-function! Multiple_cursors_after()
-  unlet g:smartim_disable
-endfunction
