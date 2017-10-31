@@ -457,8 +457,8 @@ let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
 map <Leader>hv :e /Applications/XAMPP/xamppfiles/etc/extra/httpd-vhosts.conf<CR>
 map <Leader>hh :e /etc/hosts<CR>
 map <Leader>to :!open .<CR>
-map <Leader>push :!bash ~/dotfiles/scripts/push.sh<CR>
-map <silent> <Leader>ez :e ~/dotfiles/zsh/zshrc<CR>
+map <Leader>push :!bash ~/dotfiles/push.sh<CR>
+map <silent> <Leader>ez :e ~/dotfiles/.zshrc<CR>
 map <silent> <Leader>sdemo :!touch index.html & touch app.js & touch css.less<CR>
 map <Leader>r :!node %<CR>
 

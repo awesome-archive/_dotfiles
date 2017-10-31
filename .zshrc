@@ -2,7 +2,7 @@ export ZSH=~/.oh-my-zsh
 #ZSH_THEME="cloud"
 ZSH_THEME="norm"
 
-plugins=(git)
+plugins=(git autojump osx web-search last-working-dir encode64 wd zsh-syntax-highlighting zsh-autosuggestions vi-mode extract z sublime)
 source $ZSH/oh-my-zsh.sh
 
 #标题栏
@@ -13,7 +13,7 @@ preexec () { print -Pn "\e]0;%n@%M//%/\ $1\a" }
 esac
 
 #编辑器
-export EDITOR=vim
+export EDITOR=nvim
 
 #允许在交互模式中使用注释  例如：
 setopt INTERACTIVE_COMMENTS
@@ -95,50 +95,18 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
 
-alias gcl='git clone'
-alias ga='git add .'
-alias gc='git commit'
-alias gpm='git push -u origin master'
-alias gpd='git push -u origin dev'
-alias gpg='git push -u origin gh-pages'
-alias gl='git pull'
-alias gs='git status'
-alias glog='tig'
-alias gre='git reset --hard'
-
-alias a='atom'
-alias vi='vim'
+alias v='nvim'
 #alias vim='sudo mvim -v'
 #alias h='sudo mvim -v /etc/hosts'
 alias vh='sudo mvim -v /Applications/XAMPP/xamppfiles/etc/extra/httpd-vhosts.conf'
-alias web='webpack -d -w'
 
 alias chongqi='sudo shutdown -r now'
 alias guanji='sudo shutdown -h now'
 alias yanshi='sudo shutdown -h 20:00'
 
-alias xianshi='defaults write com.apple.finder AppleShowAllFiles -bool true'
-alias yincang='defaults write com.apple.finder AppleShowAllFiles -bool false'
-
-#Enter the directory
-alias cnew='cd ~/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic && fedx'
-alias cg='cd ~/Desktop/MyGithub'
-alias cdes='cd ~/Desktop/'
-
-alias ohtml='open ~/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic/mobile/html'
-alias ocss='open ~/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic/mobile/css'
-alias oimg='open ~/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic/mobile/images'
-alias opostcss='open ~/Desktop/Qianyi/static.qianyilc.com/trunk/FED/newStatic/mobile/postcss'
-alias cdwncss='cd ~/Desktop/MaYun/wncss/'
-alias cdst='cd ~/Desktop/st_pro.qianyilc.com/ && git pull origin f-v1'
-
 alias browser='browser-sync start --server --directory --files "**/*.css, **/*.html, **/*.js"'
-alias cb='gcc demo.c && ./a.out'
-
 
 #浏览器
-alias __vimplug='open http://vimawesome.com/'
-alias __kaoqin='open http://kaoqin.intra.qianyilc.com/'
 alias __fanyi='open http://fanyi.baidu.com/?aldtype=16047#auto/zh'
 
 #tmux
@@ -151,41 +119,7 @@ alias te='crontab -e'
 alias ssh_root='ssh root@123.57.140.93'
 alias ali='ssh -p 11111 iuunhao@123.57.140.93'
 
-#git
-alias ghuiyauncheng='git reset --hard'
-alias gshanchufenzhi='git push origin :'
-
-alias subl="'/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl'"
-alias nano="subl"
-export EDITOR="subl"
-
-
-#server aliyun ubuntu14.04
-alias cd_nginx_confd='cd /etc/nginx/conf.d'
-alias dpull='cd ~/dotfiles/ && git pull && source ~/dotfiles/zsh/zshrc'
-
-
 alias f='fzf $(find . -type f | grep -v .git | grep -v node_modules | fzf -q "$LBUFFER")'
-
-
-COLOR_BLACK="\e[0;30m"
-COLOR_BLUE="\e[0;34m"
-COLOR_GREEN="\e[0;32m"
-COLOR_CYAN="\e[0;36m"
-COLOR_PINK="\e[0;35m"
-COLOR_RED="\e[0;31m"
-COLOR_PURPLE="\e[0;35m"
-COLOR_BROWN="\e[0;33m"
-COLOR_LIGHTGRAY="\e[0;37m"
-COLOR_DARKGRAY="\e[1;30m"
-COLOR_LIGHTBLUE="\e[1;34m"
-COLOR_LIGHTGREEN="\e[1;32m"
-COLOR_LIGHTCYAN="\e[1;36m"
-COLOR_LIGHTRED="\e[1;31m"
-COLOR_LIGHTPURPLE="\e[1;35m"
-COLOR_YELLOW="\e[1;33m"
-COLOR_WHITE="\e[1;37m"
-COLOR_NONE="\e[0m"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
