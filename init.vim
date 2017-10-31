@@ -285,7 +285,6 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'mhinz/vim-signify'
 
 " 历史文件列表
-"Plug 'mru.vim'
 
 " 窗口最大化
 Plug 'szw/vim-maximizer'
@@ -436,23 +435,6 @@ function! SpacevimKillOtherBuffers()
 endfunction
 nmap <Leader>bK :call SpacevimKillOtherBuffers()<cr>;
 
-
-""""""""""""""""""""""""""""""
-" => MRU plugin
-""""""""""""""""""""""""""""""
-let MRU_Max_Entries = 400
-map <leader>fr :MRU<CR>
-""""""""""""""""""""""""""""""
-" => CTRL-P
-"""""""""""""""""""""""""""""
-"let g:ctrlp_working_path_mode = 0
-
-"let g:ctrlp_map = '<c-f>'
-"map <leader>ff :CtrlP<cr>
-"map <leader>bb :CtrlPBuffer<cr>
-
-"let g:ctrlp_max_height = 20
-"let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
 " ----------------------------------------------------------------------------
 " 自定义命令
 " ----------------------------------------------------------------------------
@@ -465,8 +447,6 @@ map <silent> <Leader>sdemo :!touch index.html & touch app.js & touch css.less<CR
 map <Leader>r :!node %<CR>
 
 map! :w :w ! sudo tee %<CR>
-
-
 
 set shortmess+=c
 au User CmSetup call cm#register_source({'name' : 'cm-css',
@@ -617,6 +597,7 @@ command! -bang -nargs=? -complete=dir Files
 
 nnoremap <silent> <expr> <Leader>ff (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Files\<cr>"
 nnoremap <silent> <Leader>C        :Colors<CR>
+nnoremap <silent> <Leader>fr        :History<CR>
 nnoremap <silent> <Leader>bb  :Buffers<CR>
 nnoremap <silent> <leader>ft :Filetypes<cr>
 nnoremap <silent> <Leader>ag       :Ag <C-R><C-W><CR>
@@ -660,3 +641,4 @@ endfunction
 function! Multiple_cursors_after()
   unlet g:smartim_disable
 endfunction
+
