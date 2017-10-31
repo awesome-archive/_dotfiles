@@ -14,7 +14,7 @@ echo '安装brew'
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 echo '安装ack'
-brew install ack htop tree tig ccat node python3 neovim fzf
+brew install ack htop tree tig ccat node python3 neovim fzf zsh-autosuggestions
 
 echo 'cnpm'
 npm install -g cnpm --registry=https://registry.npm.taobao.org
