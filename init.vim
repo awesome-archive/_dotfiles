@@ -469,15 +469,16 @@ let g:javascript_plugin_jsdoc = 1
 " ============================================================================
 " FZF {{{
 " ============================================================================
-let $FZF_DEFAULT_COMMAND = 'find * -type f 2>/dev/null | grep -v -E "deps\/|_build\/|node_modules\/|vendor\/|build_intellij\/"'
-let $FZF_DEFAULT_OPTS = '--reverse'
-let g:fzf_layout = {'up': '~50%'}
-let g:fzf_tags_command = 'ctags -R --exclude=".git" --exclude="node_modules" --exclude="vendor" --exclude="log" --exclude="tmp" --exclude="db" --exclude="pkg" --exclude="deps" --exclude="_build" --extra=+f .'
-
 if has('nvim')
-  let $FZF_DEFAULT_OPTS .= ' --inline-info'
+  "let $FZF_DEFAULT_OPTS .= ' --inline-info'
   " let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
 endif
+
+let $FZF_DEFAULT_COMMAND = 'find * -type f 2>/dev/null | grep -v -E "deps\/|_build\/|node_modules\/|vendor\/|build_intellij\/|\.DS_Store"'
+let $FZF_DEFAULT_OPTS = '--reverse'
+let g:fzf_layout = {'up': '~50%'}
+let g:fzf_tags_command = 'ctags -R --exclude=".git" --exclude="node_modules" --exclude="vendor" --exclude="log" --exclude="tmp" --exclude="db" --exclude=".DS_Store" --exclude="deps" --exclude="_build" --extra=+f .'
+
 
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
@@ -506,7 +507,7 @@ omap <leader><tab> <plug>(fzf-maps-o)
 
 function! s:plugs_sink(line)
   let dir = g:plugs[a:line].dir
-  for pat in ['doc/*.txt', 'README.md', '/node_modules/']
+  for pat in ['doc/*.txt', 'README.md', ".DS_Store"]
     let match = get(split(globpath(dir, pat), "\n"), 0, '')
     if len(match)
       execute 'tabedit' match f
