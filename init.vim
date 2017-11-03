@@ -1,12 +1,12 @@
-let mapleader = ' '
-let g:mapleader = ' '
+let mapleader = " "
+let g:mapleader = " "
 syntax on
 set history=1000
 filetype on
 filetype plugin on
 filetype indent on
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+"let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+"let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 set nocompatible
 set autoread
 set shortmess=atI
@@ -172,14 +172,6 @@ if has("gui_running")
     set showtabline=0
 endif
 
-vnoremap <silent> y y`]
-vnoremap <silent> p p`]
-nnoremap <silent> p p`]
-noremap gV `[v`]
-noremap 0 ^
-noremap Y y$
-vnoremap p "_dP
-vmap <C-c> "+y
 
 map <silent> <leader><cr> :noh<cr>
 
@@ -592,6 +584,4 @@ let g:vikiUseParentSuffix = 1
 
 nmap <silent> <Leader><Leader>r <Plug>DictRSearch
 vmap <silent> <Leader><Leader>r <Plug>DictRVSearch
-
-
 
