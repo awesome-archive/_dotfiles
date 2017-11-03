@@ -1,9 +1,10 @@
 export ZSH=~/.oh-my-zsh
 #ZSH_THEME="cloud"
-ZSH_THEME="norm"
-ZSH_THEME="half-life"
+# ZSH_THEME="norm"
+ZSH_THEME="af-magic"
 
-PROMPT=$'%{$purple%}%n%{$reset_color%} in %{$limegreen%}%~%{$reset_color%}$(ruby_prompt_info " with%{$fg[red]%} " v g "%{$reset_color%}")$vcs_info_msg_0_%{$orange%}%{$reset_color%} at %{$hotpink%}%* %{$orange%}λ%{$reset_color%} '
+
+# PROMPT=$'%{$purple%}%n%{$reset_color%} in %{$limegreen%}%~%{$reset_color%}$(ruby_prompt_info " with%{$fg[red]%} " v g "%{$reset_color%}")$vcs_info_msg_0_%{$orange%}%{$reset_color%} at %{$hotpink%}%* %{$orange%}λ%{$reset_color%} '
 
 
 # plugs
