@@ -335,14 +335,8 @@ let g:NERDTreeMapOpenVSplit = 'v'
 let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$', '\~$', '\.pyc$', '\.swp$', '\.DS_Store']
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | end
 
-" dict.vim
-" ----------------------------------------------------------------------------
-let g:api_key = "1932136763"
-let g:keyfrom = "aioiyuuko"
-vmap <silent> <Leader>d <Plug>DictVSearch
-nmap <silent> <Leader><Leader>r <Plug>DictRSearch
-vmap <silent> <Leader><Leader>r <Plug>DictRVSearch
-let g:vikiUseParentSuffix = 1
+
+" function
 
 " ----------------------------------------------------------------------------
 " Autoformat
@@ -475,8 +469,8 @@ if has('nvim')
 endif
 
 let $FZF_DEFAULT_COMMAND = 'find * -type f 2>/dev/null | grep -v -E "deps\/|_build\/|node_modules\/|vendor\/|build_intellij\/|\.DS_Store"'
-let $FZF_DEFAULT_OPTS = '--reverse'
-let g:fzf_layout = {'up': '~50%'}
+"let $FZF_DEFAULT_OPTS = '--reverse'
+"let g:fzf_layout = {'up': '~50%'}
 let g:fzf_tags_command = 'ctags -R --exclude=".git" --exclude="node_modules" --exclude="vendor" --exclude="log" --exclude="tmp" --exclude="db" --exclude=".DS_Store" --exclude="deps" --exclude="_build" --extra=+f .'
 
 
@@ -589,3 +583,15 @@ endfunction
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ }
+
+" dict.vim
+" ----------------------------------------------------------------------------
+let g:api_key = "1932136763"
+let g:keyfrom = "aioiyuuko"
+let g:vikiUseParentSuffix = 1
+
+nmap <silent> <Leader><Leader>r <Plug>DictRSearch
+vmap <silent> <Leader><Leader>r <Plug>DictRVSearch
+
+
+
