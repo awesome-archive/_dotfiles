@@ -212,7 +212,6 @@ function! BuildYCM(info)
 endfunction
 "Plug 'Valloric/YouCompleteMe', { 'for': ['c', 'cpp'], 'do': function('BuildYCM') }
 
-
 " 配色
 Plug 'junegunn/seoul256.vim'
 
@@ -220,7 +219,7 @@ Plug 'junegunn/seoul256.vim'
 Plug 'tpope/vim-repeat'
 
 " 状态栏
-"Plug 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim'
 
 " 括号补全
 Plug 'jiangmiao/auto-pairs'
@@ -235,9 +234,6 @@ Plug 'scrooloose/nerdcommenter'
 " 多光标编辑
 Plug 'terryma/vim-multiple-cursors'
 
-" 跳转
-Plug 'easymotion/vim-easymotion'
-
 " css补全
 "Plug '1995eaton/vim-better-css-completion'
 "Plug 'npacker/vim-css3complete'
@@ -245,13 +241,13 @@ Plug 'easymotion/vim-easymotion'
 Plug 'vim-scripts/css3-mod'
 
 " 将当前目录设置为根
-"Plug 'airblade/vim-rooter'
+Plug 'airblade/vim-rooter'
 
 " js增强
 Plug 'pangloss/vim-javascript'
 
 " 配对修改
-"Plug 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 
 " css颜色显示
 Plug 'ap/vim-css-color'
@@ -277,16 +273,16 @@ Plug 'scrooloose/nerdtree'
 Plug 'iamcco/dict.vim'
 
 " 搜索增强
-"Plug 'haya14busa/incsearch.vim'
+Plug 'haya14busa/incsearch.vim'
 "Plug 'rhysd/clever-f.vim'
 
 " git状态
-"Plug 'mhinz/vim-signify'
+Plug 'mhinz/vim-signify'
 
 " 历史文件列表
 
 " 窗口最大化
-"Plug 'szw/vim-maximizer'
+Plug 'szw/vim-maximizer'
 
 Plug 'roxma/nvim-completion-manager'
 Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
@@ -482,11 +478,7 @@ nnoremap <silent> <Leader>ag       :Ag <C-R><C-W><CR>
 nnoremap <silent> <Leader>AG       :Ag <C-R><C-A><CR>
 xnoremap <silent> <Leader>ag       y:Ag <C-R>"<CR>
 nnoremap <silent> <Leader>`        :Marks<CR>
-
-nnoremap <silent> <Leader>ll        :Lines<CR>
-nnoremap <silent> <Leader>bl        :BLines<CR>
-
-" nnoremap <silent> q: :Hisrtory:<CR>
+" nnoremap <silent> q: :History:<CR>
 " nnoremap <silent> q/ :History/<CR>
 
 inoremap <expr> <c-x><c-t> fzf#complete('tmuxwords.rb --all-but-current --scroll 500 --min 5')
@@ -580,9 +572,9 @@ function! VisualSelection(direction, extra_filter) range
     let @" = l:saved_reg
 endfunction
 
-"let g:lightline = {
-      "\ 'colorscheme': 'wombat',
-      "\ }
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ }
 
 " dict.vim
 " ----------------------------------------------------------------------------
@@ -593,65 +585,3 @@ let g:vikiUseParentSuffix = 1
 nmap <silent> <Leader><Leader>r <Plug>DictRSearch
 vmap <silent> <Leader><Leader>r <Plug>DictRVSearch
 
-
-
-"跳转
-map <Leader> <Plug>(easymotion-prefix)
-
-" <Leader>f{char} to move to {char}
-map  <Leader><Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader><Leader>f <Plug>(easymotion-overwin-f)
-
-" s{char}{char} to move to {char}{char}
-nmap s <Plug>(easymotion-overwin-f2)
-
-" Move to line
-map <Leader><Leader>L <Plug>(easymotion-bd-jk)
-nmap <Leader><Leader>L <Plug>(easymotion-overwin-line)
-
-" Move to word
-map  <Leader><Leader>w <Plug>(easymotion-bd-w)
-nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
-
-map  / <Plug>(easymotion-sn)
-omap / <map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
-
-" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
-" Without these mappings, `n` & `N` works fine. (These mappings just provide
-" different highlight method and have some other features )
-map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)Plug>(easymotion-tn)
-
-" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
-" Without these mappings, `n` & `N` works fine. (These mappings just provide
-" different highlight method and have some other features )
-map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)
-
-
-" Gif config
-
-" Require tpope/vim-repeat to enable dot repeat support
-" Jump to anywhere with only `s{char}{target}`
-" `s<CR>` repeat last find motion.
-nmap s <Plug>(easymotion-s)
-" Bidirectional & within line 't' motion
-omap t <Plug>(easymotion-bd-tl)
-" Use uppercase target labels and type as a lower case
-let g:EasyMotion_use_upper = 1
- " type `l` and match `l`&`L`
-let g:EasyMotion_smartcase = 1
-" Smartsign (type `3` and match `3`&`#`)
-let g:EasyMotion_use_smartsign_us = 1
-
-
-function! s:fzf_statusline()
-  " Override statusline as you like
-  highlight fzf1 ctermfg=161 ctermbg=251
-  highlight fzf2 ctermfg=23 ctermbg=251
-  highlight fzf3 ctermfg=237 ctermbg=251
-  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
-endfunction
-
-autocmd! User FzfStatusLine call <SID>fzf_statusline()
