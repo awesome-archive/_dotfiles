@@ -111,7 +111,7 @@
 [core]
   autocrlf = false
   editor = vim
-	excludesfile = /Users/iuunhao/dotfiles/git/gitignore
+	excludesfile = /Users/iuunhao/.gitignore_global
 [advice]
   statusHints = false
 [diff]

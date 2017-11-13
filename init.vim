@@ -181,7 +181,7 @@ nmap <leader>F :%s//g<LEFT><LEFT>
 nmap <silent> <Leader>ev :e $MYVIMRC<CR>
 nmap <silent> <Leader>es :so $MYVIMRC<CR>
 nmap <silent> <Leader>pl :PlugInstall<CR>
-inoremap jj <Esc>
+"inoremap jj <Esc>
 
 map <Leader>j <C-W>j
 map <Leader>k <C-W>k
@@ -213,8 +213,11 @@ endfunction
 "Plug 'Valloric/YouCompleteMe', { 'for': ['c', 'cpp'], 'do': function('BuildYCM') }
 
 
+
 " 配色
 Plug 'junegunn/seoul256.vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'nlknguyen/papercolor-theme'
 
 " 点重复增强
 Plug 'tpope/vim-repeat'
@@ -301,11 +304,8 @@ silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 
 
 " theme
-set t_Co=256
-let g:seoul256_background = 233
-set background=dark
-colo seoul256
-set guifont=Inconsolata_for_Powerline:h24
+set background=light
+colo PaperColor
 
 " ----------------------------------------------------------------------------
 " SuperTab
@@ -655,3 +655,6 @@ function! s:fzf_statusline()
 endfunction
 
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
+
+set number
+set laststatus=2
