@@ -214,10 +214,11 @@ endfunction
 
 
 
-" 配色
-Plug 'junegunn/seoul256.vim'
-Plug 'altercation/vim-colors-solarized'
-Plug 'nlknguyen/papercolor-theme'
+" theme
+"Plug 'junegunn/seoul256.vim'
+Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
+Plug 'jpo/vim-railscasts-theme'
+Plug 'ainyu-theme/ayu-vim'
 
 " 点重复增强
 Plug 'tpope/vim-repeat'
@@ -228,10 +229,9 @@ Plug 'tpope/vim-repeat'
 " 括号补全
 Plug 'jiangmiao/auto-pairs'
 
-" 自动菜单
-"Plug 'vim-scripts/AutoComplPop'
 " 自动格式化
 Plug 'Chiel92/vim-autoformat'
+
 " 注释
 Plug 'scrooloose/nerdcommenter'
 
@@ -246,9 +246,6 @@ Plug 'easymotion/vim-easymotion'
 "Plug 'npacker/vim-css3complete'
 "Plug 'yuratomo/css3-complete'
 Plug 'vim-scripts/css3-mod'
-
-" 将当前目录设置为根
-"Plug 'airblade/vim-rooter'
 
 " js增强
 Plug 'pangloss/vim-javascript'
@@ -267,9 +264,6 @@ Plug 'honza/vim-snippets'
 Plug 'posva/vim-vue'
 
 " 文件搜索
-"Plug 'kien/ctrlp.vim'
-"Plug 'endel/ctrlp-filetype.vim'
-"Plug 'tacahiroy/ctrlp-funky'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
@@ -280,23 +274,24 @@ Plug 'scrooloose/nerdtree'
 Plug 'iamcco/dict.vim'
 
 " 搜索增强
-"Plug 'haya14busa/incsearch.vim'
-"Plug 'rhysd/clever-f.vim'
+Plug 'haya14busa/incsearch.vim'
+""Plug 'rhysd/clever-f.vim'
 
 " git状态
-"Plug 'mhinz/vim-signify'
-
-" 历史文件列表
+Plug 'mhinz/vim-signify'
 
 " 窗口最大化
-"Plug 'szw/vim-maximizer'
+Plug 'szw/vim-maximizer'
 
 Plug 'roxma/nvim-completion-manager'
 Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
+
 if !has('nvim')
     Plug 'roxma/vim-hug-neovim-rpc'
+    Plug 'ternjs/tern_for_vim'
 endif
 Plug 'othree/javascript-libraries-syntax.vim'
+
 
 call plug#end()
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
@@ -305,7 +300,14 @@ silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 
 " theme
 set background=light
-colo PaperColor
+"set background=dark
+set termguicolors     
+"let ayucolor="light"  
+"let ayucolor="mirage"
+let ayucolor="dark"  
+colorscheme ayu
+
+set guifont=Inconsolata_for_Powerline:h22
 
 " ----------------------------------------------------------------------------
 " SuperTab
@@ -466,7 +468,7 @@ endif
 
 let $FZF_DEFAULT_COMMAND = 'find * -type f 2>/dev/null | grep -v -E "deps\/|_build\/|node_modules\/|vendor\/|build_intellij\/|\.DS_Store"'
 "let $FZF_DEFAULT_OPTS = '--reverse'
-"let g:fzf_layout = {'up': '~50%'}
+"let g:fzf_layout = {'up': '~80%'}
 let g:fzf_tags_command = 'ctags -R --exclude=".git" --exclude="node_modules" --exclude="vendor" --exclude="log" --exclude="tmp" --exclude="db" --exclude=".DS_Store" --exclude="deps" --exclude="_build" --extra=+f .'
 
 
@@ -594,8 +596,7 @@ nmap <silent> <Leader><Leader>r <Plug>DictRSearch
 vmap <silent> <Leader><Leader>r <Plug>DictRVSearch
 
 
-
-"跳转
+"jump
 map <Leader> <Plug>(easymotion-prefix)
 
 " <Leader>f{char} to move to {char}
@@ -617,34 +618,6 @@ map  / <Plug>(easymotion-sn)
 omap / <map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 
-" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
-" Without these mappings, `n` & `N` works fine. (These mappings just provide
-" different highlight method and have some other features )
-map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)Plug>(easymotion-tn)
-
-" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
-" Without these mappings, `n` & `N` works fine. (These mappings just provide
-" different highlight method and have some other features )
-map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)
-
-
-" Gif config
-
-" Require tpope/vim-repeat to enable dot repeat support
-" Jump to anywhere with only `s{char}{target}`
-" `s<CR>` repeat last find motion.
-nmap s <Plug>(easymotion-s)
-" Bidirectional & within line 't' motion
-omap t <Plug>(easymotion-bd-tl)
-" Use uppercase target labels and type as a lower case
-let g:EasyMotion_use_upper = 1
- " type `l` and match `l`&`L`
-let g:EasyMotion_smartcase = 1
-" Smartsign (type `3` and match `3`&`#`)
-let g:EasyMotion_use_smartsign_us = 1
-
 
 function! s:fzf_statusline()
   " Override statusline as you like
@@ -658,3 +631,9 @@ autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 set number
 set laststatus=2
+
+inoremap <expr> <silent> <Tab>  pumvisible()?"\<C-n>":"\<TAB>"
+inoremap <expr> <silent> <S-TAB>  pumvisible()?"\<C-p>":"\<S-TAB>"
+imap <c-g> <Plug>(cm_force_refresh)
+
+set completeopt+=noselect
