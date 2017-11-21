@@ -72,7 +72,7 @@ set softtabstop=2
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+"set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 
 
 " NOT SUPPORT
@@ -217,14 +217,16 @@ endfunction
 " theme
 "Plug 'junegunn/seoul256.vim'
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
-Plug 'jpo/vim-railscasts-theme'
 Plug 'ainyu-theme/ayu-vim'
 
 " 点重复增强
 Plug 'tpope/vim-repeat'
 
+"  在终端或者管理器中打开
+Plug 'justinmk/vim-gtfo'
+
 " 状态栏
-"Plug 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim'
 
 " 括号补全
 Plug 'jiangmiao/auto-pairs'
@@ -234,6 +236,9 @@ Plug 'Chiel92/vim-autoformat'
 
 " 注释
 Plug 'scrooloose/nerdcommenter'
+
+"html
+Plug 'rstacruz/sparkup'
 
 " 多光标编辑
 Plug 'terryma/vim-multiple-cursors'
@@ -276,6 +281,9 @@ Plug 'iamcco/dict.vim'
 " 搜索增强
 Plug 'haya14busa/incsearch.vim'
 ""Plug 'rhysd/clever-f.vim'
+Plug 'haya14busa/incsearch.vim'
+Plug 'haya14busa/incsearch-fuzzy.vim'
+Plug 'haya14busa/incsearch-easymotion.vim'
 
 " git状态
 Plug 'mhinz/vim-signify'
@@ -527,107 +535,24 @@ function! Multiple_cursors_after()
 endfunction
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Helper functions
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Returns true if paste mode is enabled
-function! HasPaste()
-    if &paste
-        return 'PASTE MODE  '
-    endif
-    return ''
-endfunction
 
-" Don't close window, when deleting a buffer
-command! Bclose call <SID>BufcloseCloseIt()
-function! <SID>BufcloseCloseIt()
-   let l:currentBufNum = bufnr("%")
-   let l:alternateBufNum = bufnr("#")
-
-   if buflisted(l:alternateBufNum)
-     buffer #
-   else
-     bnext
-   endif
-
-   if bufnr("%") == l:currentBufNum
-     new
-   endif
-
-   if buflisted(l:currentBufNum)
-     execute("bdelete! ".l:currentBufNum)
-   endif
-endfunction
-
-function! CmdLine(str)
-    exe "menu Foo.Bar :" . a:str
-    emenu Foo.Bar
-    unmenu Foo
-endfunction
-
-function! VisualSelection(direction, extra_filter) range
-    let l:saved_reg = @"
-    execute "normal! vgvy"
-
-    let l:pattern = escape(@", "\\/.*'$^~[]")
-    let l:pattern = substitute(l:pattern, "\n$", "", "")
-
-    if a:direction == 'gv'
-        call CmdLine("Ack '" . l:pattern . "' " )
-    elseif a:direction == 'replace'
-        call CmdLine("%s" . '/'. l:pattern . '/')
-    endif
-
-    let @/ = l:pattern
-    let @" = l:saved_reg
-endfunction
-
-"let g:lightline = {
-      "\ 'colorscheme': 'wombat',
-      "\ }
+let g:lightline = {'colorscheme': 'wombat'}
 
 " dict.vim
 " ----------------------------------------------------------------------------
 let g:api_key = "1932136763"
 let g:keyfrom = "aioiyuuko"
 let g:vikiUseParentSuffix = 1
-
 nmap <silent> <Leader><Leader>r <Plug>DictRSearch
 vmap <silent> <Leader><Leader>r <Plug>DictRVSearch
+nmap <silent> <Leader>d <Plug>DictSearch
+vmap <silent> <Leader>d <Plug>DictVSearch
+nmap <silent> <Leader>dw <Plug>DictWSearch
+vmap <silent> <Leader>dw <Plug>DictWVSearch
 
 
-"jump
-map <Leader> <Plug>(easymotion-prefix)
-
-" <Leader>f{char} to move to {char}
-map  <Leader><Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader><Leader>f <Plug>(easymotion-overwin-f)
-
-" s{char}{char} to move to {char}{char}
-nmap s <Plug>(easymotion-overwin-f2)
-
-" Move to line
-map <Leader><Leader>L <Plug>(easymotion-bd-jk)
-nmap <Leader><Leader>L <Plug>(easymotion-overwin-line)
-
-" Move to word
-map  <Leader><Leader>w <Plug>(easymotion-bd-w)
-nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
-
-map  / <Plug>(easymotion-sn)
-omap / <map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
 
 
-function! s:fzf_statusline()
-  " Override statusline as you like
-  highlight fzf1 ctermfg=161 ctermbg=251
-  highlight fzf2 ctermfg=23 ctermbg=251
-  highlight fzf3 ctermfg=237 ctermbg=251
-  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
-endfunction
-
-autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 set number
 set laststatus=2
@@ -636,4 +561,63 @@ inoremap <expr> <silent> <Tab>  pumvisible()?"\<C-n>":"\<TAB>"
 inoremap <expr> <silent> <S-TAB>  pumvisible()?"\<C-p>":"\<S-TAB>"
 imap <c-g> <Plug>(cm_force_refresh)
 
-set completeopt+=noselect
+
+"Built-in terminal
+if has('nvim')
+  fu! OpenTerminal()
+   " open split windows on the topleft
+   topleft split
+   " resize the height of terminal windows to 30
+   resize 30
+   :terminal
+  endf
+else
+  fu! OpenTerminal()
+   topleft split
+   resize 60
+   :call term_start('zsh', {'curwin' : 1, 'term_finish' : 'close'})
+  endf
+endif
+nnoremap <leader><leader>t :call OpenTerminal()<cr>
+
+"jump
+function! s:config_easyfuzzymotion(...) abort
+  return extend(copy({
+  \   'converters': [incsearch#config#fuzzyword#converter()],
+  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+  \   'is_expr': 0,
+  \   'is_stay': 1
+  \ }), get(a:, 1, {}))
+endfunction
+
+noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
+
+
+function! s:incsearch_config(...) abort
+  return incsearch#util#deepextend(deepcopy({
+  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+  \   'keymap': {
+  \     "\<CR>": '<Over>(easymotion)'
+  \   },
+  \   'is_expr': 0
+  \ }), get(a:, 1, {}))
+endfunction
+noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
+noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
+noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
+nmap s <Plug>(easymotion-s)
+omap t <Plug>(easymotion-bd-tl)
+let g:EasyMotion_use_upper = 1
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_use_smartsign_us = 1
+map <Leader><Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader><Leader>L <Plug>(easymotion-overwin-line)
+map  <Leader><Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
+
+
+
+
+
+let g:gtfo#terminals = { 'mac': 'iterm' }
