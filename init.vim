@@ -59,9 +59,9 @@ set ignorecase
 set smartcase
 
 " tab
-set expandtab
-set smarttab
-set shiftround
+"set expandtab
+"set smarttab
+"set shiftround
 
 " indent
 set autoindent smartindent shiftround
@@ -217,7 +217,12 @@ endfunction
 " theme
 "Plug 'junegunn/seoul256.vim'
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
-Plug 'ainyu-theme/ayu-vim'
+Plug 'ayu-theme/ayu-vim'
+Plug 'tomasr/molokai'
+
+"tagbar
+Plug 'majutsushi/tagbar'
+
 
 " 点重复增强
 Plug 'tpope/vim-repeat'
@@ -312,10 +317,12 @@ set background=light
 set termguicolors     
 "let ayucolor="light"  
 "let ayucolor="mirage"
-let ayucolor="dark"  
-colorscheme ayu
+"let ayucolor="dark"  
+"colorscheme ayu
+colorscheme molokai
 
-set guifont=Inconsolata_for_Powerline:h22
+
+set guifont=Inconsolata:h22
 
 " ----------------------------------------------------------------------------
 " SuperTab
@@ -617,7 +624,6 @@ map  <Leader><Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
 
 
-
-
-
 let g:gtfo#terminals = { 'mac': 'iterm' }
+
+nmap <Leader>ab :TagbarToggle<CR>
