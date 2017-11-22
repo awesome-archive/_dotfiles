@@ -1,3 +1,6 @@
+" ----------------------------------------------------------------------------
+" base 
+" ----------------------------------------------------------------------------
 let mapleader = " "
 let g:mapleader = " "
 syntax on
@@ -24,9 +27,6 @@ set noerrorbells
 set visualbell t_vb=
 set t_vb=
 set tm=500
-" show location
-"set cursorcolumn
-"set cursorline
 set lazyredraw
 
 if has("gui_macvim")
@@ -59,9 +59,9 @@ set ignorecase
 set smartcase
 
 " tab
-"set expandtab
-"set smarttab
-"set shiftround
+set expandtab
+set smarttab
+set shiftround
 
 " indent
 set autoindent smartindent shiftround
@@ -71,9 +71,6 @@ set softtabstop=2
 
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
-
-"set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
-
 
 " NOT SUPPORT
 " fold
@@ -125,8 +122,9 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 
 set laststatus=2
 
-" ============================ key map ============================
-
+" ----------------------------------------------------------------------------
+" key map
+" ----------------------------------------------------------------------------
 nnoremap k gk
 nnoremap gk k
 nnoremap j gj
@@ -161,9 +159,6 @@ vnoremap < <gv
 vnoremap > >gv
 "nnoremap ; :
 "nnoremap : ;
-" save
-cmap w!! w !sudo tee >/dev/null %
-
 
 if has("gui_running")
     set guioptions-=L
@@ -171,7 +166,6 @@ if has("gui_running")
     set guioptions-=b
     set showtabline=0
 endif
-
 
 map <silent> <leader><cr> :noh<cr>
 
@@ -181,7 +175,7 @@ nmap <leader>F :%s//g<LEFT><LEFT>
 nmap <silent> <Leader>ev :e $MYVIMRC<CR>
 nmap <silent> <Leader>es :so $MYVIMRC<CR>
 nmap <silent> <Leader>pl :PlugInstall<CR>
-"inoremap jj <Esc>
+inoremap jj <Esc>
 
 map <Leader>j <C-W>j
 map <Leader>k <C-W>k
@@ -204,98 +198,51 @@ nnoremap <silent> <C-j> :move+<cr>
 
 nnoremap <slent><Leader>W :w !sudo tee %<CR>
 
+" ----------------------------------------------------------------------------
+" plug
+" ----------------------------------------------------------------------------
 call plug#begin('~/.vim/plugged')
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
     !./install.py --clang-completer --gocode-completer
   endif
 endfunction
-"Plug 'Valloric/YouCompleteMe', { 'for': ['c', 'cpp'], 'do': function('BuildYCM') }
-
-
 
 " theme
 "Plug 'junegunn/seoul256.vim'
-Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 Plug 'ayu-theme/ayu-vim'
-Plug 'tomasr/molokai'
+"Plug 'tomasr/molokai'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 "tagbar
 Plug 'majutsushi/tagbar'
 
-
-" 点重复增强
-Plug 'tpope/vim-repeat'
-
-"  在终端或者管理器中打开
-Plug 'justinmk/vim-gtfo'
-
-" 状态栏
-Plug 'itchyny/lightline.vim'
-
-" 括号补全
-Plug 'jiangmiao/auto-pairs'
-
-" 自动格式化
-Plug 'Chiel92/vim-autoformat'
-
-" 注释
-Plug 'scrooloose/nerdcommenter'
-
-"html
-Plug 'rstacruz/sparkup'
-
-" 多光标编辑
-Plug 'terryma/vim-multiple-cursors'
-
-" 跳转
-Plug 'easymotion/vim-easymotion'
-
-" css补全
-"Plug '1995eaton/vim-better-css-completion'
-"Plug 'npacker/vim-css3complete'
-"Plug 'yuratomo/css3-complete'
-Plug 'vim-scripts/css3-mod'
-
-" js增强
-Plug 'pangloss/vim-javascript'
-
-" 配对修改
-"Plug 'tpope/vim-surround'
-
-" css颜色显示
-Plug 'ap/vim-css-color'
-
-" 代码片段
-Plug 'sirver/ultisnips'
-Plug 'honza/vim-snippets'
-
-" vue
-Plug 'posva/vim-vue'
-
 " 文件搜索
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-
-" 文件管理
 Plug 'scrooloose/nerdtree'
 
-" 翻译
-Plug 'iamcco/dict.vim'
-
-" 搜索增强
+" auxiliary
 Plug 'haya14busa/incsearch.vim'
 ""Plug 'rhysd/clever-f.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
-
-" git状态
 Plug 'mhinz/vim-signify'
-
-" 窗口最大化
 Plug 'szw/vim-maximizer'
+Plug 'iamcco/dict.vim'
+Plug 'dyng/ctrlsf.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'scrooloose/nerdcommenter'
+Plug 'Chiel92/vim-autoformat'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-repeat'
+Plug 'justinmk/vim-gtfo'
+Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 
+" completion
 Plug 'roxma/nvim-completion-manager'
 Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
 
@@ -303,23 +250,36 @@ if !has('nvim')
     Plug 'roxma/vim-hug-neovim-rpc'
     Plug 'ternjs/tern_for_vim'
 endif
-Plug 'othree/javascript-libraries-syntax.vim'
 
+" js
+Plug 'pangloss/vim-javascript'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'posva/vim-vue'
+
+" snippets
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
+
+" css
+Plug 'rstacruz/sparkup'
+"Plug '1995eaton/vim-better-css-completion'
+"Plug 'npacker/vim-css3complete'
+"Plug 'yuratomo/css3-complete'
+Plug 'vim-scripts/css3-mod'
+Plug 'ap/vim-css-color'
 
 call plug#end()
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 
-
-
 " theme
-set background=light
+"set background=light
 "set background=dark
-set termguicolors     
-"let ayucolor="light"  
+set termguicolors
+"let ayucolor="light"
 "let ayucolor="mirage"
-"let ayucolor="dark"  
-"colorscheme ayu
-colorscheme molokai
+let ayucolor="dark"
+colorscheme ayu
+"colorscheme molokai
 
 
 set guifont=Inconsolata:h22
@@ -329,7 +289,9 @@ set guifont=Inconsolata:h22
 " ----------------------------------------------------------------------------
 let g:SuperTabDefultCompletionType='context'
 let g:SuperTabDefaultCompletionType = '<C-X><C-U>'
-let g:SuperTabRetainCompletionType=2 " ----------------------------------------------------------------------------
+let g:SuperTabRetainCompletionType=2
+
+" ----------------------------------------------------------------------------
 " NERDT
 " ----------------------------------------------------------------------------
 nmap <Leader>at :NERDTreeToggle<CR>
@@ -411,7 +373,6 @@ function! ViewInBrowser(name)
 endfunction
 nmap <Leader>o :call ViewInBrowser("cr")<cr>
 " ----------------------------------------------------------------------------
-
 "关闭其他缓存区
 " ----------------------------------------------------------------------------
 function! SpacevimKillOtherBuffers()
@@ -445,19 +406,6 @@ function! SpacevimKillOtherBuffers()
 endfunction
 nmap <Leader>bK :call SpacevimKillOtherBuffers()<cr>;
 
-" ----------------------------------------------------------------------------
-" 自定义命令
-" ----------------------------------------------------------------------------
-map <Leader>hv :e /Applications/XAMPP/xamppfiles/etc/extra/httpd-vhosts.conf<CR>
-map <Leader>hh :e /etc/hosts<CR>
-map <Leader>to :!open .<CR>
-map <Leader>push :!bash ~/dotfiles/push.sh<CR>
-map <silent> <Leader>ez :e ~/dotfiles/zshrc<CR>
-map <silent> <Leader>sdemo :!touch index.html & touch app.js & touch css.less<CR>
-map <Leader>r :!node %<CR>
-
-map! :w :w ! sudo tee %<CR>
-
 set shortmess+=c
 au User CmSetup call cm#register_source({'name' : 'cm-css',
         \ 'priority': 9,
@@ -473,9 +421,11 @@ let g:used_javascript_libs = 'vue'
 
 let g:javascript_plugin_jsdoc = 1
 
-" ============================================================================
-" FZF {{{
-" ============================================================================
+
+
+" ----------------------------------------------------------------------------
+" fzf
+" ----------------------------------------------------------------------------
 if has('nvim')
   "let $FZF_DEFAULT_OPTS .= ' --inline-info'
   " let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
@@ -545,6 +495,7 @@ endfunction
 
 let g:lightline = {'colorscheme': 'wombat'}
 
+" ----------------------------------------------------------------------------
 " dict.vim
 " ----------------------------------------------------------------------------
 let g:api_key = "1932136763"
@@ -559,17 +510,14 @@ vmap <silent> <Leader>dw <Plug>DictWVSearch
 
 
 
-
-
-set number
-set laststatus=2
-
 inoremap <expr> <silent> <Tab>  pumvisible()?"\<C-n>":"\<TAB>"
 inoremap <expr> <silent> <S-TAB>  pumvisible()?"\<C-p>":"\<S-TAB>"
 imap <c-g> <Plug>(cm_force_refresh)
 
 
-"Built-in terminal
+" ----------------------------------------------------------------------------
+" terminal
+" ----------------------------------------------------------------------------
 if has('nvim')
   fu! OpenTerminal()
    " open split windows on the topleft
@@ -587,7 +535,11 @@ else
 endif
 nnoremap <leader><leader>t :call OpenTerminal()<cr>
 
-"jump
+
+" ----------------------------------------------------------------------------
+" easymotion
+" ----------------------------------------------------------------------------
+
 function! s:config_easyfuzzymotion(...) abort
   return extend(copy({
   \   'converters': [incsearch#config#fuzzyword#converter()],
@@ -623,7 +575,46 @@ nmap <Leader><Leader>L <Plug>(easymotion-overwin-line)
 map  <Leader><Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
 
-
+" ----------------------------------------------------------------------------
+" gotf 
+" ----------------------------------------------------------------------------
 let g:gtfo#terminals = { 'mac': 'iterm' }
 
+" ----------------------------------------------------------------------------
+" tagbar 
+" ----------------------------------------------------------------------------
 nmap <Leader>ab :TagbarToggle<CR>
+
+" ----------------------------------------------------------------------------
+" arilien 
+" ----------------------------------------------------------------------------
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline_theme='behelit'
+set ambiwidth=double
+
+" ----------------------------------------------------------------------------
+" ctrlsf 
+" ----------------------------------------------------------------------------
+nmap     <C-F>f <Plug>CtrlSFPrompt
+vmap     <C-F>f <Plug>CtrlSFVwordPath
+vmap     <C-F>F <Plug>CtrlSFVwordExec
+nmap     <C-F>n <Plug>CtrlSFCwordPath
+nmap     <C-F>p <Plug>CtrlSFPwordPath
+nnoremap <C-F>o :CtrlSFOpen<CR>
+nnoremap <C-F>t :CtrlSFToggle<CR>
+inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
+
+" ----------------------------------------------------------------------------
+" 自定义命令
+" ----------------------------------------------------------------------------
+map <Leader>hv :e /Applications/XAMPP/xamppfiles/etc/extra/httpd-vhosts.conf<CR>
+map <Leader>hh :e /etc/hosts<CR>
+map <Leader>to :!open .<CR>
+map <Leader>push :!bash ~/dotfiles/push.sh<CR>
+map <silent> <Leader>ez :e ~/dotfiles/zshrc<CR>
+map <silent> <Leader>sdemo :!touch index.html & touch app.js & touch css.less<CR>
+map <Leader>r :!node %<CR>
+
+

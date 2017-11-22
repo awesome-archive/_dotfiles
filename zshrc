@@ -46,6 +46,8 @@ alias chongqi='sudo shutdown -r now'
 alias guanji='sudo shutdown -h now'
 alias yanshi='sudo shutdown -h 20:00'
 
+
+
 alias browser='browser-sync start --server --directory --files "**/*.css, **/*.html, **/*.js"'
 
 #浏览器
