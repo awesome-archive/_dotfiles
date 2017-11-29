@@ -224,16 +224,15 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 
 " auxiliary
-Plug 'haya14busa/incsearch.vim'
-""Plug 'rhysd/clever-f.vim'
+"Plug 'rhysd/clever-f.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
-Plug 'haya14busa/incsearch-easymotion.vim'
+"Plug 'haya14busa/incsearch-easymotion.vim'
+Plug 'easymotion/vim-easymotion'
 Plug 'mhinz/vim-signify'
 Plug 'szw/vim-maximizer'
 Plug 'iamcco/dict.vim'
 Plug 'dyng/ctrlsf.vim'
-Plug 'easymotion/vim-easymotion'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Chiel92/vim-autoformat'
@@ -327,16 +326,9 @@ nmap <leader>mf :Autoformat<cr>
 " => incsearch
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set hlsearch
-let g:incsearch#auto_nohlsearch = 1
-map z/ <Plug>(incsearch-easymotion-/)
-map z? <Plug>(incsearch-easymotion-?)
-map g/ <Plug>(incsearch-easymotion-stay)
-map n  <Plug>(incsearch-nohl-n)
-map N  <Plug>(incsearch-nohl-N)
-map *  <Plug>(incsearch-nohl-*)
-map #  <Plug>(incsearch-nohl-#)
-map g* <Plug>(incsearch-nohl-g*)
-map g# <Plug>(incsearch-nohl-g#)
+map z/ <Plug>(incsearch-fuzzy-/)
+map z? <Plug>(incsearch-fuzzy-?)
+map zg/ <Plug>(incsearch-fuzzy-stay)
 
 " ----------------------------------------------------------------------------
 " UltiSnips
@@ -539,43 +531,23 @@ nnoremap <leader><leader>t :call OpenTerminal()<cr>
 " ----------------------------------------------------------------------------
 " easymotion
 " ----------------------------------------------------------------------------
-
-function! s:config_easyfuzzymotion(...) abort
-  return extend(copy({
-  \   'converters': [incsearch#config#fuzzyword#converter()],
-  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
-  \   'is_expr': 0,
-  \   'is_stay': 1
-  \ }), get(a:, 1, {}))
-endfunction
-
-
-
-function! s:incsearch_config(...) abort
-  return incsearch#util#deepextend(deepcopy({
-  \   'modules':<Space> [incsearch#config#easymotion#module({'overwin': 1})],
-  \   'keymap': {
-  \     "\<CR>": '<Over>(easymotion)'
-  \   },
-  \   'is_expr': 0
-  \ }), get(a:, 1, {}))
-endfunction
-"noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
-"noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
-"noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
-
-noremap <silent><expr> / incsearch#go(<SID>config_easyfuzzymotion())
-nmap s <Plug>(easymotion-s)
-omap t <Plug>(easymotion-bd-tl)
-let g:EasyMotion_use_upper = 1
 let g:EasyMotion_smartcase = 1
-let g:EasyMotion_use_smartsign_us = 1
+nmap s <Plug>(easymotion-overwin-f2)
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
+nmap s <Plug>(easymotion-s2)
+nmap t <Plug>(easymotion-t2)
+map <Leader><Leader> <Plug>(easymotion-prefix)
 map <Leader><Leader>L <Plug>(easymotion-bd-jk)
 nmap <Leader><Leader>L <Plug>(easymotion-overwin-line)
 map  <Leader><Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
-
+map  <Leader><Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader><Leader>f <Plug>(easymotion-overwin-f)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
 " ----------------------------------------------------------------------------
 " gotf 
 " ----------------------------------------------------------------------------
@@ -617,5 +589,6 @@ map <Leader>push :!bash ~/dotfiles/push.sh<CR>
 map <silent> <Leader>ez :e ~/dotfiles/zshrc<CR>
 map <silent> <Leader>sdemo :!touch index.html & touch app.js & touch css.less<CR>
 map <Leader>r :!node %<CR>
+
 
 
